@@ -60,6 +60,8 @@
 
 					<div class="ibox-content css-animation-box">
 					<div id="chart1"></div>
+					<div id="chart2"></div>
+					<div id="chart3"></div>
 					<!-- <div id="container" style="min-width: 400px; max-width: 800px; height: 400px; margin: 0 auto"></div> -->
 					<div id="container2" style="min-width: 310px; max-width: 600px; height: 400px; margin: 0 auto"></div>
 					<div id="container3" style="min-width: 400px; max-width: 1200px; height: 400px; margin: 0 auto"></div>
@@ -104,195 +106,32 @@
 				$("#chart1").html(data);
 			});
 		}
+
+		function chart2(){
+			$.get("<?php echo base_url(); ?>usulan/filter_lender_bluebook/", function(data) {
+				$("#chart2").html(data);
+			});
+		}
+
+
+		function chart3(){
+			$.get("<?php echo base_url(); ?>usulan/filter_program_bluebook/", function(data) {
+				$("#chart3").html(data);
+			});
+		}
+	
 	
 		
 		//untuk hapus
 		$('#submit_btn').click(function(){
 			chart();
+			chart2();
+			chart3();
 			var id = $("#kode_bb").val();
 			console.log(id);
-			/*$.ajax({
-				url: "<?php echo base_url(); ?>usulan/filter_kl_isi_bluebook/"+id,
-				type: "GET",
-				dataType: "html",
-				
-				//dataType: 'json'
-				beforeSend: function(){
-					//notif();
-					showLoading();
-				},
-				success:function(data,){
+			
 
-					var isi = data;
-					var a = isi.length;
-					console.log(data[0]);
-					console.log(a);
-
-					  
-					$.getJSON("<?php echo base_url(); ?>usulan/filter_kl_isi_bluebook/", function(json) {
-					console.log(json);
-					console.log(json.length);
-					console.log(json[0].name);
-					//console.log(json1[0].name2);
-
-					var banyak = json.length;
-					var a = json[0].name;
-					var b = parseFloat(json[0].y);
-					//var c = JSON.parse(json);
-					var d = json;
-					//var e = JSON.parse(d);
-					//console.log(e);
-					console.log(b);
-
-					var isi= [];
-					//var isi2= [];
-
-
-					for (var i = banyak - 1; i >= 0; i--) {
-						isi.push({
-						name: [json[i].name],
-						y: parseFloat([json[i].y])
-						});
-					}
-
-					
-					
-
-					Highcharts.chart('container', {
-					    chart: {
-					        plotBackgroundColor: null,
-					        plotBorderWidth: null,
-					        plotShadow: false,
-					        type: 'pie'
-					    },
-					    title: {
-					        text: 'Persebaran Bluebook berdasarkan Kementerian Lembaga'
-					    },
-					    tooltip: {
-					        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-					    },
-					    plotOptions: {
-					        pie: {
-					            allowPointSelect: true,
-					            cursor: 'pointer',
-					            dataLabels: {
-					                enabled: true,
-					                format: '<b>{point.name}</b>: {point.percentage:.1f} %',
-					                style: {
-					                    color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
-					                }
-					            }
-					        }
-					    },
-					    series: [{
-
-					    	name: 'Brands',
-        					colorByPoint: true,
-					        data: isi
-					        		
-					    }]
-					});
-
-
-					});
-					
-
-
-					
-				},
-				dataType:"html"});*/
-
-			$.ajax({
-				url: "<?php echo base_url(); ?>usulan/filter_lender_bluebook/"+id,
-				type: "GET",
-				dataType: "json",
-				
-				//dataType: 'json'
-				beforeSend: function(){
-					//notif();
-					showLoading();
-				},
-				success:function(data,){
-
-					var isi = data;
-					var a = isi.length;
-					console.log(data[0]);
-					console.log(a);
-
-					  
-					$.getJSON("<?php echo base_url(); ?>usulan/filter_lender_bluebook/", function(json) {
-					console.log(json);
-					console.log(json.length);
-					console.log(json[0].name);
-					//console.log(json1[0].name2);
-
-					var banyak = json.length;
-					var a = json[0].name;
-					var b = parseFloat(json[0].y);
-					//var c = JSON.parse(json);
-					var d = json;
-					//var e = JSON.parse(d);
-					//console.log(e);
-					console.log(b);
-
-					var isi= [];
-					//var isi2= [];
-
-
-					for (var i = banyak - 1; i >= 0; i--) {
-						isi.push({
-						name: [json[i].name],
-						y: parseFloat([json[i].y])
-						});
-					}
-
-					
-					/*options.series[0].data = json;
-					chart = new Highcharts.Chart(options);
-*/
-
-					Highcharts.chart('container2', {
-					    chart: {
-					        plotBackgroundColor: null,
-					        plotBorderWidth: null,
-					        plotShadow: false,
-					        type: 'pie'
-					    },
-					    title: {
-					        text: 'Persebaran Bluebook berdasarkan Lender'
-					    },
-					    tooltip: {
-					        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-					    },
-					    plotOptions: {
-					        pie: {
-					            allowPointSelect: true,
-					            cursor: 'pointer',
-					            dataLabels: {
-					                enabled: true,
-					                format: '<b>{point.name}</b>: {point.percentage:.1f} %',
-					                style: {
-					                    color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
-					                }
-					            }
-					        }
-					    },
-					    series: [{
-
-					    	name: 'Persentase',
-        					colorByPoint: true,
-					        data: isi
-					        		
-					    }]
-					});
-
-
-					});
-
-					
-				},
-				dataType:"html"});
-
+	/*
 			$.ajax({
 				url: "<?php echo base_url(); ?>usulan/filter_program_bluebook/"+id,
 				type: "GET",
@@ -338,9 +177,7 @@
 					}
 
 					
-					/*options.series[0].data = json;
-					chart = new Highcharts.Chart(options);
-*/
+
 
 					Highcharts.chart('container3', {
 					    chart: {
@@ -382,7 +219,7 @@
 
 					
 				},
-				dataType:"html"});
+				dataType:"html"});*/
 
 			$.ajax({
 				url: "<?php echo base_url(); ?>usulan/filter_sektor_bluebook/"+id,

@@ -118,16 +118,11 @@ class Usulan extends CI_Controller {
 		$a = $this->uri->segment(3);
 		//$data['detail'] = $this->Bluebook_model->ambil_proyek_per_bb($a);
 
-		foreach ($this->Bluebook_model->ambil_grafik_kl_per_bb($a) as $row) {
-			$data[] = array(
-				'name' => $row['nama'],
-				'y' => $row['total']
-				);
-		}
+		
 
     	 //echo json_encode($data);
     	 //$data2 = json_encode($data);
-    	 $this->load->view('report/report_bb_kl', $data);
+    	 $this->load->view('report/report_bb_kl');
 	}
 
 	public function filter_kl_isi_bluebook()
@@ -170,7 +165,29 @@ class Usulan extends CI_Controller {
 				'y' => $row['total']
 				);
 		}
+    	 //echo json_encode($data);
+    	 $this->load->view('report/report_bb_lender', $data);
+	}
+
+		public function filter_lender_isi_bluebook()
+	{
+
+		$this->load->model('Usulan_model');
+		$this->load->model('Bluebook_model');
+			
+		$id = $this->input->post('id');
+		$a = $this->uri->segment(3);
+		//$data['detail'] = $this->Bluebook_model->ambil_proyek_per_bb($a);
+
+		
+		foreach ($this->Bluebook_model->ambil_grafik_lender_per_bb($a) as $row) {
+			$data[] = array(
+				'name' => $row['lender'],
+				'y' => $row['total']
+				);
+		}
     	 echo json_encode($data);
+    	 
 	}
 
 
@@ -191,8 +208,31 @@ class Usulan extends CI_Controller {
 				'y' => $row['total']
 				);
 		}
+    	 //echo json_encode($data);
+    	 $this->load->view('report/report_bb_program', $data);
+
+	}
+
+	public function filter_program_isi_bluebook()
+	{
+
+		$this->load->model('Usulan_model');
+		$this->load->model('Bluebook_model');
+			
+		$id = $this->input->post('id');
+		$a = $this->uri->segment(3);
+		//$data['detail'] = $this->Bluebook_model->ambil_proyek_per_bb($a);
+
+		
+		foreach ($this->Bluebook_model->ambil_grafik_program_per_bb($a) as $row) {
+			$data[] = array(
+				'name' => $row['program'],
+				'y' => $row['total']
+				);
+		}
     	 echo json_encode($data);
 	}
+
 
 
 	public function filter_sektor_bluebook()
