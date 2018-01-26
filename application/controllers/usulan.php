@@ -125,11 +125,33 @@ class Usulan extends CI_Controller {
 				);
 		}
 
+    	 //echo json_encode($data);
+    	 //$data2 = json_encode($data);
+    	 $this->load->view('report/report_bb_kl', $data);
+	}
 
-	
+	public function filter_kl_isi_bluebook()
+	{
+
+		$this->load->model('Usulan_model');
+		$this->load->model('Bluebook_model');
+			
+		$id = $this->input->post('id');
+		$a = $this->uri->segment(3);
+		//$data['detail'] = $this->Bluebook_model->ambil_proyek_per_bb($a);
+
+		foreach ($this->Bluebook_model->ambil_grafik_kl_per_bb($a) as $row) {
+			$data[] = array(
+				'name' => $row['nama'],
+				'y' => $row['total']
+				);
+		}
 
     	 echo json_encode($data);
+    	 //$data2 = json_encode($data);
+    	
 	}
+
 
 	public function filter_lender_bluebook()
 	{

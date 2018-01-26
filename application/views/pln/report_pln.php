@@ -59,7 +59,8 @@
 					</div>
 
 					<div class="ibox-content css-animation-box">
-					<div id="container" style="min-width: 400px; max-width: 800px; height: 400px; margin: 0 auto"></div>
+					<div id="chart1"></div>
+					<!-- <div id="container" style="min-width: 400px; max-width: 800px; height: 400px; margin: 0 auto"></div> -->
 					<div id="container2" style="min-width: 310px; max-width: 600px; height: 400px; margin: 0 auto"></div>
 					<div id="container3" style="min-width: 400px; max-width: 1200px; height: 400px; margin: 0 auto"></div>
 					<div id="container4" style="min-width: 400px; max-width: 1200px; height: 400px; margin: 0 auto"></div>
@@ -97,16 +98,23 @@
 		document.getElementById("loader1").style = "visibility: visible";
 		$('#loader1').fadeOut(1000);
 	}
+
+		function chart(){
+			$.get("<?php echo base_url(); ?>usulan/filter_kl_bluebook/", function(data) {
+				$("#chart1").html(data);
+			});
+		}
 	
 		
 		//untuk hapus
 		$('#submit_btn').click(function(){
+			chart();
 			var id = $("#kode_bb").val();
 			console.log(id);
-			$.ajax({
-				url: "<?php echo base_url(); ?>usulan/filter_kl_bluebook/"+id,
+			/*$.ajax({
+				url: "<?php echo base_url(); ?>usulan/filter_kl_isi_bluebook/"+id,
 				type: "GET",
-				dataType: "json",
+				dataType: "html",
 				
 				//dataType: 'json'
 				beforeSend: function(){
@@ -121,7 +129,7 @@
 					console.log(a);
 
 					  
-					$.getJSON("<?php echo base_url(); ?>usulan/filter_kl_bluebook/", function(json) {
+					$.getJSON("<?php echo base_url(); ?>usulan/filter_kl_isi_bluebook/", function(json) {
 					console.log(json);
 					console.log(json.length);
 					console.log(json[0].name);
@@ -148,9 +156,7 @@
 					}
 
 					
-					/*options.series[0].data = json;
-					chart = new Highcharts.Chart(options);
-*/
+					
 
 					Highcharts.chart('container', {
 					    chart: {
@@ -194,7 +200,7 @@
 
 					
 				},
-				dataType:"html"});
+				dataType:"html"});*/
 
 			$.ajax({
 				url: "<?php echo base_url(); ?>usulan/filter_lender_bluebook/"+id,
