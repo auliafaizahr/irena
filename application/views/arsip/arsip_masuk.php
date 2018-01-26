@@ -1,0 +1,1 @@
+<?php echo number_format($jumlah_arsip_masuk->jumlah, 0); ?>

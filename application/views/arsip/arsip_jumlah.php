@@ -1,0 +1,1 @@
+<?php echo number_format($jumlah_arsip->jumlah, 0); ?>
