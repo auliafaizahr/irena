@@ -158,13 +158,8 @@ class Usulan extends CI_Controller {
 		$a = $this->uri->segment(3);
 		//$data['detail'] = $this->Bluebook_model->ambil_proyek_per_bb($a);
 
+		$data['detail'] = $this->Bluebook_model->ambil_grafik_lender_per_bb($a);
 		
-		foreach ($this->Bluebook_model->ambil_grafik_lender_per_bb($a) as $row) {
-			$data[] = array(
-				'name' => $row['lender'],
-				'y' => $row['total']
-				);
-		}
     	 //echo json_encode($data);
     	 $this->load->view('report/report_bb_lender', $data);
 	}
@@ -272,6 +267,8 @@ class Usulan extends CI_Controller {
 				'y' => $row['total']
 				);
 		}
+			
+
     	 echo json_encode($data);
 	}
 

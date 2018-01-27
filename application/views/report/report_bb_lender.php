@@ -1,7 +1,130 @@
 					<div id="container_2" style="min-width: 400px; max-width: 800px; height: 400px; margin: 0 auto"></div>
 					<p> AYO KITA LIHAT KELUARANNYA ADAAN GA NIH </p>
 
+					<container>
+  <table class="table table-striped table-hover js-table" id="example">
+    <thead>
+      <tr>
+        <th>Training</th>
+        <th>Title</th>
+        <th>Date</th>
+        <th>End date</th>
+        <th>Description</th>
+        <th>nb of Applicants</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+    <?php foreach ($detail as $key => $value): ?>
+   
+    <tr data-toggle="collapse" data-target="#collapse4039" class="clickable">
+      <td><?php echo $value['lender']; ?></td>
+      <td>Activités nautiques - 16/10/2016</td>
+      <td>16/oct./2016</td>
+      <td>13/oct./2016</td>
+      <td>Sequelae of viral hepatitis</td>
+      <td>15</td>
+      <td>
+        <div class="btn-group btn-group-sm" role="group" aria-label="...">
+          <div class="btn-group " role="group" aria-label="Voir le detail">
+            <a href="#" class="parents js-view-parents" data-href="formation_json_parents" data-id=4039 data-toggle="tooltip" data-placement="top" alt="Voir les details" title="Details">
+              <span class="glyphicon glyphicon-eye-close" aria-hidden="true" style="color:black; margin: 5px;"></span>
+            </a>
+          </div>
+
+          <div class="btn-group " role="group" aria-label="Valider les candidats">
+            <a href="valider" data-href='' alt="Valider les candidats" data-toggle="tooltip" data-placement="right" title="Valider les candidats">
+              <span class="glyphicon glyphicon-check" aria-hidden="true" style="color:black; margin: 5px;"></span>
+            </a>
+          </div>
+          <div class="btn-group " role="group" aria-label="Imprimer la liste d'emargement pour cette formation">
+            <a href="/edsa-AgrementEPS/app_dev.php/formation/4039/liste?print=pdf" data-href="" alt="Download PDF list of applicants" data-toggle="tooltip" data-placement="right" name="Activités nautiques - 16/10/2016" title="Download PDF list of applicants">
+              <span class="glyphicon glyphicon-download-alt" aria-hidden="true" style="color:black; margin: 5px;"></span>
+            </a>
+          </div>
+        </div>
+      </td>
+    </tr>
+    <?php endforeach;   ?>
+    
+</tbody>
+  </table>
+</container>
+
 <script type="text/javascript">
+
+$(document).ready(function(){
+		$('#example').DataTable({
+			responsive: true,
+			"dom": 'T<"clear">lfrtip',
+			"order": [[ 0, "desc" ]]
+		});
+	});
+$(document).ready(function() {
+
+
+var $table = $('.js-table');
+
+$table.find('.js-view-parents').on('click', function(e) {
+  e.preventDefault();
+  var $btn = $(e.target), $row = $btn.closest('tr'), $nextRow = $row.next('tr.expand-child');
+  $btn.toggleClass('glyphicon-eye-close glyphicon-eye-open');
+  // if .expand-chid row exist already, toggle
+  if ($nextRow.length) {
+      $nextRow.toggle($btn.hasClass('glyphicon-eye-open'));
+  // if not, create .expand-child row
+  } else {
+ // var parentsData = [];
+
+    $.ajax({
+        url: "<?php echo base_url(); ?>usulan/filter_infra_bluebook",
+        dataType: "json",
+        //data: parentsData,
+        success: function (isi) {
+        	console.log(isi);
+        	console.log("inidibawah parentsdata");
+   
+		  var parentsData = {
+		  "success": true,
+		  "parents": isi
+			};
+
+        	data: parentsData;
+
+    var newRow = '<tr class="expand-child" id="collapse' + $btn.data('name') + '">' +
+      '<td colspan="12">' +
+      '<table class="table table-condensed table-bordered" width=100% >' +
+      '<thead>' +
+      '<tr>' +
+      '<th>Surname</th>' +
+      '<th>FirstName</th>' +
+      '<th>School Id</th>' +
+      '<th>School name</th>' +
+      '</tr>' +
+      '</thead>' +
+      '<tbody>';
+
+    if (parentsData.parents) {
+      $.each(parentsData.parents, function(i, parent) {
+        newRow += '<tr>' +
+          '<td>' + parent.name + '</td>' +
+          '<td>' + parent.y + '</td>' +
+        
+          '</tr>';
+      });
+    }
+    newRow += '</tbody></table></td></tr>';
+    // set next row
+    $nextRow = $(newRow).insertAfter($row);
+    
+    
+    }
+        });
+  }
+});
+
+});
+
 	
 	$.ajax({
 				url: "<?php echo base_url(); ?>usulan/filter_lender_isi_bluebook/",
