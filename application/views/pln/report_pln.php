@@ -48,9 +48,10 @@
 			</div>
 
 			<div class="col-lg-9">
+		<!-- 	untuk tabel dan grafik per kementerian -->
 				<div class="ibox float-e-margins">
 					<div class="ibox-title">
-						<h5>Tabel dan Grafik Laporan</h5>
+						<h5>Tabel dan Grafik Laporan Persebaran per Kementerian / Lembaga</h5>
 						<div class="ibox-tools">
 						<a class="collapse-link">
 							<i class="fa fa-chevron-up"></i>
@@ -60,7 +61,63 @@
 
 					<div class="ibox-content css-animation-box">
 					<div id="chart1"></div>
+				
+					<!-- <div id="container" style="min-width: 400px; max-width: 800px; height: 400px; margin: 0 auto"></div> -->
+					<div id="container2" style="min-width: 310px; max-width: 600px; height: 400px; margin: 0 auto"></div>
+					<div id="container3" style="min-width: 400px; max-width: 1200px; height: 400px; margin: 0 auto"></div>
+					<div id="container4" style="min-width: 400px; max-width: 1200px; height: 400px; margin: 0 auto"></div>
+					<div id="container5" style="min-width: 400px; max-width: 1200px; height: 400px; margin: 0 auto"></div>
+					<div id="container6" style="min-width: 400px; max-width: 1200px; height: 400px; margin: 0 auto"></div>
+
+					
+
+				 		<canvas id="chart_1" width="800" height="500"></canvas>
+				 		<p id="cek"></p>
+						
+					</div>
+				</div>
+
+				<div class="ibox float-e-margins">
+					<div class="ibox-title">
+						<h5>Tabel dan Grafik Laporan Perseberan per Lender</h5>
+						<div class="ibox-tools">
+						<a class="collapse-link">
+							<i class="fa fa-chevron-up"></i>
+						</a>
+						</div>
+					</div>
+
+					<div class="ibox-content css-animation-box">
+					
 					<div id="chart2"></div>
+					
+					<!-- <div id="container" style="min-width: 400px; max-width: 800px; height: 400px; margin: 0 auto"></div> -->
+					<div id="container2" style="min-width: 310px; max-width: 600px; height: 400px; margin: 0 auto"></div>
+					<div id="container3" style="min-width: 400px; max-width: 1200px; height: 400px; margin: 0 auto"></div>
+					<div id="container4" style="min-width: 400px; max-width: 1200px; height: 400px; margin: 0 auto"></div>
+					<div id="container5" style="min-width: 400px; max-width: 1200px; height: 400px; margin: 0 auto"></div>
+					<div id="container6" style="min-width: 400px; max-width: 1200px; height: 400px; margin: 0 auto"></div>
+
+					
+
+				 		<canvas id="chart_1" width="800" height="500"></canvas>
+				 		<p id="cek"></p>
+						
+					</div>
+				</div>
+
+				<div class="ibox float-e-margins">
+					<div class="ibox-title">
+						<h5>Tabel dan Grafik Laporan Persebaran per Program</h5>
+						<div class="ibox-tools">
+						<a class="collapse-link">
+							<i class="fa fa-chevron-up"></i>
+						</a>
+						</div>
+					</div>
+
+					<div class="ibox-content css-animation-box">
+				
 					<div id="chart3"></div>
 					<!-- <div id="container" style="min-width: 400px; max-width: 800px; height: 400px; margin: 0 auto"></div> -->
 					<div id="container2" style="min-width: 310px; max-width: 600px; height: 400px; margin: 0 auto"></div>
@@ -76,12 +133,13 @@
 						
 					</div>
 				</div>
+				
+			</div>
 			</div>
 
 
 				</div>
-			</div>
-		</div>
+		
 
 <script src="<?php echo base_url(); ?>assets/inspinia/js/jquery-2.1.1.js"></script>
 <script src="https://code.highcharts.com/highcharts.js"></script>
@@ -119,6 +177,8 @@
 				$("#chart3").html(data);
 			});
 		}
+
+
 	
 	
 		
