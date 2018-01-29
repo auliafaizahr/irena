@@ -1,6 +1,5 @@
 					<div id="container" style="min-width: 400px; max-width: 800px; height: 400px; margin: 0 auto"></div>
-					<p> AYO KITA LIHAT KELUARANNYA ADAAN GA NIH </p>
-
+					
 					<container>
   <table class="table table-striped table-hover js-table" id="example_">
     <thead>

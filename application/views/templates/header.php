@@ -156,7 +156,34 @@
                     </li>
 
                     <li <?php if($this->uri->segment(1)=="pln"){ echo "class='active'"; }	?>>
-                        <a href="<?php echo base_url(); ?>usulan/report_pln"><i class="fa fa-line-chart"></i> <span class="nav-label">Report Pinjaman Luar Negeri</span></a>
+                        <a href="<?php echo base_url(); ?>"><i class="fa fa-line-chart"></i> <span class="nav-label">Report Pinjaman Luar Negeri</span><span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+
+                        	<li <?php if($this->uri->segment(1)=="Program"){ echo "class='active'"; }	?>>
+								<a href="<?php echo base_url(); ?>usulan/report_pln">Blue Book</a>
+							</li>
+
+                        	<li <?php if($this->uri->segment(1)=="Usulan"){ echo "class='active'"; }	?>>
+								<a href="<?php echo base_url(); ?>Usulan/tampil_index">Green Book</a>
+							</li>
+
+
+
+								
+							<li <?php if($this->uri->segment(1)=="Bluebook"){ echo "class='active'"; }	?>>
+								<a href="<?php echo base_url(); ?>Bluebook/tampil_index">Lender</a>
+							</li>
+
+							<li <?php if($this->uri->segment(1)=="Greenbook"){ echo "class='active'"; }	?>>
+								<a href="<?php echo base_url(); ?>Greenbook/tampil_index">Kementerian/Lembaga</a>
+							</li>
+
+						<li <?php if($this->uri->segment(1)=="daftar_kegiatan"){ echo "class='active'"; }	?>>
+								<a href="<?php echo base_url(); ?>daftar_kegiatan/tampil_index">Program</a>
+							</li>
+
+							
+						</ul>
                     </li>
 					<li <?php if($this->uri->segment(1)=="hibah"){ echo "class='active'"; }	?>>
                         <a href="#"><i class="fa fa-dollar"></i> <span class="nav-label">Hibah</span><span class="fa arrow"></span></a>
