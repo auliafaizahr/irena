@@ -240,6 +240,21 @@ class Usulan extends CI_Controller {
 		$a = $this->uri->segment(3);
 		//$data['detail'] = $this->Bluebook_model->ambil_proyek_per_bb($a);
 
+		$data['detail'] = $this->Bluebook_model->ambil_grafik_sektor_per_bb($a);
+		
+		$this->load->view('report/report_bb_sektor', $data);
+	}
+
+	public function filter_sektor_isi_bluebook()
+	{
+
+		$this->load->model('Usulan_model');
+		$this->load->model('Bluebook_model');
+			
+		$id = $this->input->post('id');
+		$a = $this->uri->segment(3);
+		//$data['detail'] = $this->Bluebook_model->ambil_proyek_per_bb($a);
+
 		
 		foreach ($this->Bluebook_model->ambil_grafik_sektor_per_bb($a) as $row) {
 			$data[] = array(
@@ -250,7 +265,25 @@ class Usulan extends CI_Controller {
     	 echo json_encode($data);
 	}
 
+
 	public function filter_infra_bluebook()
+	{
+
+		$this->load->model('Usulan_model');
+		$this->load->model('Bluebook_model');
+			
+		$id = $this->input->post('id');
+		$a = $this->uri->segment(3);
+		//$data['detail'] = $this->Bluebook_model->ambil_proyek_per_bb($a);
+
+		$data['detail'] = $this->Bluebook_model->ambil_grafik_infra_per_bb($a);
+
+		
+		$this->load->view('report/report_bb_infra', $data);
+		
+	}
+
+	public function filter_infra_isi_bluebook()
 	{
 
 		$this->load->model('Usulan_model');
@@ -273,6 +306,23 @@ class Usulan extends CI_Controller {
 	}
 
 	public function filter_statusumum_bluebook()
+	{
+
+		$this->load->model('Usulan_model');
+		$this->load->model('Bluebook_model');
+			
+		$id = $this->input->post('id');
+		$a = $this->uri->segment(3);
+		//$data['detail'] = $this->Bluebook_model->ambil_proyek_per_bb($a);
+
+		
+		$data['detail'] = $this->Bluebook_model->ambil_grafik_status_per_bb($a);
+		
+		
+		$this->load->view('report/report_bb_status', $data);
+	}
+
+	public function filter_statusumum_isi_bluebook()
 	{
 
 		$this->load->model('Usulan_model');

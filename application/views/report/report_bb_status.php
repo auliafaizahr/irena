@@ -1,11 +1,11 @@
-					<div id="container_3" style="min-width: 400px; max-width: 800px; height: 400px; margin: 0 auto"></div>
+					<div id="container_7" style="min-width: 400px; max-width: 800px; height: 400px; margin: 0 auto"></div>
 					<p> AYO KITA LIHAT KELUARANNYA ADAAN GA NIH </p>
 
 					<container>
-  <table class="table table-striped table-hover js-table" id="example2">
+  <table class="table table-striped table-hover js-table" id="example5">
     <thead>
       <tr>
-        <th>Lender</th>
+        <th>Status</th>
         <th>Total Nilai Pinjaman</th>
         <th>Actions</th>
       </tr>
@@ -14,7 +14,7 @@
     <?php foreach ($detail as $key => $value): ?>
    
     <tr data-toggle="collapse" data-target="#collapse4039" class="clickable">
-      <td><?php echo $value['lender']; ?></td>
+      <td><?php echo $value['nama']; ?></td>
       <td><?php echo $value['total']; ?></td>
    
      
@@ -39,7 +39,7 @@
 <script type="text/javascript">
 
 $(document).ready(function(){
-		$('#example2').DataTable({
+		$('#example5').DataTable({
 			responsive: true,
 			"dom": 'T<"clear">lfrtip',
 			"order": [[ 0, "desc" ]]
@@ -112,7 +112,7 @@ $table.find('.js-view-parents').on('click', function(e) {
 
 	
 	$.ajax({
-				url: "<?php echo base_url(); ?>usulan/filter_lender_isi_bluebook/",
+				url: "<?php echo base_url(); ?>usulan/filter_status_isi_bluebook/",
 				type: "GET",
 				dataType: "html",
 				
@@ -129,7 +129,7 @@ $table.find('.js-view-parents').on('click', function(e) {
 					console.log(a);
 
 					  
-					$.getJSON("<?php echo base_url(); ?>usulan/filter_lender_isi_bluebook/", function(json) {
+					$.getJSON("<?php echo base_url(); ?>usulan/filter_status_isi_bluebook/", function(json) {
 					console.log(json);
 					console.log(json.length);
 					console.log(json[0].name);
@@ -158,7 +158,7 @@ $table.find('.js-view-parents').on('click', function(e) {
 					
 					
 
-					Highcharts.chart('container_3', {
+					Highcharts.chart('container_7', {
 					    chart: {
 					        plotBackgroundColor: null,
 					        plotBorderWidth: null,
@@ -166,7 +166,7 @@ $table.find('.js-view-parents').on('click', function(e) {
 					        type: 'pie'
 					    },
 					    title: {
-					        text: 'Persebaran Bluebook berdasarkan Lender'
+					        text: 'Persebaran Bluebook berdasarkan Sektor'
 					    },
 					    tooltip: {
 					        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
@@ -202,4 +202,4 @@ $table.find('.js-view-parents').on('click', function(e) {
 				},
 				dataType:"html"});
 
-</script>
+</script>s

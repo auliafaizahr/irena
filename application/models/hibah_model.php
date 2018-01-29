@@ -217,11 +217,7 @@ class Hibah_model extends CI_Model
 //----------------------------------- SYARAT USULAN ----------------------------
 	
 	
-	function ambil_dok_usulan_by_id_proyek($id)
-	{
-		$sql = "SELECT * FROM irena_view_hibah_dok WHERE id_proyek = '$id'	";
-		return $this->db->query($sql);
-	}
+	
 	
 	function dok_usulan_simpan_data($data)
 	{

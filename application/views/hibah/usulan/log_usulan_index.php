@@ -13,7 +13,7 @@
 				<div class="ibox-content">
 					<div class="alert alert-warning">
 						<p>Proyek <strong><?php echo $usulan->judul_en; ?></strong> yang diusulkan oleh <strong><?php echo $usulan->instansi_eselon_satu; echo ", ".$usulan->instansi; ?></strong></p>
-						
+					
 					</div>
 					<div id="tabel">
 					</div>

@@ -132,7 +132,7 @@
                             <div class="col-sm-9">
                                 <textarea name="ruang_lingkup_id" id="ruang_lingkup_id" class="col-sm-12" rows="5" placeholder="Ruang Lingkup dalam Bahasa Indonesia"><?php echo $detail->ruang_lingkup_id; ?></textarea>
                             </div>
-                        </div>
+                        </div>s
 
                          <div class="form-group">
                             <label for="nilai_pinjaman" class="col-sm-3 control-label">Nilai Pinjaman</label>

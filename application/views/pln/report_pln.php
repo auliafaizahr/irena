@@ -90,17 +90,7 @@
 					<div class="ibox-content css-animation-box">
 					
 					<div id="chart2"></div>
-					
-					<!-- <div id="container" style="min-width: 400px; max-width: 800px; height: 400px; margin: 0 auto"></div> -->
-					<div id="container2" style="min-width: 310px; max-width: 600px; height: 400px; margin: 0 auto"></div>
-					<div id="container3" style="min-width: 400px; max-width: 1200px; height: 400px; margin: 0 auto"></div>
-					<div id="container4" style="min-width: 400px; max-width: 1200px; height: 400px; margin: 0 auto"></div>
-					<div id="container5" style="min-width: 400px; max-width: 1200px; height: 400px; margin: 0 auto"></div>
-					<div id="container6" style="min-width: 400px; max-width: 1200px; height: 400px; margin: 0 auto"></div>
 
-					
-
-				 		<canvas id="chart_1" width="800" height="500"></canvas>
 				 		<p id="cek"></p>
 						
 					</div>
@@ -119,20 +109,66 @@
 					<div class="ibox-content css-animation-box">
 				
 					<div id="chart3"></div>
-					<!-- <div id="container" style="min-width: 400px; max-width: 800px; height: 400px; margin: 0 auto"></div> -->
-					<div id="container2" style="min-width: 310px; max-width: 600px; height: 400px; margin: 0 auto"></div>
-					<div id="container3" style="min-width: 400px; max-width: 1200px; height: 400px; margin: 0 auto"></div>
-					<div id="container4" style="min-width: 400px; max-width: 1200px; height: 400px; margin: 0 auto"></div>
-					<div id="container5" style="min-width: 400px; max-width: 1200px; height: 400px; margin: 0 auto"></div>
-					<div id="container6" style="min-width: 400px; max-width: 1200px; height: 400px; margin: 0 auto"></div>
-
-					
-
-				 		<canvas id="chart_1" width="800" height="500"></canvas>
 				 		<p id="cek"></p>
 						
 					</div>
 				</div>
+
+				<div class="ibox float-e-margins">
+					<div class="ibox-title">
+						<h5>Tabel dan Grafik Laporan Persebaran per Sektor</h5>
+						<div class="ibox-tools">
+						<a class="collapse-link">
+							<i class="fa fa-chevron-up"></i>
+						</a>
+						</div>
+					</div>
+
+					<div class="ibox-content css-animation-box">
+				
+					<div id="chart4"></div>
+				 		<p id="cek"></p>
+						
+					</div>
+				</div>
+
+				<div class="ibox float-e-margins">
+					<div class="ibox-title">
+						<h5>Tabel dan Grafik Laporan Persebaran per pembagian Infrastruktur dan Non Infra</h5>
+						<div class="ibox-tools">
+						<a class="collapse-link">
+							<i class="fa fa-chevron-up"></i>
+						</a>
+						</div>
+					</div>
+
+					<div class="ibox-content css-animation-box">
+				
+					<div id="chart5"></div>
+				 		<p id="cek"></p>
+						
+					</div>
+				</div>
+
+				<div class="ibox float-e-margins">
+					<div class="ibox-title">
+						<h5>Tabel dan Grafik Laporan Persebaran per Status</h5>
+						<div class="ibox-tools">
+						<a class="collapse-link">
+							<i class="fa fa-chevron-up"></i>
+						</a>
+						</div>
+					</div>
+
+					<div class="ibox-content css-animation-box">
+				
+					<div id="chart6"></div>
+				 		<p id="cek"></p>
+						
+					</div>
+				</div>
+				
+				
 				
 			</div>
 			</div>
@@ -178,6 +214,25 @@
 			});
 		}
 
+		function chart4(){
+			$.get("<?php echo base_url(); ?>usulan/filter_sektor_bluebook/", function(data) {
+				$("#chart4").html(data);
+			});
+		}
+
+		function chart5(){
+			$.get("<?php echo base_url(); ?>usulan/filter_infra_bluebook/", function(data) {
+				$("#chart5").html(data);
+			});
+		}
+
+		function chart6(){
+			$.get("<?php echo base_url(); ?>usulan/filter_statusumum_bluebook/", function(data) {
+				$("#chart6").html(data);
+			});
+		}
+
+
 
 	
 	
@@ -187,372 +242,13 @@
 			chart();
 			chart2();
 			chart3();
+			chart4();
+			chart5();
+			chart6();
 			var id = $("#kode_bb").val();
 			console.log(id);
 			
 
-	/*
-			$.ajax({
-				url: "<?php echo base_url(); ?>usulan/filter_program_bluebook/"+id,
-				type: "GET",
-				dataType: "json",
-				
-				//dataType: 'json'
-				beforeSend: function(){
-					//notif();
-					showLoading();
-				},
-				success:function(data,){
-
-					var isi = data;
-					var a = isi.length;
-					console.log(data[0]);
-					console.log(a);
-
-					  
-					$.getJSON("<?php echo base_url(); ?>usulan/filter_program_bluebook/", function(json) {
-					console.log(json);
-					console.log(json.length);
-					console.log(json[0].name);
-					//console.log(json1[0].name2);
-
-					var banyak = json.length;
-					var a = json[0].name;
-					var b = parseFloat(json[0].y);
-					//var c = JSON.parse(json);
-					var d = json;
-					//var e = JSON.parse(d);
-					//console.log(e);
-					console.log(b);
-
-					var isi= [];
-					//var isi2= [];
-
-
-					for (var i = banyak - 1; i >= 0; i--) {
-						isi.push({
-						name: [json[i].name],
-						y: parseFloat([json[i].y])
-						});
-					}
-
-					
-
-
-					Highcharts.chart('container3', {
-					    chart: {
-					        plotBackgroundColor: null,
-					        plotBorderWidth: null,
-					        plotShadow: false,
-					        type: 'pie'
-					    },
-					    title: {
-					        text: 'Persebaran Bluebook berdasarkan Program'
-					    },
-					    tooltip: {
-					        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-					    },
-					    plotOptions: {
-					        pie: {
-					            allowPointSelect: true,
-					            cursor: 'pointer',
-					            dataLabels: {
-					                enabled: true,
-					                format: '<b>{point.name}</b>: {point.percentage:.1f} %',
-					                style: {
-					                    color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
-					                }
-					            }
-					        }
-					    },
-					    series: [{
-
-					    	name: 'Persentase',
-        					colorByPoint: true,
-					        data: isi
-					        		
-					    }]
-					});
-
-
-					});
-
-					
-				},
-				dataType:"html"});*/
-
-			$.ajax({
-				url: "<?php echo base_url(); ?>usulan/filter_sektor_bluebook/"+id,
-				type: "GET",
-				dataType: "json",
-				
-				//dataType: 'json'
-				beforeSend: function(){
-					//notif();
-					showLoading();
-				},
-				success:function(data,){
-
-					var isi = data;
-					var a = isi.length;
-					console.log(data[0]);
-					console.log(a);
-
-					  
-					$.getJSON("<?php echo base_url(); ?>usulan/filter_sektor_bluebook/", function(json) {
-					console.log(json);
-					console.log(json.length);
-					console.log(json[0].name);
-					//console.log(json1[0].name2);
-
-					var banyak = json.length;
-					var a = json[0].name;
-					var b = parseFloat(json[0].y);
-					//var c = JSON.parse(json);
-					var d = json;
-					//var e = JSON.parse(d);
-					//console.log(e);
-					console.log(b);
-
-					var isi= [];
-					//var isi2= [];
-
-
-					for (var i = banyak - 1; i >= 0; i--) {
-						isi.push({
-						name: [json[i].name],
-						y: parseFloat([json[i].y])
-						});
-					}
-
-					
-					/*options.series[0].data = json;
-					chart = new Highcharts.Chart(options);
-*/
-
-					Highcharts.chart('container4', {
-					    chart: {
-					        plotBackgroundColor: null,
-					        plotBorderWidth: null,
-					        plotShadow: false,
-					        type: 'pie'
-					    },
-					    title: {
-					        text: 'Persebaran Bluebook berdasarkan Sektor'
-					    },
-					    tooltip: {
-					        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-					    },
-					    plotOptions: {
-					        pie: {
-					            allowPointSelect: true,
-					            cursor: 'pointer',
-					            dataLabels: {
-					                enabled: true,
-					                format: '<b>{point.name}</b>: {point.percentage:.1f} %',
-					                style: {
-					                    color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
-					                }
-					            }
-					        }
-					    },
-					    series: [{
-
-					    	name: 'Persentase',
-        					colorByPoint: true,
-					        data: isi
-					        		
-					    }]
-					});
-
-
-					});
-
-					
-				},
-				dataType:"html"});
-
-			$.ajax({
-				url: "<?php echo base_url(); ?>usulan/filter_infra_bluebook/"+id,
-				type: "GET",
-				dataType: "json",
-				
-				//dataType: 'json'
-				beforeSend: function(){
-					//notif();
-					showLoading();
-				},
-				success:function(data,){
-
-					var isi = data;
-					var a = isi.length;
-					console.log(data[0]);
-					console.log(a);
-
-					  
-					$.getJSON("<?php echo base_url(); ?>usulan/filter_infra_bluebook/", function(json) {
-					console.log(json);
-					console.log(json.length);
-					console.log(json[0].name);
-					//console.log(json1[0].name2);
-
-					var banyak = json.length;
-					var a = json[0].name;
-					var b = parseFloat(json[0].y);
-					//var c = JSON.parse(json);
-					var d = json;
-					//var e = JSON.parse(d);
-					//console.log(e);
-					console.log(b);
-
-					var isi= [];
-					//var isi2= [];
-
-
-					for (var i = banyak - 1; i >= 0; i--) {
-						isi.push({
-						name: [json[i].name],
-						y: parseFloat([json[i].y])
-						});
-					}
-
-					
-					/*options.series[0].data = json;
-					chart = new Highcharts.Chart(options);
-*/
-
-					Highcharts.chart('container5', {
-					    chart: {
-					        plotBackgroundColor: null,
-					        plotBorderWidth: null,
-					        plotShadow: false,
-					        type: 'pie'
-					    },
-					    title: {
-					        text: 'Persebaran Bluebook berdasarkan Infrastuktur dan Non Infrastukturs'
-					    },
-					    tooltip: {
-					        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-					    },
-					    plotOptions: {
-					        pie: {
-					            allowPointSelect: true,
-					            cursor: 'pointer',
-					            dataLabels: {
-					                enabled: true,
-					                format: '<b>{point.name}</b>: {point.percentage:.1f} %',
-					                style: {
-					                    color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
-					                }
-					            }
-					        }
-					    },
-					    series: [{
-
-					    	name: 'Persentase',
-        					colorByPoint: true,
-					        data: isi
-					        		
-					    }]
-					});
-
-
-					});
-
-					
-				},
-				dataType:"html"});
-
-			$.ajax({
-				url: "<?php echo base_url(); ?>usulan/filter_statusumum_bluebook/"+id,
-				type: "GET",
-				dataType: "json",
-				
-				//dataType: 'json'
-				beforeSend: function(){
-					//notif();
-					showLoading();
-				},
-				success:function(data,){
-
-					var isi = data;
-					var a = isi.length;
-					console.log(data[0]);
-					console.log(a);
-
-					  
-					$.getJSON("<?php echo base_url(); ?>usulan/filter_statusumum_bluebook/", function(json) {
-					console.log(json);
-					console.log(json.length);
-					console.log(json[0].name);
-					//console.log(json1[0].name2);
-
-					var banyak = json.length;
-					var a = json[0].name;
-					var b = parseFloat(json[0].y);
-					//var c = JSON.parse(json);
-					var d = json;
-					//var e = JSON.parse(d);
-					//console.log(e);
-					console.log(b);
-
-					var isi= [];
-					//var isi2= [];
-
-
-					for (var i = banyak - 1; i >= 0; i--) {
-						isi.push({
-						name: [json[i].name],
-						y: parseFloat([json[i].y])
-						});
-					}
-
-					
-					/*options.series[0].data = json;
-					chart = new Highcharts.Chart(options);
-*/
-
-					Highcharts.chart('container6', {
-					    chart: {
-					        plotBackgroundColor: null,
-					        plotBorderWidth: null,
-					        plotShadow: false,
-					        type: 'pie'
-					    },
-					    title: {
-					        text: 'Persebaran Bluebook berdasarkan Status'
-					    },
-					    tooltip: {
-					        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-					    },
-					    plotOptions: {
-					        pie: {
-					            allowPointSelect: true,
-					            cursor: 'pointer',
-					            dataLabels: {
-					                enabled: true,
-					                format: '<b>{point.name}</b>: {point.percentage:.1f} %',
-					                style: {
-					                    color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
-					                }
-					            }
-					        }
-					    },
-					    series: [{
-
-					    	name: 'Persentase',
-        					colorByPoint: true,
-					        data: isi
-					        		
-					    }]
-					});
-
-
-					});
-
-					
-				},
-				dataType:"html"});
 			return false;
 		});
 
