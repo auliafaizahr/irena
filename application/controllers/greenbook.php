@@ -46,6 +46,243 @@ class Greenbook extends CI_Controller {
 		
 	}
 
+	public function filter_kl_gb()
+	{
+
+		$this->load->model('Usulan_model');
+		$this->load->model('Bluebook_model');
+		$this->load->model('Greenbook_model');
+			
+		$id = $this->input->post('id');
+		$data['id'] = $this->uri->segment(3);
+		$data['detail'] = $this->Bluebook_model->ambil_grafik_kl_per_bb($data['id'] );
+
+		
+
+    	 //echo json_encode($data);
+    	 //$data2 = json_encode($data);
+    	 $this->load->view('report/bluebook/report_bb_kl', $data);
+	}
+
+	public function filter_kl_isi_bluebook()
+	{
+
+		$this->load->model('Usulan_model');
+		$this->load->model('Bluebook_model');
+			
+		$id = $this->input->post('id');
+		$a = $this->uri->segment(3);
+		//$data['detail'] = $this->Bluebook_model->ambil_proyek_per_bb($a);
+
+		foreach ($this->Bluebook_model->ambil_grafik_kl_per_bb($a) as $row) {
+			$data[] = array(
+				'name' => $row['nama'],
+				'y' => $row['total']
+				);
+		}
+
+    	 echo json_encode($data);
+    	 //$data2 = json_encode($data);
+    	
+	}
+
+
+	public function filter_lender_bluebook()
+	{
+
+		$this->load->model('Usulan_model');
+		$this->load->model('Bluebook_model');
+			
+		$id = $this->input->post('id');
+		$data['id'] = $this->uri->segment(3);
+	
+		//$data['detail'] = $this->Bluebook_model->ambil_proyek_per_bb($a);
+
+		$data['detail'] = $this->Bluebook_model->ambil_grafik_lender_per_bb($data['id']);
+		
+    	 //echo json_encode($data);
+    	 $this->load->view('report/bluebook/report_bb_lender', $data);
+	}
+
+		public function filter_lender_isi_bluebook()
+	{
+
+		$this->load->model('Usulan_model');
+		$this->load->model('Bluebook_model');
+			
+		$id = $this->input->post('id');
+		$a = $this->uri->segment(3);
+		//$data['detail'] = $this->Bluebook_model->ambil_proyek_per_bb($a);
+
+		
+		foreach ($this->Bluebook_model->ambil_grafik_lender_per_bb($a) as $row) {
+			$data[] = array(
+				'name' => $row['lender'],
+				'y' => $row['total']
+				);
+		}
+    	 echo json_encode($data);
+    	 
+	}
+
+
+	public function filter_program_bluebook()
+	{
+
+		$this->load->model('Usulan_model');
+		$this->load->model('Bluebook_model');
+			
+		$id = $this->input->post('id');
+		$a = $this->uri->segment(3);
+		//$data['detail'] = $this->Bluebook_model->ambil_proyek_per_bb($a);
+
+		$data['id'] = $this->uri->segment(3);
+		
+		$data['detail'] = $this->Bluebook_model->ambil_grafik_program_per_bb($data['id']);
+		
+
+    	 //echo json_encode($data);
+    	 $this->load->view('report/bluebook/report_bb_program', $data);
+
+	}
+
+	public function filter_program_isi_bluebook()
+	{
+
+		$this->load->model('Usulan_model');
+		$this->load->model('Bluebook_model');
+			
+		$id = $this->input->post('id');
+		$a = $this->uri->segment(3);
+		//$data['detail'] = $this->Bluebook_model->ambil_proyek_per_bb($a);
+
+		
+		foreach ($this->Bluebook_model->ambil_grafik_program_per_bb($a) as $row) {
+			$data[] = array(
+				'name' => $row['program'],
+				'y' => $row['total']
+				);
+		}
+    	 echo json_encode($data);
+	}
+
+
+
+	public function filter_sektor_bluebook()
+	{
+
+		$this->load->model('Usulan_model');
+		$this->load->model('Bluebook_model');
+			
+		$id = $this->input->post('id');
+		$a = $this->uri->segment(3);
+		//$data['detail'] = $this->Bluebook_model->ambil_proyek_per_bb($a);
+		$data['id'] = $this->uri->segment(3);
+
+		$data['detail'] = $this->Bluebook_model->ambil_grafik_sektor_per_bb($data['id']);
+		
+		$this->load->view('report/bluebook/report_bb_sektor', $data);
+	}
+
+	public function filter_sektor_isi_bluebook()
+	{
+
+		$this->load->model('Usulan_model');
+		$this->load->model('Bluebook_model');
+			
+		$id = $this->input->post('id');
+		$a = $this->uri->segment(3);
+		//$data['detail'] = $this->Bluebook_model->ambil_proyek_per_bb($a);
+
+		
+		foreach ($this->Bluebook_model->ambil_grafik_sektor_per_bb($a) as $row) {
+			$data[] = array(
+				'name' => $row['sektor'],
+				'y' => $row['total']
+				);
+		}
+    	 echo json_encode($data);
+	}
+
+
+	public function filter_infra_bluebook()
+	{
+
+		$this->load->model('Usulan_model');
+		$this->load->model('Bluebook_model');
+			
+		$id = $this->input->post('id');
+		$a = $this->uri->segment(3);
+		//$data['detail'] = $this->Bluebook_model->ambil_proyek_per_bb($a);
+		$data['id'] = $this->uri->segment(3);
+
+		$data['detail'] = $this->Bluebook_model->ambil_grafik_infra_per_bb($data['id']);
+
+		
+		$this->load->view('report/bluebook/report_bb_infra', $data);
+		
+	}
+
+	public function filter_infra_isi_bluebook()
+	{
+
+		$this->load->model('Usulan_model');
+		$this->load->model('Bluebook_model');
+			
+		$id = $this->input->post('id');
+		$a = $this->uri->segment(3);
+		//$data['detail'] = $this->Bluebook_model->ambil_proyek_per_bb($a);
+
+		
+		foreach ($this->Bluebook_model->ambil_grafik_infra_per_bb($a) as $row) {
+			$data[] = array(
+				'name' => $row['nama'],
+				'y' => $row['total']
+				);
+		}
+			
+
+    	 echo json_encode($data);
+	}
+
+	public function filter_statusumum_bluebook()
+	{
+
+		$this->load->model('Usulan_model');
+		$this->load->model('Bluebook_model');
+			
+		$id = $this->input->post('id');
+		$a = $this->uri->segment(3);
+		//$data['detail'] = $this->Bluebook_model->ambil_proyek_per_bb($a);
+
+		$data['id'] = $this->uri->segment(3);
+		
+		$data['detail'] = $this->Bluebook_model->ambil_grafik_status_per_bb($data['id']);
+		
+		
+		$this->load->view('report/bluebook/report_bb_status', $data);
+	}
+
+	public function filter_statusumum_isi_bluebook()
+	{
+
+		$this->load->model('Usulan_model');
+		$this->load->model('Bluebook_model');
+			
+		$id = $this->input->post('id');
+		$a = $this->uri->segment(3);
+		//$data['detail'] = $this->Bluebook_model->ambil_proyek_per_bb($a);
+
+		
+		foreach ($this->Bluebook_model->ambil_grafik_status_per_bb($a) as $row) {
+			$data[] = array(
+				'name' => $row['nama'],
+				'y' => $row['total']
+				);
+		}
+    	 echo json_encode($data);
+	}
+
 	public function arsip()
 	    {
 	    	$this->load->model('Greenbook_model');

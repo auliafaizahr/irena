@@ -1,9 +1,9 @@
 <div class="row wrapper border-bottom white-bg page-heading">
 	<div class="col-lg-12">
-		<h2>Laporan Persebaran Pinjaman Luar Negeri Pada Blue Book</h2>
+		<h2>Laporan Persebaran Pinjaman Luar Negeri Pada Green Book</h2>
 		<ol class="breadcrumb">
 			<li>
-				Halaman ini memberikan informasi dan laporan terkait laporan Pinjaman Luar Negeri berupa statistiknya pada Bluebook
+				Halaman ini memberikan informasi dan laporan terkait laporan Pinjaman Luar Negeri berupa statistiknya pada Green Book
 			</li>
 		</ol>
 	</div>
@@ -31,10 +31,10 @@
 				 
 				 <form role="form" method="POST" action="<?php ?>" enctype="multipart/formdata">
 				 	<div class="form-group">
-				 		<label>Bluebook</label>
+				 		<label>Greenbook</label>
 				 		<select class="form-control m-b" name="kode_bb" id="kode_bb">
 				 			<option value=""> Silahkan Pilih </option>
-				 			<?php foreach ($bluebook as $key => $value) { ?>
+				 			<?php foreach ($greenbook as $key => $value) { ?>
 
 				 				<option value="<?php echo $value['id']; ?>"> <?php echo $value['nama']; ?></option>';
 				 			<?php } ?>

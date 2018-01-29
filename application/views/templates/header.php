@@ -164,7 +164,7 @@
 							</li>
 
                         	<li <?php if($this->uri->segment(1)=="Usulan"){ echo "class='active'"; }	?>>
-								<a href="<?php echo base_url(); ?>Usulan/tampil_index">Green Book</a>
+								<a href="<?php echo base_url(); ?>Usulan/report_gb">Green Book</a>
 							</li>
 
 
