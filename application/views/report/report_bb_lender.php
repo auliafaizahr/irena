@@ -1,4 +1,4 @@
-					<div id="container_3" style="min-width: 400px; max-width: 800px; height: 400px; margin: 0 auto"></div>
+					<div id="container_8" style="min-width: 400px; max-width: 800px; height: 400px; margin: 0 auto"></div>
 					<p> AYO KITA LIHAT KELUARANNYA ADAAN GA NIH </p>
 
 					<container>
@@ -21,13 +21,13 @@
       <td>
         <div class="btn-group btn-group-sm" role="group" aria-label="...">
           <div class="btn-group " role="group" aria-label="Voir le detail">
-            <a id="<?php echo $value['id']; ?>" class="parents js-view-parents" data-href="formation_json_parents" data-id=4039 data-toggle="tooltip" data-placement="top" alt="Voir les details" title="Details">
+            <a id="<?php echo $value['id_lender']; ?>" class="parents js-view-parents" data-href="formation_json_parents" data-id=4039 data-toggle="tooltip" data-placement="top" alt="Voir les details" title="Details">
               <span class="glyphicon glyphicon-eye-close" aria-hidden="true" style="color:black; margin: 5px;"></span>
             </a>
           </div>
 
         </div>
-        <input type="hidden" name="untuk_id" value="<?php echo $value['id'];?>">
+        <input type="hidden" name="untuk_id" value="<?php echo $value['id_lender'];?>">
       </td>
     </tr>
     <?php endforeach;   ?>
@@ -158,7 +158,7 @@ $table.find('.js-view-parents').on('click', function(e) {
 					
 					
 
-					Highcharts.chart('container_3', {
+					Highcharts.chart('container_8', {
 					    chart: {
 					        plotBackgroundColor: null,
 					        plotBorderWidth: null,

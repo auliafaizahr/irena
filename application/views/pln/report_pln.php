@@ -62,16 +62,8 @@
 					<div class="ibox-content css-animation-box">
 					<div id="chart1"></div>
 				
-					<!-- <div id="container" style="min-width: 400px; max-width: 800px; height: 400px; margin: 0 auto"></div> -->
-					<div id="container2" style="min-width: 310px; max-width: 600px; height: 400px; margin: 0 auto"></div>
-					<div id="container3" style="min-width: 400px; max-width: 1200px; height: 400px; margin: 0 auto"></div>
-					<div id="container4" style="min-width: 400px; max-width: 1200px; height: 400px; margin: 0 auto"></div>
-					<div id="container5" style="min-width: 400px; max-width: 1200px; height: 400px; margin: 0 auto"></div>
-					<div id="container6" style="min-width: 400px; max-width: 1200px; height: 400px; margin: 0 auto"></div>
-
 					
-
-				 		<canvas id="chart_1" width="800" height="500"></canvas>
+				 		
 				 		<p id="cek"></p>
 						
 					</div>
@@ -195,43 +187,7 @@
 		$('#loader1').fadeOut(1000);
 	}
 
-		function chart(){
-			$.get("<?php echo base_url(); ?>usulan/filter_kl_bluebook/", function(data) {
-				$("#chart1").html(data);
-			});
-		}
-
-		function chart2(){
-			$.get("<?php echo base_url(); ?>usulan/filter_lender_bluebook/", function(data) {
-				$("#chart2").html(data);
-			});
-		}
-
-
-		function chart3(){
-			$.get("<?php echo base_url(); ?>usulan/filter_program_bluebook/", function(data) {
-				$("#chart3").html(data);
-			});
-		}
-
-		function chart4(){
-			$.get("<?php echo base_url(); ?>usulan/filter_sektor_bluebook/", function(data) {
-				$("#chart4").html(data);
-			});
-		}
-
-		function chart5(){
-			$.get("<?php echo base_url(); ?>usulan/filter_infra_bluebook/", function(data) {
-				$("#chart5").html(data);
-			});
-		}
-
-		function chart6(){
-			$.get("<?php echo base_url(); ?>usulan/filter_statusumum_bluebook/", function(data) {
-				$("#chart6").html(data);
-			});
-		}
-
+		
 
 
 	
@@ -239,14 +195,55 @@
 		
 		//untuk hapus
 		$('#submit_btn').click(function(){
+			
+			var id = $("#kode_bb").val();
+
+
+			function chart(){
+				$.get("<?php echo base_url(); ?>usulan/filter_kl_bluebook/"+id, function(data) {
+					$("#chart1").html(data);
+				});
+			}
+
+			function chart2(){
+				$.get("<?php echo base_url(); ?>usulan/filter_lender_bluebook/"+id, function(data) {
+					$("#chart2").html(data);
+				});
+			}
+
+
+			function chart3(){
+				$.get("<?php echo base_url(); ?>usulan/filter_program_bluebook/"+id, function(data) {
+					$("#chart3").html(data);
+				});
+			}
+
+			function chart4(){
+				$.get("<?php echo base_url(); ?>usulan/filter_sektor_bluebook/"+id, function(data) {
+					$("#chart4").html(data);
+				});
+			}
+
+			function chart5(){
+				$.get("<?php echo base_url(); ?>usulan/filter_infra_bluebook/"+id, function(data) {
+					$("#chart5").html(data);
+				});
+			}
+
+			function chart6(){
+				$.get("<?php echo base_url(); ?>usulan/filter_statusumum_bluebook/"+id, function(data) {
+					$("#chart6").html(data);
+				});
+			}
+
 			chart();
 			chart2();
 			chart3();
 			chart4();
 			chart5();
 			chart6();
-			var id = $("#kode_bb").val();
 			console.log(id);
+			console.log("diatas ini kode bb");
 			
 
 			return false;

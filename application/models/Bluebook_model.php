@@ -97,7 +97,7 @@ function usulan_simpan_data($data)
 
 		public function ambil_grafik_kl_per_bb($x)
 	{
-		$query = "SELECT irena_instansi_2.nama_instansi AS nama, SUM(IF(id_bluebook = 2, nilai_pinjaman, 0)) AS total FROM irena_bluebook_proyek LEFT JOIN irena_instansi_2 ON irena_bluebook_proyek.id_instansi = irena_instansi_2.id GROUP BY id_instansi";
+		$query = "SELECT irena_instansi_2.nama_instansi AS nama, SUM(IF(id_bluebook = '$x', nilai_pinjaman, 0)) AS total, irena_bluebook_proyek.id_instansi as id_instansi FROM irena_bluebook_proyek LEFT JOIN irena_instansi_2 ON irena_bluebook_proyek.id_instansi = irena_instansi_2.id GROUP BY id_instansi";
 
 		 $a= $this->db->query($query);
 
@@ -106,7 +106,7 @@ function usulan_simpan_data($data)
 
 	public function ambil_grafik_lender_per_bb($x)
 	{
-		$query = "SELECT  irena_lender.lender AS lender, SUM(IF(id_bluebook = 2, nilai_pinjaman, 0)) AS total
+		$query = "SELECT  irena_lender.lender AS lender, SUM(IF(id_bluebook = 2, nilai_pinjaman, 0)) AS total, irena_bluebook_proyek.id_lender AS id_lender
     		FROM irena_bluebook_proyek  LEFT JOIN irena_lender ON irena_bluebook_proyek.id_lender  = irena_lender.id GROUP BY id_lender";
 
 		 $a= $this->db->query($query);
@@ -116,7 +116,7 @@ function usulan_simpan_data($data)
 
 	public function ambil_grafik_program_per_bb($x)
 	{
-		$query = "SELECT irena_program_pln.nama_program AS program, SUM(IF(irena_bluebook_proyek.id_bluebook = 2, nilai_pinjaman, 0)) AS total FROM irena_bluebook_proyek LEFT JOIN irena_program_pln ON irena_bluebook_proyek.id_program = irena_program_pln.id GROUP BY id_program";
+		$query = "SELECT irena_program_pln.nama_program AS program, SUM(IF(irena_bluebook_proyek.id_bluebook = 2, nilai_pinjaman, 0)) AS total, irena_bluebook_proyek.id_program AS id_program FROM irena_bluebook_proyek LEFT JOIN irena_program_pln ON irena_bluebook_proyek.id_program = irena_program_pln.id GROUP BY id_program";
 
 		 $a= $this->db->query($query);
 

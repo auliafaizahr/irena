@@ -1,4 +1,4 @@
-					<div id="container_7" style="min-width: 400px; max-width: 800px; height: 400px; margin: 0 auto"></div>
+					<div id="container_9" style="min-width: 400px; max-width: 800px; height: 400px; margin: 0 auto"></div>
 					<p> AYO KITA LIHAT KELUARANNYA ADAAN GA NIH </p>
 
 					<container>
@@ -21,13 +21,13 @@
       <td>
         <div class="btn-group btn-group-sm" role="group" aria-label="...">
           <div class="btn-group " role="group" aria-label="Voir le detail">
-            <a id="<?php echo $value['id']; ?>" class="parents js-view-parents" data-href="formation_json_parents" data-id=4039 data-toggle="tooltip" data-placement="top" alt="Voir les details" title="Details">
+            <a id="" class="parents js-view-parents" data-href="formation_json_parents" data-id=4039 data-toggle="tooltip" data-placement="top" alt="Voir les details" title="Details">
               <span class="glyphicon glyphicon-eye-close" aria-hidden="true" style="color:black; margin: 5px;"></span>
             </a>
           </div>
 
         </div>
-        <input type="hidden" name="untuk_id" value="<?php echo $value['id'];?>">
+        <input type="hidden" name="untuk_id" value="">
       </td>
     </tr>
     <?php endforeach;   ?>
@@ -112,7 +112,7 @@ $table.find('.js-view-parents').on('click', function(e) {
 
 	
 	$.ajax({
-				url: "<?php echo base_url(); ?>usulan/filter_status_isi_bluebook/",
+				url: "<?php echo base_url(); ?>usulan/filter_statusumum_isi_bluebook/",
 				type: "GET",
 				dataType: "html",
 				
@@ -129,7 +129,7 @@ $table.find('.js-view-parents').on('click', function(e) {
 					console.log(a);
 
 					  
-					$.getJSON("<?php echo base_url(); ?>usulan/filter_status_isi_bluebook/", function(json) {
+					$.getJSON("<?php echo base_url(); ?>usulan/filter_statusumum_isi_bluebook/", function(json) {
 					console.log(json);
 					console.log(json.length);
 					console.log(json[0].name);
@@ -158,7 +158,7 @@ $table.find('.js-view-parents').on('click', function(e) {
 					
 					
 
-					Highcharts.chart('container_7', {
+					Highcharts.chart('container_9', {
 					    chart: {
 					        plotBackgroundColor: null,
 					        plotBorderWidth: null,
@@ -166,7 +166,7 @@ $table.find('.js-view-parents').on('click', function(e) {
 					        type: 'pie'
 					    },
 					    title: {
-					        text: 'Persebaran Bluebook berdasarkan Sektor'
+					        text: 'Persebaran Bluebook berdasarkan Status'
 					    },
 					    tooltip: {
 					        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'

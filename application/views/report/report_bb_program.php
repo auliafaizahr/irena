@@ -1,7 +1,115 @@
 					<div id="container_3" style="min-width: 400px; max-width: 1200px; height: 400px; margin: 0 auto"></div>
 					<p> AYO KITA LIHAT KELUARANNYA ADAAN GA NIH </p>
 
+					<container>
+  <table class="table table-striped table-hover js-table" id="example0">
+    <thead>
+      <tr>
+        <th>Lender</th>
+        <th>Total Nilai Pinjaman</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+    <?php foreach ($detail as $key => $value): ?>
+   
+    <tr data-toggle="collapse" data-target="#collapse4039" class="clickable">
+      <td><?php echo $value['program']; ?></td>
+      <td><?php echo $value['total']; ?></td>
+   
+     
+      <td>
+        <div class="btn-group btn-group-sm" role="group" aria-label="...">
+          <div class="btn-group " role="group" aria-label="Voir le detail">
+            <a  class="parents js-view-parents" data-href="formation_json_parents" data-id=4039 data-toggle="tooltip" data-placement="top" alt="Voir les details" title="Details">
+              <span class="glyphicon glyphicon-eye-close" aria-hidden="true" style="color:black; margin: 5px;"></span>
+            </a>
+          </div>
+
+        </div>
+        <input type="hidden" name="untuk_id" value="<?php echo $value['id_program'];?>">
+      </td>
+    </tr>
+    <?php endforeach;   ?>
+    
+</tbody>
+  </table>
+</container>
+
 <script type="text/javascript">
+
+$(document).ready(function(){
+		$('#example0').DataTable({
+			responsive: true,
+			"dom": 'T<"clear">lfrtip',
+			"order": [[ 0, "desc" ]]
+		});
+	});
+$(document).ready(function() {
+
+
+var $table = $('.js-table');
+
+$table.find('.js-view-parents').on('click', function(e) {
+  e.preventDefault();
+  var $btn = $(e.target), $row = $btn.closest('tr'), $nextRow = $row.next('tr.expand-child');
+  $btn.toggleClass('glyphicon-eye-close glyphicon-eye-open');
+  // if .expand-chid row exist already, toggle
+  if ($nextRow.length) {
+      $nextRow.toggle($btn.hasClass('glyphicon-eye-open'));
+  // if not, create .expand-child row
+  } else {
+ // var parentsData = [];
+
+    $.ajax({
+        url: "<?php echo base_url(); ?>usulan/filter_infra_bluebook",
+        dataType: "json",
+        //data: parentsData,
+        success: function (isi) {
+        	console.log(isi);
+        	console.log("inidibawah parentsdata");
+   
+		  var parentsData = {
+		  "success": true,
+		  "parents": isi
+			};
+
+        	data: parentsData;
+
+    var newRow = '<tr class="expand-child" id="collapse' + $btn.data('name') + '">' +
+      '<td colspan="12">' +
+      '<table class="table table-condensed table-bordered" width=100% >' +
+      '<thead>' +
+      '<tr>' +
+      '<th>Surname</th>' +
+      '<th>FirstName</th>' +
+      '<th>School Id</th>' +
+      '<th>School name</th>' +
+      '</tr>' +
+      '</thead>' +
+      '<tbody>';
+
+    if (parentsData.parents) {
+      $.each(parentsData.parents, function(i, parent) {
+        newRow += '<tr>' +
+          '<td>' + parent.name + '</td>' +
+          '<td>' + parent.y + '</td>' +
+        
+          '</tr>';
+      });
+    }
+    newRow += '</tbody></table></td></tr>';
+    // set next row
+    $nextRow = $(newRow).insertAfter($row);
+    
+    
+    }
+        });
+  }
+});
+
+});
+
 	
 	$.ajax({
 				url: "<?php echo base_url(); ?>usulan/filter_program_isi_bluebook/",
