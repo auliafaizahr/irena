@@ -40,9 +40,9 @@
                         </div> -->
 
                          <div class="form-group">
-                            <label for="eselon_1" class="col-sm-3 control-label">Instansi Pelaksana </label>
+                            <label for="instansi_pelaksana" class="col-sm-3 control-label">Instansi Pelaksana </label>
                             <div class="col-sm-9">
-                               <textarea name="eselon_1" id="eselon_1" class="col-sm-12" rows="5" placeholder="Instansi Pelaksana"></textarea>
+                               <textarea name="instansi_pelaksana" id="instansi_pelaksana" class="col-sm-12" rows="5" placeholder="Instansi Pelaksana"></textarea>
                             </div>
                         </div>
 
@@ -56,6 +56,20 @@
                                      
                                     <?php foreach($program as $row){ ?>
                                         <option value="<?php echo $row['id']; ?>"><?php echo $row['nama_program']; ?>
+                                      </option>
+                                    <?php } ?>
+                                </select>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label for="id_sektor" class="col-sm-3 control-label">Sektor </label>
+                            <div class="col-sm-9">
+                                <select name="id_sektor" id="id_sektor" class="form-control"  >
+                                     
+                                    <?php foreach($sektor as $row){ ?>
+                                        <option value="<?php echo $row['id']; ?>"><?php echo $row['nama']; ?>
                                       </option>
                                     <?php } ?>
                                 </select>
@@ -257,6 +271,12 @@
             width: "100%"
         });
 
+          $("#id_sektor").select2({
+            placeholder: "Pilih Status Lembaga",
+            width: "100%"
+        });
+
+
 
          $("#id_greenbook").select2({
             placeholder: "Pilih Kode Greenbook",
@@ -315,9 +335,7 @@
             })
         });
         
-        function fresh() {
-        location.reload();
-        }
+ 
         
         $('#htmlForm').submit(function(e) {
             e.preventDefault();
@@ -337,20 +355,18 @@
             var dana_usulan                    = $("#dana_usulan").val();
             var id_program                    = $("#id_program").val();
             var id_instansi                    = $("#id_instansi").val();
-            var eselon_1                    = $("#eselon_1").val();
+            var instansi_pelaksana                    = $("#instansi_pelaksana").val();
             var ruang_lingkup_id                    = $("#ruang_lingkup_id").val();
             var ruang_lingkup_eng                    = $("#ruang_lingkup_eng").val();
             var outcome                    = $("#outcome").val();
             var output                    = $("#output").val();
             var lokasi                    = $("#lokasi").val();
             var tahun_usulan                    = $("#tahun_usulan").val();
+            var id_sektor                    = $("#id_sektor").val();
            
             
             var form_data   = new FormData();
-            
-            //form_data.append('id', id);
-           // form_data.append('id_instansi_eselon_satu', id_instansi_eselon_satu);
-           // form_data.append('id_donor', id_donor);
+      
             form_data.append('id_program', id_program);
             form_data.append('judul_proyek_eng', judul_proyek_eng);
             form_data.append('judul_proyek_id', judul_proyek_id);
@@ -360,9 +376,10 @@
             form_data.append('output', output);
             form_data.append('outcome', outcome);
             form_data.append('id_instansi', id_instansi);
-            form_data.append('eselon_1', eselon_1);
+            form_data.append('instansi_pelaksana', instansi_pelaksana);
             form_data.append('lokasi', lokasi);
             form_data.append('tahun_usulan', tahun_usulan);
+            form_data.append('id_sektor', id_sektor);
             
            
             form_data.append('dana_hibah', dana_hibah);

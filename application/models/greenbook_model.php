@@ -155,6 +155,14 @@ class Greenbook_model extends CI_Model {
 		return $a->result_array();
 	}
 
+	public function ambil_sektor()
+	{
+		$query = "SELECT * FROM irena_sektor";
+		 $a= $this->db->query($query);
+
+		return $a->result_array();
+	}
+
 	public function ambil_grafik_kl_per_gb($x)
 	{
 		$query = "SELECT irena_instansi_2.nama_instansi AS nama, SUM(IF(id_greenbook = 1 , nilai_pinjaman, 0)) AS total, irena_greenbook_proyek.id_instansi as id_instansi FROM irena_greenbook_proyek LEFT JOIN irena_instansi_2 ON irena_greenbook_proyek.id_instansi = irena_instansi_2.id GROUP BY id_instansi HAVING total > 0 ";

@@ -434,6 +434,7 @@ class Usulan extends CI_Controller {
 		$data['bluebook']= $this->Bluebook_model->semua_bluebook();
 		$data['greenbook']= $this->Greenbook_model->ambil_greenbook();
 		$data['provinsi']= $this->Greenbook_model->ambil_provinsi();
+		$data['sektor']= $this->Greenbook_model->ambil_sektor();
 		
 		$data['lender']= $this->Bluebook_model->semua_lender();
 	
@@ -1171,7 +1172,7 @@ class Usulan extends CI_Controller {
     	$status = array('success' => false, 'messages' => array());
 
     	$this->form_validation->set_rules("id_program", "Program", "trim|required");
-		$this->form_validation->set_rules("eselon_1", "Instansi Pelaksana", "trim|required");
+		$this->form_validation->set_rules("instansi_pelaksana", "Instansi Pelaksana", "trim|required");
 		$this->form_validation->set_rules("id_instansi", "Instansi Pengusul", "trim|required");
 		$this->form_validation->set_rules("judul_proyek_eng", "Judul Proyek Eng", "trim|required");
 		$this->form_validation->set_rules("judul_proyek_id", "Judul Proyek ID", "trim|required");
@@ -1186,6 +1187,7 @@ class Usulan extends CI_Controller {
 		$this->form_validation->set_rules("tahun_usulan", "Tahun Usulan", "trim|required");
 		$this->form_validation->set_rules("lokasi", "Lokasi", "trim|required");
 		$this->form_validation->set_rules("durasi", "Durasi", "trim|required");
+		$this->form_validation->set_rules("id_sektor", "Sektor", "trim|required");
 		//$this->form_validation->set_rules("berkas", "Berka arsip", "required");
 		$this->form_validation->set_message('required', '%s harus diisi');
 		$this->form_validation->set_message('is_natural_no_zero', '%s harus diisi dengan angka dan lebih dari 0');
@@ -1206,7 +1208,7 @@ class Usulan extends CI_Controller {
         'ruang_lingkup_id'			=> $this->input->post('ruang_lingkup_id'),
         'ruang_lingkup_eng'				=> $this->input->post('ruang_lingkup_eng'),
         'id_instansi'					=> $this->input->post('id_instansi'),
-        'instansi_pelaksana'			=> $this->input->post('eselon_1'),
+        
         'proyeksi_tahun_pertama_penarikan'			=> $this->input->post('proyeksi_tahun_pertama_penarikan'),
         'dana_usulan'				=> $this->input->post('dana_usulan'),
         'dana_hibah'				=> $this->input->post('dana_hibah'),
@@ -1215,16 +1217,14 @@ class Usulan extends CI_Controller {
         'outcome'				=> $this->input->post('outcome'),
         'lokasi'				=> $this->input->post('lokasi'),
         'dana_pendamping'				=> $this->input->post('dana_pendamping'),
-        'id_eselon_1'				=> $this->input->post('eselon_1'),
+        'instansi_pelaksana'				=> $this->input->post('instansi_pelaksana'),
         'tahun_usulan'				=> $this->input->post('tahun_usulan'),
+        'id_sektor'				=> $this->input->post('id_sektor'),
    		 );
 
     	$this->db->insert('irena_usulan_pln', $data);
-/*
-    	$query = "SELECT id FROM irena_usulan_layak ORDER BY ID DESC LIMIT 1";
-    	$a = $this->db->query($query);
-*/
-    	$isi = array(
+
+	 	$isi = array(
     			'id_usulan' 		=> $this->Usulan_model->last()->id,
     			//'is_gb_update_by'			=> $this->session->userdata('id')
     			
