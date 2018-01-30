@@ -56,6 +56,37 @@
 
 function showResult(str) {
 
+     $.ajax({
+                url: '<?php echo base_url(); ?>Usulan/filter_kl_isi_bluebook',
+                dataType: 'json',
+                cache: false,
+                contentType: false,
+                processData: false,
+                data: form_data,
+                type: 'post',
+                success: function(response){
+                    if (response.success == true) {
+                        fresh();
+                        $('#modalTambah').modal('hide');
+                        
+                        notif("Informasi", "Data berhasil disimpan.");
+                    }
+                    else {
+                        $.each(response.messages, function(key, value) {
+                            var element = $('#' + key);
+                            
+                            element.closest('div.form-group')
+                            .removeClass('has-error')
+                            .addClass(value.length > 0 ? 'has-error' : 'has-success')
+                            .find('.text-danger')
+                            .remove();
+
+                            element.after(value);
+                        });
+                    }
+                }
+            });
+
   if (str.length==0) { 
     document.getElementById("livesearch").innerHTML="";
     document.getElementById("livesearch").style.border="0px";
