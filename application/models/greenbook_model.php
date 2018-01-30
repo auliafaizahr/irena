@@ -157,7 +157,7 @@ class Greenbook_model extends CI_Model {
 
 	public function ambil_grafik_kl_per_gb($x)
 	{
-		$query = "SELECT irena_instansi_2.nama_instansi AS nama, SUM(IF(id_greenbook = 1 , nilai_pinjaman, 0)) AS total, irena_greenbook_proyek.id_instansi as id_instansi FROM irena_greenbook_proyek LEFT JOIN irena_instansi_2 ON irena_greenbook_proyek.id_instansi = irena_instansi_2.id GROUP BY id_instansi ";
+		$query = "SELECT irena_instansi_2.nama_instansi AS nama, SUM(IF(id_greenbook = 1 , nilai_pinjaman, 0)) AS total, irena_greenbook_proyek.id_instansi as id_instansi FROM irena_greenbook_proyek LEFT JOIN irena_instansi_2 ON irena_greenbook_proyek.id_instansi = irena_instansi_2.id GROUP BY id_instansi HAVING total > 0 ";
 
 		 $a= $this->db->query($query);
 
@@ -166,7 +166,7 @@ class Greenbook_model extends CI_Model {
 
 	public function ambil_grafik_lender_per_gb($x)
 	{
-		$query = "SELECT irena_lender.lender AS lender, SUM(IF(id_greenbook = 1, nilai_pinjaman, 0)) AS total, irena_greenbook_proyek.id_lender AS id_lender FROM irena_greenbook_proyek LEFT JOIN irena_lender ON irena_greenbook_proyek.id_lender = irena_lender.id GROUP BY id_lender";
+		$query = "SELECT irena_lender.lender AS lender, SUM(IF(id_greenbook = 1, nilai_pinjaman, 0)) AS total, irena_greenbook_proyek.id_lender AS id_lender FROM irena_greenbook_proyek LEFT JOIN irena_lender ON irena_greenbook_proyek.id_lender = irena_lender.id GROUP BY id_lender HAVING total > 0";
 
 		 $a= $this->db->query($query);
 
@@ -175,7 +175,7 @@ class Greenbook_model extends CI_Model {
 
 	public function ambil_grafik_program_per_gb($x)
 	{
-		$query = "SELECT irena_program_pln.nama_program AS program, SUM(IF(irena_greenbook_proyek.id_greenbook = 1, nilai_pinjaman, 0)) AS total, irena_greenbook_proyek.id_program AS id_program FROM irena_greenbook_proyek LEFT JOIN irena_program_pln ON irena_greenbook_proyek.id_program = irena_program_pln.id GROUP BY id_program ";
+		$query = "SELECT irena_program_pln.nama_program AS program, SUM(IF(irena_greenbook_proyek.id_greenbook = 1, nilai_pinjaman, 0)) AS total, irena_greenbook_proyek.id_program AS id_program FROM irena_greenbook_proyek LEFT JOIN irena_program_pln ON irena_greenbook_proyek.id_program = irena_program_pln.id GROUP BY id_program HAVING total > 0";
 
 		 $a= $this->db->query($query);
 
@@ -184,7 +184,7 @@ class Greenbook_model extends CI_Model {
 
 	public function ambil_grafik_status_per_gb($x)
 	{
-		$query = "SELECT irena_status_umum.nama AS nama, SUM(IF(irena_greenbook_proyek.id_greenbook = 1, nilai_pinjaman, 0)) AS total FROM irena_greenbook_proyek LEFT JOIN irena_status_umum ON irena_greenbook_proyek.id_status = irena_status_umum.id GROUP BY id_status";
+		$query = "SELECT irena_status_umum.nama AS nama, SUM(IF(irena_greenbook_proyek.id_greenbook = 1, nilai_pinjaman, 0)) AS total FROM irena_greenbook_proyek LEFT JOIN irena_status_umum ON irena_greenbook_proyek.id_status = irena_status_umum.id GROUP BY id_status HAVING total > 0";
 
 		 $a= $this->db->query($query);
 
@@ -193,7 +193,7 @@ class Greenbook_model extends CI_Model {
 
 	public function ambil_grafik_infra_per_gb($x)
 	{
-		$query = "SELECT irena_infra.nama AS nama, SUM(IF(irena_greenbook_proyek.id_greenbook = 1, nilai_pinjaman, 0)) AS total FROM irena_greenbook_proyek LEFT JOIN irena_infra ON irena_greenbook_proyek.id_Infra = irena_infra.id GROUP BY nama";
+		$query = "SELECT irena_infra.nama AS nama, SUM(IF(irena_greenbook_proyek.id_greenbook = 1, nilai_pinjaman, 0)) AS total FROM irena_greenbook_proyek LEFT JOIN irena_infra ON irena_greenbook_proyek.id_Infra = irena_infra.id GROUP BY nama HAVING total > 0";
 
 		 $a= $this->db->query($query);
 
@@ -202,7 +202,7 @@ class Greenbook_model extends CI_Model {
 
 	public function ambil_grafik_sektor_per_gb($x)
 	{
-		$query = "SELECT irena_sektor.nama AS sektor, SUM(IF(irena_greenbook_proyek.id_greenbook = 1, nilai_pinjaman, 0)) AS total FROM irena_greenbook_proyek LEFT JOIN irena_sektor ON irena_greenbook_proyek.id_sektor = irena_sektor.id GROUP BY id_sektor";
+		$query = "SELECT irena_sektor.nama AS sektor, SUM(IF(irena_greenbook_proyek.id_greenbook = 1, nilai_pinjaman, 0)) AS total FROM irena_greenbook_proyek LEFT JOIN irena_sektor ON irena_greenbook_proyek.id_sektor = irena_sektor.id GROUP BY id_sektor HAVING total > 0";
 
 		 $a= $this->db->query($query);
 

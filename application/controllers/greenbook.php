@@ -52,29 +52,33 @@ class Greenbook extends CI_Controller {
 		$this->load->model('Usulan_model');
 		$this->load->model('Bluebook_model');
 		$this->load->model('Greenbook_model');
+		
+
 			
 		$id = $this->input->post('id');
 		$data['id'] = $this->uri->segment(3);
-		$data['detail'] = $this->Bluebook_model->ambil_grafik_kl_per_bb($data['id'] );
+		$data['detail'] = $this->Greenbook_model->ambil_grafik_kl_per_gb($data['id'] );
 
 		
 
     	 //echo json_encode($data);
     	 //$data2 = json_encode($data);
-    	 $this->load->view('report/bluebook/report_bb_kl', $data);
+    	 $this->load->view('report/greenbook/report_gb_kl', $data);
 	}
 
-	public function filter_kl_isi_bluebook()
+	public function filter_kl_isi_gb()
 	{
 
 		$this->load->model('Usulan_model');
 		$this->load->model('Bluebook_model');
+		$this->load->model('Greenbook_model');
+
 			
 		$id = $this->input->post('id');
 		$a = $this->uri->segment(3);
 		//$data['detail'] = $this->Bluebook_model->ambil_proyek_per_bb($a);
 
-		foreach ($this->Bluebook_model->ambil_grafik_kl_per_bb($a) as $row) {
+		foreach ($this->Greenbook_model->ambil_grafik_kl_per_gb($a) as $row) {
 			$data[] = array(
 				'name' => $row['nama'],
 				'y' => $row['total']
@@ -87,35 +91,39 @@ class Greenbook extends CI_Controller {
 	}
 
 
-	public function filter_lender_bluebook()
+	public function filter_lender_gb()
 	{
 
 		$this->load->model('Usulan_model');
 		$this->load->model('Bluebook_model');
+		$this->load->model('Greenbook_model');
+
 			
 		$id = $this->input->post('id');
 		$data['id'] = $this->uri->segment(3);
 	
 		//$data['detail'] = $this->Bluebook_model->ambil_proyek_per_bb($a);
 
-		$data['detail'] = $this->Bluebook_model->ambil_grafik_lender_per_bb($data['id']);
+		$data['detail'] = $this->Greenbook_model->ambil_grafik_lender_per_gb($data['id']);
 		
     	 //echo json_encode($data);
-    	 $this->load->view('report/bluebook/report_bb_lender', $data);
+    	 $this->load->view('report/greenbook/report_gb_lender', $data);
 	}
 
-		public function filter_lender_isi_bluebook()
+		public function filter_lender_isi_gb()
 	{
 
 		$this->load->model('Usulan_model');
 		$this->load->model('Bluebook_model');
+		$this->load->model('Greenbook_model');
+
 			
 		$id = $this->input->post('id');
 		$a = $this->uri->segment(3);
 		//$data['detail'] = $this->Bluebook_model->ambil_proyek_per_bb($a);
 
 		
-		foreach ($this->Bluebook_model->ambil_grafik_lender_per_bb($a) as $row) {
+		foreach ($this->Greenbook_model->ambil_grafik_lender_per_gb($a) as $row) {
 			$data[] = array(
 				'name' => $row['lender'],
 				'y' => $row['total']
@@ -126,11 +134,13 @@ class Greenbook extends CI_Controller {
 	}
 
 
-	public function filter_program_bluebook()
+	public function filter_program_gb()
 	{
 
 		$this->load->model('Usulan_model');
 		$this->load->model('Bluebook_model');
+		$this->load->model('Greenbook_model');
+
 			
 		$id = $this->input->post('id');
 		$a = $this->uri->segment(3);
@@ -138,26 +148,28 @@ class Greenbook extends CI_Controller {
 
 		$data['id'] = $this->uri->segment(3);
 		
-		$data['detail'] = $this->Bluebook_model->ambil_grafik_program_per_bb($data['id']);
+		$data['detail'] = $this->Greenbook_model->ambil_grafik_program_per_gb($data['id']);
 		
 
     	 //echo json_encode($data);
-    	 $this->load->view('report/bluebook/report_bb_program', $data);
+    	 $this->load->view('report/greenbook/report_gb_program', $data);
 
 	}
 
-	public function filter_program_isi_bluebook()
+	public function filter_program_isi_gb()
 	{
 
 		$this->load->model('Usulan_model');
 		$this->load->model('Bluebook_model');
+		$this->load->model('Greenbook_model');
+
 			
 		$id = $this->input->post('id');
 		$a = $this->uri->segment(3);
 		//$data['detail'] = $this->Bluebook_model->ambil_proyek_per_bb($a);
 
 		
-		foreach ($this->Bluebook_model->ambil_grafik_program_per_bb($a) as $row) {
+		foreach ($this->Greenbook_model->ambil_grafik_program_per_gb($a) as $row) {
 			$data[] = array(
 				'name' => $row['program'],
 				'y' => $row['total']
@@ -168,34 +180,38 @@ class Greenbook extends CI_Controller {
 
 
 
-	public function filter_sektor_bluebook()
+	public function filter_sektor_gb()
 	{
 
 		$this->load->model('Usulan_model');
 		$this->load->model('Bluebook_model');
+		$this->load->model('Greenbook_model');
+
 			
 		$id = $this->input->post('id');
 		$a = $this->uri->segment(3);
 		//$data['detail'] = $this->Bluebook_model->ambil_proyek_per_bb($a);
 		$data['id'] = $this->uri->segment(3);
 
-		$data['detail'] = $this->Bluebook_model->ambil_grafik_sektor_per_bb($data['id']);
+		$data['detail'] = $this->Greenbook_model->ambil_grafik_sektor_per_gb($data['id']);
 		
-		$this->load->view('report/bluebook/report_bb_sektor', $data);
+		$this->load->view('report/greenbook/report_gb_sektor', $data);
 	}
 
-	public function filter_sektor_isi_bluebook()
+	public function filter_sektor_isi_gb()
 	{
 
 		$this->load->model('Usulan_model');
 		$this->load->model('Bluebook_model');
+		$this->load->model('Greenbook_model');
+
 			
 		$id = $this->input->post('id');
 		$a = $this->uri->segment(3);
 		//$data['detail'] = $this->Bluebook_model->ambil_proyek_per_bb($a);
 
 		
-		foreach ($this->Bluebook_model->ambil_grafik_sektor_per_bb($a) as $row) {
+		foreach ($this->Greenbook_model->ambil_grafik_sektor_per_gb($a) as $row) {
 			$data[] = array(
 				'name' => $row['sektor'],
 				'y' => $row['total']
@@ -205,36 +221,40 @@ class Greenbook extends CI_Controller {
 	}
 
 
-	public function filter_infra_bluebook()
+	public function filter_infra_gb()
 	{
 
 		$this->load->model('Usulan_model');
 		$this->load->model('Bluebook_model');
+		$this->load->model('Greenbook_model');
+
 			
 		$id = $this->input->post('id');
 		$a = $this->uri->segment(3);
 		//$data['detail'] = $this->Bluebook_model->ambil_proyek_per_bb($a);
 		$data['id'] = $this->uri->segment(3);
 
-		$data['detail'] = $this->Bluebook_model->ambil_grafik_infra_per_bb($data['id']);
+		$data['detail'] = $this->Greenbook_model->ambil_grafik_infra_per_gb($data['id']);
 
 		
-		$this->load->view('report/bluebook/report_bb_infra', $data);
+		$this->load->view('report/greenbook/report_gb_infra', $data);
 		
 	}
 
-	public function filter_infra_isi_bluebook()
+	public function filter_infra_isi_gb()
 	{
 
 		$this->load->model('Usulan_model');
 		$this->load->model('Bluebook_model');
+		$this->load->model('Greenbook_model');
+
 			
 		$id = $this->input->post('id');
 		$a = $this->uri->segment(3);
 		//$data['detail'] = $this->Bluebook_model->ambil_proyek_per_bb($a);
 
 		
-		foreach ($this->Bluebook_model->ambil_grafik_infra_per_bb($a) as $row) {
+		foreach ($this->Greenbook_model->ambil_grafik_infra_per_gb($a) as $row) {
 			$data[] = array(
 				'name' => $row['nama'],
 				'y' => $row['total']
@@ -245,11 +265,13 @@ class Greenbook extends CI_Controller {
     	 echo json_encode($data);
 	}
 
-	public function filter_statusumum_bluebook()
+	public function filter_statusumum_gb()
 	{
 
 		$this->load->model('Usulan_model');
 		$this->load->model('Bluebook_model');
+		$this->load->model('Greenbook_model');
+
 			
 		$id = $this->input->post('id');
 		$a = $this->uri->segment(3);
@@ -257,24 +279,25 @@ class Greenbook extends CI_Controller {
 
 		$data['id'] = $this->uri->segment(3);
 		
-		$data['detail'] = $this->Bluebook_model->ambil_grafik_status_per_bb($data['id']);
+		$data['detail'] = $this->Greenbook_model->ambil_grafik_status_per_gb($data['id']);
 		
 		
-		$this->load->view('report/bluebook/report_bb_status', $data);
+		$this->load->view('report/greenbook/report_gb_status', $data);
 	}
 
-	public function filter_statusumum_isi_bluebook()
+	public function filter_statusumum_isi_gb()
 	{
 
 		$this->load->model('Usulan_model');
 		$this->load->model('Bluebook_model');
+		$this->load->model('Greenbook_model');
 			
 		$id = $this->input->post('id');
 		$a = $this->uri->segment(3);
 		//$data['detail'] = $this->Bluebook_model->ambil_proyek_per_bb($a);
 
 		
-		foreach ($this->Bluebook_model->ambil_grafik_status_per_bb($a) as $row) {
+		foreach ($this->Greenbook_model->ambil_grafik_status_per_gb($a) as $row) {
 			$data[] = array(
 				'name' => $row['nama'],
 				'y' => $row['total']

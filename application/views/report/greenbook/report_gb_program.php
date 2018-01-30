@@ -115,7 +115,7 @@ $table.find('.js-view-parents').on('click', function(e) {
 
 	
 	$.ajax({
-				url: "<?php echo base_url(); ?>usulan/filter_program_isi_bluebook/"+id,
+				url: "<?php echo base_url(); ?>greenbook/filter_program_isi_gb/"+id,
 				type: "GET",
 				dataType: "html",
 				
@@ -132,7 +132,7 @@ $table.find('.js-view-parents').on('click', function(e) {
 					console.log(a);
 
 					  
-					$.getJSON("<?php echo base_url(); ?>usulan/filter_program_isi_bluebook/"+id, function(json) {
+					$.getJSON("<?php echo base_url(); ?>greenbook/filter_program_isi_gb/"+id, function(json) {
 					console.log(json);
 					console.log(json.length);
 					console.log(json[0].name);

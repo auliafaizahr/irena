@@ -32,7 +32,7 @@
 				 <form role="form" method="POST" action="<?php ?>" enctype="multipart/formdata">
 				 	<div class="form-group">
 				 		<label>Greenbook</label>
-				 		<select class="form-control m-b" name="kode_bb" id="kode_bb">
+				 		<select class="form-control m-b" name="kode_gb" id="kode_gb">
 				 			<option value=""> Silahkan Pilih </option>
 				 			<?php foreach ($greenbook as $key => $value) { ?>
 
@@ -60,7 +60,7 @@
 					</div>
 
 					<div class="ibox-content css-animation-box">
-					<div id="chart1"></div>
+					<div id="chart_"></div>
 				
 					
 				 		
@@ -81,7 +81,7 @@
 
 					<div class="ibox-content css-animation-box">
 					
-					<div id="chart2"></div>
+					<div id="chart_2"></div>
 
 				 		<p id="cek"></p>
 						
@@ -100,7 +100,7 @@
 
 					<div class="ibox-content css-animation-box">
 				
-					<div id="chart3"></div>
+					<div id="chart_3"></div>
 				 		<p id="cek"></p>
 						
 					</div>
@@ -118,7 +118,7 @@
 
 					<div class="ibox-content css-animation-box">
 				
-					<div id="chart4"></div>
+					<div id="chart_4"></div>
 				 		<p id="cek"></p>
 						
 					</div>
@@ -136,7 +136,7 @@
 
 					<div class="ibox-content css-animation-box">
 				
-					<div id="chart5"></div>
+					<div id="chart_5"></div>
 				 		<p id="cek"></p>
 						
 					</div>
@@ -154,7 +154,7 @@
 
 					<div class="ibox-content css-animation-box">
 				
-					<div id="chart6"></div>
+					<div id="chart_6"></div>
 				 		<p id="cek"></p>
 						
 					</div>
@@ -196,43 +196,43 @@
 		//untuk hapus
 		$('#submit_btn').click(function(){
 			
-			var id = $("#kode_bb").val();
+			var id = $("#kode_gb").val();
 
 
 			function chart(){
-				$.get("<?php echo base_url(); ?>usulan/filter_kl_bluebook/"+id, function(data) {
-					$("#chart1").html(data);
+				$.get("<?php echo base_url(); ?>greenbook/filter_kl_gb/"+id, function(data) {
+					$("#chart_").html(data);
 				});
 			}
 
 			function chart2(){
-				$.get("<?php echo base_url(); ?>usulan/filter_lender_bluebook/"+id, function(data) {
-					$("#chart2").html(data);
+				$.get("<?php echo base_url(); ?>greenbook/filter_lender_gb/"+id, function(data) {
+					$("#chart_2").html(data);
 				});
 			}
 
 
 			function chart3(){
-				$.get("<?php echo base_url(); ?>usulan/filter_program_bluebook/"+id, function(data) {
-					$("#chart3").html(data);
+				$.get("<?php echo base_url(); ?>greenbook/filter_program_gb/"+id, function(data) {
+					$("#chart_3").html(data);
 				});
 			}
 
 			function chart4(){
-				$.get("<?php echo base_url(); ?>usulan/filter_sektor_bluebook/"+id, function(data) {
-					$("#chart4").html(data);
+				$.get("<?php echo base_url(); ?>greenbook/filter_sektor_bluebook/"+id, function(data) {
+					$("#chart_4").html(data);
 				});
 			}
 
 			function chart5(){
-				$.get("<?php echo base_url(); ?>usulan/filter_infra_bluebook/"+id, function(data) {
-					$("#chart5").html(data);
+				$.get("<?php echo base_url(); ?>greenbook/filter_infra_gb/"+id, function(data) {
+					$("#chart_5").html(data);
 				});
 			}
 
 			function chart6(){
-				$.get("<?php echo base_url(); ?>usulan/filter_statusumum_bluebook/"+id, function(data) {
-					$("#chart6").html(data);
+				$.get("<?php echo base_url(); ?>greenbook/filter_statusumum_gb/"+id, function(data) {
+					$("#chart_6").html(data);
 				});
 			}
 
