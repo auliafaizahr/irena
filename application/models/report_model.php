@@ -7,7 +7,7 @@
 	* Dimodifikasi : 
 **/
 
-class Bluebook_model extends CI_Model {
+class Report_model extends CI_Model {
 	
 	public function ambil_proyek_bluebook()
 	{
@@ -95,38 +95,25 @@ function usulan_simpan_data($data)
 		return $a->row();
 	}
 
-		public function ambil_grafik_kl_per_bb($x)
+		public function ambil_grafik_lender_per_bb($x)
 	{
-		$query = "SELECT irena_instansi_2.nama_instansi AS nama, SUM(IF(id_bluebook = '$x', nilai_pinjaman, 0)) AS total, irena_bluebook_proyek.id_instansi as id_instansi FROM irena_bluebook_proyek LEFT JOIN irena_instansi_2 ON irena_bluebook_proyek.id_instansi = irena_instansi_2.id GROUP BY id_instansi HAVING total > 0";
+		$query = "SELECT irena_bluebook_kode.nama AS nama, SUM(IF(irena_bluebook_proyek.id_lender = 2, nilai_pinjaman, 0)) AS total FROM irena_bluebook_proyek LEFT JOIN irena_bluebook_kode ON irena_bluebook_proyek.id_bluebook = irena_bluebook_kode.id GROUP BY nama HAVING total > 0";
 
 		 $a= $this->db->query($query);
 
 		return $a->result_array();
 	}
 
-	public function ambil_grafik_lender_per_bb($x)
+	public function ambil_grafik_lender_per_gb($x)
 	{
-		$query = "SELECT  irena_lender.lender AS lender, SUM(IF(id_bluebook = '$x', nilai_pinjaman, 0)) AS total, irena_bluebook_proyek.id_lender AS id_lender
-    		FROM irena_bluebook_proyek  LEFT JOIN irena_lender ON irena_bluebook_proyek.id_lender  = irena_lender.id GROUP BY id_lender HAVING total > 0";
+		$query = "SELECT irena_greenbook_kode.nama AS nama, SUM(IF(irena_greenbook_proyek.id_lender = 1, nilai_pinjaman, 0)) AS total FROM irena_greenbook_proyek LEFT JOIN irena_greenbook_kode ON irena_greenbook_proyek.id_greenbook = irena_greenbook_kode.id GROUP BY nama HAVING total > 0";
 
 		 $a= $this->db->query($query);
 
 		return $a->result_array();
 	}
 
-
-
-	public function ambil_grafik_lender_per_bb_program($x)
-	{
-		$query = "SELECT  irena_lender.lender AS lender, SUM(IF(id_bluebook = '$x' AND irena_bluebook_proyek.id_program = 6, nilai_pinjaman, 0)) AS total, irena_bluebook_proyek.id_lender AS id_lender
-    		FROM irena_bluebook_proyek  LEFT JOIN irena_lender ON irena_bluebook_proyek.id_lender  = irena_lender.id GROUP BY id_lender HAVING total > 0";
-
-		 $a= $this->db->query($query);
-
-		return $a->result_array();
-	}
-
-	public function ambil_grafik_program_per_bb($x)
+	public function ambil_grafik_lender_per_program($x)
 	{
 		$query = "SELECT irena_program_pln.nama_program AS program, SUM(IF(irena_bluebook_proyek.id_bluebook = '$x', nilai_pinjaman, 0)) AS total, irena_bluebook_proyek.id_program AS id_program FROM irena_bluebook_proyek LEFT JOIN irena_program_pln ON irena_bluebook_proyek.id_program = irena_program_pln.id GROUP BY id_program HAVING total > 0";
 

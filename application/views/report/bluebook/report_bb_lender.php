@@ -147,14 +147,31 @@ $table.find('.js-view-parents').on('click', function(e) {
 					console.log(b);
 
 					var isi= [];
+					var isi2= [];
 					//var isi2= [];
 
 
 					for (var i = banyak - 1; i >= 0; i--) {
+
 						isi.push({
 						name: [json[i].name],
+						id_: [json[i].id_lender],
 						y: parseFloat([json[i].y])
 						});
+
+						console.log(isi);
+						console.log("diatas ini isi yg tumpah");
+
+						$.getJSON("<?php echo base_url(); ?>usulan/filter_lender_isi_bluebook/"+id+"/"+isi[0].id_, function(json1) {
+
+							console.log(json1[0].name);
+							
+						
+						});
+						console.log(isi[0].id_);
+							console.log("diatas ini json1");
+
+
 					}
 
 					
