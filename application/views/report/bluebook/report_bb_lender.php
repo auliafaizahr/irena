@@ -138,7 +138,7 @@ $table.find('.js-view-parents').on('click', function(e) {
 					//console.log(json1[0].name2);
 
 					var banyak = json.length;
-					var a = json[2].id;
+					var a = json[0].name;
 					var b = parseFloat(json[0].y);
 					//var c = JSON.parse(json);
 					var d = json;
@@ -157,27 +157,39 @@ $table.find('.js-view-parents').on('click', function(e) {
 
 						isi.push({
 						name: [json[i].name],
-						id_: [json[i].id_lender],
+						id_: parseFloat([json[i].id]),
 						y: parseFloat([json[i].y])
 						});
 
 						console.log(isi);
 						console.log("diatas ini isi yg tumpah");
 
+						$.getJSON("<?php echo base_url(); ?>usulan/filter_lender_isi_bluebook_program/"+id+"/"+json[i].id, function(json1) {
 
-					
+							var panjang = json1.length;
+							for (var j = panjang - 1; j >= 0; j--) {
+								
+								isi2.push({
+									name: [json1[j].name],
+									y: parseFloat(json1[j].y)
+								})
 
-					}
+							}
 
-					$.getJSON("<?php echo base_url(); ?>usulan/filter_lender_isi_bluebook_program/"+id+"/"+json[1].id, function(json1) {
-
-							console.log(json1[0].name);
-							console.log("diatas ini json1");
 							
+
+
 							
 						
 						});
 					
+					console.log(isi[0]);
+							console.log("diatas ini panjang");
+					
+
+					}
+
+
 
 					Highcharts.chart('container_8', {
 					    chart: {
