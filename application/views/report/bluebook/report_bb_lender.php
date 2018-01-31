@@ -133,18 +133,20 @@ $table.find('.js-view-parents').on('click', function(e) {
 					  
 					$.getJSON("<?php echo base_url(); ?>usulan/filter_lender_isi_bluebook/"+id, function(json) {
 					console.log(json);
-					console.log(json.length);
-					console.log(json[0].name);
+					console.log(json.length);0
+					//console.log(json[1].y);
 					//console.log(json1[0].name2);
 
 					var banyak = json.length;
-					var a = json[0].name;
+					var a = json[2].id;
 					var b = parseFloat(json[0].y);
 					//var c = JSON.parse(json);
 					var d = json;
 					//var e = JSON.parse(d);
 					//console.log(e);
-					console.log(b);
+					console.log(a);
+					console.log("isi diatas json 0 nama");
+
 
 					var isi= [];
 					var isi2= [];
@@ -162,19 +164,19 @@ $table.find('.js-view-parents').on('click', function(e) {
 						console.log(isi);
 						console.log("diatas ini isi yg tumpah");
 
-						$.getJSON("<?php echo base_url(); ?>usulan/filter_lender_isi_bluebook/"+id+"/"+isi[0].id_, function(json1) {
 
-							console.log(json1[0].name);
-							
-						
-						});
-						console.log(isi[0].id_);
-							console.log("diatas ini json1");
-
+					
 
 					}
 
-					
+					$.getJSON("<?php echo base_url(); ?>usulan/filter_lender_isi_bluebook_program/"+id+"/"+json[1].id, function(json1) {
+
+							console.log(json1[0].name);
+							console.log("diatas ini json1");
+							
+							
+						
+						});
 					
 
 					Highcharts.chart('container_8', {
