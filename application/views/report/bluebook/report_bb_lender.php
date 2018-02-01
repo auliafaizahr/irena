@@ -148,12 +148,21 @@ $table.find('.js-view-parents').on('click', function(e) {
 					console.log(a);
 					console.log("isi diatas json 0 nama");
 
+						var person = []; // Array is empty
 
 					var isi= [];
 					var isi2= [];
-					var series = {};
+								var title = [];
 
+					
 					//var isi2= [];
+					var series = {
+						name: ["a", "b", "c"],
+						id: ["1", "b", "z"],
+						y:[2, 3, 4],
+						index: [
+       						{ "name":"Ford", "models":[ "Fiesta", "Focus", "Mustang" ] }]
+					}
 
 
 					for (var i = banyak - 1; i >= 0; i--) {
@@ -161,7 +170,8 @@ $table.find('.js-view-parents').on('click', function(e) {
 						isi.push({
 						name: [json[i].name],
 						id_: parseFloat([json[i].id]),
-						y: parseFloat([json[i].y])
+						y: parseFloat([json[i].y]),
+						
 						});
 
 						console.log(isi);
@@ -173,27 +183,53 @@ $table.find('.js-view-parents').on('click', function(e) {
 
 						$.getJSON("<?php echo base_url(); ?>usulan/filter_lender_isi_bluebook_program/"+id+"/"+json[i].id, function(json1) {
 
-							var panjang = json1.length;
-							/*for (var j = panjang - 1; j >= 0; j--) {
-								
-								isi[i].y.push({
-									name: [json1[j].name],
-									y: parseFloat(json1[j].y)
-								})
-
-							}*/
+							var title = [];
+								for (var i=0; i<5; i++) {
+								    title[i] = {
+								        name: "name" + i+1,
+								        age: "age" + i+1,
+								        hometown: "hometown" + i+1
+								    };
+								}
+							series['index'].push(title)
 							
-							console.log(panjang);
-							console.log("diatas ini panjang");
-						
+							console.log(title);
+
+								
 						});
 					
-					
+						
 					
 
 					}
+							series['name'].push("hahaha");
+								series['name'].push(isi);
+								//series.push(title);
 
 
+					console.log(series.name);
+					console.log(series.index);
+					console.log(title);
+					
+					console.log(series.id);
+					console.log(series.y);
+						console.log("diatas ini isi yg tumpah2");
+
+				
+
+				console.log(person);
+				console.log("diatas ini person");
+
+/*
+					var title = [];
+					for (var i=0; i<5; i++) {
+					    title[i] = {
+					        name: "name" + i+1,
+					        age: "age" + i+1,
+					        hometown: "hometown" + i+1
+					    };
+					}
+					console.log(title);*/
 
 
 					Highcharts.chart('container_8', {
@@ -240,7 +276,8 @@ $table.find('.js-view-parents').on('click', function(e) {
 				},
 				dataType:"html"});
 
-	// Create the chart
+
+
 Highcharts.chart('container_15', {
     chart: {
         type: 'pie'
