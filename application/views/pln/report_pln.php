@@ -15,9 +15,40 @@
 <div class="wrapper wrapper-content animated fadeIn">
 	<div class="row">
 		<div class="col-lg-3">
-			<div class="ibox float-e-margins">
+			<div class="ibox float-e-margins"> 
 				<div class="ibox-title">
                     <h5>Filter</h5>
+
+                    <div class="ibox-tools">
+                    	<a class="collapse-links">
+                    		<i class="fa fa-chevron-up"></i>
+                    	</a>
+                    </div>
+				</div>
+				<div id="loader1" class="loader1" style='visibility: hidden;'></div>
+				<div class="ibox-content" >
+
+				 
+				 <form role="form" method="POST" action="<?php ?>" enctype="multipart/formdata">
+				 	<div class="form-group">
+				 		<label>Bluebook</label>
+				 		<select class="form-control m-b" name="kode_bb" id="kode_bb">
+				 			<option value=""> Silahkan Pilih </option>
+				 			<?php foreach ($bluebook as $key => $value) { ?>
+
+				 				<option value="<?php echo $value['id']; ?>"> <?php echo $value['nama']; ?></option>';
+				 			<?php } ?>
+				 		</select>
+				 	</div>
+				 	<button id="submit_btn" class="btn btn-primary">Submit</button>
+				 	<button id="tes" class="btn btn-primary">tes</button>
+				 </form>
+				 </div>
+				</div>
+
+				<div class="ibox float-e-margins"> 
+				<div class="ibox-title">
+                    <h5>Filter Lanjutan</h5>
 
                     <div class="ibox-tools">
                     	<a class="collapse-links">

@@ -114,11 +114,33 @@ function usulan_simpan_data($data)
 		return $a->result_array();
 	}
 
+	public function FunctionName($value='')
+	{
+		if ($id_program != "") {
+			
+			if ($id_lender != "" ) {
+				
+				if ($id_sektor != "") {
+					
+					if ($id_status !=  "") {
+						
+						if ($id_instansi != "") {
+							//semua syarat terisi
+						}
+
+					}elseif (condition) {
+						/*CREATE irena_bb_gabung_view AS SELECT irena_bluebook_proyek.id AS id, irena_bluebook_proyek.id_bluebook AS id_bluebook,  irena_bluebook_kode.nama AS bluebook, irena_bluebook_proyek.id_program AS id_program, irena_program_pln.nama_program AS program, irena_bluebook_proyek.id_instansi AS id_instansi, irena_instansi_2.nama_instansi AS instansi, irena_bluebook_proyek.id_instansi_pelaksana AS instansi_pelaksana, irena_bluebook_proyek.judul_proyek_id AS judul_proyek, irena_bluebook_proyek.id_status AS id_status, irena_status_umum.nama AS status_proyek, irena_bluebook_proyek.id_lender AS id_lender, irena_lender.lender AS lender, irena_bluebook_proyek.id_sektor AS id_sektor, irena_sektor.nama AS sektor, irena_bluebook_proyek.infra AS infra, irena_bluebook_proyek.nilai_pinjaman AS pinjaman FROM irena_bluebook_proyek JOIN irena_program_pln ON irena_bluebook_proyek.id_program = irena_program_pln.id  JOIN irena_lender ON irena_bluebook_proyek.id_lender = irena_lender.id JOIN irena_instansi_2 ON irena_bluebook_proyek.id_instansi = irena_instansi_2.id JOIN irena_status_umum on irena_bluebook_proyek.id_status = irena_status_umum.id JOIN irena_sektor on irena_bluebook_proyek.id_sektor = irena_sektor.id JOIN irena_bluebook_kode on irena_bluebook_proyek.id_bluebook = irena_bluebook_kode.id */
+					}
+				}
+			}
+		}
+	}
+
 
 
 	public function ambil_grafik_lender_per_bb_program($x)
 	{
-		$query = "SELECT  irena_lender.lender AS lender, SUM(IF(id_bluebook = '$x' AND irena_bluebook_proyek.id_program = 6, nilai_pinjaman, 0)) AS total, irena_bluebook_proyek.id_lender AS id_lender
+		$query = "SELECT  irena_lender.lender AS lender, SUM(IF(id_bluebook = 1 AND irena_bluebook_proyek.id_program = 6, nilai_pinjaman, 0)) AS total, irena_bluebook_proyek.id_lender AS id_lender
     		FROM irena_bluebook_proyek  LEFT JOIN irena_lender ON irena_bluebook_proyek.id_lender  = irena_lender.id GROUP BY id_lender HAVING total > 0";
 
 		 $a= $this->db->query($query);
