@@ -40,6 +40,61 @@
 				 			<?php } ?>
 				 		</select>
 				 	</div>
+
+				 	<div class="form-group">
+				 		<label>Kementerian/Lembaga</label>
+				 		<select class="form-control m-b" name="kode_bb" id="kode_bb">
+				 			<option value=""> Silahkan Pilih </option>
+				 			<?php foreach ($bluebook as $key => $value) { ?>
+
+				 				<option value="<?php echo $value['id']; ?>"> <?php echo $value['nama']; ?></option>';
+				 			<?php } ?>
+				 		</select>
+				 	</div>
+
+				 	<div class="form-group">
+				 		<label>Lender</label>
+				 		<select class="form-control m-b" name="kode_bb" id="kode_bb">
+				 			<option value=""> Silahkan Pilih </option>
+				 			<?php foreach ($bluebook as $key => $value) { ?>
+
+				 				<option value="<?php echo $value['id']; ?>"> <?php echo $value['nama']; ?></option>';
+				 			<?php } ?>
+				 		</select>
+				 	</div>
+
+				 	<div class="form-group">
+				 		<label>Progra</label>
+				 		<select class="form-control m-b" name="kode_bb" id="kode_bb">
+				 			<option value=""> Silahkan Pilih </option>
+				 			<?php foreach ($bluebook as $key => $value) { ?>
+
+				 				<option value="<?php echo $value['id']; ?>"> <?php echo $value['nama']; ?></option>';
+				 			<?php } ?>
+				 		</select>
+				 	</div>
+
+				 	<div class="form-group">
+				 		<label>Sektor</label>
+				 		<select class="form-control m-b" name="kode_bb" id="kode_bb">
+				 			<option value=""> Silahkan Pilih </option>
+				 			<?php foreach ($bluebook as $key => $value) { ?>
+
+				 				<option value="<?php echo $value['id']; ?>"> <?php echo $value['nama']; ?></option>';
+				 			<?php } ?>
+				 		</select>
+				 	</div>
+
+				 	<div class="form-group">
+				 		<label>Status</label>
+				 		<select class="form-control m-b" name="kode_bb" id="kode_bb">
+				 			<option value=""> Silahkan Pilih </option>
+				 			<?php foreach ($bluebook as $key => $value) { ?>
+
+				 				<option value="<?php echo $value['id']; ?>"> <?php echo $value['nama']; ?></option>';
+				 			<?php } ?>
+				 		</select>
+				 	</div>
 				 	<button id="submit_btn" class="btn btn-primary">Submit</button>
 				 	<button id="tes" class="btn btn-primary">tes</button>
 				 </form>

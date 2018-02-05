@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 26, 2018 at 10:32 AM
+-- Generation Time: Feb 05, 2018 at 06:54 AM
 -- Server version: 10.1.25-MariaDB
 -- PHP Version: 5.6.31
 
@@ -71,7 +71,8 @@ INSERT INTO `catatan_usulan` (`id`, `id_usulan`, `id_user`, `waktu`, `catatan`) 
 (28, 57, 0, '2018-01-03 00:31:22', 'abcdefg'),
 (29, 56, 0, '2018-01-03 00:32:48', 'segera cek hasil rapat multilateral'),
 (30, 10, 0, '2018-01-03 04:34:16', 'katanya ada tambahan dari '),
-(31, 10, 0, '2018-01-04 02:50:59', 'bagaimana jika');
+(31, 10, 0, '2018-01-04 02:50:59', 'bagaimana jika'),
+(32, 11, 0, '2018-01-30 06:11:50', 'tolong ditanya ke multilateral');
 
 -- --------------------------------------------------------
 
@@ -1309,6 +1310,32 @@ INSERT INTO `irena_arsip_usulan` (`id`, `id_usulan`, `id_jenis`, `nama`, `berkas
 -- --------------------------------------------------------
 
 --
+-- Stand-in structure for view `irena_bb_gabung_view`
+-- (See below for the actual view)
+--
+CREATE TABLE `irena_bb_gabung_view` (
+`id` int(11)
+,`id_bluebook` varchar(10)
+,`bluebook` varchar(100)
+,`id_program` varchar(11)
+,`program` varchar(250)
+,`id_instansi` varchar(5)
+,`instansi` varchar(100)
+,`instansi_pelaksana` varchar(11)
+,`judul_proyek` varchar(300)
+,`id_status` int(11)
+,`status_proyek` varchar(40)
+,`id_lender` varchar(5)
+,`lender` varchar(100)
+,`id_sektor` int(11)
+,`sektor` varchar(50)
+,`infra` int(11)
+,`pinjaman` int(11)
+);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `irena_bb_layak`
 --
 
@@ -1438,9 +1465,9 @@ CREATE TABLE `irena_bluebook_proyek` (
 
 INSERT INTO `irena_bluebook_proyek` (`id`, `id_usulan_proyek`, `id_bluebook`, `id_usulan`, `id_program`, `id_instansi`, `id_eselon_1`, `id_instansi_pelaksana`, `tahun_usulan`, `judul_proyek_eng`, `judul_proyek_id`, `ruang_lingkup_eng`, `ruang_lingkup_id`, `durasi`, `proyeksi_tahun_pertama_penarikan`, `id_status_lembaga`, `id_status_lender`, `output`, `outcome`, `nilai_pinjaman`, `nilai_hibah`, `dana_pendamping`, `id_lender`, `Files`, `id_sektor`, `infra`, `id_status`) VALUES
 (170, 0, '2', 2, '1', '87', '931', '79', 0, 'lorem ipsuuum', 'lorem ipsum', '', 'lorem ipsum', 12, 0, '', '', 'lorem ipsum', 'lorem ipsum', 250, 123, 155, '1', 0, 2, 2, 1),
-(192, 0, '1', 8, '6 ', '87 ', NULL, '87 ', 0, 'a', 'a', '-', '-', 0, 0, '', '', NULL, NULL, 200, 0, 0, '', 0, 1, 1, 3),
-(193, 10, '2', 10, '18 ', '57', '', '71 ', 0, 'art', 'art', '-', '-', 0, 0, '', '', 'abc', 'abc', 124, 122, 0, '', 0, 0, 2, 2),
-(194, 11, '2', 11, '19 ', '87 ', '', '81 ', 0, 'tre', 'tre', '-', '-', 0, 2015, '', '', 'rrr', 'aaa', 111, 111, 0, '', 0, 0, 1, 2);
+(192, 0, '1', 8, '6 ', '87 ', NULL, '87 ', 0, 'a', 'a', '-', '-', 0, 0, '', '', NULL, NULL, 200, 0, 0, '1', 0, 1, 1, 3),
+(193, 10, '2', 10, '18 ', '57', '', '71 ', 0, 'art', 'art', '-', '-', 0, 0, '', '', 'abc', 'abc', 124, 122, 0, '2', 0, 3, 2, 2),
+(194, 11, '2', 11, '19 ', '87 ', '', '81 ', 0, 'tre', 'tre', '-', '-', 0, 2015, '', '', 'rrr', 'aaa', 111, 111, 0, '2', 0, 5, 1, 2);
 
 -- --------------------------------------------------------
 
@@ -1883,6 +1910,32 @@ INSERT INTO `irena_eselon_1` (`id`, `id_instansi`, `id_eselon_1`, `nama_eselon_1
 -- --------------------------------------------------------
 
 --
+-- Stand-in structure for view `irena_gb_gabung_view`
+-- (See below for the actual view)
+--
+CREATE TABLE `irena_gb_gabung_view` (
+`id` int(11)
+,`id_greenbook` varchar(11)
+,`greenbook` varchar(60)
+,`id_program` varchar(10)
+,`program` varchar(250)
+,`id_instansi` varchar(11)
+,`instansi` varchar(100)
+,`instansi_pelaksana` text
+,`judul_proyek` varchar(500)
+,`id_status` int(11)
+,`status_proyek` varchar(40)
+,`id_lender` varchar(5)
+,`lender` varchar(100)
+,`id_sektor` int(11)
+,`sektor` varchar(50)
+,`infra` int(11)
+,`pinjaman` int(11)
+);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `irena_gb_layak`
 --
 
@@ -1943,7 +1996,8 @@ CREATE TABLE `irena_greenbook_kode` (
 --
 
 INSERT INTO `irena_greenbook_kode` (`id`, `nama`) VALUES
-(1, 'Greenbook 2015');
+(1, 'Greenbook 2015'),
+(2, 'Greenbook 2016');
 
 -- --------------------------------------------------------
 
@@ -1990,18 +2044,21 @@ CREATE TABLE `irena_greenbook_proyek` (
   `nilai_hibah` int(11) NOT NULL,
   `dana_usulan` int(11) NOT NULL,
   `dana_pendamping` int(11) NOT NULL,
-  `tahun_usulan` varchar(10) NOT NULL
+  `tahun_usulan` varchar(10) NOT NULL,
+  `id_sektor` int(11) NOT NULL,
+  `id_Infra` int(11) NOT NULL,
+  `id_status` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `irena_greenbook_proyek`
 --
 
-INSERT INTO `irena_greenbook_proyek` (`id`, `id_usulan`, `id_bb_proyek`, `id_greenbook`, `id_bluebook`, `id_instansi`, `id_program`, `id_lender`, `id_eselon_1`, `instansi_pelaksana`, `judul_proyek_id`, `judul_proyek_eng`, `ruang_lingkup_id`, `ruang_lingkup_eng`, `id_status_lembaga`, `id_status_lender`, `durasi`, `proyeksi_tahun_pertama_penarikan`, `output`, `outcome`, `lokasi`, `nilai_pinjaman`, `nilai_hibah`, `dana_usulan`, `dana_pendamping`, `tahun_usulan`) VALUES
-(10, '2', 0, '', '', '57', '2', '1', '931', '79', 'lorem ipsum', '', 'lorem ipsum', '', '', '', 12, 0, 'lorem ipsum', 'lorem ipsum', '', 0, 123, 143, 155, '0'),
-(11, '1', 0, '', '', '87', '1', '', '1092', '85', 'hehe', 'hehe', 'haha', 'haha', '', '', 13, 2018, 'wqwq', 'asdf', '', 213, 123, 0, 0, '2017'),
-(20, '8', 0, '', '', '87 ', '6 ', '', '', '87 ', 'a', 'a', '', '', '', '', 0, 0, '', '', '', 0, 0, 0, 0, ''),
-(21, '10', 193, '1', '', '77', '18 ', '2', '', '64 ', 'art', 'art', '', '', '', '', 0, 0, 'abc', 'abc', '', 124, 122, 0, 0, '');
+INSERT INTO `irena_greenbook_proyek` (`id`, `id_usulan`, `id_bb_proyek`, `id_greenbook`, `id_bluebook`, `id_instansi`, `id_program`, `id_lender`, `id_eselon_1`, `instansi_pelaksana`, `judul_proyek_id`, `judul_proyek_eng`, `ruang_lingkup_id`, `ruang_lingkup_eng`, `id_status_lembaga`, `id_status_lender`, `durasi`, `proyeksi_tahun_pertama_penarikan`, `output`, `outcome`, `lokasi`, `nilai_pinjaman`, `nilai_hibah`, `dana_usulan`, `dana_pendamping`, `tahun_usulan`, `id_sektor`, `id_Infra`, `id_status`) VALUES
+(10, '2', 0, '2', '', '57', '2', '1', '931', '79', 'lorem ipsum', '', 'lorem ipsum', '', '', '', 12, 0, 'lorem ipsum', 'lorem ipsum', '', 0, 123, 143, 155, '0', 2, 1, 1),
+(11, '1', 0, '1', '', '87', '1', '1', '1092', '85', 'hehe', 'hehe', 'haha', 'haha', '', '', 13, 2018, 'wqwq', 'asdf', '', 213, 123, 0, 0, '2017', 1, 1, 2),
+(20, '8', 0, '2', '', '87 ', '6 ', '2', '', '87 ', 'a', 'a', '', '', '', '', 0, 0, '', '', '', 0, 0, 0, 0, '', 1, 2, 2),
+(21, '10', 193, '1', '', '77', '18 ', '2', '', '64 ', 'art', 'art', '', '', '', '', 0, 0, 'abc', 'abc', '', 124, 122, 0, 0, '', 2, 1, 3);
 
 -- --------------------------------------------------------
 
@@ -4358,7 +4415,21 @@ INSERT INTO `irena_user_log` (`id`, `id_user`, `on_off`, `update_date`) VALUES
 (515, 20, b'1', '2018-01-18 03:37:49'),
 (516, 20, b'1', '2018-01-18 03:40:06'),
 (517, 20, b'1', '2018-01-23 04:49:26'),
-(518, 20, b'1', '2018-01-23 08:31:01');
+(518, 20, b'1', '2018-01-23 08:31:01'),
+(519, 20, b'1', '2018-01-26 10:58:40'),
+(520, 20, b'1', '2018-01-29 03:25:30'),
+(521, 20, b'1', '2018-01-30 03:29:31'),
+(522, 20, b'0', '2018-01-30 07:02:51'),
+(523, 20, b'1', '2018-01-30 07:04:27'),
+(524, 20, b'1', '2018-01-30 10:48:50'),
+(525, 20, b'1', '2018-01-31 05:45:15'),
+(526, 20, b'1', '2018-01-31 07:12:19'),
+(527, 20, b'1', '2018-02-01 03:27:37'),
+(528, 20, b'1', '2018-02-01 04:52:44'),
+(529, 20, b'1', '2018-02-01 04:59:01'),
+(530, 20, b'1', '2018-02-02 03:31:04'),
+(531, 20, b'1', '2018-02-02 08:05:15'),
+(532, 20, b'1', '2018-02-05 06:21:38');
 
 -- --------------------------------------------------------
 
@@ -4465,7 +4536,8 @@ INSERT INTO `irena_usulan_adm` (`id`, `id_usulan`, `is_lengkap`, `update_at`, `u
 (74, 17, 0, '2018-01-10 17:24:58', '', '', 0, 0, '0000-00-00', '', 0, 0, '0000-00-00 00:00:00', '', 0, 0, '0000-00-00 00:00:00', ''),
 (75, 18, 0, '2018-01-10 17:30:03', '', '', 0, 0, '0000-00-00', '', 0, 0, '0000-00-00 00:00:00', '', 0, 0, '0000-00-00 00:00:00', ''),
 (76, 19, 0, '2018-01-10 19:25:05', '', '', 0, 0, '0000-00-00', '', 0, 0, '0000-00-00 00:00:00', '', 0, 0, '0000-00-00 00:00:00', ''),
-(77, 20, 1, '2018-01-12 03:56:50', '20', 'aaa', 0, 0, '0000-00-00', '', 0, 0, '0000-00-00 00:00:00', '', 0, 0, '0000-00-00 00:00:00', '');
+(77, 20, 1, '2018-01-12 03:56:50', '20', 'aaa', 0, 0, '0000-00-00', '', 0, 0, '0000-00-00 00:00:00', '', 0, 0, '0000-00-00 00:00:00', ''),
+(78, 21, 0, '2018-01-30 04:44:43', '', '', 0, 0, '0000-00-00', '', 0, 0, '0000-00-00 00:00:00', '', 0, 0, '0000-00-00 00:00:00', '');
 
 -- --------------------------------------------------------
 
@@ -4571,7 +4643,8 @@ INSERT INTO `irena_usulan_layak` (`id`, `id_usulan`, `is_layak`, `update_at`, `u
 (77, 17, 0, '2018-01-10 17:24:58', '', '', 0, 0, '0000-00-00 00:00:00', '', 0),
 (78, 18, 0, '2018-01-10 17:30:03', '', '', 0, 0, '0000-00-00 00:00:00', '', 0),
 (79, 19, 0, '2018-01-10 19:25:05', '', '', 0, 0, '0000-00-00 00:00:00', '', 0),
-(80, 20, 0, '2018-01-11 07:41:49', '', '', 0, 0, '0000-00-00 00:00:00', '', 0);
+(80, 20, 0, '2018-01-11 07:41:49', '', '', 0, 0, '0000-00-00 00:00:00', '', 0),
+(81, 21, 0, '2018-01-30 04:44:43', '', '', 0, 0, '0000-00-00 00:00:00', '', 0);
 
 -- --------------------------------------------------------
 
@@ -4613,17 +4686,19 @@ CREATE TABLE `irena_usulan_pln` (
   `is_DK` int(11) NOT NULL DEFAULT '0',
   `is_LA` int(11) NOT NULL DEFAULT '0',
   `Files` varchar(500) NOT NULL,
-  `lokasi` text NOT NULL
+  `lokasi` text NOT NULL,
+  `id_sektor` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `irena_usulan_pln`
 --
 
-INSERT INTO `irena_usulan_pln` (`id`, `id_instansi`, `id_eselon_1`, `instansi_pelaksana`, `id_program`, `proyeksi_tahun_pertama_penarikan`, `judul_proyek_id`, `judul_proyek_eng`, `ruang_lingkup_id`, `ruang_lingkup_eng`, `dana_usulan`, `dana_hibah`, `tahun_usulan`, `durasi`, `output`, `outcome`, `dana_pendamping`, `is_BB`, `is_GB`, `is_DK`, `is_LA`, `Files`, `lokasi`) VALUES
-(10, '33', '1009', '71 ', '18 ', 2019, 'art', 'art', 'atr', 'atr', 124, 122, 0, 20, 'abc', 'abc', 123, 1, 1, 0, 0, '', ''),
-(11, '87 ', '', '81 ', '19 ', 2015, 'tre', 'tre', 'tre', 'tre', 111, 111, 0, 15, 'rrr', 'aaa', 12, 1, 0, 0, 0, '', ''),
-(20, '88', 'ab', 'ab', '1', 1212, 'd', 'a', 'ab', 'ab', 123, 123, 2018, 21, 'ab', 'ab', 123, 0, 0, 0, 0, '', 'acd');
+INSERT INTO `irena_usulan_pln` (`id`, `id_instansi`, `id_eselon_1`, `instansi_pelaksana`, `id_program`, `proyeksi_tahun_pertama_penarikan`, `judul_proyek_id`, `judul_proyek_eng`, `ruang_lingkup_id`, `ruang_lingkup_eng`, `dana_usulan`, `dana_hibah`, `tahun_usulan`, `durasi`, `output`, `outcome`, `dana_pendamping`, `is_BB`, `is_GB`, `is_DK`, `is_LA`, `Files`, `lokasi`, `id_sektor`) VALUES
+(10, '33', '1009', '71 ', '18 ', 2019, 'art', 'art', 'atr', 'atr', 124, 122, 0, 20, 'abc', 'abc', 123, 1, 1, 0, 0, '', '', 0),
+(11, '87 ', '', '81 ', '19 ', 2015, 'tre', 'tre', 'tre', 'tre', 111, 111, 0, 15, 'rrr', 'aaa', 12, 1, 0, 0, 0, '', '', 0),
+(20, '88', 'ab', 'ab', '1', 1212, 'd', 'a', 'ab', 'ab', 123, 123, 2018, 21, 'ab', 'ab', 123, 0, 0, 0, 0, '', 'acd', 0),
+(21, '18', '', 'KUA Cirebon', '24', 2020, 'Pembangunan KUA di Cirebon', 'Pembangunan KUA di Cirebon', 'Gedung', 'Gedung', 128000, 1000, 2018, 20, 'Gedung 2 tingkat', 'Mau buat gedung', 1500, 0, 0, 0, 0, '', 'Cirebon', 14);
 
 -- --------------------------------------------------------
 
@@ -4778,7 +4853,8 @@ INSERT INTO `irena_usulkan_bb` (`id`, `id_usulan`, `is_usulkan`, `update_at`, `u
 (73, 17, 0, '2018-01-10 17:24:58', '', ''),
 (74, 18, 0, '2018-01-10 17:30:04', '', ''),
 (75, 19, 0, '2018-01-10 19:25:05', '', ''),
-(76, 20, 0, '2018-01-11 07:41:49', '', '');
+(76, 20, 0, '2018-01-11 07:41:49', '', ''),
+(77, 21, 0, '2018-01-30 04:44:43', '', '');
 
 -- --------------------------------------------------------
 
@@ -5104,6 +5180,24 @@ CREATE TABLE `irena_view_usulan_pln_log` (
 ,`id_arsip` int(11)
 ,`no_arsip` varchar(255)
 );
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `irena_bb_gabung_view`
+--
+DROP TABLE IF EXISTS `irena_bb_gabung_view`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `irena_bb_gabung_view`  AS  select `irena_bluebook_proyek`.`id` AS `id`,`irena_bluebook_proyek`.`id_bluebook` AS `id_bluebook`,`irena_bluebook_kode`.`nama` AS `bluebook`,`irena_bluebook_proyek`.`id_program` AS `id_program`,`irena_program_pln`.`nama_program` AS `program`,`irena_bluebook_proyek`.`id_instansi` AS `id_instansi`,`irena_instansi_2`.`nama_instansi` AS `instansi`,`irena_bluebook_proyek`.`id_instansi_pelaksana` AS `instansi_pelaksana`,`irena_bluebook_proyek`.`judul_proyek_id` AS `judul_proyek`,`irena_bluebook_proyek`.`id_status` AS `id_status`,`irena_status_umum`.`nama` AS `status_proyek`,`irena_bluebook_proyek`.`id_lender` AS `id_lender`,`irena_lender`.`lender` AS `lender`,`irena_bluebook_proyek`.`id_sektor` AS `id_sektor`,`irena_sektor`.`nama` AS `sektor`,`irena_bluebook_proyek`.`infra` AS `infra`,`irena_bluebook_proyek`.`nilai_pinjaman` AS `pinjaman` from ((((((`irena_bluebook_proyek` join `irena_program_pln` on((`irena_bluebook_proyek`.`id_program` = `irena_program_pln`.`id`))) join `irena_lender` on((`irena_bluebook_proyek`.`id_lender` = `irena_lender`.`id`))) join `irena_instansi_2` on((`irena_bluebook_proyek`.`id_instansi` = `irena_instansi_2`.`id`))) join `irena_status_umum` on((`irena_bluebook_proyek`.`id_status` = `irena_status_umum`.`id`))) join `irena_sektor` on((`irena_bluebook_proyek`.`id_sektor` = `irena_sektor`.`id`))) join `irena_bluebook_kode` on((`irena_bluebook_proyek`.`id_bluebook` = `irena_bluebook_kode`.`id`))) ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `irena_gb_gabung_view`
+--
+DROP TABLE IF EXISTS `irena_gb_gabung_view`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `irena_gb_gabung_view`  AS  select `irena_greenbook_proyek`.`id` AS `id`,`irena_greenbook_proyek`.`id_greenbook` AS `id_greenbook`,`irena_greenbook_kode`.`nama` AS `greenbook`,`irena_greenbook_proyek`.`id_program` AS `id_program`,`irena_program_pln`.`nama_program` AS `program`,`irena_greenbook_proyek`.`id_instansi` AS `id_instansi`,`irena_instansi_2`.`nama_instansi` AS `instansi`,`irena_greenbook_proyek`.`instansi_pelaksana` AS `instansi_pelaksana`,`irena_greenbook_proyek`.`judul_proyek_id` AS `judul_proyek`,`irena_greenbook_proyek`.`id_status` AS `id_status`,`irena_status_umum`.`nama` AS `status_proyek`,`irena_greenbook_proyek`.`id_lender` AS `id_lender`,`irena_lender`.`lender` AS `lender`,`irena_greenbook_proyek`.`id_sektor` AS `id_sektor`,`irena_sektor`.`nama` AS `sektor`,`irena_greenbook_proyek`.`id_Infra` AS `infra`,`irena_greenbook_proyek`.`nilai_pinjaman` AS `pinjaman` from ((((((`irena_greenbook_proyek` join `irena_program_pln` on((`irena_greenbook_proyek`.`id_program` = `irena_program_pln`.`id`))) join `irena_lender` on((`irena_greenbook_proyek`.`id_lender` = `irena_lender`.`id`))) join `irena_instansi_2` on((`irena_greenbook_proyek`.`id_instansi` = `irena_instansi_2`.`id`))) join `irena_status_umum` on((`irena_greenbook_proyek`.`id_status` = `irena_status_umum`.`id`))) join `irena_sektor` on((`irena_greenbook_proyek`.`id_sektor` = `irena_sektor`.`id`))) join `irena_greenbook_kode` on((`irena_greenbook_proyek`.`id_greenbook` = `irena_greenbook_kode`.`id`))) ;
 
 -- --------------------------------------------------------
 
@@ -5759,7 +5853,7 @@ ALTER TABLE `irena_usulkan_bb`
 -- AUTO_INCREMENT for table `catatan_usulan`
 --
 ALTER TABLE `catatan_usulan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 --
 -- AUTO_INCREMENT for table `irena_agenda`
 --
@@ -5909,7 +6003,7 @@ ALTER TABLE `irena_gb_layak`
 -- AUTO_INCREMENT for table `irena_greenbook_kode`
 --
 ALTER TABLE `irena_greenbook_kode`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `irena_greenbook_lokasi`
 --
@@ -6139,17 +6233,17 @@ ALTER TABLE `irena_user_level`
 -- AUTO_INCREMENT for table `irena_user_log`
 --
 ALTER TABLE `irena_user_log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=519;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=533;
 --
 -- AUTO_INCREMENT for table `irena_usulan_adm`
 --
 ALTER TABLE `irena_usulan_adm`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=78;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
 --
 -- AUTO_INCREMENT for table `irena_usulan_layak`
 --
 ALTER TABLE `irena_usulan_layak`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=82;
 --
 -- AUTO_INCREMENT for table `irena_usulan_log_kategori`
 --
@@ -6159,7 +6253,7 @@ ALTER TABLE `irena_usulan_log_kategori`
 -- AUTO_INCREMENT for table `irena_usulan_pln`
 --
 ALTER TABLE `irena_usulan_pln`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 --
 -- AUTO_INCREMENT for table `irena_usulan_pln_dok`
 --
@@ -6174,7 +6268,7 @@ ALTER TABLE `irena_usulan_pln_log`
 -- AUTO_INCREMENT for table `irena_usulkan_bb`
 --
 ALTER TABLE `irena_usulkan_bb`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;COMMIT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=78;COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
