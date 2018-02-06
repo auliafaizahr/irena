@@ -53,6 +53,21 @@ class Usulan_model extends CI_Model {
 		
 	}
 
+		function usulan_simpan_data_edit($data)
+	{
+		if(array_key_exists('id', $data))
+		{
+			$id = $data['id'];
+			unset($data['id']);
+			$this->db->where('id',$id);
+			$this->db->update('irena_usulan_pln', $data);
+		}
+		else
+		{
+			$this->db->insert('irena_usulan_pln', $data);
+		}		
+	}
+
 	public function jumlah_judul()
 	{
 		

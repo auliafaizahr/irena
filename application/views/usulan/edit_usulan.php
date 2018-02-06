@@ -141,7 +141,7 @@
                             <label for="durasi" class="col-sm-3">Bulan</label>
                         </div>
 
-                        <input type="hidden" name="id" class="form-control" id="id" value="">
+                        <input type="hidden" name="id" class="form-control" id="id" value="<?php echo $detail->id; ?>">
                     </div>
                     <div class="modal-footer">                  
                         <button type="submit"class="btn btn-primary">Simpan</button>
@@ -217,34 +217,44 @@
             var me          = $(this);
             
             var id                          = $("#id").val();
-            var id_instansi_eselon_satu     = $("#id_instansi_eselon_satu").val();
-            var id_jenis                    = $("#id_jenis").val();
-            var id_donor                    = $("#id_donor").val();
-            var judul_en                    = $("#judul_en").val();
-            var judul_id                    = $("#judul_id").val();
+            var id_instansi                          = $("#id_instansi").val();
+          
+            var instansi_pelaksana     = $("#instansi_pelaksana").val();
+            var id_program                    = $("#id_program").val();
+            var proyeksi_tahun_pertama_penarikan                    = $("#proyeksi_tahun_pertama_penarikan").val();
+            var judul_proyek_id                    = $("#judul_proyek_id").val();
+            var judul_proyek_eng                    = $("#judul_proyek_eng").val();
             var durasi                      = $("#durasi").val();
-            var id_mata_uang                = $("#id_mata_uang").val();
-            var nilai_hibah                 = $("#nilai_hibah").val();
-            var nilai_dp                    = $("#nilai_dp").val();
-            var ringkasan                   = $("#ringkasan").val();
+            var ruang_lingkup_id                = $("#ruang_lingkup_id").val();
+            var ruang_lingkup_eng                 = $("#ruang_lingkup_eng").val();
+            var dana_pendamping                 = $("#dana_pendamping").val();
+            var dana_hibah                    = $("#dana_hibah").val();
+            var dana_usulan                   = $("#dana_usulan").val();
+            var output                   = $("#output").val();
+            var outcome                   = $("#outcome").val();
             
             var form_data   = new FormData();
             
             form_data.append('id', id);
-            form_data.append('id_instansi_eselon_satu', id_instansi_eselon_satu);
-            form_data.append('id_donor', id_donor);
-            form_data.append('id_jenis', id_jenis);
-            form_data.append('judul_en', judul_en);
-            form_data.append('judul_id', judul_id);
+            form_data.append('id_instansi', id_instansi);
+            form_data.append('instansi_pelaksana', instansi_pelaksana);
+            form_data.append('id_program', id_program);
+            form_data.append('proyeksi_tahun_pertama_penarikan', proyeksi_tahun_pertama_penarikan);
+            form_data.append('judul_proyek_id', judul_proyek_id);
+            form_data.append('judul_proyek_eng', judul_proyek_eng);
+            form_data.append('ruang_lingkup_id', ruang_lingkup_id);
+            form_data.append('ruang_lingkup_eng', ruang_lingkup_eng);
+            form_data.append('dana_pendamping', dana_pendamping);
+            form_data.append('dana_hibah', dana_hibah);
+            form_data.append('dana_usulan', dana_usulan);
+            form_data.append('output', output);
+            form_data.append('outcome', outcome);
             form_data.append('durasi', durasi);
-            form_data.append('id_mata_uang', id_mata_uang);
-            form_data.append('nilai_hibah', nilai_hibah);
-            form_data.append('nilai_dp', nilai_dp);
-            form_data.append('ringkasan', ringkasan);
+           
 
 
             $.ajax({
-                url: '<?php echo base_url(); ?>hibah/usulan_simpan/edit',
+                url: '<?php echo base_url(); ?>usulan/usulan_simpan/edit',
                 dataType: 'json',
                 cache: false,
                 contentType: false,
@@ -253,7 +263,7 @@
                 type: 'post',
                 success: function(response){
                     if (response.success == true) {
-                        $('#modalEdit').modal('hide');
+                        $('#modalEditUsulan').modal('hide');
                         segarkan_data();
                         notif("Informasi", "Data berhasil disimpan.");
                     }
