@@ -471,6 +471,7 @@ class Usulan extends CI_Controller {
 
     public function tambah_baru_dokumen()
 	{	
+		$this->load->model('Usulan_model');
 		
 		$status = array('success' => false, 'messages' => array());
 		
@@ -542,7 +543,7 @@ class Usulan extends CI_Controller {
 						
 						//$id = $this->input->post('id');
 						
-						unset($data['berkas_lama']);
+						//unset($data['berkas_lama']);
 						$data['berkas'] 		= $dataupload['file_name'];
 						$data['update_by']		= $this->session->userdata('id');
 						$data['update_date'] 	= date('Y-m-d H:i:s');

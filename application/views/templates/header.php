@@ -169,7 +169,7 @@
 
 
 
-								
+							<!-- 	
 							<li <?php if($this->uri->segment(1)=="Bluebook"){ echo "class='active'"; }	?>>
 								<a href="<?php echo base_url(); ?>Bluebook/tampil_index">Lender</a>
 							</li>
@@ -181,7 +181,7 @@
 						<li <?php if($this->uri->segment(1)=="daftar_kegiatan"){ echo "class='active'"; }	?>>
 								<a href="<?php echo base_url(); ?>daftar_kegiatan/tampil_index">Program</a>
 							</li>
-
+ -->
 							
 						</ul>
                     </li>
