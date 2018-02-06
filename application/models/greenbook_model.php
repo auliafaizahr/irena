@@ -47,6 +47,21 @@ class Greenbook_model extends CI_Model {
 		return $a->row();
 	}
 
+	function gb_simpan_data_edit($data)
+	{
+		if(array_key_exists('id', $data))
+		{
+			$id = $data['id'];
+			unset($data['id']);
+			$this->db->where('id',$id);
+			$this->db->update('irena_greenbook_proyek', $data);
+		}
+		else
+		{
+			$this->db->insert('irena_greenbook_proyek', $data);
+		}		
+	}
+
 
 		function usulan_simpan_data($data)
 	{

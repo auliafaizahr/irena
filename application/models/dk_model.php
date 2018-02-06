@@ -24,6 +24,22 @@ class Dk_model extends CI_Model {
 	}
 
 
+	function dk_simpan_data_edit($data)
+	{
+		if(array_key_exists('id', $data))
+		{
+			$id = $data['id'];
+			unset($data['id']);
+			$this->db->where('id',$id);
+			$this->db->update('irena_daftarkegiatan_proyek', $data);
+		}
+		else
+		{
+			$this->db->insert('irena_daftarkegiatan_proyek', $data);
+		}		
+	}
+
+
 	public function ambil_bb($x)
 	{
 		$query = "SELECT nama FROM irena_bluebook_kode WHERE id = '$x'";

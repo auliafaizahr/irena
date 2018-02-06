@@ -20,6 +20,83 @@ class Greenbook extends CI_Controller {
 			$this->load->view('templates/footer'); 
 	}
 
+	function gb_simpan()
+	{
+    	$this->load->model('Usulan_model');
+    	$this->load->model('Greenbook_model');
+
+		$status = array('success' => false, 'messages' => array());
+
+
+		$this->form_validation->set_rules("id_instansi", "Instansi ", "trim|required");
+		$this->form_validation->set_rules("instansi_pelaksana", "Instansi Pelaksana", "trim|required");
+		$this->form_validation->set_rules("id_program", "Program", "trim|required");
+		$this->form_validation->set_rules("proyeksi_tahun_pertama_penarikan", "Tahun Pertama Penarikan", "trim|required");
+		$this->form_validation->set_rules("durasi", "Durasi", "trim|required|is_natural_no_zero");
+		$this->form_validation->set_rules("judul_proyek_id", "Judul Proyek dalam Bahasa Indonesia", "trim|required");
+		$this->form_validation->set_rules("judul_proyek_eng", "Judul Proyek dalam Bahasa Inggris", "trim|required");
+		$this->form_validation->set_rules("ruang_lingkup_id", "Ruang Lingkup dalam Bahasa Indonesia", "trim|required");
+		$this->form_validation->set_rules("ruang_lingkup_eng", "Ruang Lingkup dalam Bahasa Inggris", "trim|required");
+		$this->form_validation->set_rules("dana_pendamping", "Dana Pendamping", "trim|required|numeric");
+		$this->form_validation->set_rules("nilai_hibah", "Nilai Hibah", "trim|required");
+		$this->form_validation->set_rules("nilai_pinjaman", "Nilai Pinjaman", "trim|required");
+		$this->form_validation->set_rules("output", "Output", "trim|required");
+		$this->form_validation->set_rules("outcome", "Outcome", "trim|required");
+		$this->form_validation->set_rules("id_bluebook", "Kode Bluebook", "trim|required");
+		$this->form_validation->set_rules("id_lender", "Lender", "trim|required");
+		$this->form_validation->set_rules("id_status_lender", "Status Lender", "trim|required");
+		$this->form_validation->set_rules("id_status_lembaga", "Status Lembaga", "trim|required");
+		$this->form_validation->set_rules("id_greenbook", "Greenbook", "trim|required");
+	
+		
+		//$this->form_validation->set_rules("berkas", "Berka arsip", "required");
+		$this->form_validation->set_message('required', '%s harus diisi');
+		$this->form_validation->set_message('is_natural_no_zero', '%s harus diisi dengan angka dan lebih dari 0');
+
+		$this->form_validation->set_error_delimiters('<p class="text-danger">', '</p>');
+
+		if ($this->form_validation->run() == FALSE) {
+			foreach ($_POST as $key => $value) {
+				$status['messages'][$key] = form_error($key);
+			}
+			
+		}else{ //validasi benar semua
+			foreach ($_POST as $key => $value) {
+				$status['messages'][$key] = form_error($key);
+			}
+			
+			$status['success'] = true;
+			
+			$data 					= $_POST;
+			/*$data['update_by']		= $this->session->userdata('id');
+			$data['update_date']	= date('Y-m-d H:i:s');*/
+			
+			if($this->uri->segment(3) == 'tambah'){
+				$data['nilai_admin']		= 0;
+				$data['nilai_admin_ket']	= "-";
+				$data['nilai_admin_id']		= $this->session->userdata('id');
+				$data['nilai_admin_date']	= date('Y-m-d H:i:s');
+				$data['nilai_layak']		= 0;
+				$data['nilai_layak_ket']	= "-";
+				$data['nilai_layak_id']		= $this->session->userdata('id');
+				$data['nilai_layak_date']	= date('Y-m-d H:i:s');
+				$data['masuk_drkh']			= 0;
+				$data['masuk_drkh_ket']		= "-";
+				$data['masuk_drkh_id']		= $this->session->userdata('id');
+				$data['masuk_drkh_date']	= date('Y-m-d H:i:s');
+				
+				$result 				= $this->hibah_model->usulan_simpan_data($data);
+			}elseif($this->uri->segment(3) == 'edit'){
+				//$data['id']		= $this->input->post('id');
+				$result 		= $this->Greenbook_model->gb_simpan_data_edit($data);
+			}
+			
+		}
+
+		echo json_encode($status);
+
+	}
+
 	public function edit()
 	{
 		$this->load->model('Bluebook_model');
