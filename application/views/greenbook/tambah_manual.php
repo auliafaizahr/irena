@@ -433,7 +433,7 @@
 
 
             $.ajax({
-                url: '<?php echo base_url(); ?>greenbook/tambah_manual_input',
+            url: '<?php echo base_url(); ?>greenbook/tambah_manual_input',
                 dataType: 'json',
                 cache: false,
                 contentType: false,

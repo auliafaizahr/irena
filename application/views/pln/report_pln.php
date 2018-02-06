@@ -12,6 +12,8 @@
 	</div>
 </div>
 
+<div id="untukModal"></div>
+
 <div class="wrapper wrapper-content animated fadeIn">
 	<div class="row">
 		<div class="col-lg-3">
@@ -41,62 +43,9 @@
 				 		</select>
 				 	</div>
 
-				 	<div class="form-group">
-				 		<label>Kementerian/Lembaga</label>
-				 		<select class="form-control m-b" name="kode_bb" id="kode_bb">
-				 			<option value=""> Silahkan Pilih </option>
-				 			<?php foreach ($bluebook as $key => $value) { ?>
-
-				 				<option value="<?php echo $value['id']; ?>"> <?php echo $value['nama']; ?></option>';
-				 			<?php } ?>
-				 		</select>
-				 	</div>
-
-				 	<div class="form-group">
-				 		<label>Lender</label>
-				 		<select class="form-control m-b" name="kode_bb" id="kode_bb">
-				 			<option value=""> Silahkan Pilih </option>
-				 			<?php foreach ($bluebook as $key => $value) { ?>
-
-				 				<option value="<?php echo $value['id']; ?>"> <?php echo $value['nama']; ?></option>';
-				 			<?php } ?>
-				 		</select>
-				 	</div>
-
-				 	<div class="form-group">
-				 		<label>Progra</label>
-				 		<select class="form-control m-b" name="kode_bb" id="kode_bb">
-				 			<option value=""> Silahkan Pilih </option>
-				 			<?php foreach ($bluebook as $key => $value) { ?>
-
-				 				<option value="<?php echo $value['id']; ?>"> <?php echo $value['nama']; ?></option>';
-				 			<?php } ?>
-				 		</select>
-				 	</div>
-
-				 	<div class="form-group">
-				 		<label>Sektor</label>
-				 		<select class="form-control m-b" name="kode_bb" id="kode_bb">
-				 			<option value=""> Silahkan Pilih </option>
-				 			<?php foreach ($bluebook as $key => $value) { ?>
-
-				 				<option value="<?php echo $value['id']; ?>"> <?php echo $value['nama']; ?></option>';
-				 			<?php } ?>
-				 		</select>
-				 	</div>
-
-				 	<div class="form-group">
-				 		<label>Status</label>
-				 		<select class="form-control m-b" name="kode_bb" id="kode_bb">
-				 			<option value=""> Silahkan Pilih </option>
-				 			<?php foreach ($bluebook as $key => $value) { ?>
-
-				 				<option value="<?php echo $value['id']; ?>"> <?php echo $value['nama']; ?></option>';
-				 			<?php } ?>
-				 		</select>
-				 	</div>
+				 	
 				 	<button id="submit_btn" class="btn btn-primary">Submit</button>
-				 	<button id="tes" class="btn btn-primary">tes</button>
+				 	
 				 </form>
 				 </div>
 				</div>
@@ -118,7 +67,7 @@
 				 <form role="form" method="POST" action="<?php ?>" enctype="multipart/formdata">
 				 	<div class="form-group">
 				 		<label>Bluebook</label>
-				 		<select class="form-control m-b" name="kode_bb" id="kode_bb">
+				 		<select class="form-control m-b" name="kode_bb2" id="kode_bb2">
 				 			<option value=""> Silahkan Pilih </option>
 				 			<?php foreach ($bluebook as $key => $value) { ?>
 
@@ -126,8 +75,65 @@
 				 			<?php } ?>
 				 		</select>
 				 	</div>
-				 	<button id="submit_btn" class="btn btn-primary">Submit</button>
-				 	<button id="tes" class="btn btn-primary">tes</button>
+
+				 	<div class="form-group">
+				 		<label>Kementerian/Lembaga</label>
+				 		<select class="form-control m-b" name="id_instansi" id="id_instansi">
+				 			<option value=""> Silahkan Pilih </option>
+				 			<?php foreach ($instansi as $key => $value) { ?>
+
+				 				<option value="<?php echo $value['id']; ?>"> <?php echo $value['nama_instansi']; ?></option>';
+				 			<?php } ?>
+				 		</select>
+				 	</div>
+
+				 	<div class="form-group">
+				 		<label>Lender</label>
+				 		<select class="form-control m-b" name="id_lender" id="id_lender">
+				 			<option value=""> Silahkan Pilih </option>
+				 			<?php foreach ($lender as $key => $value) { ?>
+
+				 				<option value="<?php echo $value['id']; ?>"> <?php echo $value['lender']; ?></option>';
+				 			<?php } ?>
+				 		</select>
+				 	</div>
+
+				 	<div class="form-group">
+				 		<label>Program</label>
+				 		<select class="form-control m-b" name="id_program" id="id_program">
+				 			<option value=""> Silahkan Pilih </option>
+				 			<?php foreach ($program as $key => $value) { ?>
+
+				 				<option value="<?php echo $value['id']; ?>"> <?php echo $value['nama_program']; ?></option>';
+				 			<?php } ?>
+				 		</select>
+				 	</div>
+
+				 	<div class="form-group">
+				 		<label>Sektor</label>
+				 		<select class="form-control m-b" name="id_sektor" id="id_sektor">
+				 			<option value=""> Silahkan Pilih </option>
+				 			<?php foreach ($sektor as $key => $value) { ?>
+
+				 				<option value="<?php echo $value['id']; ?>"> <?php echo $value['nama']; ?></option>';
+				 			<?php } ?>
+				 		</select>
+				 	</div>
+
+				 	<div class="form-group">
+				 		<label>Status</label>
+				 		<select class="form-control m-b" name="id_status" id="id_status">
+				 			<option value=""> Silahkan Pilih </option>
+				 			<?php foreach ($status as $key => $value) { ?>
+
+				 				<option value="<?php echo $value['id']; ?>"> <?php echo $value['nama']; ?></option>';
+				 			<?php } ?>
+				 		</select>
+				 	</div>
+
+
+				 	<button id="advance_btn" class="btn btn-primary">Submit</button>
+				 	
 				 </form>
 				 </div>
 				</div>
@@ -262,8 +268,7 @@
 <!-- 
 <script src="<?php echo base_url(); ?>assets/highcharts/highcharts.js"></script>
 <script src="<?php echo base_url(); ?>assets/highcharts/modules/data.js"></script>
-<script src="<?php echo base_url(); ?>assets/highcharts/modules/drilldown.js"></script> --> -->
-
+<script src="<?php echo base_url(); ?>assets/highcharts/modules/drilldown.js"></script> -->
 
 <script>
 
@@ -273,11 +278,6 @@
 		$('#loader1').fadeOut(1000);
 	}
 
-		
-
-
-	
-	
 		
 		//untuk hapus
 		$('#submit_btn').click(function(){
@@ -330,6 +330,35 @@
 			chart6();
 			console.log(id);
 			console.log("diatas ini kode bb");
+			
+
+			return false;
+		});
+
+		$('#advance_btn').click(function(){
+			
+			var id_bb = $("#kode_bb2").val();
+			var id_instansi = $("#id_instansi").val();
+			var id_status = $("#id_status").val();
+			var id_sektor = $("#id_sektor").val();
+			var id_program = $("#id_program").val();
+			var id_lender = $("#id_lender").val();
+                	console.log(id_bb);
+
+
+			  $.ajax({
+                type : 'post',
+                url : "<?php echo base_url(); ?>report/report_advance",
+                data :  'id_bb='+id_bb+'&id_instansi='+id_instansi+'&id_lender='+id_lender+'&id_status='+id_status+'&id_sektor='+id_sektor+'&id_program='+id_program,
+                success : function(response){
+                	console.log(id_bb);
+                $("#untukModal").html(response);
+                $('#modalBB').modal('show');
+                },
+
+                dataType:"html"
+            });
+
 			
 
 			return false;

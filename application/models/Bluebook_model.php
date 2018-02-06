@@ -228,6 +228,24 @@ function usulan_simpan_data($data)
 		return $a->result_array();
 	}
 
+	public function ambil_statusumum()
+	{
+		
+		$query = "SELECT * FROM irena_status_umum";
+		 $a= $this->db->query($query);
+
+		return $a->result_array();
+	}
+
+		public function ambil_sektor()
+	{
+		
+		$query = "SELECT * FROM irena_sektor";
+		 $a= $this->db->query($query);
+
+		return $a->result_array();
+	}
+
 	public function kode_bluebook($x)
 	{
 		$query = "SELECT nama FROM irena_bluebook_kode WHERE id = '$x'";
@@ -302,7 +320,7 @@ function usulan_simpan_data($data)
 
 	public function ambil_program()
 	{
-		$query = "SELECT * FROM irena_program";
+		$query = "SELECT * FROM irena_program_pln";
 		 $a= $this->db->query($query);
 
 		return $a->result_array();

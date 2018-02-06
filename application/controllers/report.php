@@ -10,6 +10,7 @@ class Report extends CI_Controller {
 		parent::__construct();
 		$this->load->library('parser');
 		$this->load->model('Greenbook_model');
+		$this->load->model('Report_model');
 		$this->load->helper(array('form', 'url'));
 		date_default_timezone_set('Asia/Jakarta');
 	}
@@ -56,6 +57,160 @@ class Report extends CI_Controller {
     	 echo json_encode($data);
     	 //$data2 = json_encode($data);
     	
+	}
+
+	public function report_advance()
+	{
+
+		$data['id_bb'] =  $this->input->post('id_bb');
+		$data['id_instansi'] =  $this->input->post('id_instansi');
+		$data['id_lender'] =  $this->input->post('id_lender');
+		$data['id_status'] =  $this->input->post('id_status');
+		$data['id_sektor'] =  $this->input->post('id_sektor');
+		$data['id_program'] =  $this->input->post('id_program');
+		//$data['id_instansi'] = $_GET['id_instansi'];
+	 	$id_instansi = $this->input->post('id_instansi');
+
+	 	/*if (($data['id_bb'] != ""  &&  $data['id_bb'] != 'NULL') && 
+	 		($data['id_instansi'] != ""  &&  $data['id_instansi'] != 'NULL') && 
+	 		($data['id_lender'] != ""  &&  $data['id_lender'] != 'NULL') && 
+	 		($data['id_status'] != ""  &&  $data['id_status'] != 'NULL') &&
+	 		($data['id_sektor'] != ""  &&  $data['id_sektor'] != 'NULL') &&
+	 		($data['id_program'] != ""  &&  $data['id_program'] != 'NULL') 
+	 		) {
+	 		$data['info'] = "tidak kosong"; //untuk kalau semua terisi
+	 	}elseif (($data['id_bb'] != ""  &&  $data['id_bb'] != 'NULL') && 
+	 		($data['id_instansi'] != ""  &&  $data['id_instansi'] != 'NULL') && 
+	 		($data['id_lender'] != ""  &&  $data['id_lender'] != 'NULL') && 
+	 		($data['id_status'] != ""  &&  $data['id_status'] != 'NULL') &&
+	 		($data['id_sektor'] != ""  &&  $data['id_sektor'] != 'NULL') &&
+	 		($data['id_program'] == ""  ||  $data['id_program'] == 'NULL') ) {
+	 		//untuk kalau id program nya kosong
+
+	 		$data['info'] = "program kosong";
+	 		
+	 	}elseif (($data['id_bb'] != ""  &&  $data['id_bb'] != 'NULL') && 
+	 		($data['id_instansi'] != ""  &&  $data['id_instansi'] != 'NULL') && 
+	 		($data['id_lender'] != ""  &&  $data['id_lender'] != 'NULL') && 
+	 		($data['id_status'] != ""  &&  $data['id_status'] != 'NULL') &&
+	 		($data['id_sektor'] == ""  ||  $data['id_sektor'] == 'NULL') &&
+	 		($data['id_program'] == ""  ||  $data['id_program'] == 'NULL')) {
+	 		//untuk kalau sektor dan program kosong
+	 		$data['info'] = "program dan sektor kosong";
+
+	 	}elseif (($data['id_bb'] != ""  &&  $data['id_bb'] != 'NULL') && 
+	 		($data['id_instansi'] != ""  &&  $data['id_instansi'] != 'NULL') && 
+	 		($data['id_lender'] != ""  &&  $data['id_lender'] != 'NULL') && 
+	 		($data['id_status'] == "" ||  $data['id_status'] == 'NULL') &&
+	 		($data['id_sektor'] == ""  ||  $data['id_sektor'] == 'NULL') &&
+	 		($data['id_program'] == ""  ||  $data['id_program'] == 'NULL')) {
+	 		//untuk kalau sektor dan program kosong
+	 		$data['info'] = "program, status, sektor kosong";
+
+	 	 }elseif (($data['id_bb'] != ""  &&  $data['id_bb'] != 'NULL') && 
+	 		($data['id_instansi'] != ""  &&  $data['id_instansi'] != 'NULL') && 
+	 		($data['id_lender'] == ""  ||  $data['id_lender'] == 'NULL') && 
+	 		($data['id_status'] == "" ||  $data['id_status'] == 'NULL') &&
+	 		($data['id_sektor'] == ""  ||  $data['id_sektor'] == 'NULL') &&
+	 		($data['id_program'] == ""  ||  $data['id_program'] == 'NULL')) {
+	 		//untuk kalau sektor dan program kosong
+	 		$data['info'] = "lender, program, status, sektor kosong";
+
+	 	 }elseif (($data['id_bb'] != ""  &&  $data['id_bb'] != 'NULL') && 
+	 		($data['id_instansi'] == ""  ||  $data['id_instansi'] == 'NULL') && 
+	 		($data['id_lender'] == ""  ||  $data['id_lender'] == 'NULL') && 
+	 		($data['id_status'] == "" ||  $data['id_status'] == 'NULL') &&
+	 		($data['id_sektor'] == ""  ||  $data['id_sektor'] == 'NULL') &&
+	 		($data['id_program'] == ""  ||  $data['id_program'] == 'NULL')) {
+	 		//untuk kalau sektor dan program kosong
+	 		$data['info'] = "k/l, lender, program, status, sektor kosong";
+
+	 	 }elseif (($data['id_bb'] == ""  ||  $data['id_bb'] == 'NULL') && 
+	 		($data['id_instansi'] == ""  ||  $data['id_instansi'] == 'NULL') && 
+	 		($data['id_lender'] == ""  ||  $data['id_lender'] == 'NULL') && 
+	 		($data['id_status'] == "" ||  $data['id_status'] == 'NULL') &&
+	 		($data['id_sektor'] == ""  ||  $data['id_sektor'] == 'NULL') &&
+	 		($data['id_program'] == ""  ||  $data['id_program'] == 'NULL')) {
+	 		//untuk kalau sektor dan program kosong
+	 		$data['info'] = "k/l, bluebook, lender, program, status, sektor kosong";
+
+	 	 }elseif (($data['id_bb'] != ""  &&  $data['id_bb'] != 'NULL') && 
+	 		($data['id_instansi'] != ""  &&  $data['id_instansi'] != 'NULL') && 
+	 		($data['id_lender'] != ""  &&  $data['id_lender'] != 'NULL') && 
+	 		($data['id_status'] != ""  &&  $data['id_status'] != 'NULL') &&
+	 		($data['id_sektor'] == ""  ||  $data['id_sektor'] == 'NULL') &&
+	 		($data['id_program'] != ""  &&  $data['id_program'] != 'NULL')) {
+	 		//untuk kalau sektor dan program kosong
+	 		$data['info'] = " sektor kosong, yang lain keisi";
+
+	 	 }{
+	 		//$data['info'] = " kosong";
+
+	 	}*/
+
+	 	//kondisi pertama, terisi semua
+
+	 	if (($data['id_bb'] != ""  &&  $data['id_bb'] != 'NULL') ) {
+
+	 			//cek instansi kosong apa gak
+	 			if (($data['id_instansi'] != ""  &&  $data['id_instansi'] != 'NULL')) {
+	 				# code...
+
+	 					//cek lender kosong apa gak, ini kalau instansi ga kosong, lender ga kosong
+		 				if (($data['id_lender'] != ""  &&  $data['id_lender'] != 'NULL')) {
+		 				# code...
+
+		 					//cek status kosong apa gak, instansi ga koosng, lender ga ksoong, status ga kosong
+		 					if (($data['id_status'] != ""  &&  $data['id_status'] != 'NULL')) {
+
+		 						//cek status kosong apa gak, instansi ga koosng, lender ga ksoong, status ga kosong, program ga kosong
+
+		 						if (($data['id_program'] != ""  &&  $data['id_program'] != 'NULL')) {
+		 						# code...
+
+		 						//cek status kosong apa gak, instansi ga koosng, lender ga ksoong, status ga kosong, program ga kosong, sektor ga kosong
+
+			 						if (($data['id_sektor'] != ""  &&  $data['id_sektor'] != 'NULL')) {
+			 						
+
+	 									$data['info'] = "semua terisi, tidak ada kosong";
+
+			 						}elseif (($data['id_sektor'] == ""  &&  $data['id_sektor'] == 'NULL')) {
+	 									$data['info'] = "sektor kosong";
+			 							# code...
+			 						}
+
+		 						}
+		 					# code...
+		 					}
+		 				}
+
+	 			}
+
+	 			if (($data['id_lender'] != ""  ||  $data['id_lender'] != 'NULL')) {
+	 				# code...
+	 			}
+
+	 			if (($data['id_status'] != ""  ||  $data['id_status'] != 'NULL')) {
+	 				# code...
+	 			}
+
+	 			if (($data['id_program'] != ""  ||  $data['id_program'] != 'NULL')) {
+	 				# code...
+	 			}
+
+	 			if (($data['id_sektor'] != ""  ||  $data['id_sektor'] != 'NULL')) {
+	 				# code...
+	 			}
+
+	 			
+	 	}
+
+	 
+
+
+		$this->load->view('report/bluebook/report_bb_advance', $data);
+		# code...
 	}
 
 

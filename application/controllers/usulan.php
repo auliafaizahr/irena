@@ -594,6 +594,11 @@ class Usulan extends CI_Controller {
 		$this->load->model('Bluebook_model');
 
 		$data['bluebook']= $this->Bluebook_model->semua_bluebook();
+		$data['program']= $this->Bluebook_model->ambil_program();
+		$data['instansi']= $this->Bluebook_model->ambil_instansi();
+		$data['lender']= $this->Bluebook_model->semua_lender();
+		$data['sektor']= $this->Bluebook_model->ambil_sektor();
+		$data['status']= $this->Bluebook_model->ambil_statusumum();
 		
     	$this->load->view('templates/header'); 
 		$this->load->view('pln/report_pln', $data);
