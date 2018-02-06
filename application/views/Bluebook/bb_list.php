@@ -430,7 +430,7 @@
            //console.log(rowid);
            $.ajax({
                 type : 'post',
-                url : "<?php echo base_url(); ?>Usulan/catatan",
+                url : "<?php echo base_url(); ?>bluebook/catatan",
                 data :  'id='+ id,
                 success : function(response){
                 //$('.fetched-data-arsip').html(data);//menampilkan data ke dalam modal

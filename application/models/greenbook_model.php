@@ -17,6 +17,13 @@ class Greenbook_model extends CI_Model {
 	
 	}
 
+
+	public function ambil_catatan($a)
+	{
+		 $query = "SELECT * FROM catatan_gb WHERE id_gb_proyek = '$a' ORDER BY waktu ASC";
+        return $this->db->query($query)->result();
+	}
+
 	public function save_update($isi2)
 	{
 		if(array_key_exists('id', $isi2))
@@ -30,6 +37,14 @@ class Greenbook_model extends CI_Model {
 		{
 			$this->db->insert('irena_gb_layak', $isi2);
 		}		
+	}
+
+	public function ambil_user($a)
+	{
+		$query = "SELECT * FROM irena_user WHERE id = '$a'";
+		 $a= $this->db->query($query);
+
+		return $a->row();
 	}
 
 

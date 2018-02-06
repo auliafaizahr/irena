@@ -96,7 +96,7 @@
 	}
 
 	function segar() {
-		$.get("<?php echo base_url(); ?>Usulan/catatan", function(data) {
+		$.get("<?php echo base_url(); ?>bluebook/catatan", function(data) {
 			$(".isi").html(data);
 		});
 	}
@@ -112,7 +112,7 @@
 			
 			var is_lengkap 			= $("#is_lengkap").val();
 			var catatan 			= $("#catatan").val();
-			var id_usulan 			= $("#id").val();
+			var id_bb_proyek 			= $("#id").val();
 				console.log(id);
 			
             var form_data 	= new FormData();
@@ -120,14 +120,14 @@
 			form_data.append('id', id);
 			
 			form_data.append('catatan', catatan);
-			form_data.append('id_usulan', id);
+			form_data.append('id_bb_proyek', id);
 			form_data.append('waktu', waktu);
 
 			var data = {};
 			console.log(id);
             $.ajax({
             	 type: 'POST',
-                url: '<?php echo base_url(); ?>Usulan/tambah_catatan',
+                url: '<?php echo base_url(); ?>bluebook/tambah_catatan',
                 dataType: 'json',
                 cache: false,
                 contentType: false,

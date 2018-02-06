@@ -17,6 +17,65 @@ class Loan_aggr extends CI_Controller {
 			$this->load->view('PLN/usulan');
 			$this->load->view('templates/footer'); 
 	}
+
+
+		public function catatan()
+    {
+    	$this->load->model('Greenbook_model');
+    	$this->load->model('dk_model');
+    	$this->load->model('la_model');
+    	$data['id'] = $this->input->post('id');
+    	$a = $this->input->post('id');
+    	$data['isi'] = $this->la_model->ambil_catatan($a);
+    	$this->load->view('LA/catatan_la', $data);
+    }
+
+    function tambah_catatan()
+	{
+		$this->load->model('la_model');
+		$this->load->model('dk_model');
+		$status = array('success' => false, 'messages' => array());
+
+		$this->form_validation->set_rules("id", "ID PRoyek", "trim|required");
+		
+
+		$this->form_validation->set_error_delimiters('<p class="text-danger">', '</p>');
+
+		if ($this->form_validation->run() == FALSE) {
+			foreach ($_POST as $key => $value) {
+				$status['messages'][$key] = form_error($key);
+			}	
+		}else{ //validasi benar semua
+		
+			/*
+			$status['success'] 	= false;
+			$nilai_admin =$this->input->nilai_admin;
+			$status['messages']['nilai_admin'] = $nilai_admin;
+			*/
+
+			$data = array(
+				'id_la_proyek'							=> $this->input->post('id_la_proyek'),
+				'catatan'							=> $this->input->post('catatan'),
+				//$data['id_bluebook']					= $this->input->post('id_bluebook');
+				'waktu'								=> date('Y-m-d H:i:s'),
+				'id_user'								=> $this->session->userdata('id'),
+				
+				
+				);
+
+			$hasil3 = $this->db->insert('catatan_la', $data);
+
+				$status['success'] 			= true;
+				$data 						= $_POST;
+				
+			
+			///
+		}
+
+		echo json_encode($data);
+		//var_dump($data);
+	}
+
 	
 	public function edit()
 	{

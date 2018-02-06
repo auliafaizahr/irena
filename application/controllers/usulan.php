@@ -956,6 +956,8 @@ class Usulan extends CI_Controller {
 				'catatan'							=> $this->input->post('catatan'),
 				//$data['id_bluebook']					= $this->input->post('id_bluebook');
 				'waktu'								=> date('Y-m-d H:i:s'),
+				'id_user'								=> $this->session->userdata('id'),
+
 				
 				
 				);
@@ -1274,6 +1276,7 @@ class Usulan extends CI_Controller {
     public function catatan()
     {
     	$this->load->model('Usulan_model');
+    	$this->load->model('Greenbook_model');
     	$data['id'] = $this->input->post('id');
     	$a = $this->input->post('id');
     	$data['isi'] = $this->Usulan_model->ambil_catatan($a);

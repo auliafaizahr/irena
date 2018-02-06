@@ -66,6 +66,63 @@ class Greenbook extends CI_Controller {
     	 $this->load->view('report/greenbook/report_gb_kl', $data);
 	}
 
+	public function catatan()
+    {
+    	$this->load->model('Greenbook_model');
+    	$this->load->model('Bluebook_model');
+    	$data['id'] = $this->input->post('id');
+    	$a = $this->input->post('id');
+    	$data['isi'] = $this->Greenbook_model->ambil_catatan($a);
+    	$this->load->view('greenbook/catatan_gb', $data);
+    }
+
+
+	function tambah_catatan()
+	{
+		$this->load->model('Greenbook_model');
+		$this->load->model('Bluebook_model');
+		$status = array('success' => false, 'messages' => array());
+
+		$this->form_validation->set_rules("id", "ID PRoyek", "trim|required");
+		
+
+		$this->form_validation->set_error_delimiters('<p class="text-danger">', '</p>');
+
+		if ($this->form_validation->run() == FALSE) {
+			foreach ($_POST as $key => $value) {
+				$status['messages'][$key] = form_error($key);
+			}	
+		}else{ //validasi benar semua
+		
+			/*
+			$status['success'] 	= false;
+			$nilai_admin =$this->input->nilai_admin;
+			$status['messages']['nilai_admin'] = $nilai_admin;
+			*/
+
+			$data = array(
+				'id_gb_proyek'							=> $this->input->post('id_gb_proyek'),
+				'catatan'							=> $this->input->post('catatan'),
+				//$data['id_bluebook']					= $this->input->post('id_bluebook');
+				'waktu'								=> date('Y-m-d H:i:s'),
+				'id_user'								=> $this->session->userdata('id'),
+				
+				
+				);
+
+			$hasil3 = $this->db->insert('catatan_gb', $data);
+
+				$status['success'] 			= true;
+				$data 						= $_POST;
+				
+			
+			///
+		}
+
+		echo json_encode($data);
+		//var_dump($data);
+	}
+
 	public function filter_kl_isi_gb()
 	{
 

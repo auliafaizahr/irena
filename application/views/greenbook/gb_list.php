@@ -319,7 +319,7 @@
            //console.log(rowid);
            $.ajax({
                 type : 'post',
-                url : "<?php echo base_url(); ?>Usulan/catatan",
+                url : "<?php echo base_url(); ?>greenbook/catatan",
                 data :  'id='+ id,
                 success : function(response){
                 //$('.fetched-data-arsip').html(data);//menampilkan data ke dalam modal

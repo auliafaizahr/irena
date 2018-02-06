@@ -27,6 +27,12 @@ class Bluebook_model extends CI_Model {
 		return $a->row();
 	}
 
+	public function ambil_catatan($a)
+	{
+		 $query = "SELECT * FROM catatan_bb WHERE id_bb_proyek = '$a' ORDER BY waktu ASC";
+        return $this->db->query($query)->result();
+	}
+
 
 function usulan_simpan_data($data)
 	{

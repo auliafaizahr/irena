@@ -17,6 +17,12 @@ class La_model extends CI_Model {
 	
 	}
 
+	public function ambil_catatan($a)
+	{
+		 $query = "SELECT * FROM catatan_la WHERE id_la_proyek = '$a' ORDER BY waktu ASC";
+        return $this->db->query($query)->result();
+	}
+
 	public function ambil_bb($x)
 	{
 		$query = "SELECT nama FROM irena_bluebook_kode WHERE id = '$x'";
