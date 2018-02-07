@@ -509,7 +509,29 @@
             });
           });
 
-	
+	 $(document).on('click', '.rekam', function(){  
+           
+         
+             var id = $(this).attr("id"); 
+           //console.log(id);
+           //var rowid = $(e.relatedTarget).data('id');
+           //console.log(rowid);
+           $.ajax({
+                type : 'post',
+                url : "<?php echo base_url(); ?>Bluebook/tampilkan_log_bb_index",
+                data :  'id='+ id,
+                success : function(response){
+                //$('.fetched-data-arsip').html(data);//menampilkan data ke dalam modal
+  
+                  $("#tmpModal").html(response);
+                $('#modalLog').modal('show');
+              
+                //  $('#modalKecil').modal('show');
+               // $('.fetched-data-lagi').html(data);//menampilkan data ke dalam modal
+                },
+                dataType:"html"
+                });
+            });
 	
 	function masuk_dpp(id, nilai_admin, nilai_layak){
 		if(nilai_admin == '1' && nilai_layak == '1'){

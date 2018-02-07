@@ -13,7 +13,7 @@
 						
 							<div class="col-sm-12 ">
 								<div class=" alert alert-success">
-								<p><?php echo $value->waktu; ?> - <?php echo $this->Greenbook_model->ambil_user($value->id_user)->nama_panggilan; ?></br>
+								<p><b><?php echo $value->waktu; ?> - <?php echo $this->Greenbook_model->ambil_user($value->id_user)->nama_panggilan; ?></b></br>
 								Staff, pada </br>
 
 

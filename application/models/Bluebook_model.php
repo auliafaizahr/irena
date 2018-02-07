@@ -17,6 +17,12 @@ class Bluebook_model extends CI_Model {
 	
 	}
 
+	public function ambil_dok_bb_by_id_proyek($x)
+	{
+		$sql = "SELECT * FROM irena_view_usulan_pln_dok WHERE id_proyek = '$x' ";
+		return $this->db->query($sql);
+	}
+
 	public function last_gb()
 	{
 		$query = "SELECT id FROM irena_greenbook_proyek ORDER BY ID DESC LIMIT 1";

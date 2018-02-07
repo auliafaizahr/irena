@@ -200,6 +200,18 @@ class Greenbook extends CI_Controller {
 		//var_dump($data);
 	}
 
+	 function tampilkan_log_gb_index()
+	{
+    	$this->load->model('Usulan_model');
+    	$this->load->model('Greenbook_model');
+
+		$id_proyek							= $this->input->post('id');
+		$data['usulan']						= $this->Greenbook_model->detail_proyek($id_proyek);
+		//$data['usulan']			= $query->row();
+		$this->load->view('Greenbook/log_gb_dokumen_index', $data);
+		//$this->load->view('sbsn/usulan/log_usulan_index');
+	}
+
 	public function filter_kl_isi_gb()
 	{
 

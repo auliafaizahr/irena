@@ -107,6 +107,19 @@ class Daftar_kegiatan extends CI_Controller {
     	$this->load->view('daftar_keg/catatan_dk', $data);
     }
 
+    function tampilkan_log_dk_index()
+	{
+    	$this->load->model('dk_model');
+    	$this->load->model('Usulan_model');
+    	$this->load->model('Greenbook_model');
+
+		$id_proyek							= $this->input->post('id');
+		$data['usulan']						= $this->dk_model->detail_proyek($id_proyek);
+		//$data['usulan']			= $query->row();
+		$this->load->view('Daftar_keg/log_dk_dokumen_index', $data);
+		//$this->load->view('sbsn/usulan/log_usulan_index');
+	}
+
     function tambah_catatan()
 	{
 		$this->load->model('Greenbook_model');

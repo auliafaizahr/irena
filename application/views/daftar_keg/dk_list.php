@@ -193,7 +193,7 @@
                            <button data-toggle="dropdown" class="btn btn-white dropdown-toggle" type="button" >Aksi <span class="caret"></span></button>
                            
                            <ul class="dropdown-menu pull-right">
-                                                   <li><a  data-toggle="" data-target="modal" class="rekam" id="<?php echo $value['id']; ?>">Rekam Jejak</a></li>
+                                                   <li><a  data-toggle="" data-target="modal" class="rekam_dk" id="<?php echo $value['id']; ?>">Rekam Jejak</a></li>
                                                    <li><a  data-toggle="" data-target="modal" class="catatan" id="<?php echo $value['id']; ?>">Catatan</a></li>
                                                    <li><a  data-toggle="" data-target="modal" class="edit" id="<?php echo $value['id']; ?>" >Edit</a></li>
                                                     <li><a  class="del-proyek" id="<?php echo $value['id']; ?>">Hapus</a></li>
@@ -323,6 +323,30 @@
     dataType:"html"});
     return false;
   }
+
+   $(document).on('click', '.rekam_dk', function(){  
+           
+         
+             var id = $(this).attr("id"); 
+           //console.log(id);
+           //var rowid = $(e.relatedTarget).data('id');
+           //console.log(rowid);
+           $.ajax({
+                type : 'post',
+                url : "<?php echo base_url(); ?>daftar_kegiatan/tampilkan_log_dk_index",
+                data :  'id='+ id,
+                success : function(response){
+                //$('.fetched-data-arsip').html(data);//menampilkan data ke dalam modal
+  
+                  $("#tmpModal").html(response);
+                $('#modalLog').modal('show');
+              
+                //  $('#modalKecil').modal('show');
+               // $('.fetched-data-lagi').html(data);//menampilkan data ke dalam modal
+                },
+                dataType:"html"
+                });
+            });
 
   
      function nilai_layak(layak, nilai_admin, c){

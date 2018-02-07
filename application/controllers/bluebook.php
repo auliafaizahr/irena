@@ -198,7 +198,7 @@ class Bluebook extends CI_Controller {
 				//$data['id_bluebook']					= $this->input->post('id_bluebook');
 				'waktu'								=> date('Y-m-d H:i:s'),
 				'id_user'								=> $this->session->userdata('id'),
-				
+
 				
 				
 				);
@@ -215,6 +215,27 @@ class Bluebook extends CI_Controller {
 		echo json_encode($data);
 		//var_dump($data);
 	}
+
+		function tampilkan_data_log_bb()
+	{
+		$this->load->model('hibah_model');
+		$id_proyek 		= $this->uri->segment(3);
+		$data['log'] 	= $this->Bluebook_model->ambil_data_log_bb_by_id_proyek($id_proyek);
+		$this->load->view('usulan/log_usulan_list', $data);
+	}
+
+	public function tampilkan_dok_bb_list()
+	{
+		$this->load->model('Usulan_model');
+
+		$data['id_proyek'] 		= $this->uri->segment(3);
+		$id_proyek		= $this->uri->segment(3);
+		$data['dok'] 	= $this->Bluebook_model->ambil_dok_bb_by_id_proyek($id_proyek);
+		$this->load->view('usulan/dok_usulan_list', $data);
+
+		 			
+	}
+
 
 
 
@@ -501,6 +522,19 @@ class Bluebook extends CI_Controller {
 		
 		
 	}
+
+	 function tampilkan_log_bb_index()
+	{
+    	$this->load->model('Usulan_model');
+    	$this->load->model('Bluebook_model');
+
+		$id_proyek							= $this->input->post('id');
+		$data['usulan']						= $this->Bluebook_model->detail_proyek($id_proyek);
+		//$data['usulan']			= $query->row();
+		$this->load->view('Bluebook/log_bb_dokumen_index', $data);
+		//$this->load->view('sbsn/usulan/log_usulan_index');
+	}
+	
 
 	public function update() {
 		$this->load->model('Bluebook_model');

@@ -19,6 +19,20 @@ class Loan_aggr extends CI_Controller {
 	}
 
 
+    function tampilkan_log_la_index()
+	{
+    	$this->load->model('dk_model');
+    	$this->load->model('la_model');
+
+		$id_proyek							= $this->input->post('id');
+		$data['usulan']						= $this->la_model->detail_proyek($id_proyek);
+		//$data['usulan']			= $query->row();
+		$this->load->view('LA/log_la_dokumen_index', $data);
+		//$this->load->view('sbsn/usulan/log_usulan_index');
+	}
+
+
+
 		public function catatan()
     {
     	$this->load->model('Greenbook_model');
