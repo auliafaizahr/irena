@@ -505,12 +505,14 @@ class Bluebook extends CI_Controller {
 	{
 		$this->load->model('Bluebook_model');
 		$this->load->model('Usulan_model');
+		$this->load->model('Greenbook_model');
 		$a = $this->input->post('id');
 		$data['detail'] = $this->Bluebook_model->detail_proyek($a);
 		$data['lembaga']= $this->Usulan_model->ambil_instansi();
 		$data['status_lembaga']= $this->Bluebook_model->semua_status_lembaga();
 		$data['status_lender']= $this->Bluebook_model->semua_status_lender();
 		$data['bluebook']= $this->Bluebook_model->semua_bluebook();
+		$data['sektor']= $this->Greenbook_model->ambil_sektor();
 		
 		$data['lender']= $this->Bluebook_model->semua_lender();
 		$data['program']= $this->Usulan_model->ambil_program();

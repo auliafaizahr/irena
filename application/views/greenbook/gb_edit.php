@@ -38,6 +38,31 @@
                             </div>
                         </div>
 
+                        <div class="form-group">
+                            <label for="id_infra" class="col-sm-3 control-label">Kategori </label>
+                            <div class="col-sm-9">
+                                <select name="id_infra" id="id_infra" class="form-control"  >
+                                     <option value="1">Infrastruktur</option>
+                                     <option value="2">Non Infrastruktur</option>
+                                      
+                                   
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="id_sektor" class="col-sm-3 control-label">Sektor </label>
+                            <div class="col-sm-9">
+                                <select name="id_sektor" id="id_sektor" class="form-control"  >
+                                     
+                                    <?php foreach($sektor as $row){ ?>
+                                        <option value="<?php echo $row['id']; ?>"><?php echo $row['nama']; ?>
+                                      </option>
+                                    <?php } ?>
+                                </select>
+                            </div>
+                        </div>
+
 
                         <div class="form-group">
                             <label for="id_program" class="col-sm-3 control-label">Program </label>
@@ -261,6 +286,16 @@
     $(document).ready(function(){
         $("#id_instansi").select2({
             placeholder: "Pilih Instansi",
+            width: "100%"
+        });
+
+         $("#id_sektor").select2({
+            placeholder: "Pilih Sektor",
+            width: "100%"
+        });
+
+           $("#id_infra").select2({
+            placeholder: "Pilih Kategori",
             width: "100%"
         });
         

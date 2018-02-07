@@ -89,6 +89,11 @@ class Usulan_model extends CI_Model {
 	{
 		$this->db->where('id', $a);
 		return $this->db->delete('irena_usulan_pln');
+		return $this->db->delete('irena_usulan_pln_log');
+		$this->db->where('id_usulan', $a);
+		return $this->db->delete('irena_usulan_layak');
+		$this->db->where('id_usulan', $a);
+		return $this->db->delete('irena_usulkan_bb');
 	}
 
 	public function jenis_arsip()

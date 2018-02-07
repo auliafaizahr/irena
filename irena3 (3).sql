@@ -36,6 +36,41 @@ CREATE TABLE `catatan_usulan` (
   `catatan` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+CREATE TABLE `catatan_bb` (
+  `id` int(11) NOT NULL,
+  `id_bb_proyek` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
+  `waktu` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `catatan` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE `catatan_gb` (
+  `id` int(11) NOT NULL,
+  `id_gb_proyek` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
+  `waktu` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `catatan` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+CREATE TABLE `catatan_dk` (
+  `id` int(11) NOT NULL,
+  `id_dk_proyek` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
+  `waktu` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `catatan` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE `catatan_la` (
+  `id` int(11) NOT NULL,
+  `id_la_proyek` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
+  `waktu` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `catatan` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+
 --
 -- Dumping data for table `catatan_usulan`
 --
@@ -5153,6 +5188,9 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 DROP TABLE IF EXISTS `irena_view_hibah_log`;
 
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `irena_view_hibah_log`  AS  select `irena_hibah_log`.`id` AS `id`,`irena_hibah_log_kategori`.`nama` AS `kategori`,`irena_hibah_log`.`nama` AS `nama`,`irena_hibah_log`.`deskripsi` AS `deskripsi`,`irena_user`.`nama_panggilan` AS `nama_panggilan`,`irena_hibah_log`.`id_proyek` AS `id_proyek`,`irena_arsip_jenis`.`nama` AS `folder`,`irena_arsip`.`berkas` AS `berkas`,`irena_hibah_log`.`id_log_kategori` AS `id_log_kategori`,`irena_hibah_log`.`id_arsip` AS `id_arsip`,`irena_arsip`.`no` AS `no_arsip` from (((((`irena_hibah_log` join `irena_hibah_proyek` on((`irena_hibah_proyek`.`id` = `irena_hibah_log`.`id_proyek`))) join `irena_hibah_log_kategori` on((`irena_hibah_log_kategori`.`id` = `irena_hibah_log`.`id_log_kategori`))) join `irena_arsip` on((`irena_arsip`.`id` = `irena_hibah_log`.`id_arsip`))) join `irena_user` on((`irena_user`.`id` = `irena_hibah_log`.`update_by`))) join `irena_arsip_jenis` on((`irena_arsip_jenis`.`id` = `irena_arsip`.`id_jenis`))) ;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `irena_view_hibah_log`  AS  select `irena_hibah_log`.`id` AS `id`,`irena_hibah_log_kategori`.`nama` AS `kategori`,`irena_hibah_log`.`nama` AS `nama`,`irena_hibah_log`.`deskripsi` AS `deskripsi`,`irena_user`.`nama_panggilan` AS `nama_panggilan`,`irena_hibah_log`.`id_proyek` AS `id_proyek`,`irena_arsip_jenis`.`nama` AS `folder`,`irena_arsip`.`berkas` AS `berkas`,`irena_hibah_log`.`id_log_kategori` AS `id_log_kategori`,`irena_hibah_log`.`id_arsip` AS `id_arsip`,`irena_arsip`.`no` AS `no_arsip` from (((((`irena_hibah_log` join `irena_hibah_proyek` on((`irena_hibah_proyek`.`id` = `irena_hibah_log`.`id_proyek`))) join `irena_hibah_log_kategori` on((`irena_hibah_log_kategori`.`id` = `irena_hibah_log`.`id_log_kategori`))) join `irena_arsip` on((`irena_arsip`.`id` = `irena_hibah_log`.`id_arsip`))) join `irena_user` on((`irena_user`.`id` = `irena_hibah_log`.`update_by`))) join `irena_arsip_jenis` on((`irena_arsip_jenis`.`id` = `irena_arsip`.`id_jenis`))) ;
+
 
 -- --------------------------------------------------------
 

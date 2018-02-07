@@ -109,6 +109,7 @@ class Greenbook extends CI_Controller {
 		$data['status_lender']= $this->Bluebook_model->semua_status_lender();
 		$data['bluebook']= $this->Bluebook_model->semua_bluebook();
 		$data['greenbook']= $this->Greenbook_model->ambil_greenbook();
+		$data['sektor']= $this->Greenbook_model->ambil_sektor();
 		
 		$data['lender']= $this->Bluebook_model->semua_lender();
 		$data['program']= $this->Usulan_model->ambil_program();
@@ -837,6 +838,7 @@ class Greenbook extends CI_Controller {
 		$data['status_lender']= $this->Bluebook_model->semua_status_lender();
 		$data['bluebook']= $this->Bluebook_model->semua_bluebook();
 		$data['greenbook']= $this->Greenbook_model->ambil_greenbook();
+		$data['sektor']= $this->Greenbook_model->ambil_sektor();
 		
 		$data['lender']= $this->Bluebook_model->semua_lender();
 	

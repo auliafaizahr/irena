@@ -32,9 +32,9 @@
                         </div>
                         
                         <div class="form-group">
-                            <label for="id_eselon_1" class="col-sm-3 control-label">Instansi Pelaksana 1</label>
+                            <label for="id_eselon_1" class="col-sm-3 control-label">Instansi Pelaksana </label>
                             <div class="col-sm-9">
-                                <textarea name="instansi_pelaksana" id="instansi_pelaksana" class="col-sm-12" rows="5" placeholder="Instansi Eselon 1"><?php echo $detail->instansi_pelaksana; ?></textarea>
+                                <textarea name="instansi_pelaksana" id="instansi_pelaksana" class="col-sm-12" rows="5" placeholder="instansi_pelaksana"><?php echo $detail->instansi_pelaksana; ?></textarea>
                             </div>
                         </div>
 
@@ -52,6 +52,31 @@
                                     <?php } ?>
                                     <?php foreach($program as $row){ ?>
                                         <option value="<?php echo $row['id']; ?>"><?php echo $row['nama_program']; ?>
+                                      </option>
+                                    <?php } ?>
+                                </select>
+                            </div>
+                        </div>
+
+                         <div class="form-group">
+                            <label for="id_infra" class="col-sm-3 control-label">Kategori </label>
+                            <div class="col-sm-9">
+                                <select name="id_infra" id="id_infra" class="form-control"  >
+                                     <option value="1">Infrastruktur</option>
+                                     <option value="2">Non Infrastruktur</option>
+                                      
+                                   
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="id_sektor" class="col-sm-3 control-label">Sektor </label>
+                            <div class="col-sm-9">
+                                <select name="id_sektor" id="id_sektor" class="form-control"  >
+                                     
+                                    <?php foreach($sektor as $row){ ?>
+                                        <option value="<?php echo $row['id']; ?>"><?php echo $row['nama']; ?>
                                       </option>
                                     <?php } ?>
                                 </select>
@@ -279,6 +304,11 @@
             width: "100%"
         });
 
+        $("#id_infra").select2({
+            placeholder: "Pilih Kategori",
+            width: "100%"
+        });
+
          $("#id_status_lembaga").select2({
             placeholder: "Pilih Status Lembaga",
             width: "100%"
@@ -289,6 +319,12 @@
             placeholder: "Pilih Status Lender",
             width: "100%"
         });
+
+         $("#id_sektor").select2({
+            placeholder: "Pilih Sektor",
+            width: "100%"
+        });
+        
         
         
         
@@ -338,6 +374,8 @@
             var id_lender                   = $("#id_lender").val();
             var id_status_lender                   = $("#id_status_lender").val();
             var id_status_lembaga                   = $("#id_status_lembaga").val();
+            var id_infra                   = $("#id_infra").val();
+            var id_sektor                   = $("#id_sektor").val();
             
             var form_data   = new FormData();
             
@@ -360,6 +398,8 @@
             form_data.append('id_lender', id_lender);
             form_data.append('id_status_lender', id_status_lender);
             form_data.append('id_status_lembaga', id_status_lembaga);
+            form_data.append('id_sektor', id_sektor);
+            form_data.append('id_infra', id_infra);
 
             $.ajax({
                 url: '<?php echo base_url(); ?>bluebook/bb_simpan/edit',

@@ -22,33 +22,7 @@
                                 </select>
                             </div>
                         </div>
-                        
-                    <!--     <div class="form-group">
-                            <label for="id_eselon_1" class="col-sm-3 control-label">Instansi Eselon I</label>
-                            <div class="col-sm-9">
-                                <select name="id_eselon_1" id="id_eselon_1" class="form-control" >
-                                 
-                                </select>
-                            </div>
-                        </div>
- -->
-                       <!--  <div class="input_fields_wrap">
-                            <button class="add_field_button">Add More Fields</button>
-                            <div><input type="text" name="mytext[]"></div>
-                        </div> -->
-
-                       <!--  <div class="form-group ">
-                            <label for="id_eselon_1" class="col-sm-3 control-label">Instansi Pelaksana</label>
-                            <div class="col-sm-5 tambah ">
-                                <div><input type="text" name="eselon_1[]" id="eselon_1" size="50" class="form-control"></div>
-                            </div>
-                            <div class="col-sm-3">
-                                <button  class="add_field_button btn btn-sm btn-primary">Tambah Instansi Pelaksana</button>
-                            </div>
-
-                            
-                        </div> -->
-
+            
                          <div class="form-group">
                             <label for="instansi_pelaksana" class="col-sm-3 control-label">Instansi Pelaksana</label>
                             <div class="col-sm-9">
@@ -57,6 +31,33 @@
                             </div>
                            
                         </div>
+
+                        <div class="form-group">
+                            <label for="id_infra" class="col-sm-3 control-label">Kategori </label>
+                            <div class="col-sm-9">
+                                <select name="id_infra" id="id_infra" class="form-control"  >
+                                     <option value="1">Infrastruktur</option>
+                                     <option value="2">Non Infrastruktur</option>
+                                      
+                                   
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="id_sektor" class="col-sm-3 control-label">Sektor </label>
+                            <div class="col-sm-9">
+                                <select name="id_sektor" id="id_sektor" class="form-control"  >
+                                     
+                                    <?php foreach($sektor as $row){ ?>
+                                        <option value="<?php echo $row['id']; ?>"><?php echo $row['nama']; ?>
+                                      </option>
+                                    <?php } ?>
+                                </select>
+                            </div>
+                        </div>
+
+
 
 
 
@@ -318,6 +319,16 @@
 
          $("#id_greenbook").select2({
             placeholder: "Pilih Kode Greenbook",
+            width: "100%"
+        });
+
+         $("#id_sektor").select2({
+            placeholder: "Pilih Sektor",
+            width: "100%"
+        });
+
+           $("#id_infra").select2({
+            placeholder: "Pilih Kategori",
             width: "100%"
         });
         
