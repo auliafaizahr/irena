@@ -12,7 +12,7 @@
 			<th style="width:20px;">GB</th>
 			<th style="width:20px;">DK</th>
 			<th style="width:20px;">LA</th>
-			<th style="width:3%;">Aksi</th>
+			<th style="width:3%;">Aksi <!-- <?php echo $this->session->userdata('id_user_level'); ?> --></th>
 		</tr>
 	</thead>
 	<tbody>
@@ -31,13 +31,15 @@
 			<td><?php 
                         $adm = $this->Usulan_model->ambil_adm($value['id'])->is_lengkap;
                         $kasubdit_adm = $this->Usulan_model->ambil_adm($value['id'])->is_kasubdit;
+                        $user_level = $this->session->userdata('id_user_level');
+
 
                         if ($adm == '1') {
 
                            if ($kasubdit_adm == '0') {
-                             echo "<a   id='".$c."'  onclick='nilai_admin($adm, $c, $kasubdit_adm)'><i class=' btn fa fa-times-circle btn-warning'></i></a>";
+                             echo "<a   id='".$c."'  onclick='nilai_admin($adm, $c, $kasubdit_adm, $user_level )'><i class=' btn fa fa-times-circle btn-warning'></i></a>";
                           }elseif ($kasubdit_adm == '1') {
-                             echo "<a   id='".$c."'  onclick='nilai_admin($adm, $c, $kasubdit_adm)'><i class=' btn fa fa-warning btn-warning'></i></a>";
+                             echo "<a   id='".$c."'  onclick='nilai_admin($adm, $c, $kasubdit_adm, $user_level )'><i class=' btn fa fa-warning btn-warning'></i></a>";
                           }else{
                             echo '<a ><i class="btn fa fa-times-circle btn-danger"></i></a>';
                           }
@@ -49,14 +51,14 @@
                           if ($kasubdit_adm == '0') {
                              echo '<a ><i class="btn fa fa-check-square btn-warning"></i></a>';
                           }elseif ($kasubdit_adm == '1') {
-                             echo "<a   id='".$c."'  onclick='nilai_admin($adm, $c, $kasubdit_adm)'><i class=' btn fa fa-warning btn-warning'></i></a>";
+                             echo "<a   id='".$c."'  onclick='nilai_admin($adm, $c, $kasubdit_adm, $user_level )'><i class=' btn fa fa-warning btn-warning'></i></a>";
                           }else{
                             echo '<a ><i class="btn fa fa-check-square btn-primary"></i></a>';
                           }
                            
                         }else{
                           //echo "<a   id='".$c."' layak='".$c."' onclick='nilai_admin($adm)'><i class=' btn fa fa-times-circle btn-danger'></i></a>";
-                          echo "<a   id='".$c."'  onclick='nilai_admin($adm, $c, $kasubdit_adm)'><i class=' btn fa fa-times-circle btn-default'></i></a>";
+                          echo "<a   id='".$c."'  onclick='nilai_admin($adm, $c, $kasubdit_adm, $user_level )'><i class=' btn fa fa-times-circle btn-default'></i></a>";
                         }
 
 
@@ -71,7 +73,7 @@
                           if ($kasubdit_layak == '0') {
                              echo '<a ><i class="btn fa fa-times-circle btn-warning"></i></a>';
                           }elseif ($kasubdit_layak == '1') {
-                             echo "<a   id='".$c."'  onclick='nilai_layak($layak, $adm, $c)'><i class=' btn fa fa-warning btn-warning'></i></a>";
+                             echo "<a   id='".$c."'  onclick='nilai_layak($layak, $adm, $c, $user_level )'><i class=' btn fa fa-warning btn-warning'></i></a>";
                           }else{
                             echo '<a ><i class="btn fa fa-times-circle btn-danger"></i></a>';
                           }
@@ -81,14 +83,14 @@
                           if ($kasubdit_layak == '0') {
                              echo '<a ><i class="btn fa fa-check-square btn-warning"></i></a>';
                           }elseif ($kasubdit_layak == '1') {
-                             echo "<a   id='".$c."'  onclick='nilai_layak($layak, $adm, $c)'><i class=' btn fa fa-check-square btn-primary'></i></a>";
+                             echo "<a   id='".$c."'  onclick='nilai_layak($layak, $adm, $c, $user_level )'><i class=' btn fa fa-check-square btn-primary'></i></a>";
                           }else{
                             echo '<a ><i class="btn fa fa-check-square btn-primary"></i></a>';
                           }
                            
                         }else{
                           //echo "<a   id='".$c."' layak='".$c."' onclick='nilai_admin($adm)'><i class=' btn fa fa-times-circle btn-danger'></i></a>";
-                          echo "<a   id='".$c."'  onclick='nilai_layak($layak, $adm, $c)'><i class=' btn fa fa-times-circle btn-default'></i></a>";
+                          echo "<a   id='".$c."'  onclick='nilai_layak($layak, $adm, $c, $user_level )'><i class=' btn fa fa-times-circle btn-default'></i></a>";
                         }
 
 
@@ -113,9 +115,9 @@
 
                           if ($kasubdit_usul == '0') {
                              echo '<a ><i class="usul_btn btn fa fa-times-circle btn-warning"  id="'.$c.'"></i></a>';
-                             echo "<a   id='".$c."'  onclick='nilai_layak($layak, $adm, $c)'><i class=' btn fa fa-warning btn-warning'></i></a>";
+                             echo "<a   id='".$c."'  onclick='nilai_layak($layak, $adm, $c, $user_level )'><i class=' btn fa fa-warning btn-warning'></i></a>";
                           }elseif ($kasubdit_usul == '1') {
-                             echo "<a   id='".$c."'  onclick='nilai_layak($layak, $adm, $c)'><i class=' btn fa fa-warning btn-warning'></i></a>";
+                             echo "<a   id='".$c."'  onclick='nilai_layak($layak, $adm, $c, $user_level )'><i class=' btn fa fa-warning btn-warning'></i></a>";
                           }else{
                             echo '<a ><i class="btn fa fa-times-circle btn-danger"></i></a>';
                           }
@@ -125,7 +127,7 @@
                           if ($kasubdit_usul == '0') {
                              echo '<a ><i class="btn fa fa-check-square btn-warning"></i></a>';
                           }elseif ($kasubdit_usul == '1') {
-                             echo "<a   id='".$c."'  onclick='nilai_layak($layak, $adm, $c)'><i class=' btn fa fa-check-square btn-primary'></i></a>";
+                             echo "<a   id='".$c."'  onclick='nilai_layak($layak, $adm, $c, $user_level )'><i class=' btn fa fa-check-square btn-primary'></i></a>";
                           }else{
                             echo '<a ><i class="btn fa fa-check-square btn-primary"></i></a>';
                           }
@@ -133,7 +135,7 @@
                         }else{
                           //echo "<a   id='".$c."' layak='".$c."' onclick='nilai_admin($adm)'><i class=' btn fa fa-times-circle btn-danger'></i></a>";
                           echo "<div class='btn-group'>
-                            <button type='button'  class='btn btn-xs  btn-danger' onclick='tambah_BB($usul_BB, $c, $kasubdit_usul)' ><i class='fa fa-plus'></i> Tambah ke BB</button>
+                            <button type='button'  class='btn btn-xs  btn-danger' onclick='tambah_BB($usul_BB, $c, $kasubdit_usul, $user_level )' ><i class='fa fa-plus'></i> Tambah ke BB</button>
                         </div>";
                          /* echo "<a   id='".$c."'  onclick='nilai_layak($layak, $adm, $c)'><i class=' btn fa fa-times-circle btn-default'></i></a>";*/
                         }
@@ -253,34 +255,74 @@
                 });
             });
 
-	function nilai_admin(adm, c, kasubdit){
+	function nilai_admin(adm, c, kasubdit, user_level){
     console.log("sukses");
    
      var id = c;
      console.log(id); 
-    if (adm == '0') {
-      console.log("sukses");
-  
-    $.ajax({
-      type : 'post',
-                url : "<?php echo base_url(); ?>Usulan/adm",
-                data :  'id='+ id,
-                success : function(response){
-                 $("#tmpModal").html(response);
-                $('#modal_adm').modal('show');
-              
-                //  $('#modalKecil').modal('show');
-               // $('.fetched-data-lagi').html(data);//menampilkan data ke dalam modal
-                },
-                dataType:"html"
-    });
-    } else if ( kasubdit == '0' ){
+   
+
+     if (user_level != '5') {
+
+        if ( kasubdit == '0' ) {
+
+              //cek kasubdit
+              if (adm == '0') {
+                      console.log("sukses");
+                        
+                          $.ajax({
+                            type : 'post',
+                                      url : "<?php echo base_url(); ?>Usulan/adm",
+                                      data :  'id='+ id,
+                                      success : function(response){
+                                       $("#tmpModal").html(response);
+                                      $('#modal_adm').modal('show');
+                                    
+                                      //  $('#modalKecil').modal('show');
+                                     // $('.fetched-data-lagi').html(data);//menampilkan data ke dalam modal
+                                      },
+                                      dataType:"html"
+                          });
+              }else if(adm != '0'){
+                console.loge("Belum dinilai oleh kasubdit");
+          } 
+          }
+      }
+    
+
+    if( user_level == '5'){
+
+       if ( kasubdit == '0' ) {
+
+              //cek kasubdit
+              if (adm == '0') {
+                      console.log("sukses");
+                        
+                          $.ajax({
+                            type : 'post',
+                                      url :  "<?php echo base_url(); ?>Usulan/adm",
+                                      data :  'id='+ id,
+                                      success : function(response){
+                                       $("#tmpModal").html(response);
+                                      $('#modal_adm').modal('show');
+                                    
+                                      //  $('#modalKecil').modal('show');
+                                     // $('.fetched-data-lagi').html(data);//menampilkan data ke dalam modal
+                                      },
+                                      dataType:"html"
+                          });
+              }else if(adm != '0'){
+                console.loge("Belum dinilai oleh kasubdit");
+          } 
+          }
+      alert('Ini halaman kasubdit');
+      console.log("ini punya kasubdit");
+
+    }/*else if ( kasubdit == '0' ){
      
      alert('Menunggu penilaian kasubdit')
       console.log("gagal bray");
-    } else {
-      alert('Selesaikan penilaian kelayakan terlebih dahulu');
-    }
+    }*/ 
 
   }
 
@@ -378,7 +420,7 @@
 	}
 
 	
-     function nilai_layak(layak, nilai_admin, c){
+     function nilai_layak(layak, nilai_admin, c, user_level){
       console.log(c);
 
       var id = c;
