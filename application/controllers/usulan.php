@@ -906,16 +906,26 @@ class Usulan extends CI_Controller {
 			
 			$data['id']					= $this->input->post('id');
 			date_default_timezone_set('Asia/Jakarta');
+			if ($this->session->userdata('id_user_level') != '5') {
 
 			//$data['nilai_admin_id']		= $this->session->userdata('id');
 			$data['update_by']			= $this->session->userdata('id');
 			$data['update_at']			= date('Y-m-d H:i:s');
 			$data['is_layak']			= $this->input->post('is_layak');
+			$data['ket']			= $this->input->post('nilai_layak_ket');
 			$result 					= $this->Usulan_model->usulan_simpan_data($data);
 			$status['success'] 			= true;
 			$data 						= $_POST;
 
-			
+			}elseif ($this->session->userdata('id_user_level') == '5') {
+				$data['by_kasubdit']			= $this->session->userdata('id');
+				$data['at_kasubdit']			= date('Y-m-d H:i:s');
+				$data['is_kasubdit']			= $this->input->post('is_layak');
+				$data['catatan']			= $this->input->post('nilai_layak_ket');
+				$result 					= $this->Usulan_model->usulan_simpan_data($data);
+				$status['success'] 			= true;
+				$data 						= $_POST;
+			}
 			
 			///
 		}
@@ -1141,18 +1151,32 @@ class Usulan extends CI_Controller {
 			*/
 			
                       date_default_timezone_set('Asia/Jakarta');
+
+            if ($this->session->userdata('id_user_level') != '5') {
+	            $data['update_by']			= $this->session->userdata('id');
+				$data['update_at']			= date('Y-m-d H:i:s');
+				$data['id']					= $this->input->post('id');
+				$data['is_lengkap']			= $this->input->post('is_lengkap');
+				$data['is_kasubdit']		= "0";
+				$data['keterangan']			= $this->input->post('nilai_admin_ket');
+				$result 					= $this->Usulan_model->simpan_adm($data);
+				$status['success'] 			= true;
+				$data 						= $_POST;
+
+            }elseif ($this->session->userdata('id_user_level') == '5') {
+            	 $data['by_kasubdit']			= $this->session->userdata('id');
+				$data['at_kasubdit']			= date('Y-m-d H:i:s');
+				$data['id']					= $this->input->post('id');
+				
+				$data['is_kasubdit']		= $this->input->post('is_lengkap');
+				$data['catatan']			= $this->input->post('nilai_admin_ket');
+				$result 					= $this->Usulan_model->simpan_adm($data);
+				$status['success'] 			= true;
+				$data 						= $_POST;
+            }
 			
 			//$data['nilai_admin_id']		= $this->session->userdata('id');
-			$data['update_by']			= $this->session->userdata('id');
-			$data['update_at']			= date('Y-m-d H:i:s');
-			$data['id']					= $this->input->post('id');
-			$data['is_lengkap']			= $this->input->post('is_lengkap');
-			$data['is_kasubdit']		= "0";
-			$data['keterangan']			= $this->input->post('nilai_admin_ket');
-			$result 					= $this->Usulan_model->simpan_adm($data);
-			$status['success'] 			= true;
-			$data 						= $_POST;
-
+			
 
 
 			

@@ -17,11 +17,11 @@
 
               <tr class="read">
                 <td class="mail-ontact text-right">Instansi Eselon I</td>
-                <td class="mail-subject"><!-- <?php echo $usulan->instansi_eselon_satu; ?> --></td>
+                <td class="mail-subject"></td>
               </tr>
               <tr class="read">
                 <td class="mail-ontact text-right">Instansi Pelaksana</td>
-                <td class="mail-subject"><?php echo $this->Usulan_model->ambil_instansi_untuk_usulan($detail->id_instansi_pelaksana)->nama_instansi; ?></td>
+                <td class="mail-subject"><!--  -->/td>
               </tr>
                <tr class="read">
                 <td class="mail-ontact text-right">Program</td>

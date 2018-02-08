@@ -282,6 +282,15 @@ function usulan_simpan_data($data)
 		return $a->row();
 	}
 
+		public function kode_greenbook($x)
+	{
+		$query = "SELECT nama FROM irena_greenbook_kode WHERE id = '$x'";
+		 $a= $this->db->query($query);
+
+		return $a->row();
+	}
+
+
 	public function semua_status_lender()
 	{
 		$query = "SELECT * FROM irena_status_lender_pln";

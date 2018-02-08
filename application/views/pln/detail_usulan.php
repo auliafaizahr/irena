@@ -74,7 +74,7 @@
                       if($this->Usulan_model->ambil_adm($detail->id)->is_kasubdit == "0") {
                          echo "<p><span class='label label-warning'>Administrasi tidak lengkap, dalam proses menunggu persetujuan penilaian kasubdit</span></p>";
                         //echo "<p><span class='label label-danger'>Belum memenuhi kelengkapan</span></p>";
-                      }elseif ($this->Usulan_model->ambil_adm($detail->id)->is_kasubdit == "1") {
+                      }elseif ($this->Usulan_model->ambil_adm($detail->id)->is_kasubdit == "2") {
                         echo "<p><span class='label label-warning'>Sudah dilakukan penilaian, namun kasubdit meminta untuk dinilai kembali</span></p>";
                       }else{
                         echo "<p><span class='label label-danger'>Hasil penilaian administrasi tidak lengkap</span></p>";
@@ -143,7 +143,7 @@
                       if($this->Usulan_model->ambil_layak($detail->id)->is_kasubdit == "0") {
                          echo "<p><span class='label label-warning'>Tidak memenuhi penilaian kelayakan, dalam proses menunggu persetujuan penilaian kasubdit</span></p>";
                         //echo "<p><span class='label label-danger'>Belum memenuhi kelengkapan</span></p>";
-                      }elseif ($this->Usulan_model->ambil_layak($detail->id)->is_kasubdit == "1") {
+                      }elseif ($this->Usulan_model->ambil_layak($detail->id)->is_kasubdit == "2") {
                         echo "<p><span class='label label-warning'>Sudah dilakukan penilaian, namun kasubdit meminta untuk dinilai kembali</span></p>";
                       }else{
                         echo "<p><span class='label label-danger'>Hasil penilaian kelayakan tidak memenuhi</span></p>";
@@ -181,9 +181,9 @@
                       echo "<b>".$nama3."</b> </br>";
                       echo "<p> Penilaian dilakukan pada " .date("d M'y h:i:s", strtotime($this->Usulan_model->ambil_layak($detail->id)->update_at." UTC")) . "</p>";
                       echo "<p> Catatan Penilaian : </br> </p> ";
-                      echo "<b>".$this->Usulan_model->ambil_layak($detail->id)->catatan_staff."</b> </br>";
+                      echo "<b>".$this->Usulan_model->ambil_layak($detail->id)->ket."</b> </br>";
 
-                      echo "<p> Penilaian dilakukan oleh </p>";
+                    
                     }
 
                     if ($this->Usulan_model->ambil_layak($detail->id)->is_kasubdit != '0' ) {
