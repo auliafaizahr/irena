@@ -59,6 +59,25 @@
                                 </select>
                             </div>
                         </div>
+
+                         <div class="form-group">
+                            <label for="lokasi" class="col-sm-3 control-label">Lokasi </label>
+                            <div class="col-sm-9">
+                                <select name="lokasi" id="lokasi" class="form-control" >
+                                    <?php 
+                                        $query  = $this->Usulan_model->ambil_lokasi_proyek_id($detail->lokasi); 
+                                        foreach ($query as $key) 
+                                        {
+                                    ?>
+                                        <option value="<?php echo $key->id; ?>"><?php echo $key->nama; ?></option>
+                                    <?php } ?>
+                                    <?php foreach($lokasi as $row){ ?>
+                                        <option value="<?php echo $row['id']; ?>"><?php echo $row['nama']; ?>
+                                      </option>
+                                    <?php } ?>
+                                </select>
+                            </div>
+                        </div>
                         
                         <div class="form-group">
                             <label for="proyeksi_tahun_pertama_penarikan" class="col-sm-3 control-label">Proyeksi Tahun Pertama Penarikan</label>
@@ -190,6 +209,44 @@
             placeholder: "Pilih Tahun",
             width: "100%"
         });
+
+         $("#lokasi").select2({
+            placeholder: "Pilih Lokasi",
+            width: "100%",
+            multiple:true,
+            tags: true
+
+
+        });
+
+     /*     selections = [
+        {id:1,text:'Enhancement'},
+        {id:2,text:'Bug'},
+        {id:3,text:'Duplicate'},
+        {id:4,text:'Invalid'},
+        {id:5,text:'Won\'t Fix'}
+            ];
+
+             var extract_preselected_ids = function(element){
+        var preselected_ids = [];
+        if(element.val())
+            $(element.val().split(",")).each(function () {
+                preselected_ids.push({id: this});
+            });
+        console.log(preselected_ids);
+        return preselected_ids;
+    };
+    
+    var preselect = function(preselected_ids){
+        var pre_selections = [];
+        for(index in selections)
+            for(id_index in preselected_ids)
+                if (selections[index].id == preselected_ids[id_index].id)
+                    pre_selections.push(selections[index]);
+        return pre_selections;
+    };
+
+*/
         
         
         $('#id_instansi').change(function () {
@@ -232,6 +289,7 @@
             var dana_usulan                   = $("#dana_usulan").val();
             var output                   = $("#output").val();
             var outcome                   = $("#outcome").val();
+            var lokasi                   = $("#lokasi").val();
             
             var form_data   = new FormData();
             
@@ -250,6 +308,8 @@
             form_data.append('output', output);
             form_data.append('outcome', outcome);
             form_data.append('durasi', durasi);
+            form_data.append('lokasi', lokasi);
+                        console.log(lokasi);
            
 
 

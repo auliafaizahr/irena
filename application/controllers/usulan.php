@@ -394,6 +394,8 @@ class Usulan extends CI_Controller {
 		$data['detail'] = $this->Usulan_model->detail_proyek($a);
 		$data['lembaga']= $this->Usulan_model->ambil_instansi();
 		$data['program']= $this->Usulan_model->ambil_program();
+		$data['lokasi'] = $this->Usulan_model->ambil_lokasi();
+		
 		
 
        $this->load->view('Usulan/edit_usulan', $data);
@@ -438,6 +440,11 @@ class Usulan extends CI_Controller {
 		$a = $this->input->post('id');
 
 		$this->Usulan_model->hapus_usulan_fix($a);
+		$this->Usulan_model->hapus_dari_usulkan_bb($a);
+		$this->Usulan_model->hapus_dari_layak($a);
+		$this->Usulan_model->hapus_dari_adm($a);
+		$this->Usulan_model->hapus_dari_dok($a);
+		$this->Usulan_model->hapus_dari_log($a);
 		
     }
 
@@ -451,6 +458,7 @@ class Usulan extends CI_Controller {
 		$data['lembaga']= $this->Usulan_model->ambil_instansi();
 		$data['program']= $this->Usulan_model->ambil_program();
 		$data['arsip'] = $this->Usulan_model->ambil_arsip();
+		$data['lokasi'] = $this->Usulan_model->ambil_lokasi();
 		
 		$data['lembaga']= $this->Usulan_model->ambil_instansi();
 		$data['status_lembaga']= $this->Bluebook_model->semua_status_lembaga();

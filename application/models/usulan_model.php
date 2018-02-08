@@ -89,16 +89,58 @@ class Usulan_model extends CI_Model {
 	{
 		$this->db->where('id', $a);
 		return $this->db->delete('irena_usulan_pln');
-		return $this->db->delete('irena_usulan_pln_log');
+		
+	}
+
+	public function hapus_dari_layak($a)
+	{
+		
 		$this->db->where('id_usulan', $a);
 		return $this->db->delete('irena_usulan_layak');
+		
+	}
+
+	public function hapus_dari_usulkan_bb($a)
+	{
+
 		$this->db->where('id_usulan', $a);
 		return $this->db->delete('irena_usulkan_bb');
+		
+	}
+
+	public function hapus_dari_adm($a)
+	{
+
+		$this->db->where('id_usulan', $a);
+		return $this->db->delete('irena_usulan_adm');
+		
+	}
+
+	public function hapus_dari_dok($a)
+	{
+
+		$this->db->where('id_proyek', $a);
+		return $this->db->delete('irena_usulan_pln_dok');
+		
+	}
+
+	public function hapus_dari_log($a)
+	{
+
+		$this->db->where('id_proyek', $a);
+		return $this->db->delete('irena_usulan_pln_log');
+		
 	}
 
 	public function jenis_arsip()
 	{
 		 $query = "SELECT * FROM irena_arsip_jenis  ORDER BY nama ASC";
+        return $this->db->query($query)->result_array();
+	}
+
+	public function ambil_lokasi()
+	{
+		 $query = "SELECT * FROM irena_provinsi_kabkota  ORDER BY nama ASC";
         return $this->db->query($query)->result_array();
 	}
 
@@ -164,6 +206,23 @@ class Usulan_model extends CI_Model {
 		
 	}
 
+	public function ambil_lokasi_proyek_id($x)
+	{
+		
+		$query = "SELECT * FROM irena_provinsi_kabkota WHERE id = '$x'";
+		 $a= $this->db->query($query);
+		return $a->result();
+	}
+
+	public function ambil_program_proyek_id($x)
+	{
+		
+		$query = "SELECT * FROM irena_program_pln WHERE id = '$x'";
+		 $a= $this->db->query($query);
+		return $a->result();
+	}
+
+
 
 
 	public function ambil_instansi_id($x)
@@ -177,14 +236,8 @@ class Usulan_model extends CI_Model {
 
 
 
-	public function ambil_program_proyek_id($x)
-	{
-		
-		$query = "SELECT * FROM irena_program_pln WHERE id = '$x'";
-		 $a= $this->db->query($query);
-		return $a->result();
-		
-	}
+
+
 
 	public function ambil_bb($x)
 	{

@@ -92,33 +92,19 @@
                         <div class="form-group">
                             <label for="lokasi" class="col-sm-3 control-label">Lokasi</label>
                             <div class="col-sm-9">
-                               <textarea name="lokasi" id="lokasi" class="col-sm-12" rows="5" placeholder="Lokasi"></textarea>
-                            </div>
-                        </div>
 
-                        <!-- <div class="form-group">
-                            <label for="id_provinsi" class="col-sm-3 control-label">Provinsi </label>
-                            <div class="col-sm-9">
-                                <select name="id_provinsi" id="id_provinsi" class="form-control" multiple="multiple" >
+                                <select name="lokasi" id="lokasi" class="form-control"  >
                                      
-                                    <?php foreach($provinsi as $row){ ?>
+                                    <?php foreach($lokasi as $row){ ?>
                                         <option value="<?php echo $row['id']; ?>"><?php echo $row['nama']; ?>
                                       </option>
                                     <?php } ?>
                                 </select>
+                               <!-- <textarea name="lokasi" id="lokasi" class="col-sm-12" rows="5" placeholder="Lokasi"></textarea> -->
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <label for="id_kabkota" class="col-sm-3 control-label">Kabupaten/Kota </label>
-                            <div class="col-sm-9">
-                                <select name="id_kabkota" id="id_kabkota" class="form-control" multiple="multiple" >
-                                     
-                                   
-                                </select>
-                            </div>
-                        </div>
- -->
+             
 
                        
                         
@@ -310,6 +296,12 @@
 
         $("#id_provinsi").select2({
             placeholder: "Pilih Provinsi",
+            width: "100%"
+        });
+
+         $("#lokasi").select2({
+            placeholder: "Pilih Lokasi",
+            multiple:true,
             width: "100%"
         });
         
