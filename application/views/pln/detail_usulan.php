@@ -264,9 +264,10 @@
                       $nama6 = $this->Usulan_model->ambil_user($user6)->nama_depan;
                       echo "<p> Dan disetujui atau dinilai ulang oleh kasubdit ";
                       echo "<b>".$nama6."</b> </br>";
-                      echo "<p> Penilaian dilakukan pada " .$this->Usulan_model->ambil_adm($detail->id)->kasubdit_bb_by. "</p>";
+                      echo "<p> Penilaian dilakukan pada " .$this->Usulan_model->ambil_adm($detail->id)->kasubdit_bb_at. "</p>";
                       echo "<p> Catatan Penilaian Kasubdit : </br> </p> ";
-                      echo "<b>".$this->Usulan_model->ambil_adm($detail->id)->is_bb_kasubdit."</b> </br>";
+                      echo "<b>".$this->Usulan_model->ambil_adm($detail->id)->catatan_kasubdit
+                      ."</b> </br>";
                     }
                     /*$query  = $this->arsip_model->ambil_nama_user_by_id($usulan->nilai_admin_id);
                     $user = $query->row();

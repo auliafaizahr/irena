@@ -911,6 +911,7 @@ class Usulan extends CI_Controller {
 			//$data['nilai_admin_id']		= $this->session->userdata('id');
 			$data['update_by']			= $this->session->userdata('id');
 			$data['update_at']			= date('Y-m-d H:i:s');
+			$data['is_kasubdit']		= '0';
 			$data['is_layak']			= $this->input->post('is_layak');
 			$data['ket']			= $this->input->post('nilai_layak_ket');
 			$result 					= $this->Usulan_model->usulan_simpan_data($data);
@@ -959,7 +960,58 @@ class Usulan extends CI_Controller {
 			$status['messages']['nilai_admin'] = $nilai_admin;
 			*/
 
-			$data = array(
+			$data['id']					= $this->input->post('id');
+			date_default_timezone_set('Asia/Jakarta');
+			if ($this->session->userdata('id_user_level') != '5') {
+
+			//$data['nilai_admin_id']		= $this->session->userdata('id');
+			$data['is_BB_by']			= $this->session->userdata('id');
+			$data['is_BB_at']			= date('Y-m-d H:i:s');
+			$data['is_bb_kasubdit']		= '0';
+			$data['is_BB']			= $this->input->post('nilai_layak');
+			$data['is_BB_catatan']			= $this->input->post('nilai_layak_ket');
+			$result 					= $this->Usulan_model->simpan_adm($data);
+			$status['success'] 			= true;
+			$data 						= $_POST;
+
+			}elseif ($this->session->userdata('id_user_level') == '5') {
+				$data['is_bb_kasubdit']			= $this->input->post('nilai_layak');
+				$bb_staff			= $this->Usulan_model->ambil_adm($value['id'])->is_BB; //ngambil nilai dari staff buat dibandingin
+				$data['kasubdit_bb_at']			= date('Y-m-d H:i:s');
+				$data['catatan_kasubdit']			= $this->input->post('nilai_layak_ket');
+				$result 					= $this->Usulan_model->simpan_adm($data);
+				$data['kasubdit_bb_by']			= $this->session->userdata('id');
+
+				$status['success'] 			= true;
+				$data 						= $_POST;
+
+				if ($bb_staff == '2') {
+					if ( $data['is_bb_kasubdit']	== '2' ) {
+
+						//tambah ke database proyek bluebook
+						# code...
+					}elseif( $data['is_bb_kasubdit']	== '1' ){
+						$data['kasubdit_bb_at']			= date('Y-m-d H:i:s');
+						$data['catatan_kasubdit']			= $this->input->post('nilai_layak_ket');
+						$result 					= $this->Usulan_model->simpan_adm($data);
+						$data['kasubdit_bb_by']			= $this->session->userdata('id');
+
+						$status['success'] 			= true;
+						$data 						= $_POST;
+					}
+
+				}else{
+					$data['kasubdit_bb_at']			= date('Y-m-d H:i:s');
+					$data['catatan_kasubdit']			= $this->input->post('nilai_layak_ket');
+					$result 					= $this->Usulan_model->simpan_adm($data);
+					$data['kasubdit_bb_by']			= $this->session->userdata('id');
+
+					$status['success'] 			= true;
+					$data 						= $_POST;
+				}
+			}
+
+		/*	$data = array(
 				'id_usulan'					=> $this->input->post('id'),
 				'id_usulan_proyek'					=> $this->input->post('id'),
 				//$data['id_bluebook']					= $this->input->post('id_bluebook');
@@ -987,7 +1039,7 @@ class Usulan extends CI_Controller {
 
 				);
 
-		 	$hasil1 =  $this->Usulan_model->update_BB($data2);
+		 	$hasil1 =  $this->Usulan_model->update_BB_di_usulan($data2);
 
 		 	$data3 = array(
 				'id' =>$this->input->post('id'),
@@ -1011,7 +1063,7 @@ class Usulan extends CI_Controller {
 				$status['success'] 			= true;
 				$data 						= $_POST;
 				
-			
+			*/
 			///
 		}
 
@@ -1154,16 +1206,17 @@ class Usulan extends CI_Controller {
 
             if ($this->session->userdata('id_user_level') != '5') {
 	            $data['update_by']			= $this->session->userdata('id');
-				$data['update_at']			= date('Y-m-d H:i:s');
 				$data['id']					= $this->input->post('id');
 				$data['is_lengkap']			= $this->input->post('is_lengkap');
-				$data['is_kasubdit']		= "0";
+				
 				$data['keterangan']			= $this->input->post('nilai_admin_ket');
+				$data['update_at']			= date('Y-m-d H:i:s');
+
 				$result 					= $this->Usulan_model->simpan_adm($data);
 				$status['success'] 			= true;
 				$data 						= $_POST;
 
-            }elseif ($this->session->userdata('id_user_level') == '5') {
+            } elseif ($this->session->userdata('id_user_level') == '5') {
             	 $data['by_kasubdit']			= $this->session->userdata('id');
 				$data['at_kasubdit']			= date('Y-m-d H:i:s');
 				$data['id']					= $this->input->post('id');

@@ -19,14 +19,14 @@
 							<div class="col-sm-8">
 								<div class="checkbox">
 									<label>
-										<input type="checkbox" id="check_nilai_layak"> Usulan Layak
+										<input type="checkbox" id="check_nilai_layak"> Usulan Layak ditambahkan ke Bluebook
 										<input type="hidden" name="nilai_layak" id="nilai_layak" class="form-control" value="">
 										<input type="hidden" name="id" id="id" class="form-control" value="<?php echo $detail->id; ?>">
 										<input type="hidden" name="id_usulan" id="id_usulan" class="form-control" value="<?php echo $detail->id; ?>">
 										
 										<input type="hidden" name="id_program" id="id_program" class="form-control" value="<?php echo $detail->id_program; ?>">
 										<input type="hidden" name="id_instansi" id="id_instansi" class="form-control" value="<?php echo $detail->id_instansi; ?>">
-										<input type="hidden" name="id_instansi_pelaksana" id="id_instansi_pelaksana" class="form-control" value="<?php echo $detail->id_instansi_pelaksana; ?>">
+										<input type="hidden" name="id_instansi_pelaksana" id="id_instansi_pelaksana" class="form-control" value="<?php echo $detail->instansi_pelaksana; ?>">
 										<input type="hidden" name="judul_proyek_id" id="judul_proyek_id" class="form-control" value="<?php echo $detail->judul_proyek_id; ?>">
 										<input type="hidden" name="judul_proyek_eng" id="judul_proyek_eng" class="form-control" value="<?php echo $detail->judul_proyek_eng; ?>">
 										<input type="hidden" name="ruang_lingkup_id" id="ruang_lingkup_id" class="form-control" value="<?php echo $detail->ruang_lingkup_id; ?>">
@@ -72,9 +72,9 @@
     $(document).ready(function(){
 		$('#check_nilai_layak').change(function() {
 			if($("#check_nilai_layak").is(':checked') == true){
-				$('#nilai_layak').val(1);
+				$('#nilai_layak').val(2);
 			}else{
-				$('#nilai_layak').val(0);
+				$('#nilai_layak').val(1);
 			}
 			
 		});
@@ -85,6 +85,7 @@
 		
 		$('#htmlForm').submit(function(e) {
 			e.preventDefault();
+
 
 			var me 			= $(this);
 			
@@ -106,7 +107,7 @@
 			var nilai_hibah		 	= $("#nilai_hibah").val();
 			var nilai_pinjaman		 	= $("#nilai_pinjaman").val();
 			
-			
+			console.log(nilai_layak);
             var form_data 	= new FormData();
 			
 			form_data.append('id', id);

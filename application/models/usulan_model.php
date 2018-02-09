@@ -124,14 +124,14 @@ class Usulan_model extends CI_Model {
 		
 	}
 
-	public function hapus_dari_log($a)
+	/*public function ($a)
 	{
 
 		$this->db->where('id_proyek', $a);
 		return $this->db->delete('irena_usulan_pln_log');
 		
 	}
-
+*/
 	public function jenis_arsip()
 	{
 		 $query = "SELECT * FROM irena_arsip_jenis  ORDER BY nama ASC";
