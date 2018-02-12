@@ -404,7 +404,7 @@
                 dataType: 'json',
                 cache: false,
                 contentType: false,
-                processData: false,
+                processData: false
                 data: form_data,
                 type: 'post',
                 success: function(response){

@@ -49,6 +49,22 @@ class Bluebook_model extends CI_Model {
 		}		
 	}
 
+		function bb_layak_simpan_data($data)
+	{
+		if(array_key_exists('id', $data))
+		{
+			$id = $data['id'];
+			unset($data['id']);
+			$this->db->where('id_proyek_bb',$id);
+			$this->db->update('irena_bb_layak', $data);
+		}
+		else
+		{
+			$this->db->insert('irena_bb_layak', $data);
+		}		
+	}
+
+
 	public function ambil_catatan($a)
 	{
 		 $query = "SELECT * FROM catatan_bb WHERE id_bb_proyek = '$a' ORDER BY waktu ASC";

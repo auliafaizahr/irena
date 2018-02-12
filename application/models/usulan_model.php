@@ -387,6 +387,15 @@ class Usulan_model extends CI_Model {
 		return $a->row();
 	}
 
+	public function detail_proyek_lokasi_saja($x)
+	{
+		$query = "SELECT lokasi FROM irena_usulan_pln WHERE id = '$x'";
+		 $a= $this->db->query($query);
+
+		return $a->result_array();
+	}
+
+
 	public function ambil_layak($x)
 	{
 		$query = "SELECT * FROM irena_Usulan_layak WHERE id_usulan = '$x'";
@@ -417,6 +426,55 @@ class Usulan_model extends CI_Model {
 			$this->db->insert('irena_usulan_adm', $data);
 		}		
 	}
+
+	public function tambah_ke_BB($data)
+	{
+		
+		if(array_key_exists('id', $data))
+		{
+			$id = $data['id_usulan'];
+			unset($data['id_usulan']);
+			$this->db->where('id_usulan',$id);
+			$this->db->update('irena_bluebook_proyek', $data);
+		}
+		else
+		{
+			$this->db->insert('irena_bluebook_proyek', $data);
+		}		
+			
+	}
+
+	public function tambah_ke_BB_layak($data)
+	{
+		
+		if(array_key_exists('id', $data))
+		{
+			$id = $data['id_proyek_bb'];
+			unset($data['id_proyek_bb']);
+			$this->db->where('id_proyek_bb',$id);
+			$this->db->update('irena_bb_layak', $data);
+		}
+		else
+		{
+			$this->db->insert('irena_bb_layak', $data);
+		}		
+			
+	}
+
+	public function update_isBB($data)
+	{
+		
+		if(array_key_exists('id', $data))
+		{
+			$id = $data['id'];
+			unset($data['id']);
+			$this->db->where('id',$id);
+			$this->db->update('irena_usulan_pln', $data);
+		}
+			
+			
+	}
+
 
 	public function update_BB($data2)
 	{

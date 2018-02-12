@@ -63,21 +63,25 @@
                          <div class="form-group">
                             <label for="lokasi" class="col-sm-3 control-label">Lokasi </label>
                             <div class="col-sm-9">
-                                <select name="lokasi" id="lokasi" class="form-control" >
-                                    <?php 
-                                        $query  = $this->Usulan_model->ambil_lokasi_proyek_id($detail->lokasi); 
-                                        foreach ($query as $key) 
-                                        {
-                                    ?>
-                                        <option value="<?php echo $key->id; ?>"><?php echo $key->nama; ?></option>
-                                    <?php } ?>
-                                    <?php foreach($lokasi as $row){ ?>
-                                        <option value="<?php echo $row['id']; ?>"><?php echo $row['nama']; ?>
-                                      </option>
-                                    <?php } ?>
-                                </select>
+                                <select name="lokasi" id="lokasi" class="form-control" multiple>
+                           
+                                <?php $key = array($detail->lokasi);
+                                $a = array();
+                                $a = explode(",", $detail->lokasi);
+                                $key2 = array("1", "2", "4", "3");
+                                 
+
+
+                                foreach($lokasi as $row ){ ?>
+                                <option value="<?php echo $row['id']; ?>" <?php echo in_array($row['id'] , $a) ? 'selected' : '' ?>><?php echo $row['nama']; ?>
+                                 </option>
+                                 <?php } ?>
+                                 </select>
                             </div>
                         </div>
+
+
+
                         
                         <div class="form-group">
                             <label for="proyeksi_tahun_pertama_penarikan" class="col-sm-3 control-label">Proyeksi Tahun Pertama Penarikan</label>

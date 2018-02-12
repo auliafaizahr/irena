@@ -76,6 +76,8 @@
                        
                         $layak = $this->Bluebook_model->ambil_layak($value['id'])->is_layak;
                         $kasubdit_layak = $this->Bluebook_model->ambil_layak($value['id'])->is_kasubdit_layak;
+                        $user_level = $this->session->userdata('id_user_level');
+
                        
                         $c = $value['id'];
 
@@ -84,10 +86,10 @@
                          if ($layak == '1') {
 
                            if ($kasubdit_layak == '0') {
-                            echo "<a id='".$value['id']."' class='layak' data-id='".$layak."' data-kasubdit='".$kasubdit_layak."'><i class='btn fa fa-times-circle btn-warning'></i></a>";
+                            echo "<a id='".$value['id']."' class='layak' data-user='".$user_level."'  data-id='".$layak."' data-kasubdit='".$kasubdit_layak."'><i class='btn fa fa-times-circle btn-warning'></i></a>";
                              
-                          }elseif ($kasubdit_layak == '1') {
-                             echo "<a id='".$value['id']."' class='layak' data-id='".$layak."' data-kasubdit='".$kasubdit_layak."' ><i class='btn fa fa-warning btn-warning'></i></a>";
+                          }elseif ($kasubdit_layak == '2') {
+                             echo "<a id='".$value['id']."' class='layak'  data-user='".$user_level."' data-id='".$layak."' data-kasubdit='".$kasubdit_layak."' ><i class='btn fa fa-warning btn-warning'></i></a>";
                              
                           }else{
                             echo '<a ><i class="btn fa fa-times-circle btn-danger" ></i></a>';
@@ -98,10 +100,10 @@
 
                          
                           if ($kasubdit_layak == '0') {
-                            echo "<a id='".$value['id']."' class='layak' data-id='".$layak."' data-kasubdit='".$kasubdit_layak."'><i class='btn fa fa-check-square btn-warning'></i></a>";
+                            echo "<a id='".$value['id']."' class='layak'  data-user='".$user_level."' data-id='".$layak."' data-kasubdit='".$kasubdit_layak."'><i class='btn fa fa-check-square btn-warning'></i></a>";
                              
                           }elseif ($kasubdit_layak == '1') {
-                            echo "<a id='".$value['id']."' class='layak' data-id='".$layak."' data-kasubdit='".$kasubdit_layak."' ><i class='btn fa fa-warning btn-warning'></i></a>";
+                            echo "<a id='".$value['id']."'  data-user='".$user_level."' class='layak' data-id='".$layak."' data-kasubdit='".$kasubdit_layak."' ><i class='btn fa fa-warning btn-warning'></i></a>";
                             
                           }else{
                             echo '<a ><i class="btn fa fa-check-square btn-primary"></i></a>';
@@ -109,7 +111,7 @@
                            
                         }else{
                           //echo "<a   id='".$c."' layak='".$c."' onclick='nilai_admin($adm)'><i class=' btn fa fa-times-circle btn-danger'></i></a>";
-                          echo "<a id='".$value['id']."' class='layak'php data-id='".$layak."' data-kasubdit='".$kasubdit_layak."' ><i class='btn fa fa-times-circle  btn-default'></i></a>";
+                          echo "<a id='".$value['id']."' class='layak'  data-user='".$user_level."' data-id='".$layak."' data-kasubdit='".$kasubdit_layak."' ><i class='btn fa fa-times-circle  btn-default'></i></a>";
                           
                         }
 
@@ -124,10 +126,10 @@
                         if ($is_GB == '1') {
 
                            if ($gb_kasubdit == '0') {
-                            echo "<a id='".$value['id']."' class='tambahkeGB' data-id='".$is_GB."' data-kasubdit='".$gb_kasubdit."'><i class='btn fa fa-times-circle btn-warning'></i></a>";
+                            echo "<a id='".$value['id']."' class='tambahkeGB' data-layak='".$layak."' data-user='".$user_level."' data-id='".$is_GB."' data-kasubdit='".$gb_kasubdit."'><i class='btn fa fa-times-circle btn-warning'></i></a>";
                              
                         }elseif ($gb_kasubdit == '1') {
-                             echo "<a id='".$value['id']."' class='tambahkeGB' data-id='".$is_GB."' data-kasubdit='".$gb_kasubdit."' ><i class='btn fa fa-warning btn-warning'></i></a>";
+                             echo "<a id='".$value['id']."'  data-user='".$user_level."' class='tambahkeGB' data-layak='".$layak."' data-id='".$is_GB."' data-kasubdit='".$gb_kasubdit."' ><i class='btn fa fa-warning btn-warning'></i></a>";
                              
                         }else{
                             echo '<a ><i class="btn fa fa-times-circle btn-danger" ></i></a>';
@@ -138,19 +140,19 @@
 
                          
                           if ($gb_kasubdit == '0') {
-                            echo "<a id='".$value['id']."' class='tambahkeGB' data-id='".$is_GB."' data-kasubdit='".$gb_kasubdit."'><i class='btn fa fa-check-square btn-warning'></i></a>";
+                            echo "<a id='".$value['id']."' class='tambahkeGB'  data-user='".$user_level."' data-layak='".$layak."' data-id='".$is_GB."' data-kasubdit='".$gb_kasubdit."'><i class='btn fa fa-check-square btn-warning'></i></a>";
                              
                           }elseif ($gb_kasubdit == '1') {
-                            echo "<a id='".$value['id']."' class='tambahkeGB' data-id='".$is_GB."' data-kasubdit='".$gb_kasubdit."' ><i class='btn fa fa-warning btn-warning'></i></a>";
+                            echo "<a id='".$value['id']."' class='tambahkeGB'  data-user='".$user_level."' data-layak='".$layak."' data-id='".$is_GB."' data-kasubdit='".$gb_kasubdit."' ><i class='btn fa fa-warning btn-warning'></i></a>";
                             
                           }else{
-                            echo '<a ><i class="btn fa fa-check-square btn-primary"></i></a>'."<a id='".$value['id']."' data-id='".$is_GB."' data-kasubdit='".$gb_kasubdit."' class='tambahkeGB' ><i class='btn fa fa-plus  btn-danger'></i></a>"; 
+                            echo '<a ><i class="btn fa fa-check-square btn-primary"></i></a>'."<a id='".$value['id']."'  data-user='".$user_level."' data-id='".$is_GB."' data-layak='".$layak."' data-kasubdit='".$gb_kasubdit."' class='tambahkeGB' ><i class='btn fa fa-plus  btn-danger'></i></a>"; 
                           }
                            
                         }else{
                           //echo "<a   id='".$c."' layak='".$c."' onclick='nilai_admin($adm)'><i class=' btn fa fa-times-circle btn-danger'></i></a>";
                           echo "<div class='btn-group'>
-                            <button type='button'  class='tambahkeGB btn btn-xs  btn-danger' id='".$value['id']."' data-id='".$is_GB."' data-kasubdit='".$gb_kasubdit."'><i class='fa fa-plus'></i> Tambah ke GB</button>
+                            <button type='button'  class='tambahkeGB btn btn-xs  btn-danger' id='".$value['id']."' data-layak='".$layak."'  data-user='".$user_level."' data-id='".$is_GB."' data-kasubdit='".$gb_kasubdit."'><i class='fa fa-plus'></i> Tambah ke GB</button>
                             </div>";
                          // echo "<a id='".$value['id']."' class='tambahBB' ><i class='btn fa fa-plus  btn-danger'></i></a>";
                           
@@ -185,53 +187,7 @@
 
 
 <script>
-	function detail_list(page){
-		$.ajax({
-			url: "<?php echo base_url(); ?>"+page,
-			beforeSend: function(){
-				
-				showLoading();
-				$('#loader').fadeOut(1000);
-			},
-			success:function(response){
 
-				$("#tmpModal").html(response);
-				$('#modalDetail').modal('show');
-			},
-			dataType:"html"});
-		return false;
-	}
-
-	function nilai_admin(adm, c, kasubdit){
-    console.log("sukses");
-   
-     var id = c;
-     console.log(id); 
-    if (adm == '0') {
-      console.log("sukses");
-  
-    $.ajax({
-      type : 'post',
-                url : "<?php echo base_url(); ?>Usulan/adm",
-                data :  'id='+ id,
-                success : function(response){
-                 $("#tmpModal").html(response);
-                $('#modal_adm').modal('show');
-              
-                //  $('#modalKecil').modal('show');
-               // $('.fetched-data-lagi').html(data);//menampilkan data ke dalam modal
-                },
-                dataType:"html"
-    });
-    } else if ( kasubdit == '0' ){
-     
-     alert('Menunggu penilaian kasubdit')
-      console.log("gagal bray");
-    } else {
-      alert('Selesaikan penilaian kelayakan terlebih dahulu');
-    }
-
-  }
 
   $(document).on('click', '.layak', function(){  
            
@@ -239,60 +195,187 @@
              var id = $(this).attr("id"); 
              var layak = $(this).attr("data-id"); 
              var kasubdit_layak = $(this).attr("data-kasubdit"); 
+             var user_level = $(this).attr("data-user"); 
            console.log(id);
            console.log(layak);
            console.log(kasubdit_layak);
+           console.log(user_level);
            //var rowid = $(e.relatedTarget).data('id');
            //console.log(rowid);
 
-        if (layak == '0') {
-           $.ajax({
-                type : 'post',
-                url : "<?php echo base_url(); ?>Bluebook/layak",
-                data :  'id='+ id,
-                success : function(response){
-                //$('.fetched-data-arsip').html(data);//menampilkan data ke dalam modal
 
-                  $("#tmpModal").html(response);
-                $('#modalLayak2').modal('show');
-                console.log("bisa");
-              alert(response);
-                //  $('#modalKecil').modal('show');
-               // $('.fetched-data-lagi').html(data);//menampilkan data ke dalam modal
-                },
-                dataType:"html"
-                });
+      if (user_level != '5') {
 
-          } else if (kasubdit_layak == '0'){
-            alert('Menunggu persetujuan kasubdit');
-            
-          };
+              //cek kasubdit
+           
+
+                  if (kasubdit_layak == '0') {
+
+                      if (layak == '0') {
+
+                           $.ajax({
+                            type : 'post',
+                                      url : "<?php echo base_url(); ?>Bluebook/layak",
+                                      data :  'id='+ id,
+                                      success : function(response){
+                                         $("#tmpModal").html(response);
+                                      $('#modalLayak2').modal('show');
+                                    
+                                      //  $('#modalKecil').modal('show');
+                                     // $('.fetched-data-lagi').html(data);//menampilkan data ke dalam modal
+                                      },
+                                      dataType:"html"
+                          });
+
+                      } else if(layak != '0'){
+
+                        alert('Belum dinilai oleh kasubdit');
+                        console.log('Belum dinilai oleh kasubdit');
+                      
+                      }
+                      //cek kalo hasil penilaian staff dan kasubdit berbeda
+                  }else if( (kasubdit_layak  == '2' && layak == '1') || (kasubdit_layak == '1' && layak == '2') ){
+                      $.ajax({
+                                    type : 'post',
+                                              url : "<?php echo base_url(); ?>Bluebook/layak",
+                                              data :  'id='+ id,
+                                              success : function(response){
+                                               $("#tmpModal").html(response);
+                                              $('#modalLayak2').modal('show');
+                                            
+                                              //  $('#modalKecil').modal('show');
+                                             // $('.fetched-data-lagi').html(data);//menampilkan data ke dalam modal
+                                              },
+                                              dataType:"html"
+                                  });
+                     } 
+                     
+                        
+                          
+              }
+
+
+      if (user_level == '5') {
+
+              //cek kasubdit
+           
+
+                  if (kasubdit_layak == '0') {
+
+                      if (layak != '0') {
+
+                           $.ajax({
+                            type : 'post',
+                                      url : "<?php echo base_url(); ?>Bluebook/layak",
+                                      data :  'id='+ id,
+                                      success : function(response){
+                                         $("#tmpModal").html(response);
+                                      $('#modalLayak2').modal('show');
+                                    
+                                      //  $('#modalKecil').modal('show');
+                                     // $('.fetched-data-lagi').html(data);//menampilkan data ke dalam modal
+                                      },
+                                      dataType:"html"
+                          });
+
+                      } 
+                      //cek kalo hasil penilaian staff dan kasubdit berbeda
+                  }
+                        
+                          
+              }
+      
+
+
+
         });
 	
-	function tampilkan_form_edit(page){
-		$.ajax({
-			url: "<?php echo base_url(); ?>"+page,
-			success:function(response){
-				$("#tmpModal").html(response);
-				$('#modalEdit').modal('show');
-		},
-		dataType:"html"});
-		return false;
-	}
 
      $(document).on('click', '.tambahkeGB', function(){  
            
          
              var gb = $(this).attr("id"); 
              var id = $(this).attr("id"); 
-             var layak = $(this).attr("data-id"); 
+             var usul_GB = $(this).attr("data-id"); 
+             var layak = $(this).attr("data-layak"); 
              var kasubdit = $(this).attr("data-kasubdit"); 
+             var user_level = $(this).attr("data-user"); 
           // console.log(id);
            console.log(gb);
            console.log(layak);
            console.log(kasubdit);
            //var rowid = $(e.relatedTarget).data('id');
            //console.log(rowid);
+           
+            if (user_level != '5') {
+
+              //cek kasubdit
+              if (layak == '2') {
+                  if (kasubdit == '0') {
+                      if (usul_GB == '0') {
+                           $.ajax({
+                            type : 'post',
+                                      url : "<?php echo base_url(); ?>Bluebook/tambahkeGB",
+                                      data :  'id='+ id,
+                                      success : function(response){
+                                         $("#tmpModal").html(response);
+                                      $('#modalGB').modal('show');
+                                    
+                                      //  $('#modalKecil').modal('show');
+                                     // $('.fetched-data-lagi').html(data);//menampilkan data ke dalam modal
+                                      },
+                                      dataType:"html"
+                          });
+                      } else if(usul_GB != '0'){
+                        alert('Belum dinilai oleh kasubdit');
+                        console.log('Belum dinilai oleh kasubdit');                     
+                     }
+                      //cek kalo hasil penilaian staff dan kasubdit berbeda
+                  }else if( (kasubdit  == '2' && usul_GB == '1') || (kasubdit == '1' && usul_GB == '2') ){
+                      $.ajax({
+                                    type : 'post',
+                                              url : "<?php echo base_url(); ?>Bluebook/tambahkeGB",
+                                              data :  'id='+ id,
+                                              success : function(response){
+                                               $("#tmpModal").html(response);
+                                              $('#modalGB ').modal('show');
+                                            
+                                              //  $('#modalKecil').modal('show');
+                                             // $('.fetched-data-lagi').html(data);//menampilkan data ke dalam modal
+                                              },
+                                              dataType:"html"
+                                  });
+                  }else if(usul_GB == '2' && kasubdit == '2'){
+                    alert('Yakin akan menambahkan lagi ?');
+
+                     $.ajax({
+                        type : 'post',
+                        url : "<?php echo base_url(); ?>Bluebook/tambah_lagi",
+                        data :  'id='+ id,
+                        success : function(response){
+                        //$('.fetched-data-arsip').html(data);//menampilkan data ke dalam modal
+
+                          $("#tmpModal").html(response);
+                        $('#tambah_lagi').modal('show');
+                        console.log("bisa");
+                      alert(response);
+                        //  $('#modalKecil').modal('show');
+                       // $('.fetched-data-lagi').html(data);//menampilkan data ke dalam modal
+                        },
+                        dataType:"html"
+                        });
+                  }else{
+                    alert("Selesaikan dahulu penilaian kelayakan");
+                  } 
+                             
+                        
+                          
+              }else if (layak != 2) {
+                alert('Belum bisa melanjutkan proses ini');
+              }
+          
+      }
+
 
         if (layak == '0') {
 
@@ -368,17 +451,10 @@
 
     $(document).on('click', '.edit', function(){  
            
-           // console.log(id);
-           //var rowid = $(e.relatedTarget).data('id');
-           //console.log(rowid);
-          /* $('#myModalDetail').modal('show');
-           });*/
-
-          //$('#ModalEdit').modal('show');
+          
              var id = $(this).attr("id"); 
            console.log(id);
-           //var rowid = $(e.relatedTarget).data('id');
-           //console.log(rowid);
+          
           $.ajax({
                
                 url : "<?php echo base_url(); ?>Bluebook/edit",
@@ -399,27 +475,6 @@
                 });
             });
 
-	function tampilkan_log_usulan_index(page){
-		$.ajax({
-			url: "<?php echo base_url(); ?>"+page,
-			success:function(response){
-				$("#tmpModal").html(response);
-				$('#modalLog').modal('show');
-		},
-		dataType:"html"});
-		return false;
-	}
-	
-	function tampilkan_syarat_usulan(page){
-		$.ajax({
-			url: "<?php echo base_url(); ?>"+page,
-			success:function(response){
-				$("#tmpModal").html(response);
-				$('#modalIndex').modal('show');
-		},
-		dataType:"html"});
-		return false;
-	}
 
 	$(document).on('click', '.catatan', function(){  
            
@@ -445,44 +500,8 @@
                 });
             });
 	
-	function tampilkan_form_hapus(page){
-		$.ajax({
-			url: "<?php echo base_url(); ?>"+page,
-			success:function(response){
-				$("#tmpModal").html(response);
-				$('#modalHapus').modal('show');
-		},
-		dataType:"html"});
-		return false;
-	}
 
-	
-     function nilai_layak(layak, nilai_admin, c){
-      console.log(c);
 
-      var id = c;
-    //alert(id+','+nilai_admin);
-   if (nilai_admin == '2') {
-      console.log("sukses");
-    $.ajax({
-      type : 'post',
-                url : "<?php echo base_url(); ?>Usulan/layak",
-                data :  'id='+ id,
-                success : function(response){
-                   $("#tmpModal").html(response);
-                $('#modalLayak').modal('show');
-              
-                //  $('#modalKecil').modal('show');
-               // $('.fetched-data-lagi').html(data);//menampilkan data ke dalam modal
-                },
-                dataType:"html"
-    });
-    }else {
-     
-      console.log("gagal bray");
-      alert("Belum selesai penilaian Administrasi");
-    }
-  }
 
      $(document).on('click', '.del-proyek', function(){  
            
@@ -494,7 +513,7 @@
            //console.log(rowid);
            $.ajax({
                 type : 'post',
-                url : "<?php echo base_url(); ?>Usulan/hapus",
+                url : "<?php echo base_url(); ?>Bluebook/hapus",
                 data :  'id='+ id,
                 success : function(response){
                 
@@ -533,26 +552,7 @@
                 });
             });
 	
-	function masuk_dpp(id, nilai_admin, nilai_layak){
-		if(nilai_admin == '1' && nilai_layak == '1'){
-			$.ajax({
-				url: "<?php echo base_url(); ?>sbsn/usulan_tampil_form_masuk_dpp/"+id,
-				beforeSend: function(){
-					showLoading();
-				},
-				success:function(response){
-					$("#tmpModal").html(response);
-					$('#modalNilai').modal('show');
-				},
-				dataType:"html"
-			});
-			
-		}else{
-			alert('Maaf! Penilaian administrasi atau penilaian kelayakan belum dilakukan. Silahkan dilakukan penilaian administrasi dan penilaian kelayakan.');
-		}
-	}
 
-	
 	
 	$(document).ready(function(){
 		$('#example').DataTable({

@@ -975,26 +975,92 @@ class Usulan extends CI_Controller {
 			$data 						= $_POST;
 
 			}elseif ($this->session->userdata('id_user_level') == '5') {
-				$data['is_bb_kasubdit']			= $this->input->post('nilai_layak');
-				$bb_staff			= $this->Usulan_model->ambil_adm($value['id'])->is_BB; //ngambil nilai dari staff buat dibandingin
-				$data['kasubdit_bb_at']			= date('Y-m-d H:i:s');
-				$data['catatan_kasubdit']			= $this->input->post('nilai_layak_ket');
-				$result 					= $this->Usulan_model->simpan_adm($data);
-				$data['kasubdit_bb_by']			= $this->session->userdata('id');
-
-				$status['success'] 			= true;
-				$data 						= $_POST;
-
+			
+				$bb_staff							= $this->Usulan_model->ambil_adm($data['id']	)->is_BB; //ngambil nilai dari staff buat dibandingin
+				$bb_kasubdit 					= $this->input->post('nilai_layak');
+				
 				if ($bb_staff == '2') {
-					if ( $data['is_bb_kasubdit']	== '2' ) {
+					if ( $bb_kasubdit	== '2' ) {
 
 						//tambah ke database proyek bluebook
 						# code...
-					}elseif( $data['is_bb_kasubdit']	== '1' ){
+
+							
+			    	$data = array(
+					'id'					=> $this->input->post('id'),
+			        
+			        'kasubdit_bb_at'			=> date('Y-m-d H:i:s'),
+			        'is_bb_kasubdit'			=>  $this->input->post('nilai_layak'),
+			        'catatan_kasubdit'			=>  $this->input->post('nilai_layak_ket'),
+			        'kasubdit_bb_by'			=> $this->session->userdata('id'),
+
+			        
+			   		 );
+					$result 					= $this->Usulan_model->simpan_adm($data);
+
+					$data_isBB = array(
+					'id'					=> $this->input->post('id'),
+			        'is_BB'					=> '1',
+			        
+			   		 );
+					$result4 					= $this->Usulan_model->update_isBB($data_isBB);
+
+
+
+			    	$data2 = array(
+					//'id'					=> $this->input->post('id'),
+					'id_usulan'					=> $this->input->post('id_usulan'),
+
+			        
+			        'id_program'			=> $this->input->post('id_program'),
+			        'id_instansi'			=>  $this->input->post('id_instansi'),
+			        'instansi_pelaksana'			=>  $this->input->post('instansi_pelaksana'),
+			        'tahun_usulan'			=> $this->input->post('tahun_usulan'),
+			        'judul_proyek_id'			=>  $this->input->post('judul_proyek_id'),
+			        'judul_proyek_eng'			=>  $this->input->post('judul_proyek_eng'),
+			        'ruang_lingkup_id'			=>  $this->input->post('ruang_lingkup_id'),
+			        'ruang_lingkup_eng'			=>  $this->input->post('ruang_lingkup_eng'),
+			        'durasi'			=>  $this->input->post('durasi'),
+			        'proyeksi_tahun_pertama_penarikan'			=>  $this->input->post('proyeksi_tahun_pertama_penarikan'),
+			        'output'			=>  $this->input->post('output'),
+			        'outcome'			=>  $this->input->post('outcome'),
+			        'nilai_pinjaman'			=>  $this->input->post('nilai_pinjaman'),
+			        'nilai_hibah'			=>  $this->input->post('nilai_hibah'),
+			        'dana_pendamping'			=>  $this->input->post('dana_pendamping'),
+			        'id_sektor'			=>  $this->input->post('id_sektor'),
+			        'infra'			=>  $this->input->post('infra'),
+			        'id_status'			=>  $this->input->post('id_status'),
+			        'lokasi'			=>  $this->input->post('lokasi'),
+			   		 );
+
+					$result2 					= $this->Usulan_model->tambah_ke_BB($data2);
+
+					$isi = array(
+		    			'id_proyek_bb' 		=> $this->Usulan_model->last_bb()->id,
+		    			
+		    		);
+
+					$result3 					= $this->Usulan_model->tambah_ke_BB_layak($isi);
+
+		    	
+		    		
+
+						//$data 						= $_POST;
+						$data2 						= $_POST;
+						$data 						= $_POST;
+						$data_isBB 						= $_POST;
+						$isi 						= $_POST;
+
+						$status['success'] 			= true;
+
+					}elseif( $bb_kasubdit	== '1' ){
 						$data['kasubdit_bb_at']			= date('Y-m-d H:i:s');
+						$data['is_bb_kasubdit']			= $this->input->post('nilai_layak');
+						$data['kasubdit_bb_by']			= $this->session->userdata('id');
+
+
 						$data['catatan_kasubdit']			= $this->input->post('nilai_layak_ket');
 						$result 					= $this->Usulan_model->simpan_adm($data);
-						$data['kasubdit_bb_by']			= $this->session->userdata('id');
 
 						$status['success'] 			= true;
 						$data 						= $_POST;
@@ -1011,60 +1077,7 @@ class Usulan extends CI_Controller {
 				}
 			}
 
-		/*	$data = array(
-				'id_usulan'					=> $this->input->post('id'),
-				'id_usulan_proyek'					=> $this->input->post('id'),
-				//$data['id_bluebook']					= $this->input->post('id_bluebook');
-				'id_program'					=> $this->input->post('id_program'),
-				'id_instansi'					=> $this->input->post('id_instansi'),
-				'id_eselon_1'					=> $this->input->post('id_eselon_1'),
-				'nilai_hibah'					=> $this->input->post('nilai_hibah'),
-				'nilai_pinjaman'					=> $this->input->post('nilai_pinjaman'),
-				'dana_pendamping'					=> $this->input->post('dana_pendamping'),
-				'id_instansi_pelaksana'					=> $this->input->post('id_instansi_pelaksana'),
-				'proyeksi_tahun_pertama_penarikan'					=> $this->input->post('proyeksi_tahun_pertama_penarikan'),
-				//$data['id']					= $this->input->post('id');
-				'judul_proyek_id'					=> $this->input->post('judul_proyek_id'),
-				'judul_proyek_eng'					=> $this->input->post('judul_proyek_eng'),
-				'output'					=> $this->input->post('output'),
-				'outcome'					=> $this->input->post('outcome'),
-				
-				);
-
-			$hasil3 = $this->db->insert('irena_bluebook_proyek', $data);
-
-			$data2 = array(
-				'id' =>$this->input->post('id'),
-				'is_BB' =>"1",
-
-				);
-
-		 	$hasil1 =  $this->Usulan_model->update_BB_di_usulan($data2);
-
-		 	$data3 = array(
-				'id' =>$this->input->post('id'),
-				'is_BB' =>"2",
-				);
-
-		 	$hasil3 =  $this->Usulan_model->save_adm($data2);
-
-		   	$isi = array(
-		    			'id_proyek_bb' 		=> $this->Usulan_model->last_bb()->id,
-		    			
-		    		);
-
-		    	
-		    $hasil2 = $this->db->insert('irena_bb_layak', $isi);
-					
-
-				$data2 						= $_POST;
-				$data3 						= $_POST;
-				$isi 						= $_POST;
-				$status['success'] 			= true;
-				$data 						= $_POST;
-				
-			*/
-			///
+		
 		}
 
 		echo json_encode($status);
