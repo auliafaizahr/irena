@@ -40,7 +40,11 @@
 										
 										<input type="hidden" name="nilai_hibah" id="nilai_hibah" class="form-control" value="<?php echo $detail->nilai_hibah; ?>">
 										<input type="hidden" name="id_lender" id="id_lender" class="form-control" value="<?php echo $detail->id_lender; ?>">
-										<input type="hidden" name="id_eselon_1" id="id_eselon_1" class="form-control" value="<?php echo $detail->id_eselon_1; ?>">
+										<input type="hidden" name="lokasi" id="lokasi" class="form-control" value="<?php echo $detail->lokasi; ?>">
+										<input type="hidden" name="id_status" id="id_status" class="form-control" value="<?php echo $detail->id_status; ?>">
+										<input type="hidden" name="id_sektor" id="id_sektor" class="form-control" value="<?php echo $detail->id_sektor; ?>">
+										<input type="hidden" name="tahun_usulan" id="tahun_usulan" class="form-control" value="<?php echo $detail->tahun_usulan; ?>">
+										<input type="hidden" name="infra" id="infra" class="form-control" value="<?php echo $detail->infra; ?>">
 										<input type="hidden" name="nilai_pendamping" id="nilai_pendamping" class="form-control" value="<?php echo $detail->dana_pendamping; ?>">
 										<input type="hidden" name="proyeksi_tahun_pertama_penarikan" id="proyeksi_tahun_pertama_penarikan" class="form-control" value="<?php echo $detail->proyeksi_tahun_pertama_penarikan; ?>">
 									
@@ -74,9 +78,9 @@
     $(document).ready(function(){
 		$('#check_nilai_layak').change(function() {
 			if($("#check_nilai_layak").is(':checked') == true){
-				$('#nilai_layak').val(1);
+				$('#nilai_layak').val(2);
 			}else{
-				$('#nilai_layak').val(0);
+				$('#nilai_layak').val(1);
 			}
 			
 		});
@@ -96,10 +100,11 @@
 			var nilai_layak_ket 	= $("#nilai_layak_ket").val();
 			var judul_proyek_id 	= $("#judul_proyek_id").val();
 			var judul_proyek_eng 	= $("#judul_proyek_eng").val();
-			var judul_proyek_eng 	= $("#judul_proyek_eng").val();
+			var ruang_lingkup_id 	= $("#ruang_lingkup_id").val();
+			var ruang_lingkup_eng 	= $("#ruang_lingkup_eng").val();
 			var id_instansi 		= $("#id_instansi").val();
 			var id_program		 	= $("#id_program").val();
-			var id_instansi_pelaksana		 	= $("#id_instansi_pelaksana").val();
+			var instansi_pelaksana		 	= $("#instansi_pelaksana").val();
 			var proyeksi_tahun_pertama_penarikan		 	= $("#proyeksi_tahun_pertama_penarikan").val();
 			var id_lender		 	= $("#id_lender").val();
 			var id_eselon_1		 	= $("#id_eselon_1").val();
@@ -110,6 +115,13 @@
 			var nilai_pendamping		 	= $("#nilai_pendamping").val();
 			var id_status_lembaga		 	= $("#id_status_lembaga").val();
 			var id_status_lender		 	= $("#id_status_lender").val();
+			var tahun_usulan		 	= $("#tahun_usulan").val();
+			var durasi		 	= $("#durasi").val();
+			var dana_pendamping		 	= $("#dana_pendamping").val();
+			var id_sektor		 	= $("#id_sektor").val();
+			var lokasi		 	= $("#lokasi").val();
+			var infra		 	= $("#infra").val();
+			var id_status		 	= $("#id_status").val();
 			
 			
             var form_data 	= new FormData();
@@ -120,7 +132,7 @@
 			form_data.append('judul_proyek_id', judul_proyek_id);
 			form_data.append('judul_proyek_eng', judul_proyek_eng);
 			form_data.append('id_program', id_program);
-			form_data.append('id_instansi_pelaksana', id_instansi_pelaksana);
+			form_data.append('instansi_pelaksana', instansi_pelaksana);
 			form_data.append('id_instansi', id_instansi);
 			form_data.append('proyeksi_tahun_pertama_penarikan', proyeksi_tahun_pertama_penarikan);
 			form_data.append('id_lender', id_lender);
@@ -133,6 +145,15 @@
 			form_data.append('id_status_lender', id_status_lender);
 			form_data.append('id_status_lembaga', id_status_lembaga);
 			form_data.append('id_usulan', id_usulan);
+			form_data.append('tahun_usulan', tahun_usulan);
+			form_data.append('ruang_lingkup_eng', ruang_lingkup_eng);
+			form_data.append('ruang_lingkup_id', ruang_lingkup_id);
+			form_data.append('durasi', ruang_lingkup_id);
+			form_data.append('dana_pendamping', dana_pendamping);
+			form_data.append('id_sektor', id_sektor);
+			form_data.append('lokasi', lokasi);
+			form_data.append('infra', infra);
+			form_data.append('id_status', id_status);
 			
 			
 

@@ -376,54 +376,44 @@
           
       }
 
+       if (user_level == '5') {
 
-        if (layak == '0') {
+              //cek kasubdit
+              if (layak == '2') {
 
-          if(kasubdit == '0')
-           $.ajax({
-                type : 'post',
-                url : "<?php echo base_url(); ?>Bluebook/tambahkeGB",
-                data :  'id='+ id,
-                success : function(response){
-                //$('.fetched-data-arsip').html(data);//menampilkan data ke dalam modal
 
-                  $("#tmpModal").html(response);
-                $('#modalGB').modal('show');
-                console.log("bisa");
-              alert(response);
-                //  $('#modalKecil').modal('show');
-               // $('.fetched-data-lagi').html(data);//menampilkan data ke dalam modal
-                },
-                dataType:"html"
-                });
+                  if (kasubdit == '0') {
 
-          } else if (kasubdit == '0'){
-            alert('Menunggu persetujuan kasubdit');
-            
-          } else if(layak == '2' && kasubdit == '2'){
-            alert('Yakin akan menambahkan lagi ?');
+                      if (usul_GB != '0') {
 
-             $.ajax({
-                type : 'post',
-                url : "<?php echo base_url(); ?>Bluebook/tambah_lagi",
-                data :  'id='+ id,
-                success : function(response){
-                //$('.fetched-data-arsip').html(data);//menampilkan data ke dalam modal
+                           $.ajax({
+                            type : 'post',
+                                      url : "<?php echo base_url(); ?>Bluebook/tambahkeGB",
+                                      data :  'id='+ id,
+                                      success : function(response){
+                                         $("#tmpModal").html(response);
+                                      $('#modalGB').modal('show');
+                                    
+                                      //  $('#modalKecil').modal('show');
+                                     // $('.fetched-data-lagi').html(data);//menampilkan data ke dalam modal
+                                      },
+                                      dataType:"html"
+                          });
 
-                  $("#tmpModal").html(response);
-                $('#tambah_lagi').modal('show');
-                console.log("bisa");
-              alert(response);
-                //  $('#modalKecil').modal('show');
-               // $('.fetched-data-lagi').html(data);//menampilkan data ke dalam modal
-                },
-                dataType:"html"
-                });
-          }else{
-            alert("Selesaikan dahulu penilaian kelayakan");
-          }
+                      } 
 
-          ;
+                  }else if(kasubdit != ' 0' && usul_GB != '0'){
+                    alert("Yakin untuk menambahkan lagi ?");
+                  } 
+                     
+                        
+                          
+              }
+          
+      }
+
+
+
         });
 
 

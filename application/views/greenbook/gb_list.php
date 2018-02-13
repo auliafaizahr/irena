@@ -67,7 +67,7 @@
                                     
                             ?></td>
 
-                             <td>
+                      <td>
                           <?php 
 
                           $layak = $this->Greenbook_model->ambil_layak($value['id'])->is_layak;
@@ -102,7 +102,9 @@
                            
                         }else{
                           //echo "<a   id='".$c."' layak='".$c."' onclick='nilai_admin($adm)'><i class=' btn fa fa-times-circle btn-danger'></i></a>";
-                          echo "<a id='".$value['id']."' class='layak' ><i class='btn fa fa-times-circle  btn-warning'></i></a>";
+                           echo "<a id='".$value['id']."' class='layak' data-id='".$layak."' data-kasubdit='".$kasubdit_layak."'><i class='btn fa fa-times-circle  btn-default'></i></a>";
+                             
+                          //echo "<a id='".$value['id']."' class='layak' ><i class='btn fa fa-times-circle  btn-default'></i></a>";
                           
                         }
 
@@ -227,7 +229,7 @@
                 success : function(response){
                 //$('.fetched-data-arsip').html(data);//menampilkan data ke dalam modal
 
-                  $("#tmpModal3").html(response);
+                  $("#tmpModal").html(response);
                 $('#modalLayak2').modal('show');
                 console.log("bisa");
               alert(response);
