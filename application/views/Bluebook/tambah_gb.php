@@ -122,6 +122,9 @@
 			var lokasi		 	= $("#lokasi").val();
 			var infra		 	= $("#infra").val();
 			var id_status		 	= $("#id_status").val();
+			var id_bluebook		 	= $("#id_bluebook").val();
+			var id_status_lender		 	= $("#id_status_lender").val();
+			var id_status_lembaga		 	= $("#id_status_lembaga").val();
 			
 			
             var form_data 	= new FormData();
@@ -154,6 +157,9 @@
 			form_data.append('lokasi', lokasi);
 			form_data.append('infra', infra);
 			form_data.append('id_status', id_status);
+			form_data.append('id_bluebook', id_bluebook);
+			form_data.append('id_status_lender', id_status_lender);
+			form_data.append('id_status_lembaga', id_status_lembaga);
 			
 			
 

@@ -317,9 +317,14 @@ class Bluebook extends CI_Controller {
 			    	$data2 = array(
 					//'id'					=> $this->input->post('id'),
 					'id_usulan'					=> $this->input->post('id_usulan'),
+					'id_bluebook'					=> $this->input->post('id_bluebook'),
+					'id_status_lender'					=> $this->input->post('id_status_lender'),
+					'id_status_lembaga'					=> $this->input->post('id_status_lembaga'),
+					'id_lender'					=> $this->input->post('id_lender'),
 
 			        
 			        'id_program'			=> $this->input->post('id_program'),
+			        'id_bb_proyek'			=> $this->input->post('id'),
 			        'id_instansi'			=>  $this->input->post('id_instansi'),
 			        'instansi_pelaksana'			=>  $this->input->post('instansi_pelaksana'),
 			        'tahun_usulan'			=> $this->input->post('tahun_usulan'),
