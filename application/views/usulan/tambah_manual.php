@@ -224,24 +224,9 @@
             placeholder: "Pilih Instansi",
             width: "100%"
         });
-        
-        $("#id_eselon_1").select2({
-            placeholder: "Pilih Instansi Eselon I",
-            width: "100%"
-        });
-
-        $("#id_kabkota").select2({
-            placeholder: "Pilih Kabupaten/Kota",
-            width: "100%"
-        });
-
+     
          $("#id_infra").select2({
             placeholder: "Pilih Kategori",
-            width: "100%"
-        });
-        
-        $("#id_donor").select2({
-            placeholder: "Pilih Donor",
             width: "100%"
         });
 
@@ -249,56 +234,17 @@
             placeholder: "Pilih Program",
             width: "100%"
         });
-        
-        $("#id_mata_uang").select2({
-            placeholder: "Pilih Mata Uang",
-            width: "100%"
-        });
-        
-        $("#id_jenis").select2({
-            placeholder: "Pilih Tahun",
-            width: "100%"
-        });
 
-         $("#id_bluebook").select2({
-            placeholder: "Pilih Bluebook",
-            width: "100%"
-        });
-
-        $("#id_lender").select2({
-            placeholder: "Pilih Lender",
-            width: "100%"
-        });
-
-         $("#id_status_lembaga").select2({
-            placeholder: "Pilih Status Lembaga",
+        $("#id_status").select2({
+            placeholder: "Pilih Status",
             width: "100%"
         });
 
           $("#id_sektor").select2({
-            placeholder: "Pilih Status Lembaga",
-            width: "100%"
-        });
-
-
-
-         $("#id_greenbook").select2({
-            placeholder: "Pilih Kode Greenbook",
+            placeholder: "Pilih Sektor",
             width: "100%"
         });
         
-        
-
-         $("#id_status_lender").select2({
-            placeholder: "Pilih Status Lender",
-            width: "100%"
-        });
-
-        $("#id_provinsi").select2({
-            placeholder: "Pilih Provinsi",
-            width: "100%"
-        });
-
          $("#lokasi").select2({
             placeholder: "Pilih Lokasi",
             multiple:true,
@@ -307,43 +253,7 @@
         
         
         
-        
-        $('#id_instansi').change(function () {
-            var selProv = $(this).val();
-            console.log(selProv);
-            $.ajax({
-                url: "<?php echo base_url(); ?>Usulan/ambil_data_instansi_es_1_by_id_instansi/"+selProv,
-                dataType: "json",
-                success: function(data) {
-                    $("#id_eselon_1").empty();
-                    $("#id_eselon_1").append('<option value="">Pilih Instansi Eselon I</option>');
-                    $(data).each(function(){
-                        var option = $('<option />');
-                        option.attr('value', this.id).text(this.nama_eselon_1);
-                        $('#id_eselon_1').append(option);
-                    });
-                }
-            })
-        });
-
-
-        $('#id_provinsi').change(function () {
-            var selProv = $(this).val();
-            console.log(selProv);
-            $.ajax({
-                url: "<?php echo base_url(); ?>Usulan/ambil_kabkota_id_prov/"+selProv,
-                dataType: "json",
-                success: function(data) {
-                    $("#id_kabkota").empty();
-                    $("#id_kabkota").append('<option value="">Pilih Kabupaten/Kota</option>');
-                    $(data).each(function(){
-                        var option = $('<option />');
-                        option.attr('value', this.id).text(this.nama);
-                        $('#id_kabkota').append(option);
-                    });
-                }
-            })
-        });
+       
         
  
         
@@ -373,6 +283,8 @@
             var lokasi                    = $("#lokasi").val();
             var tahun_usulan                    = $("#tahun_usulan").val();
             var id_sektor                    = $("#id_sektor").val();
+            var id_infra                    = $("#id_infra").val();
+            
            
             
             var form_data   = new FormData();
@@ -396,22 +308,22 @@
             form_data.append('dana_usulan', dana_usulan);
             form_data.append('dana_pendamping', dana_pendamping);
             form_data.append('proyeksi_tahun_pertama_penarikan', proyeksi_tahun_pertama_penarikan);
+            form_data.append('id_infra', id_infra);
+    
             
 
-
             $.ajax({
-                url: '<?php echo base_url(); ?>Usulan/tambah',
+            url: '<?php echo base_url(); ?>usulan/tambah',
                 dataType: 'json',
                 cache: false,
                 contentType: false,
-                processData: false
+                processData: false,
                 data: form_data,
                 type: 'post',
                 success: function(response){
                     if (response.success == true) {
-                        refresh_data();
                         $('#modalTambah').modal('hide');
-                        
+                        refresh_data();
                         notif("Informasi", "Data berhasil disimpan.");
                     }
                     else {

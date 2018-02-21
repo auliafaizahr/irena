@@ -52,9 +52,9 @@
     $(document).ready(function(){
 		$('#check_nilai_layak').change(function() {
 			if($("#check_nilai_layak").is(':checked') == true){
-				$('#nilai_layak').val(2);
-			}else{
 				$('#nilai_layak').val(1);
+			}else{
+				$('#nilai_layak').val(0);
 			}
 			
 		});

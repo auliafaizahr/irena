@@ -29,7 +29,7 @@
 										<input type="hidden" name="id_instansi" id="id_instansi" class="form-control" value="<?php echo $detail->id_instansi; ?>">
 										<input type="hidden" name="id_status_lender" id="id_status_lender" class="form-control" value="<?php echo $detail->id_status_lender; ?>">
 										<input type="hidden" name="id_status_lembaga" id="id_status_lembaga" class="form-control" value="<?php echo $detail->id_status_lembaga; ?>">
-										<input type="hidden" name="instansi_pelaksana" id="instansi_pelaksana" class="form-control" value="<?php echo $detail->instansi_pelaksana; ?>">
+										<input type="hidden" name="id_instansi_pelaksana" id="id_instansi_pelaksana" class="form-control" value="<?php echo $detail->id_instansi_pelaksana; ?>">
 										<input type="hidden" name="judul_proyek_id" id="judul_proyek_id" class="form-control" value="<?php echo $detail->judul_proyek_id; ?>">
 										<input type="hidden" name="judul_proyek_eng" id="judul_proyek_eng" class="form-control" value="<?php echo $detail->judul_proyek_eng; ?>">
 										<input type="hidden" name="ruang_lingkup_id" id="ruang_lingkup_id" class="form-control" value="<?php echo $detail->ruang_lingkup_id; ?>">
@@ -113,10 +113,6 @@
 			var id_status_lender		 	= $("#id_status_lender").val();
 			var id_greenbook		 	= $("#id_greenbook").val();
 			var id_bluebook		 	= $("#id_bluebook").val();
-			var id_sektor		 	= $("#id_sektor").val();
-			var lokasi		 	= $("#lokasi").val();
-			var infra		 	= $("#infra").val();
-			var id_status		 	= $("#id_status").val();
 			
 			
             var form_data 	= new FormData();
@@ -143,10 +139,6 @@
 			form_data.append('id_greenbook', id_greenbook);
 			//form_data.append('id_dk_proyek', id_dk_proyek);
 			form_data.append('id_bluebook', id_bluebook);
-			form_data.append('lokasi', lokasi);
-			form_data.append('infra', infra);
-			form_data.append('id_status', id_status);
-			form_data.append('id_sektor', id_sektor);
 			
 			
 

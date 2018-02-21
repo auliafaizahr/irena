@@ -15,16 +15,17 @@
 							</div>
 						</div><hr />
 						<div class="form-group">
-                            <label for="is_layak" class="col-sm-4 control-label">Hasil Penilaian</label>
-                            <div class="col-sm-8">
-                                <select name="is_layak" id="is_layak" class="form-control" >
-                                    <option value="0">Belum Lengkap</option>
-                                    <option value="1">Tidak Lengkap</option>
-                                    <option value="2">Sudah Lengkap</option>
-                                </select>
-                            </div>
-                        </div>
-
+							<label for="nilai_layak" class="col-sm-4 control-label">Hasil Penilaian</label>
+							<div class="col-sm-8">
+								<div class="checkbox">
+									<label>
+										<input type="checkbox" id="check_nilai_layak"> Usulan Layak
+										<input type="hidden" name="nilai_layak" id="nilai_layak" class="form-control" value="">
+										<input type="hidden" name="id" id="id" class="form-control" value="<?php echo $isi->id; ?>">
+									</label>
+								</div>
+							</div>
+						</div>
 						<div class="form-group">
 							<label for="nilai_layak_ket" class="col-sm-4 control-label">Keterangan</label>
 							<div class="col-sm-8">
@@ -36,7 +37,7 @@
 						<button type="submit" id="tblSimpan" class="btn btn-primary">Simpan</button>
 						<button type="button" id="tblTutup" class="btn btn-white" data-dismiss="modal">Tutup</button>
 					</div>
-						<input type="hidden" name="id" id="id" class="form-control" value="<?php echo $isi->id; ?>">
+						<input type="hidden" name="id" id="id" class="form-control" value="">
 						
 					</div>
 					
@@ -49,12 +50,14 @@
 				
 <script>
     $(document).ready(function(){
-		
-
-		$("#is_layak").select2({
-            placeholder: "Pilih Hasil Penilaian",
-            width: "100%"
-        });
+		$('#check_nilai_layak').change(function() {
+			if($("#check_nilai_layak").is(':checked') == true){
+				$('#nilai_layak').val(1);
+			}else{
+				$('#nilai_layak').val(0);
+			}
+			
+		});
 
 		function fresh() {
 		    location.reload();
@@ -68,7 +71,6 @@
 			var id					= $("#id").val();
 			var nilai_layak 		= $("#nilai_layak").val();
 			var nilai_layak_ket 	= $("#nilai_layak_ket").val();
-			var is_layak 	= $("#is_layak").val();
 			
 			
             var form_data 	= new FormData();
@@ -76,7 +78,6 @@
 			form_data.append('id', id);
 			form_data.append('nilai_layak', nilai_layak);
 			form_data.append('nilai_layak_ket', nilai_layak_ket);
-			form_data.append('is_layak', is_layak);
 
 
             $.ajax({

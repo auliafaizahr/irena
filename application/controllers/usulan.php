@@ -1389,6 +1389,7 @@ class Usulan extends CI_Controller {
 		$this->form_validation->set_rules("lokasi", "Lokasi", "trim|required");
 		$this->form_validation->set_rules("durasi", "Durasi", "trim|required");
 		$this->form_validation->set_rules("id_sektor", "Sektor", "trim|required");
+		$this->form_validation->set_rules("id_infra", "Kategori", "trim|required");
 		//$this->form_validation->set_rules("berkas", "Berka arsip", "required");
 		$this->form_validation->set_message('required', '%s harus diisi');
 		$this->form_validation->set_message('is_natural_no_zero', '%s harus diisi dengan angka dan lebih dari 0');
@@ -1409,6 +1410,7 @@ class Usulan extends CI_Controller {
         'ruang_lingkup_id'			=> $this->input->post('ruang_lingkup_id'),
         'ruang_lingkup_eng'				=> $this->input->post('ruang_lingkup_eng'),
         'id_instansi'					=> $this->input->post('id_instansi'),
+        'id_infra'					=> $this->input->post('id_infra'),
         
         'proyeksi_tahun_pertama_penarikan'			=> $this->input->post('proyeksi_tahun_pertama_penarikan'),
         'dana_usulan'				=> $this->input->post('dana_usulan'),

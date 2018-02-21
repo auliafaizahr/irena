@@ -272,59 +272,54 @@ class Bluebook extends CI_Controller {
 			if ($this->session->userdata('id_user_level') != '5') {
 
 			//$data['nilai_admin_id']		= $this->session->userdata('id');
-			$data['is_gb_update_by']			= $this->session->userdata('id');
-			$data['is_gb_update_at']			= date('Y-m-d H:i:s');
-			$data['is_gb_kasubdit']		= '0';
-			$data['is_GB']			= $this->input->post('nilai_layak');
-			$data['layak_keterangan']			= $this->input->post('nilai_layak_ket');
-			$result 					= $this->Bluebook_model->bb_layak_simpan_data($data);
+			$data['is_GB_update_by']			= $this->session->userdata('id');
+			$data['is_GB_update_at']			= date('Y-m-d H:i:s');
+			$data['is_bb_kasubdit']		= '0';
+			$data['is_BB']			= $this->input->post('nilai_layak');
+			$data['is_BB_catatan']			= $this->input->post('nilai_layak_ket');
+			$result 					= $this->Usulan_model->simpan_adm($data);
 			$status['success'] 			= true;
 			$data 						= $_POST;
 
 			}elseif ($this->session->userdata('id_user_level') == '5') {
 			
-				$bb_staff							= $this->Bluebook_model->ambil_layak($data['id']	)->is_GB; //ngambil nilai dari staff buat dibandingin
-				$gb_kasubdit 					= $this->input->post('nilai_layak');
+				$bb_staff							= $this->Usulan_model->ambil_adm($data['id']	)->is_BB; //ngambil nilai dari staff buat dibandingin
+				$bb_kasubdit 					= $this->input->post('nilai_layak');
 				
 				if ($bb_staff == '2') {
-					if ( $gb_kasubdit	== '2' ) {
+					if ( $bb_kasubdit	== '2' ) {
 
 						//tambah ke database proyek bluebook
 						# code...
 
-				/*			
+							
 			    	$data = array(
 					'id'					=> $this->input->post('id'),
 			        
-			        'kasubdit_gb_at'			=> date('Y-m-d H:i:s'),
-			        'is_gb_kasubdit'			=>  $this->input->post('nilai_layak'),
-			        'gb_catatan_catatan'			=>  $this->input->post('nilai_layak_ket'),
-			        'kasubdit_gb_by'			=> $this->session->userdata('id'),
+			        'kasubdit_bb_at'			=> date('Y-m-d H:i:s'),
+			        'is_bb_kasubdit'			=>  $this->input->post('nilai_layak'),
+			        'catatan_kasubdit'			=>  $this->input->post('nilai_layak_ket'),
+			        'kasubdit_bb_by'			=> $this->session->userdata('id'),
 
 			        
 			   		 );
-					$result 					= $this->Bluebook_model->bb_layak_simpan_data($data);
+					$result 					= $this->Usulan_model->simpan_adm($data);
 
-					$data_isGB = array(
+					$data_isBB = array(
 					'id'					=> $this->input->post('id'),
-			        'is_GB'					=> '1',
+			        'is_BB'					=> '1',
 			        
 			   		 );
-					$result4 					= $this->Usulan_model->update_isBB($data_isGB);*/
+					$result4 					= $this->Usulan_model->update_isBB($data_isBB);
 
 
 
 			    	$data2 = array(
 					//'id'					=> $this->input->post('id'),
 					'id_usulan'					=> $this->input->post('id_usulan'),
-					'id_bluebook'					=> $this->input->post('id_bluebook'),
-					'id_status_lender'					=> $this->input->post('id_status_lender'),
-					'id_status_lembaga'					=> $this->input->post('id_status_lembaga'),
-					'id_lender'					=> $this->input->post('id_lender'),
 
 			        
 			        'id_program'			=> $this->input->post('id_program'),
-			        'id_bb_proyek'			=> $this->input->post('id'),
 			        'id_instansi'			=>  $this->input->post('id_instansi'),
 			        'instansi_pelaksana'			=>  $this->input->post('instansi_pelaksana'),
 			        'tahun_usulan'			=> $this->input->post('tahun_usulan'),
@@ -345,14 +340,14 @@ class Bluebook extends CI_Controller {
 			        'lokasi'			=>  $this->input->post('lokasi'),
 			   		 );
 
-					$result2 					= $this->Bluebook_model->tambah_ke_GB($data2);
+					$result2 					= $this->Usulan_model->tambah_ke_BB($data2);
 
 					$isi = array(
-		    			'id_proyek_gb' 		=> $this->Bluebook_model->last_gb()->id,
+		    			'id_proyek_bb' 		=> $this->Usulan_model->last_bb()->id,
 		    			
 		    		);
 
-					$result3 					= $this->Bluebook_model->tambah_ke_GB_layak($isi);
+					$result3 					= $this->Usulan_model->tambah_ke_BB_layak($isi);
 
 		    	
 		    		
@@ -372,7 +367,7 @@ class Bluebook extends CI_Controller {
 
 
 						$data['catatan_kasubdit']			= $this->input->post('nilai_layak_ket');
-						$result 					= $this->Bluebook_model->bb_layak_simpan_data($data);
+						$result 					= $this->Usulan_model->simpan_adm($data);
 
 						$status['success'] 			= true;
 						$data 						= $_POST;
@@ -381,7 +376,7 @@ class Bluebook extends CI_Controller {
 				}else{
 					$data['kasubdit_bb_at']			= date('Y-m-d H:i:s');
 					$data['catatan_kasubdit']			= $this->input->post('nilai_layak_ket');
-					$result 					= $this->Bluebook_model->bb_layak_simpan_data($data);
+					$result 					= $this->Usulan_model->simpan_adm($data);
 					$data['kasubdit_bb_by']			= $this->session->userdata('id');
 
 					$status['success'] 			= true;

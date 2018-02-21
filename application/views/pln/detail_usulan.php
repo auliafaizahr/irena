@@ -24,6 +24,10 @@
                 <td class="mail-subject"><?php echo $this->Usulan_model->ambil_program_proyek($detail->id_program)->nama_program; ?></td>
               </tr>
               <tr class="read">
+                <td class="mail-ontact text-right">Sektor</td>
+                <td class="mail-subject"><?php echo  $detail->id_sektor; ?></td>
+              </tr>
+              <tr class="read">
                 <td class="mail-ontact text-right">Judul EN</td>
                 <td class="mail-subject"><?php echo $detail->judul_proyek_eng; ?></td>
               </tr>
@@ -34,6 +38,10 @@
               <tr class="read">
                 <td class="mail-ontact text-right">Durasi</td>
                 <td class="mail-subject"><?php echo $detail->durasi. " bulan"; ?></td>
+              </tr>
+              <tr class="read">
+                <td class="mail-ontact text-right">Lokasi</td>
+                <td class="mail-subject"><?php echo  $detail->lokasi; ?></td>
               </tr>
               <tr class="read">
                 <td class="mail-ontact text-right">Ruang Lingkup ENG</td>

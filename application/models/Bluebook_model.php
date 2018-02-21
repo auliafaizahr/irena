@@ -17,9 +17,6 @@ class Bluebook_model extends CI_Model {
 	
 	}
 
-
-
-
 	public function ambil_dok_bb_by_id_proyek($x)
 	{
 		$sql = "SELECT * FROM irena_view_usulan_pln_dok WHERE id_proyek = '$x' ";
@@ -252,23 +249,10 @@ function usulan_simpan_data($data)
 		return $a->row();
 	}
 
-		public function tambah_ke_GB_layak($data)
+	public function tambahkeGB()
 	{
-		
-		if(array_key_exists('id', $data))
-		{
-			$id = $data['id_proyek_gb'];
-			unset($data['id_proyek_gb']);
-			$this->db->where('id_proyek_gb',$id);
-			$this->db->update('irena_gb_layak', $data);
-		}
-		else
-		{
-			$this->db->insert('irena_gb_layak', $data);
-		}		
-			
+		# code...
 	}
-
 
 
 	public function ambil_instansi_untuk_usulan($x)
@@ -304,23 +288,6 @@ function usulan_simpan_data($data)
 		 $a= $this->db->query($query);
 
 		return $a->result_array();
-	}
-
-	public function tambah_ke_GB($data)
-	{
-		
-		if(array_key_exists('id', $data))
-		{
-			$id = $data['id_bb_proyek'];
-			unset($data['id_bb_proyek']);
-			$this->db->where('id_bb_proyek',$id);
-			$this->db->update('irena_greenbook_proyek', $data);
-		}
-		else
-		{
-			$this->db->insert('irena_greenbook_proyek', $data);
-		}		
-			
 	}
 
 	public function kode_bluebook($x)

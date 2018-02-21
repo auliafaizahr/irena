@@ -610,31 +610,20 @@ class Greenbook extends CI_Controller {
 			$status['messages']['nilai_admin'] = $nilai_admin;
 			*/
 			
-			$data['id']					= $this->input->post('id');
-			date_default_timezone_set('Asia/Jakarta');
-			if ($this->session->userdata('id_user_level') != '5') {
-
+			
 			//$data['nilai_admin_id']		= $this->session->userdata('id');
-			$data['update_by']			= $this->session->userdata('id');
 			$data['update_at']			= date('Y-m-d H:i:s');
-			$data['is_kasubdit_layak']		= '0';
-			$data['is_layak']			= $this->input->post('is_layak');
-			$data['catatan_staff_layak']			= $this->input->post('nilai_layak_ket');
+			$data['update_by']			= $this->session->userdata('id');
+			$data['id']					= $this->input->post('id');
+			
+			$data['is_layak']			= "1";
 			$result 					= $this->Greenbook_model->usulan_simpan_data($data);
 			$status['success'] 			= true;
 			$data 						= $_POST;
 
-			}elseif ($this->session->userdata('id_user_level') == '5') {
-				$data['kasubdit_layak_by']			= $this->session->userdata('id');
-				$data['kasubdit_layak_at']			= date('Y-m-d H:i:s');
-				$data['is_kasubdit_layak']			= $this->input->post('is_layak');
-				$data['layak_catatan_kasubdit']			= $this->input->post('nilai_layak_ket');
-				$result 					= $this->Greenbook_model->usulan_simpan_data($data);
-				$status['success'] 			= true;
-				$data 						= $_POST;
-			}
 			
 			
+			///
 		}
 		echo json_encode($status);
 		//var_dump($data);
@@ -800,17 +789,17 @@ class Greenbook extends CI_Controller {
         'ruang_lingkup_id'			=> $this->input->post('ruang_lingkup_id'),
         'ruang_lingkup_eng'				=> $this->input->post('ruang_lingkup_eng'),
         'id_instansi'					=> $this->input->post('id_instansi'),
-        'id_instansi_pelaksana'			=> $this->input->post('id_instansi_pelaksana'),
+        'instansi_pelaksana'			=> $this->input->post('instansi_pelaksana'),
         'proyeksi_tahun_pertama_penarikan'			=> $this->input->post('proyeksi_tahun_pertama_penarikan'),
-        'dana_usulan'				=> $this->input->post('dana_usulan'),
-        'dana_hibah'				=> $this->input->post('dana_hibah'),
+        'nilai_pinjaman'				=> $this->input->post('nilai_pinjaman'),
+        'nilai_hibah'				=> $this->input->post('nilai_hibah'),
         'durasi'				=> $this->input->post('durasi'),
         'output'				=> $this->input->post('output'),
         'outcome'				=> $this->input->post('outcome'),
         'dana_pendamping'				=> $this->input->post('dana_pendamping'),
    		 );
 
-    	$this->db->insert('irena_usulan_pln', $data);
+    	$this->db->insert('irena_greenbook_proyek', $data);
 /*
     	$query = "SELECT id FROM irena_usulan_layak ORDER BY ID DESC LIMIT 1";
     	$a = $this->db->query($query);
@@ -850,6 +839,7 @@ class Greenbook extends CI_Controller {
 		$data['bluebook']= $this->Bluebook_model->semua_bluebook();
 		$data['greenbook']= $this->Greenbook_model->ambil_greenbook();
 		$data['sektor']= $this->Greenbook_model->ambil_sektor();
+		$data['lokasi']= $this->Usulan_model->ambil_lokasi();
 		
 		$data['lender']= $this->Bluebook_model->semua_lender();
 	

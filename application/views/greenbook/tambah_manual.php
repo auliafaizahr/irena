@@ -1,4 +1,4 @@
-\<div class="modal inmodal fade" id="ModalEdit" role="dialog"  aria-hidden="true" data-backdrop="static" data-keyboard="false" >
+<div class="modal inmodal fade" id="ModalEdit" role="dialog"  aria-hidden="true" data-backdrop="static" data-keyboard="false" >
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="ibox">
@@ -109,6 +109,21 @@
                                 <input type="text" name="proyeksi_tahun_pertama_penarikan" id="proyeksi_tahun_pertama_penarikan" class="form-control" placeholder="Proyeksi Tahun Pertama Penarikan" value="">
                             </div>
                         </div>
+
+                          <div class="form-group">
+                            <label for="lokasi" class="col-sm-3 control-label">Lokasi</label>
+                            <div class="col-sm-9">
+
+                                <select name="lokasi" id="lokasi" class="form-control"  >
+                                     
+                                    <?php foreach($lokasi as $row){ ?>
+                                        <option value="<?php echo $row['id']; ?>"><?php echo $row['nama']; ?>
+                                      </option>
+                                    <?php } ?>
+                                </select>
+                               <!-- <textarea name="lokasi" id="lokasi" class="col-sm-12" rows="5" placeholder="Lokasi"></textarea> -->
+                            </div>
+                        </div>
                         
                      
                         <div class="form-group">
@@ -128,16 +143,34 @@
                          <div class="form-group">
                             <label for="ruang_lingkup_eng" class="col-sm-3 control-label">Ruang Lingkup EN</label>
                             <div class="col-sm-9">
-                                <input type="text" name="ruang_lingkup_eng" id="" class="form-control" placeholder="Ruang Lingkup dalam Bahasa Inggris" value="">
+                              <textarea name="ruang_lingkup_eng" id="ruang_lingkup_eng" class="col-sm-12" rows="5" placeholder="Ruang Lingkup dalam Bahasa Inggris"></textarea>
+                                
                             </div>
                         </div>
 
                          <div class="form-group">
                             <label for="ruang_lingkup_id" class="col-sm-3 control-label">Ruang Lingkup ID</label>
                             <div class="col-sm-9">
-                                <input type="text" name="ruang_lingkup_id" id="ruang_lingkup_id" class="form-control" placeholder="Ruang Lingkup dalam Bahasa Indonesia" value="">
+                             <textarea name="ruang_lingkup_id" id="ruang_lingkup_id" class="col-sm-12" rows="5" placeholder="Ruang Lingkup dalam Bahasa Indonesia"></textarea>
+                                
                             </div>
                         </div>
+
+                        <div class="form-group">
+                            <label for="lokasi" class="col-sm-3 control-label">Lokasi</label>
+                            <div class="col-sm-9">
+
+                                <select name="lokasi" id="lokasi" class="form-control"  >
+                                     
+                                    <?php foreach($lokasi as $row){ ?>
+                                        <option value="<?php echo $row['id']; ?>"><?php echo $row['nama']; ?>
+                                      </option>
+                                    <?php } ?>
+                                </select>
+                               <!-- <textarea name="lokasi" id="lokasi" class="col-sm-12" rows="5" placeholder="Lokasi"></textarea> -->
+                            </div>
+                        </div>
+
 
                          <div class="form-group">
                             <label for="nilai_pinjaman" class="col-sm-3 control-label">Nilai Pinjaman</label>
@@ -291,15 +324,8 @@
             width: "100%"
         });
         
-        $("#id_mata_uang").select2({
-            placeholder: "Pilih Mata Uang",
-            width: "100%"
-        });
-        
-        $("#id_jenis").select2({
-            placeholder: "Pilih Tahun",
-            width: "100%"
-        });
+   
+      
 
          $("#id_bluebook").select2({
             placeholder: "Pilih Bluebook",
@@ -332,7 +358,11 @@
             width: "100%"
         });
         
-        
+        $("#lokasi").select2({
+            placeholder: "Pilih Lokasi",
+            multiple:true,
+            width: "100%"
+        });
 
          $("#id_status_lender").select2({
             placeholder: "Pilih Status Lender",
@@ -366,26 +396,7 @@
         });
 
 
-        
-       /* 
-        $('#id_instansi').change(function () {
-            console.log(selProv);
-            $.ajax({
-                url: "<?php echo base_url(); ?>Usulan/ambil_data_instansi_es_1_by_id_instansi/"+selProv,
-                dataType: "json",
-                success: function(data) {
-                    $("#id_eselon_1").empty();
-                    $("#id_eselon_1").append('<option value="">Pilih Instansi Eselon I</option>');
-                    $(data).each(function(){
-            var selProv = $(this).val();
-                        var option = $('<option />');
-                        option.attr('value', this.id).text(this.nama_eselon_1);
-                        $('#id_eselon_1').append(option);
-                    });
-                }
-            })
-        });
-        */
+
         
     /*    $('').on(click).*/
         $('#htmlForm').submit(function(e) {
@@ -418,6 +429,8 @@
             var outcome                    = $("#outcome").val();
             var output                    = $("#output").val();
             var id_instansi_pelaksana                    = $("#id_instansi_pelaksana").val();
+            var id_sektor                    = $("#id_sektor").val();
+            var id_infra                    = $("#id_infra").val();
             
             var form_data   = new FormData();
             
@@ -441,6 +454,9 @@
             form_data.append('proyeksi_tahun_pertama_penarikan', proyeksi_tahun_pertama_penarikan);
             form_data.append('outcome', outcome);
             form_data.append('output', output);
+            form_data.append('id_sektor', id_sektor);
+            form_data.append('id_infra', id_infra);
+            form_data.append('lokasi', lokasi);
 
 
             $.ajax({
