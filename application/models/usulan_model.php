@@ -312,6 +312,26 @@ class Usulan_model extends CI_Model {
 		
 	}
 
+
+	public function status_umum($x)
+	{
+		
+		$query = "SELECT * FROM irena_status_umum WHERE id = '$x'";
+		 $a= $this->db->query($query);
+		return $a->result();
+		
+	}
+
+	public function semua_status_umum($x)
+	{
+		
+		$query = "SELECT * FROM irena_status_umum ORDER BY nama ASC";
+		 $a= $this->db->query($query);
+		return $a->result_array();
+		
+	}
+
+
 	public function status_lembaga($x)
 	{
 		

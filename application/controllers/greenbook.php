@@ -777,6 +777,83 @@ class Greenbook extends CI_Controller {
 		
 	}
 
+	 public function tambah_gb()
+    {
+    	$this->load->model('Usulan_model');
+    	$status = array('success' => false, 'messages' => array());
+
+    	$this->form_validation->set_rules("id_program", "Program", "trim|required");
+		$this->form_validation->set_rules("instansi_pelaksana", "Instansi Pelaksana", "trim|required");
+		$this->form_validation->set_rules("id_instansi", "Instansi Pengusul", "trim|required");
+		$this->form_validation->set_rules("judul_proyek_eng", "Judul Proyek Eng", "trim|required");
+		$this->form_validation->set_rules("judul_proyek_id", "Judul Proyek ID", "trim|required");
+		$this->form_validation->set_rules("ruang_lingkup_id", "Ruang Lingkup ID", "trim|required");
+		$this->form_validation->set_rules("ruang_lingkup_eng", "Ruang Lingkup ENG", "trim|required");
+		$this->form_validation->set_rules("proyeksi_tahun_pertama_penarikan", "Tahun Pertama Penarikan", "trim|required");
+		$this->form_validation->set_rules("dana_usulan", "Nilai Pinjaman", "trim|required");
+		$this->form_validation->set_rules("dana_hibah", "Nilai Hibah", "trim|required");
+		$this->form_validation->set_rules("dana_pendamping", "Dana Pendamping", "trim|required");
+		$this->form_validation->set_rules("outcome", "Outcome", "trim|required");
+		$this->form_validation->set_rules("output", "Output", "trim|required");
+		$this->form_validation->set_rules("tahun_usulan", "Tahun Usulan", "trim|required");
+		$this->form_validation->set_rules("lokasi", "Lokasi", "trim|required");
+		$this->form_validation->set_rules("durasi", "Durasi", "trim|required");
+		$this->form_validation->set_rules("id_sektor", "Sektor", "trim|required");
+		$this->form_validation->set_rules("id_infra", "Kategori", "trim|required");
+		//$this->form_validation->set_rules("berkas", "Berka arsip", "required");
+		$this->form_validation->set_message('required', '%s harus diisi');
+		$this->form_validation->set_message('is_natural_no_zero', '%s harus diisi dengan angka dan lebih dari 0');
+
+		$this->form_validation->set_error_delimiters('<p class="text-danger">', '</p>');
+
+		if ($this->form_validation->run() == FALSE) {
+			foreach ($_POST as $key => $value) {
+				$status['messages'][$key] = form_error($key);
+			}
+		}else{ //validasi benar semua
+
+		
+    	$data = array(
+        'id_program'				=> $this->input->post('id_program'),
+        'judul_proyek_id'			=> $this->input->post('judul_proyek_id'),
+        'judul_proyek_eng'			=> $this->input->post('judul_proyek_eng'),
+        'ruang_lingkup_id'			=> $this->input->post('ruang_lingkup_id'),
+        'ruang_lingkup_eng'				=> $this->input->post('ruang_lingkup_eng'),
+        'id_instansi'					=> $this->input->post('id_instansi'),
+        'id_infra'					=> $this->input->post('id_infra'),
+        
+        'proyeksi_tahun_pertama_penarikan'			=> $this->input->post('proyeksi_tahun_pertama_penarikan'),
+        'dana_usulan'				=> $this->input->post('dana_usulan'),
+        'dana_hibah'				=> $this->input->post('dana_hibah'),
+        'durasi'				=> $this->input->post('durasi'),
+        'output'				=> $this->input->post('output'),
+        'outcome'				=> $this->input->post('outcome'),
+        'lokasi'				=> $this->input->post('lokasi'),
+        'dana_pendamping'				=> $this->input->post('dana_pendamping'),
+        'instansi_pelaksana'				=> $this->input->post('instansi_pelaksana'),
+        'tahun_usulan'				=> $this->input->post('tahun_usulan'),
+        'id_sektor'				=> $this->input->post('id_sektor'),
+   		 );
+
+    	$this->db->insert('irena_greenbook_proyek', $data);
+
+	 	$isi = array(
+    			'id_usulan' 		=> $this->Usulan_model->last()->id,
+    			//'is_gb_update_by'			=> $this->session->userdata('id')
+    			
+    		);
+
+    	
+    	$this->db->insert('irena_usulan_layak', $isi);
+    	$this->db->insert('irena_usulan_adm', $isi);
+    	$this->db->insert('irena_usulkan_bb', $isi);
+    	$status['success'] 			= true;
+
+		}
+    	 echo json_encode($status);
+    }
+
+
 	 public function tambah_manual_input()
     {
     	$this->load->model('Usulan_model');
@@ -839,6 +916,7 @@ class Greenbook extends CI_Controller {
 		$data['bluebook']= $this->Bluebook_model->semua_bluebook();
 		$data['greenbook']= $this->Greenbook_model->ambil_greenbook();
 		$data['sektor']= $this->Greenbook_model->ambil_sektor();
+		$data['lokasi']= $this->Usulan_model->ambil_lokasi();
 		$data['lokasi']= $this->Usulan_model->ambil_lokasi();
 		
 		$data['lender']= $this->Bluebook_model->semua_lender();

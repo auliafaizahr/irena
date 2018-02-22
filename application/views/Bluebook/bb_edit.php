@@ -160,6 +160,8 @@
                             </div>
                         </div>
 
+
+
                          <div class="form-group">
                             <label for="id_lender" class="col-sm-3 control-label">Indikasi Lender</label>
                             <div class="col-sm-9">
@@ -173,6 +175,25 @@
                                     <?php } ?>
                                     <?php foreach($lender as $row){ ?>
                                         <option value="<?php echo $row['id']; ?>"><?php echo $row['lender']; ?>
+                                      </option>
+                                    <?php } ?>
+                                </select>
+                            </div>
+                        </div>
+
+                          <div class="form-group">
+                            <label for="id_status" class="col-sm-3 control-label">Status Umum</label>
+                            <div class="col-sm-9">
+                                <select name="id_status" id="id_status" class="form-control" >
+                                     <?php 
+                                        $query  = $this->Usulan_model->status_umum($detail->id_status); 
+                                        foreach ($query as $key) 
+                                        {
+                                    ?>
+                                        <option value="<?php echo $key->id; ?>"><?php echo $key->nama; ?></option>
+                                    <?php } ?>
+                                    <?php foreach($status_umum as $row){ ?>
+                                        <option value="<?php echo $row['id']; ?>"><?php echo $row['nama']; ?>
                                       </option>
                                     <?php } ?>
                                 </select>
@@ -324,6 +345,12 @@
             placeholder: "Pilih Sektor",
             width: "100%"
         });
+
+        $("#id_status").select2({
+            placeholder: "Pilih Sektor",
+            width: "100%"
+        });
+        
         
         
         
@@ -376,6 +403,7 @@
             var id_status_lembaga                   = $("#id_status_lembaga").val();
             var id_infra                   = $("#id_infra").val();
             var id_sektor                   = $("#id_sektor").val();
+            var id_status                   = $("#id_status").val();
             
             var form_data   = new FormData();
             
@@ -399,7 +427,8 @@
             form_data.append('id_status_lender', id_status_lender);
             form_data.append('id_status_lembaga', id_status_lembaga);
             form_data.append('id_sektor', id_sektor);
-            form_data.append('id_infra', id_infra);
+            form_data.append('infra', id_infra);
+            form_data.append('id_status', id_status);
 
             $.ajax({
                 url: '<?php echo base_url(); ?>bluebook/bb_simpan/edit',
