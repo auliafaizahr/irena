@@ -231,10 +231,11 @@
                     <tbody>
                       <tr>
                         <td>
-                          Bluebook 2015
+                        <?php echo $this->Bluebook_model->kode_bluebook($detail->id_bluebook)->nama; ?>
+                         
                         </td>
                         <td>
-                         200
+                        <?php echo $detail->nilai_pinjaman; ?>
                         </td>
                       </tr>
                     </tbody>
@@ -244,7 +245,7 @@
               </tr>
 
 
-            <?php if($this->Bluebook_model->ambil_layak($detail->id)->is_GB != '0'){ ?>
+            <?php if($this->Bluebook_model->ambil_layak($detail->id)->is_gb_kasubdit == '2'){ ?>
               <tr class="read">
                 <td class="mail-ontact text-right">Detail Greenbook</td>
                 <td class="mail-subject">
@@ -265,18 +266,32 @@
                     </thead>
 
                     <tbody>
+                    <?php $gb_detail = $this->Usulan_model->ambil_gb_detail($detail->id);
+
+                      foreach ($gb_detail as $key => $value):
+                        # code...
+                      
+                     ?>
                       <tr>
                         <td>
-                          Greenbook 2015
+                         <?php 
+                         if($value->id_greenbook != ''){
+                         echo $this->Greenbook_model->kode_greenbook($value->id_greenbook)->nama;
+                        }else{
+                          echo "";
+                        }
+                          ?>
+                        
                         </td>
                         <td>
-                         200
+                        <?php  echo $value->nilai_pinjaman; ?>
                         </td>
-
                          <td>
-                         Lender
+                        <?php echo $this->Greenbook_model->lender($value->id_lender)->lender;
+                         ?>
                         </td>
                       </tr>
+                      <?php endforeach; ?>
                     </tbody>
 
                   </table>

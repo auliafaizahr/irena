@@ -409,19 +409,27 @@
                       </tr>
                     </thead>
 
-                    <tbody>
+                  <tbody>
+                    <?php $dk_detail = $this->Usulan_model->ambil_dk_detail($detail->id);
+
+                      foreach ($dk_detail as $key => $value):
+                        # code...
+                      
+                     ?>
                       <tr>
                         <td>
-                          Tanggal DK
+                         <?php echo $value->tgl_DK; ?>
+                        
                         </td>
                         <td>
-                         200
+                        <?php  echo $value->nilai_pinjaman; ?>
                         </td>
-
-                        <td>
-                         JICA
+                         <td>
+                        <?php echo $this->Greenbook_model->lender($value->id_lender)->lender;
+                         ?>
                         </td>
                       </tr>
+                      <?php endforeach; ?>
                     </tbody>
 
                   </table>
@@ -452,19 +460,27 @@
                       </tr>
                     </thead>
 
-                    <tbody>
+                     <tbody>
+                    <?php $dk_detail = $this->Usulan_model->ambil_la_detail($detail->id);
+
+                      foreach ($la_detail as $key => $value):
+                        # code...
+                      
+                     ?>
                       <tr>
                         <td>
-                          Tanggal LA
+                         <?php echo $value->tgl_LA; ?>
+                        
                         </td>
                         <td>
-                         200
+                        <?php  echo $value->nilai_pinjaman; ?>
                         </td>
-
-                        <td>
-                         JICA
+                         <td>
+                        <?php echo $this->Greenbook_model->lender($value->id_lender)->lender;
+                         ?>
                         </td>
                       </tr>
+                      <?php endforeach; ?>
                     </tbody>
 
                   </table>

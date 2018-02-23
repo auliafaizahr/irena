@@ -272,14 +272,14 @@ class Bluebook extends CI_Controller {
 			if ($this->session->userdata('id_user_level') != '5') {
 
 			//$data['nilai_admin_id']		= $this->session->userdata('id');
-			$data['is_GB_update_by']			= $this->session->userdata('id');
-			$data['is_GB_update_at']			= date('Y-m-d H:i:s');
-			$data['is_bb_kasubdit']		= '0';
-			$data['is_BB']			= $this->input->post('nilai_layak');
-			$data['is_BB_catatan']			= $this->input->post('nilai_layak_ket');
-			$result 					= $this->Usulan_model->simpan_adm($data);
-			$status['success'] 			= true;
-			$data 						= $_POST;
+			$data['is_gb_update_by']			= $this->session->userdata('id');
+			$data['is_gb_update_at']			= date('Y-m-d H:i:s');
+			$data['is_gb_kasubdit']				= '0';
+			$data['is_GB']						= $this->input->post('nilai_layak');
+			$data['gb_catatan_catatan']			= $this->input->post('nilai_layak_ket');
+			$result 							= $this->Bluebook_model->bb_layak_simpan_data($data);
+			$status['success'] 					= true;
+			$data 								= $_POST;
 
 			}elseif ($this->session->userdata('id_user_level') == '5') {
 			

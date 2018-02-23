@@ -251,7 +251,7 @@ class Usulan_model extends CI_Model {
 	public function ambil_bb_detail($x)
 	{
 		
-		$query = "SELECT * FROM irena_bluebook_proyek WHERE id_usulan_proyek = '$x'";
+		$query = "SELECT * FROM irena_bluebook_proyek WHERE id_usulan = '$x'";
 		 $a= $this->db->query($query);
 		return $a->result();
 		
