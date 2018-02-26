@@ -72,15 +72,16 @@
 
                           $layak = $this->Greenbook_model->ambil_layak($value['id'])->is_layak;
                           $kasubdit_layak = $this->Greenbook_model->ambil_layak($value['id'])->is_kasubdit_layak;
+                            $user_level = $this->session->userdata('id_user_level');
 
                       //mengganti ikon kalo udah layak atau belum
                          if ($layak == '1') {
 
                            if ($kasubdit_layak == '0') {
-                            echo "<a id='".$value['id']."' class='layak' data-id='".$layak."' data-kasubdit='".$kasubdit_layak."'><i class='btn fa fa-times-circle btn-warning'></i></a>";
+                            echo "<a id='".$value['id']."' class='layak' data-id='".$layak."' data-kasubdit='".$kasubdit_layak."' data-user='".$user_level."'><i class='btn fa fa-times-circle btn-warning'></i></a>";
                              
-                          }elseif ($kasubdit_layak == '1') {
-                             echo "<a id='".$value['id']."' class='layak' data-id='".$layak."' data-kasubdit='".$kasubdit_layak."' ><i class='btn fa fa-warning btn-warning'></i></a>";
+                          }elseif ($kasubdit_layak == '2') {
+                             echo "<a id='".$value['id']."' class='layak' data-id='".$layak."' data-kasubdit='".$kasubdit_layak."'  data-user='".$user_level."'><i class='btn fa fa-warning btn-warning'></i></a>";
                              
                           }else{
                             echo '<a ><i class="btn fa fa-times-circle btn-danger" ></i></a>';
@@ -94,7 +95,7 @@
                             echo "<a id='".$value['id']."' class='layak' data-id='".$layak."' data-kasubdit='".$kasubdit_layak."'><i class='btn fa fa-check-square btn-warning'></i></a>";
                              
                           }elseif ($kasubdit_layak == '1') {
-                            echo "<a id='".$value['id']."' class='layak' data-id='".$layak."' data-kasubdit='".$kasubdit_layak."' ><i class='btn fa fa-warning btn-warning'></i></a>";
+                            echo "<a id='".$value['id']."' class='layak' data-id='".$layak."' data-kasubdit='".$kasubdit_layak."' data-user='".$user_level."' ><i class='btn fa fa-warning btn-warning'></i></a>";
                             
                           }else{
                             echo '<a ><i class="btn fa fa-check-square btn-primary"></i></a>';
@@ -102,7 +103,7 @@
                            
                         }else{
                           //echo "<a   id='".$c."' layak='".$c."' onclick='nilai_admin($adm)'><i class=' btn fa fa-times-circle btn-danger'></i></a>";
-                          echo "<a id='".$value['id']."' class='layak' ><i class='btn fa fa-times-circle  btn-warning'></i></a>";
+                          echo "<a id='".$value['id']."' data-id='".$layak."' data-kasubdit='".$kasubdit_layak."' data-user='".$user_level."' class='layak' ><i class='btn fa fa-times-circle  btn-default'></i></a>";
                           
                         }
 
@@ -212,12 +213,15 @@
            
          
              var id = $(this).attr("id"); 
-             var kasubdit = $(this).attr("data-kasubdit"); 
+             var kasubdit_layak = $(this).attr("data-kasubdit"); 
              var layak = $(this).attr("data-id"); 
+             var user_level = $(this).attr("data-user"); 
            console.log(id);
-           console.log(kasubdit);
+           console.log(kasubdit_layak);
+           console.log(layak);
+           console.log(user_level);
 
-        if (layak == '0') {
+       /* if (layak == '0') {
            //var rowid = $(e.relatedTarget).data('id');
            //console.log(rowid);
            $.ajax({
@@ -227,7 +231,7 @@
                 success : function(response){
                 //$('.fetched-data-arsip').html(data);//menampilkan data ke dalam modal
 
-                  $("#tmpModal3").html(response);
+                  $("#tmpModal").html(response);
                 $('#modalLayak2').modal('show');
                 console.log("bisa");
               alert(response);
@@ -241,7 +245,92 @@
 
             alert('Menunggu persetujuan kasbudit');
 
-         };
+         };*/
+
+
+      if (user_level != '5') {
+
+              //cek kasubdit
+           
+
+                  if (kasubdit_layak == '0') {
+
+                      if (layak == '0') {
+
+                           $.ajax({
+                            type : 'post',
+                                      url : "<?php echo base_url(); ?>Greenbook/layak",
+                                      data :  'id='+ id,
+                                      success : function(response){
+                                         $("#tmpModal").html(response);
+                                      $('#modalLayak2').modal('show');
+                                    
+                                      //  $('#modalKecil').modal('show');
+                                     // $('.fetched-data-lagi').html(data);//menampilkan data ke dalam modal
+                                      },
+                                      dataType:"html"
+                          });
+
+                      } else if(layak != '0'){
+
+                        alert('Belum dinilai oleh kasubdit');
+                        console.log('Belum dinilai oleh kasubdit');
+                      
+                      }
+                      //cek kalo hasil penilaian staff dan kasubdit berbeda
+                  }else if( (kasubdit_layak  == '2' && layak == '1') || (kasubdit_layak == '1' && layak == '2') ){
+                      $.ajax({
+                                    type : 'post',
+                                              url : "<?php echo base_url(); ?>Greenbook/layak",
+                                              data :  'id='+ id,
+                                              success : function(response){
+                                               $("#tmpModal").html(response);
+                                              $('#modalLayak2').modal('show');
+                                            
+                                              //  $('#modalKecil').modal('show');
+                                             // $('.fetched-data-lagi').html(data);//menampilkan data ke dalam modal
+                                              },
+                                              dataType:"html"
+                                  });
+                     } 
+                     
+                        
+                          
+              }
+
+
+      if (user_level == '5') {
+
+              //cek kasubdit
+           
+
+                  if (kasubdit_layak == '0') {
+
+                      if (layak != '0') {
+
+                           $.ajax({
+                            type : 'post',
+                                      url : "<?php echo base_url(); ?>Greenbook/layak",
+                                      data :  'id='+ id,
+                                      success : function(response){
+                                         $("#tmpModal").html(response);
+                                      $('#modalLayak2').modal('show');
+                                    
+                                      //  $('#modalKecil').modal('show');
+                                     // $('.fetched-data-lagi').html(data);//menampilkan data ke dalam modal
+                                      },
+                                      dataType:"html"
+                          });
+
+                      } 
+                      //cek kalo hasil penilaian staff dan kasubdit berbeda
+                  }
+                        
+                          
+              }
+      
+
+
          
          });
 
@@ -301,38 +390,7 @@
                 });
             });
   
-  function tampilkan_form_edit(page){
-    $.ajax({
-      url: "<?php echo base_url(); ?>"+page,
-      success:function(response){
-        $("#tmpModal").html(response);
-        $('#modalEdit').modal('show');
-    },
-    dataType:"html"});
-    return false;
-  }
-  
-  function tampilkan_log_usulan_index(page){
-    $.ajax({
-      url: "<?php echo base_url(); ?>"+page,
-      success:function(response){
-        $("#tmpModal").html(response);
-        $('#modalLog').modal('show');
-    },
-    dataType:"html"});
-    return false;
-  }
-  
-  function tampilkan_syarat_usulan(page){
-    $.ajax({
-      url: "<?php echo base_url(); ?>"+page,
-      success:function(response){
-        $("#tmpModal").html(response);
-        $('#modalIndex').modal('show');
-    },
-    dataType:"html"});
-    return false;
-  }
+
 
   $(document).on('click', '.catatan', function(){  
            
@@ -407,7 +465,7 @@
            //console.log(rowid);
            $.ajax({
                 type : 'post',
-                url : "<?php echo base_url(); ?>Usulan/hapus",
+                url : "<?php echo base_url(); ?>Greenbook/hapus",
                 data :  'id='+ id,
                 success : function(response){
                 

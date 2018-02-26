@@ -23,16 +23,7 @@ class Bluebook_model extends CI_Model {
 		return $this->db->query($sql);
 	}
 
-	public function last_gb()
-	{
-		$query = "SELECT id FROM irena_greenbook_proyek ORDER BY ID DESC LIMIT 1";
-
-
-		$a = $this->db->query($query);
-
-		return $a->row();
-	}
-
+	
 
 		function bb_simpan_data_edit($data)
 	{
@@ -249,9 +240,48 @@ function usulan_simpan_data($data)
 		return $a->row();
 	}
 
-	public function tambahkeGB()
+		public function tambah_ke_GB($data)
 	{
-		# code...
+		
+		if(array_key_exists('id', $data))
+		{
+			$id = $data['id_bb_proyek'];
+			unset($data['id_bb_proyek']);
+			$this->db->where('id_bb_proyek',$id);
+			$this->db->update('irena_greenbook_proyek', $data);
+		}
+		else
+		{
+			$this->db->insert('irena_greenbook_proyek', $data);
+		}		
+			
+	}
+
+		public function tambah_ke_GB_layak($data)
+	{
+		
+		if(array_key_exists('id', $data))
+		{
+			$id = $data['id_proyek_gb'];
+			unset($data['id_proyek_gb']);
+			$this->db->where('id_proyek_gb',$id);
+			$this->db->update('irena_gb_layak', $data);
+		}
+		else
+		{
+			$this->db->insert('irena_gb_layak', $data);
+		}		
+			
+	}
+
+	public function last_gb()
+	{
+		$query = "SELECT id FROM irena_greenbook_proyek ORDER BY ID DESC LIMIT 1";
+
+
+		$a = $this->db->query($query);
+
+		return $a->row();
 	}
 
 
