@@ -603,6 +603,33 @@ class Greenbook extends CI_Controller {
 				$status['messages'][$key] = form_error($key);
 			}	
 		}else{ //validasi benar semua
+
+			$data['id']					= $this->input->post('id');
+			date_default_timezone_set('Asia/Jakarta');
+			if ($this->session->userdata('id_user_level') != '5') {
+
+			//$data['nilai_admin_id']		= $this->session->userdata('id');
+			$data['update_by']			= $this->session->userdata('id');
+			$data['update_at']			= date('Y-m-d H:i:s');
+			$data['is_kasubdit_layak']		= '0';
+			$data['is_layak']			= $this->input->post('nilai_layak');
+			$data['catatan_staff_layak']			= $this->input->post('nilai_layak_ket');
+			$result 					= $this->Greenbook_model->usulan_simpan_data($data);
+			$status['success'] 			= true;
+			$data 						= $_POST;
+
+			}elseif ($this->session->userdata('id_user_level') == '5') {
+				$data['kasubdit_layak_by']			= $this->session->userdata('id');
+				$data['kasubdit_layak_at']			= date('Y-m-d H:i:s');
+				$data['is_kasubdit_layak']			= $this->input->post('nilai_layak');
+				$data['layak_catatan_kasubdit']			= $this->input->post('nilai_layak_ket');
+				$result 					= $this->Greenbook_model->usulan_simpan_data($data);
+				$status['success'] 			= true;
+				$data 						= $_POST;
+			}
+			
+			///
+		
 		
 			/*
 			$status['success'] 	= false;
@@ -612,7 +639,7 @@ class Greenbook extends CI_Controller {
 			
 			
 			//$data['nilai_admin_id']		= $this->session->userdata('id');
-			$data['update_at']			= date('Y-m-d H:i:s');
+			/*$data['update_at']			= date('Y-m-d H:i:s');
 			$data['update_by']			= $this->session->userdata('id');
 			$data['id']					= $this->input->post('id');
 			
@@ -620,7 +647,7 @@ class Greenbook extends CI_Controller {
 			$result 					= $this->Greenbook_model->usulan_simpan_data($data);
 			$status['success'] 			= true;
 			$data 						= $_POST;
-
+*/
 			
 			
 			///

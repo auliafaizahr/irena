@@ -92,10 +92,10 @@
 
                          
                           if ($kasubdit_layak == '0') {
-                            echo "<a id='".$value['id']."' class='layak' data-id='".$layak."' data-kasubdit='".$kasubdit_layak."'><i class='btn fa fa-check-square btn-warning'></i></a>";
+                            echo "<a id='".$value['id']."' class='layak' data-id='".$layak."' data-user='".$user_level."' data-kasubdit='".$kasubdit_layak."'><i class='btn fa fa-check-square btn-warning' ></i></a>";
                              
                           }elseif ($kasubdit_layak == '1') {
-                            echo "<a id='".$value['id']."' class='layak' data-id='".$layak."' data-kasubdit='".$kasubdit_layak."' data-user='".$user_level."' ><i class='btn fa fa-warning btn-warning'></i></a>";
+                            echo "<a id='".$value['id']."' data-user='".$user_level."' class='layak' data-id='".$layak."' data-kasubdit='".$kasubdit_layak."' data-user='".$user_level."' ><i class='btn fa fa-warning btn-warning'></i></a>";
                             
                           }else{
                             echo '<a ><i class="btn fa fa-check-square btn-primary"></i></a>';
