@@ -261,12 +261,6 @@ class Bluebook extends CI_Controller {
 			}	
 		}else{ //validasi benar semua
 		
-			/*
-			$status['success'] 	= false;
-			$nilai_admin =$this->input->nilai_admin;
-			$status['messages']['nilai_admin'] = $nilai_admin;
-			*/
-
 			$data['id']					= $this->input->post('id');
 			date_default_timezone_set('Asia/Jakarta');
 			if ($this->session->userdata('id_user_level') != '5') {

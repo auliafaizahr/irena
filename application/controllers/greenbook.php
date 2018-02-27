@@ -500,13 +500,138 @@ class Greenbook extends CI_Controller {
 			}	
 		}else{ //validasi benar semua
 		
-			/*
-			$status['success'] 	= false;
-			$nilai_admin =$this->input->nilai_admin;
-			$status['messages']['nilai_admin'] = $nilai_admin;
-			*/
+			
+			$data['id']					= $this->input->post('id');
+			date_default_timezone_set('Asia/Jakarta');
+			if ($this->session->userdata('id_user_level') != '5') {
 
-			$data = array(
+			//$data['nilai_admin_id']		= $this->session->userdata('id');
+			$data['is_dk_update_by']			= $this->session->userdata('id');
+			$data['is_dk_update_at']			= date('Y-m-d H:i:s');
+			$data['is_dk_kasubdit']				= '0';
+			$data['is_dk']						= $this->input->post('nilai_layak');
+			$data['dk_cat_staff']				= $this->input->post('nilai_layak_ket');
+			$result 							= $this->Greenbook_model->usulan_simpan_data($data);
+			$status['success'] 					= true;
+			$data 								= $_POST;
+
+			}elseif ($this->session->userdata('id_user_level') == '5') {
+			
+				$dk_staff							= $this->Greenbook_model->ambil_layak($data['id'])->is_dk; //ngambil nilai dari staff buat dibandingin
+				
+				$dk_kasubdit 					= $this->input->post('nilai_layak');
+				
+				if ($dk_staff == '2') {
+					if ( $dk_kasubdit	== '2' ) {
+
+						//tambah ke database proyek bluebook
+						# code...
+
+							
+			    	$data = array(
+					'id'					=> $this->input->post('id'),
+			        
+			        'kasubdit_dk_at'			=> date('Y-m-d H:i:s'),
+			        'is_dk_kasubdit'			=>  $this->input->post('nilai_layak'),
+			        'dk_catatan_kasubdit'			=>  $this->input->post('nilai_layak_ket'),
+			        'kasubdit_dk_by'			=> $this->session->userdata('id'),
+
+			        
+			   		 );
+					$result 					= $this->Greenbook_model->usulan_simpan_data($data);
+
+					$data_isDK = array(
+					'id'						=> $this->input->post('id_usulan'),
+			        'is_DK'						=> '1',
+			        
+			   		 );
+					$result4 					= $this->Usulan_model->update_isBB($data_isDK);
+
+
+
+			    	$data2 = array(
+					//'id'					=> $this->input->post('id'),
+					'id_usulan'						=> $this->input->post('id_usulan'),
+					'id_gb_proyek'					=> $this->input->post('id'),
+					'id_bb_proyek'					=> $this->input->post('id_bb_proyek'),
+
+			        
+			        'id_program'					=> $this->input->post('id_program'),
+			        'id_instansi'					=>  $this->input->post('id_instansi'),
+			        'instansi_pelaksana'			=>  $this->input->post('instansi_pelaksana'),
+			        'tahun_usulan'					=> $this->input->post('tahun_usulan'),
+			        'id_lender'						=> $this->input->post('id_lender'),
+			        'id_bluebook'					=> $this->input->post('id_bluebook'),
+			        'id_greenbook'					=> $this->input->post('id_greenbook'),
+			        'judul_proyek_id'				=>  $this->input->post('judul_proyek_id'),
+			        'judul_proyek_eng'				=>  $this->input->post('judul_proyek_eng'),
+			        'ruang_lingkup_id'				=>  $this->input->post('ruang_lingkup_id'),
+			        'ruang_lingkup_eng'				=>  $this->input->post('ruang_lingkup_eng'),
+			        'id_status_lembaga'				=>  $this->input->post('id_status_lembaga'),
+			        'id_status_lender'				=>  $this->input->post('id_status_lender'),
+			        'durasi'						=>  $this->input->post('durasi'),
+			        'proyeksi_tahun_pertama_penarikan'			=>  $this->input->post('proyeksi_tahun_pertama_penarikan'),
+			        'output'						=>  $this->input->post('output'),
+			        'outcome'						=>  $this->input->post('outcome'),
+			        'nilai_pinjaman'				=>  $this->input->post('nilai_pinjaman'),
+			        'nilai_hibah'					=>  $this->input->post('nilai_hibah'),
+			        'dana_pendamping'				=>  $this->input->post('dana_pendamping'),
+			        'id_sektor'						=>  $this->input->post('id_sektor'),
+			        'infra'							=>  $this->input->post('infra'),
+			        'id_status'						=>  $this->input->post('id_status'),
+			        'lokasi'						=>  $this->input->post('lokasi'),
+			   		 );
+
+					$result2 					= $this->Greenbook_model->tambah_ke_DK($data2);
+
+					$isi = array(
+		    			'id_proyek_dk' 		=> $this->Greenbook_model->last_dk()->id,
+		    			
+		    		);
+
+					$result3 					= $this->Greenbook_model->tambah_ke_DK_layak($isi);
+
+		    	
+		    		
+
+						//$data 						= $_POST;
+						$data2 							= $_POST;
+						$data 							= $_POST;
+						$data_isDK 						= $_POST;
+						$isi 							= $_POST;
+				
+						$status['success'] 				= true;
+
+					}elseif( $dk_kasubdit	== '1' ){
+						$data['kasubdit_dk_at']			= date('Y-m-d H:i:s');
+						$data['is_dk_kasubdit']			= $this->input->post('nilai_layak');
+						$data['kasubdit_dk_by']			= $this->session->userdata('id');
+
+
+						$data['dk_catatan_kasubdit']			= $this->input->post('nilai_layak_ket');
+						$result 					= $this->Greenbook_model->usulan_simpan_data($data);
+
+						$status['success'] 			= true;
+						$data 						= $_POST;
+					}
+
+				}else{
+					$data['kasubdit_dk_at']			= date('Y-m-d H:i:s');
+					$data['dk_catatan_kasubdit']			= $this->input->post('nilai_layak_ket');
+					$result 					= $this->Greenbook_model->usulan_simpan_data($data);
+					$data['kasubdit_dk_by']			= $this->session->userdata('id');
+
+					$status['success'] 			= true;
+					$data 						= $_POST;
+				}
+			}
+
+		
+		}
+
+		echo json_encode($status);
+
+			/*$data = array(
 				'id_usulan'					=> $this->input->post('id_usulan'),
 				//$data['id_bluebook']					= $this->input->post('id_bluebook');
 				'id_program'					=> $this->input->post('id_program'),
@@ -569,9 +694,9 @@ class Greenbook extends CI_Controller {
 				
 			
 			///
-		}
+		}*/
 
-		echo json_encode($status);
+		//echo json_encode($status);
 		//var_dump($data);
 	}
 

@@ -130,10 +130,10 @@
                         if ($is_dk == '1') {
 
                             if ($dk_kasubdit == '0') {
-                                echo "<a id='".$value['id']."' class='tambahkeDK' data-id='".$is_dk."' data-kasubdit='".$dk_kasubdit."'><i class='btn fa fa-times-circle btn-warning'></i></a>";
+                                echo "<a id='".$value['id']."' class='tambahkeDK' data-id='".$is_dk."' data-kasubdit='".$dk_kasubdit."' data-user='".$user_level."'  data-layak='".$kasubdit_layak."'><i class='btn fa fa-times-circle btn-warning'></i></a>";
                                  
                             }elseif ($dk_kasubdit == '1') {
-                                 echo "<a id='".$value['id']."' class='tambahkeDK' data-id='".$is_dk."' data-kasubdit='".$dk_kasubdit."' ><i class='btn fa fa-warning btn-warning'></i></a>";
+                                 echo "<a id='".$value['id']."' class='tambahkeDK' data-id='".$is_dk."' data-kasubdit='".$dk_kasubdit."' data-user='".$user_level."'  data-layak='".$kasubdit_layak."' ><i class='btn fa fa-warning btn-warning'></i></a>";
                                  
                             }else{
                                 echo '<a ><i class="btn fa fa-times-circle btn-danger" ></i></a>';
@@ -144,10 +144,10 @@
 
                          
                           if ($dk_kasubdit == '0') {
-                            echo "<a id='".$value['id']."' class='tambahkeDK' data-id='".$is_dk."' data-kasubdit='".$dk_kasubdit."'><i class='btn fa fa-check-square btn-warning'></i></a>";
+                            echo "<a id='".$value['id']."' class='tambahkeDK' data-id='".$is_dk."' data-kasubdit='".$dk_kasubdit."' data-user='".$user_level."'  data-layak='".$kasubdit_layak."'><i class='btn fa fa-check-square btn-warning'></i></a>";
                              
                           }elseif ($dk_kasubdit == '1') {
-                            echo "<a id='".$value['id']."' class='tambahkeDK' data-id='".$is_dk."' data-kasubdit='".$dk_kasubdit."' ><i class='btn fa fa-warning btn-warning'></i></a>";
+                            echo "<a id='".$value['id']."' class='tambahkeDK' data-id='".$is_dk."' data-kasubdit='".$dk_kasubdit."' data-user='".$user_level."'  data-layak='".$kasubdit_layak."' ><i class='btn fa fa-warning btn-warning'></i></a>";
                             
                           }else{
                             echo '<a ><i class="btn fa fa-check-square btn-primary"></i></a>'; 
@@ -156,7 +156,7 @@
                         }else{
                           //echo "<a   id='".$c."' layak='".$c."' onclick='nilai_admin($adm)'><i class=' btn fa fa-times-circle btn-danger'></i></a>";
                           echo "<div class='btn-group'>
-                            <button type='button'  class='tambahkeDK btn btn-xs  btn-danger' data-id='".$is_dk."' data-kasubdit='".$dk_kasubdit."' id='".$value['id']."' data-layak='".$kasubdit_layak."'><i class='fa fa-plus'></i> Tambah ke DK</button>
+                            <button type='button'  class='tambahkeDK btn btn-xs  btn-danger' data-id='".$is_dk."' data-kasubdit='".$dk_kasubdit."' id='".$value['id']."' data-layak='".$kasubdit_layak."' data-user='".$user_level."'><i class='fa fa-plus'></i> Tambah ke DK</button>
                         </div>";
                          // echo "<a id='".$value['id']."' class='tambahBB' ><i class='btn fa fa-plus  btn-danger'></i></a>";
                           
@@ -221,31 +221,6 @@
            console.log(layak);
            console.log(user_level);
 
-       /* if (layak == '0') {
-           //var rowid = $(e.relatedTarget).data('id');
-           //console.log(rowid);
-           $.ajax({
-                type : 'post',
-                url : "<?php echo base_url(); ?>Greenbook/layak",
-                data :  'id='+ id,
-                success : function(response){
-                //$('.fetched-data-arsip').html(data);//menampilkan data ke dalam modal
-
-                  $("#tmpModal").html(response);
-                $('#modalLayak2').modal('show');
-                console.log("bisa");
-              alert(response);
-                //  $('#modalKecil').modal('show');
-               // $('.fetched-data-lagi').html(data);//menampilkan data ke dalam modal
-                },
-                dataType:"html"
-                });
-
-         } else if(kasubdit == '0'){
-
-            alert('Menunggu persetujuan kasbudit');
-
-         };*/
 
 
       if (user_level != '5') {
@@ -416,45 +391,9 @@
                 });
             });
   
-  function tampilkan_form_hapus(page){
-    $.ajax({
-      url: "<?php echo base_url(); ?>"+page,
-      success:function(response){
-        $("#tmpModal").html(response);
-        $('#modalHapus').modal('show');
-    },
-    dataType:"html"});
-    return false;
-  }
+
 
   
-     function nilai_layak(layak, nilai_admin, c){
-      console.log(c);
-
-      var id = c;
-    //alert(id+','+nilai_admin);
-   if (nilai_admin == '2') {
-      console.log("sukses");
-    $.ajax({
-      type : 'post',
-                url : "<?php echo base_url(); ?>Usulan/layak",
-                data :  'id='+ id,
-                success : function(response){
-                   $("#tmpModal").html(response);
-                $('#modalLayak').modal('show');
-              
-                //  $('#modalKecil').modal('show');
-               // $('.fetched-data-lagi').html(data);//menampilkan data ke dalam modal
-                },
-                dataType:"html"
-    });
-    }else {
-     
-      console.log("gagal bray");
-      alert("Belum selesai penilaian Administrasi");
-    }
-  }
-
      $(document).on('click', '.del-proyek', function(){  
            
           
@@ -482,47 +421,123 @@
 
   
   
-  function masuk_dpp(id, nilai_admin, nilai_layak){
-    if(nilai_admin == '1' && nilai_layak == '1'){
-      $.ajax({
-        url: "<?php echo base_url(); ?>sbsn/usulan_tampil_form_masuk_dpp/"+id,
-        beforeSend: function(){
-          showLoading();
-        },
-        success:function(response){
-          $("#tmpModal").html(response);
-          $('#modalNilai').modal('show');
-        },
-        dataType:"html"
-      });
-      
-    }else{
-      alert('Maaf! Penilaian administrasi atau penilaian kelayakan belum dilakukan. Silahkan dilakukan penilaian administrasi dan penilaian kelayakan.');
-    }
-  }
 
   
 
   $(document).on('click', '.tambahkeDK', function(){  
-           
-           // console.log(id);
-           //var rowid = $(e.relatedTarget).data('id');
-           //console.log(rowid);
-          /* $('#myModalDetail').modal('show');
-           });*/
 
         var id = $(this).attr("id"); 
-        var dk = $(this).attr("data-id"); 
+        var usul_DK = $(this).attr("data-id"); 
         var kasubdit = $(this).attr("data-kasubdit"); 
-        var layak_kasubdit = $(this).attr("data-layak"); 
+        var layak = $(this).attr("data-layak");
+        var user_level = $(this).attr("data-user"); 
+
 
         console.log(id);
-        console.log(dk);
+        console.log(usul_DK);
         console.log(kasubdit);
-        console.log(layak_kasubdit);
+        console.log(layak);
+
+        if (user_level != '5') {
+
+              //cek kasubdit
+              if (layak == '2') {
+                  if (kasubdit == '0') {
+                      if (usul_DK == '0') {
+                           $.ajax({
+                            type : 'post',
+                                      url : "<?php echo base_url(); ?>Greenbook/tambahkeDK",
+                                      data :  'id='+ id,
+                                      success : function(response){
+                                         $("#tmpModal").html(response);
+                                      $('#modalDK').modal('show');
+                                    
+                                      //  $('#modalKecil').modal('show');
+                                     // $('.fetched-data-lagi').html(data);//menampilkan data ke dalam modal
+                                      },
+                                      dataType:"html"
+                          });
+                      } else if(usul_DK != '0'){
+                        alert('Belum dinilai oleh kasubdit');
+                        console.log('Belum dinilai oleh kasubdit');                     
+                     }
+                      //cek kalo hasil penilaian staff dan kasubdit berbeda
+                  }else if( (kasubdit  == '2' && usul_DK == '1') || (kasubdit == '1' && usul_DK == '2') ){
+                      $.ajax({
+                                    type : 'post',
+                                              url : "<?php echo base_url(); ?>Greenbook/tambahkeDK",
+                                              data :  'id='+ id,
+                                              success : function(response){
+                                               $("#tmpModal").html(response);
+                                              $('#modalDK ').modal('show');
+                                            
+                                              //  $('#modalKecil').modal('show');
+                                             // $('.fetched-data-lagi').html(data);//menampilkan data ke dalam modal
+                                              },
+                                              dataType:"html"
+                                  });
+                   
+                             
+                        
+                          
+              }else if (layak != 2) {
+                alert('Belum bisa melanjutkan proses ini');
+              }
+          
+      }
+    }
+
+           if (user_level == '5') {
+
+            console.log("ini di kasubdit");
+
+              //cek kasubdit
+              if (layak == '2') {
+                  if (kasubdit == '0') {
+                      if (usul_DK == '2') {
+                           $.ajax({
+                            type : 'post',
+                                      url : "<?php echo base_url(); ?>Greenbook/tambahkeDK",
+                                      data :  'id='+ id,
+                                      success : function(response){
+                                         $("#tmpModal").html(response);
+                                      $('#modalDK').modal('show');
+                                    
+                                      //  $('#modalKecil').modal('show');
+                                     // $('.fetched-data-lagi').html(data);//menampilkan data ke dalam modal
+                                      },
+                                      dataType:"html"
+                          });
+                      } else if(usul_DK != '0'){
+                        alert('Belum dinilai oleh kasubdit');
+                        console.log('Belum dinilai oleh kasubdit');                     
+                     }
+                      //cek kalo hasil penilaian staff dan kasubdit berbeda
+                  }else if( (kasubdit  == '2' && usul_DK == '1') || (kasubdit == '1' && usul_DK == '2') ){
+                      $.ajax({
+                                    type : 'post',
+                                              url : "<?php echo base_url(); ?>Greenbook/tambahkeDK",
+                                              data :  'id='+ id,
+                                              success : function(response){
+                                               $("#tmpModal").html(response);
+                                              $('#modalDK ').modal('show');
+                                            
+                                              //  $('#modalKecil').modal('show');
+                                             // $('.fetched-data-lagi').html(data);//menampilkan data ke dalam modal
+                                              },
+                                              dataType:"html"
+                                  });
+                  }        
+                        
+                          
+              }else if (layak != 2) {
+                alert('Belum bisa melanjutkan proses ini');
+              }
+          
+      }
         
            //console.log(id); 
-          if (layak_kasubdit == '2') {
+  /*        if (layak_kasubdit == '2') {
             console.log("sukses");
          console.log(id);
              $.ajax({
@@ -549,6 +564,10 @@
             console.log("gagal bray");
               return false;
           }
+*/
+
+
+
           });
 
   $(document).on('click', '.detail', function(){  

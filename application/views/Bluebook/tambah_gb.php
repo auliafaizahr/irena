@@ -98,7 +98,7 @@
 			
 			var id					= $("#id").val();
 			var nilai_layak 		= $("#nilai_layak").val();
-			var id_usulan 		= $("#id_usulan").val();
+			var id_usulan 			= $("#id_usulan").val();
 			var nilai_layak_ket 	= $("#nilai_layak_ket").val();
 			var judul_proyek_id 	= $("#judul_proyek_id").val();
 			var judul_proyek_eng 	= $("#judul_proyek_eng").val();

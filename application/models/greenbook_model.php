@@ -62,6 +62,40 @@ class Greenbook_model extends CI_Model {
 		}		
 	}
 
+		public function tambah_ke_DK($data)
+	{
+		
+		if(array_key_exists('id', $data))
+		{
+			$id = $data['id_gb_proyek'];
+			unset($data['id_gb_proyek']);
+			$this->db->where('id_gb_proyek',$id);
+			$this->db->update('irena_daftarkegiatan_proyek', $data);
+		}
+		else
+		{
+			$this->db->insert('irena_daftarkegiatan_proyek', $data);
+		}		
+			
+	}
+
+		public function tambah_ke_DK_layak($data)
+	{
+		
+		if(array_key_exists('id', $data))
+		{
+			$id = $data['id_proyek_dk'];
+			unset($data['id_proyek_dk']);
+			$this->db->where('id_proyek_dk',$id);
+			$this->db->update('irena_dk_layak', $data);
+		}
+		else
+		{
+			$this->db->insert('irena_dk_layak', $data);
+		}		
+			
+	}
+
 
 		function usulan_simpan_data($data)
 	{
