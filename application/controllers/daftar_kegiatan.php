@@ -390,6 +390,9 @@ class Daftar_kegiatan extends CI_Controller {
 		$data['bluebook']= $this->Bluebook_model->semua_bluebook();
 		$data['greenbook']= $this->Greenbook_model->ambil_greenbook();
 		$data['lender']= $this->Bluebook_model->semua_lender();
+		$data['lokasi'] = $this->Usulan_model->ambil_lokasi();
+		$data['sektor']= $this->Greenbook_model->ambil_sektor();
+		
 
 		$this->load->view('daftar_keg/dk_edit', $data);
 		//$this->load->view('templates/footer1');

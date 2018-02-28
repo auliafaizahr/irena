@@ -10,7 +10,7 @@
                     <div class="ibox-content">
                         
                         <div class="form-group">
-                            <label for="id_instansi" class="col-sm-3 control-label">Instansi</label>
+                            <label for="id_instansi" class="col-sm-3 control-label">Instansi Pengusul</label>
                             <div class="col-sm-9">
                                 <select id="id_instansi" class="form-control" >
                                   
@@ -58,14 +58,21 @@
                             </div>
                         </div>
 
-                         <div class="form-group">
-                            <label for="id_infra" class="col-sm-3 control-label">Kategori </label>
+                           <div class="form-group">
+                            <label for="infra" class="col-sm-3 control-label">Kategori </label>
                             <div class="col-sm-9">
-                                <select name="id_infra" id="id_infra" class="form-control"  >
-                                     <option value="1">Infrastruktur</option>
-                                     <option value="2">Non Infrastruktur</option>
-                                      
-                                   
+                                <select name="infra" id="infra" class="form-control" >
+                                    <?php 
+                                        $query  = $this->Usulan_model->ambil_infra_id($detail->infra); 
+                                        foreach ($query as $key) 
+                                        {
+                                    ?>
+                                        <option value="<?php echo $key->id; ?>"><?php echo $key->nama; ?></option>
+                                    <?php } ?>
+                                    <?php foreach($infra as $row){ ?>
+                                        <option value="<?php echo $row['id']; ?>"><?php echo $row['nama']; ?>
+                                      </option>
+                                    <?php } ?>
                                 </select>
                             </div>
                         </div>
@@ -80,6 +87,13 @@
                                       </option>
                                     <?php } ?>
                                 </select>
+                            </div>
+                        </div>
+
+                         <div class="form-group">
+                            <label for="tahun_usulan" class="col-sm-3 control-label">Tahun Usulan</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="tahun_usulan" id="tahun_usulan" class="form-control" placeholder="Tahun Usulan" value="<?php echo $detail->tahun_usulan; ?>">
                             </div>
                         </div>
 
@@ -108,6 +122,27 @@
                                 <input type="text" name="proyeksi_tahun_pertama_penarikan" id="proyeksi_tahun_pertama_penarikan" class="form-control" placeholder="Proyeksi Tahun Pertama Penarikan" value="<?php echo $detail->proyeksi_tahun_pertama_penarikan; ?>">
                             </div>
                         </div>
+
+                        <div class="form-group">
+                            <label for="lokasi" class="col-sm-3 control-label">Lokasi </label>
+                            <div class="col-sm-9">
+                                <select name="lokasi" id="lokasi" class="form-control" multiple>
+                           
+                                <?php $key = array($detail->lokasi);
+                                $a = array();
+                                $a = explode(",", $detail->lokasi);
+                                $key2 = array("1", "2", "4", "3");
+                                 
+
+
+                                foreach($lokasi as $row ){ ?>
+                                <option value="<?php echo $row['id']; ?>" <?php echo in_array($row['id'] , $a) ? 'selected' : '' ?>><?php echo $row['nama']; ?>
+                                 </option>
+                                 <?php } ?>
+                                 </select>
+                            </div>
+                        </div>
+
                         
                      
                         <div class="form-group">
@@ -219,7 +254,7 @@
                             </div>
                         </div>
 
-                         <div class="form-group">
+                        <div class="form-group">
                             <label for="id_status_lembaga" class="col-sm-3 control-label">Status Kesiapan K/L</label>
                             <div class="col-sm-9">
                                 <select name="id_status_lembaga" id="id_status_lembaga" class="form-control" >
@@ -325,7 +360,7 @@
             width: "100%"
         });
 
-        $("#id_infra").select2({
+        $("#infra").select2({
             placeholder: "Pilih Kategori",
             width: "100%"
         });
@@ -349,6 +384,13 @@
         $("#id_status").select2({
             placeholder: "Pilih Sektor",
             width: "100%"
+        });
+
+        $("#lokasi").select2({
+            placeholder: "Pilih Lokasi",
+            width: "100%",
+            multiple:true,
+            tags: true
         });
         
         
@@ -404,6 +446,8 @@
             var id_infra                   = $("#id_infra").val();
             var id_sektor                   = $("#id_sektor").val();
             var id_status                   = $("#id_status").val();
+            var lokasi                   = $("#lokasi").val();
+            var tahun_usulan                   = $("#tahun_usulan").val();
             
             var form_data   = new FormData();
             
@@ -429,6 +473,8 @@
             form_data.append('id_sektor', id_sektor);
             form_data.append('infra', id_infra);
             form_data.append('id_status', id_status);
+            form_data.append('lokasi', lokasi);
+            form_data.append('tahun_usulan', tahun_usulan);
 
             $.ajax({
                 url: '<?php echo base_url(); ?>bluebook/bb_simpan/edit',

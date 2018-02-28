@@ -35,7 +35,7 @@
 			<td><?php 
 
               if($value['id_bluebook']!= ""){
-                  echo $this->Bluebook_model->kode_bluebook($value['id_bluebook'])->nama;; 
+                  echo $this->Bluebook_model->kode_bluebook($value['id_bluebook'])->nama; 
                }else {
                   echo ""; 
                     }  ?>

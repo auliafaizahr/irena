@@ -37,6 +37,31 @@
                             </div>
                         </div>
 
+                        <div class="form-group">
+                            <label for="id_infra" class="col-sm-3 control-label">Kategori </label>
+                            <div class="col-sm-9">
+                                <select name="id_infra" id="id_infra" class="form-control"  >
+                                     <option value="1">Infrastruktur</option>
+                                     <option value="2">Non Infrastruktur</option>
+                                      
+                                   
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="id_sektor" class="col-sm-3 control-label">Sektor </label>
+                            <div class="col-sm-9">
+                                <select name="id_sektor" id="id_sektor" class="form-control"  >
+                                     
+                                    <?php foreach($sektor as $row){ ?>
+                                        <option value="<?php echo $row['id']; ?>"><?php echo $row['nama']; ?>
+                                      </option>
+                                    <?php } ?>
+                                </select>
+                            </div>
+                        </div>
+
 
                         <div class="form-group">
                             <label for="id_program" class="col-sm-3 control-label">Program </label>
@@ -104,61 +129,33 @@
                         </div>
                         
                      
-                        <div class="form-group">
-                            <label for="judul_proyek_eng" class="col-sm-3 control-label">Judul EN</label>
-                            <div class="col-sm-9">
-                                <input type="text" name="judul_proyek_eng" id="judul_proyek_eng" class="form-control" placeholder="Judul Proyek Dalam Bahasa Inggris" value="<?php echo $detail->judul_proyek_eng; ?>">
-                            </div>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="judul_proyek_id" class="col-sm-3 control-label">Judul ID</label>
-                            <div class="col-sm-9">
-                                <input type="text" name="judul_proyek_id" id="judul_proyek_id" class="form-control" placeholder="Judul Proyek Dalam Bahasa Indonesia" value="<?php echo $detail->judul_proyek_id; ?>">
-                            </div>
-                        </div>
-
-                         <div class="form-group">
-                            <label for="ruang_lingkup_eng" class="col-sm-3 control-label">Ruang Lingkup EN</label>
-                            <div class="col-sm-9">
-                                <input type="text" name="ruang_lingkup_eng" id="" class="form-control" placeholder="Ruang Lingkup dalam Bahasa Inggris" value="<?php echo $detail->ruang_lingkup_eng; ?>">
-                            </div>
-                        </div>
-
-                         <div class="form-group">
-                            <label for="ruang_lingkup_id" class="col-sm-3 control-label">Ruang Lingkup ID</label>
-                            <div class="col-sm-9">
-                                <input type="text" name="ruang_lingkup_id" id="ruang_lingkup_id" class="form-control" placeholder="Ruang Lingkup dalam Bahasa Indonesia" value="<?php echo $detail->ruang_lingkup_id; ?>">
-                            </div>
-                        </div>
-
-                         <div class="form-group">
-                            <label for="nilai_pinjaman" class="col-sm-3 control-label">Nilai Pinjaman</label>
-                            <div class="col-sm-9">
-                                <input type="text" name="nilai_pinjaman" id="nilai_pinjaman" class="form-control" placeholder="Dana Pinjaman yang Diajukan" value="<?php echo $detail->nilai_pinjaman; ?>">
-                            </div>
-                        </div>
-
-                         <div class="form-group">
-                            <label for="nilai_hibah" class="col-sm-3 control-label">Nilai Hibah</label>
-                            <div class="col-sm-9">
-                                <input type="text" name="nilai_hibah" id="nilai_hibah" class="form-control" placeholder="Nilai Hibah" value="<?php echo $detail->nilai_hibah; ?>">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="dana_pendamping" class="col-sm-3 control-label">Dana Pendamping</label>
-                            <div class="col-sm-9">
-                                <input type="text" name="dana_pendamping" id="dana_pendamping" class="form-control" placeholder="Dana Pendamping" value="<?php echo $detail->dana_pendamping; ?>">
-                            </div>
-                        </div>
-
+                      
                         <div class="form-group">
                             <label for="tgl_dk" class="col-sm-3 control-label">Tanggal DK</label>
                             <div class="col-sm-9">
                                 <div class="input-group date" >
-                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" name= "tgl_dk" id="tgl_dk" class="form-control" value="" data-date-format='yyyy-mm-dd'>
+                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" name= "tgl_dk" id="tgl_dk" class="form-control" value="<?php echo $detail->tgl_DK; ?>" data-date-format='yyyy-mm-dd'>
                                 </div>
+                            </div>
+                        </div>
+
+                          <div class="form-group">
+                            <label for="lokasi" class="col-sm-3 control-label">Lokasi </label>
+                            <div class="col-sm-9">
+                                <select name="lokasi" id="lokasi" class="form-control" multiple>
+                           
+                                <?php $key = array($detail->lokasi);
+                                $a = array();
+                                $a = explode(",", $detail->lokasi);
+                                $key2 = array("1", "2", "4", "3");
+                                 
+
+
+                                foreach($lokasi as $row ){ ?>
+                                <option value="<?php echo $row['id']; ?>" <?php echo in_array($row['id'] , $a) ? 'selected' : '' ?>><?php echo $row['nama']; ?>
+                                 </option>
+                                 <?php } ?>
+                                 </select>
                             </div>
                         </div>
 
@@ -218,6 +215,56 @@
                                 </select>
                             </div>
                         </div>
+
+                          <div class="form-group">
+                            <label for="judul_proyek_eng" class="col-sm-3 control-label">Judul EN</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="judul_proyek_eng" id="judul_proyek_eng" class="form-control" placeholder="Judul Proyek Dalam Bahasa Inggris" value="<?php echo $detail->judul_proyek_eng; ?>">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="judul_proyek_id" class="col-sm-3 control-label">Judul ID</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="judul_proyek_id" id="judul_proyek_id" class="form-control" placeholder="Judul Proyek Dalam Bahasa Indonesia" value="<?php echo $detail->judul_proyek_id; ?>">
+                            </div>
+                        </div>
+
+                         <div class="form-group">
+                            <label for="ruang_lingkup_eng" class="col-sm-3 control-label">Ruang Lingkup EN</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="ruang_lingkup_eng" id="" class="form-control" placeholder="Ruang Lingkup dalam Bahasa Inggris" value="<?php echo $detail->ruang_lingkup_eng; ?>">
+                            </div>
+                        </div>
+
+                         <div class="form-group">
+                            <label for="ruang_lingkup_id" class="col-sm-3 control-label">Ruang Lingkup ID</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="ruang_lingkup_id" id="ruang_lingkup_id" class="form-control" placeholder="Ruang Lingkup dalam Bahasa Indonesia" value="<?php echo $detail->ruang_lingkup_id; ?>">
+                            </div>
+                        </div>
+
+                         <div class="form-group">
+                            <label for="nilai_pinjaman" class="col-sm-3 control-label">Nilai Pinjaman</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="nilai_pinjaman" id="nilai_pinjaman" class="form-control" placeholder="Dana Pinjaman yang Diajukan" value="<?php echo $detail->nilai_pinjaman; ?>">
+                            </div>
+                        </div>
+
+                         <div class="form-group">
+                            <label for="nilai_hibah" class="col-sm-3 control-label">Nilai Hibah</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="nilai_hibah" id="nilai_hibah" class="form-control" placeholder="Nilai Hibah" value="<?php echo $detail->nilai_hibah; ?>">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="dana_pendamping" class="col-sm-3 control-label">Dana Pendamping</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="dana_pendamping" id="dana_pendamping" class="form-control" placeholder="Dana Pendamping" value="<?php echo $detail->dana_pendamping; ?>">
+                            </div>
+                        </div>
+
 
 
 
@@ -311,11 +358,30 @@
             width: "100%"
         });
 
+        $("#id_sektor").select2({
+            placeholder: "Pilih Status Lembaga",
+            width: "100%"
+        });
+
+        $("#id_infra").select2({
+            placeholder: "Pilih Status Lembaga",
+            width: "100%"
+        });
+
 
          $("#id_greenbook").select2({
             placeholder: "Pilih Kode Greenbook",
             width: "100%"
         });
+
+
+        $("#lokasi").select2({
+            placeholder: "Pilih Lokasi",
+            width: "100%",
+            multiple:true,
+            tags: true
+        });
+        
         
         
 
@@ -324,7 +390,7 @@
             width: "100%"
         });
 
-         $("#tgl").datepicker({
+         $("#tgl_dk").datepicker({
             todayHighlight: true
          });
         

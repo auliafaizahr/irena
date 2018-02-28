@@ -284,6 +284,7 @@
             var tahun_usulan                    = $("#tahun_usulan").val();
             var id_sektor                    = $("#id_sektor").val();
             var id_infra                    = $("#id_infra").val();
+            var Kategori                    = $("#Kategori").val();
             
            
             
@@ -309,6 +310,7 @@
             form_data.append('dana_pendamping', dana_pendamping);
             form_data.append('proyeksi_tahun_pertama_penarikan', proyeksi_tahun_pertama_penarikan);
             form_data.append('id_infra', id_infra);
+            form_data.append('Kategori', Kategori);
     
             
 

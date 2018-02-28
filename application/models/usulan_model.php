@@ -196,6 +196,66 @@ class Usulan_model extends CI_Model {
 		return $a->row();
 	}
 
+	public function ambil_nama_lokasi($x)
+	{
+		$query = "SELECT * FROM irena_provinsi_kabkota WHERE id = '$x'";
+		 $a= $this->db->query($query);
+
+		return $a->row();
+	}
+
+	public function ambil_nama_sektor($x)
+	{
+		$query = "SELECT * FROM irena_sektor WHERE id = '$x'";
+		 $a= $this->db->query($query);
+
+		return $a->row();
+	}
+
+	public function ambil_nama_sektor_($x)
+	{
+		$query = "SELECT * FROM irena_sektor WHERE id = '$x'";
+		 $a= $this->db->query($query);
+
+		return $a->result();
+	}
+
+	public function ambil_infra()
+	{
+		$query = "SELECT * FROM irena_infra";
+		 $a= $this->db->query($query);
+
+		return $a->result_array();
+	}
+
+	public function ambil_infra_id($x)
+	{
+		$query = "SELECT * FROM irena_infra WHERE id = '$x'";
+		 $a= $this->db->query($query);
+
+		return $a->result();
+	}
+
+
+	public function ambil_nama_statusumum($x)
+	{
+		$query = "SELECT * FROM irena_status_umum WHERE id = '$x'";
+		 $a= $this->db->query($query);
+
+		return $a->row();
+	}
+
+	public function ambil_nama_statusumum_($x)
+	{
+		$query = "SELECT * FROM irena_status_umum WHERE id = '$x'";
+		 $a= $this->db->query($query);
+
+		return $a->result();
+	}
+
+
+
+
 
 	public function ambil_program_proyek($x)
 	{
@@ -259,7 +319,6 @@ class Usulan_model extends CI_Model {
 
 	public function ambil_gb_detail($x)
 	{
-		
 		$query = "SELECT * FROM irena_greenbook_proyek WHERE id_usulan = '$x'";
 		 $a= $this->db->query($query);
 		return $a->result();
@@ -288,7 +347,7 @@ class Usulan_model extends CI_Model {
 		public function ambil_gb($x)
 	{
 		
-		$query = "SELECT * FROM irena_bluebook_kode WHERE id = '$x'";
+		$query = "SELECT * FROM irena_greenbook_kode WHERE id = '$x'";
 		 $a= $this->db->query($query);
 		return $a->result();
 		
@@ -322,7 +381,7 @@ class Usulan_model extends CI_Model {
 		
 	}
 
-	public function semua_status_umum($x)
+	public function semua_status_umum()
 	{
 		
 		$query = "SELECT * FROM irena_status_umum ORDER BY nama ASC";

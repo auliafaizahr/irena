@@ -16,14 +16,83 @@
 
 
               <tr class="read">
-                <td class="mail-ontact text-right">Instansi Eselon I</td>
-                <td class="mail-subject"><!-- <?php echo $usulan->instansi_eselon_satu; ?> --></td>
+                <td class="mail-ontact text-right">Instansi Pelaksana</td>
+                <td class="mail-subject"><?php echo $detail->instansi_pelaksana; ?> </td>
               </tr>
 
+              <tr class="read">
+                <td class="mail-ontact text-right">Tahun Usulan</td>
+                <td class="mail-subject"><?php echo $detail->tahun_usulan; ?></td>
+              </tr>
+
+              <tr class="read">
+                <td class="mail-ontact text-right">Referensi Bluebook</td>
+                <td class="mail-subject"><?php echo $this->Bluebook_model->kode_bluebook($detail->id_bluebook)->nama; ?></td>
+              </tr>
+              <tr class="read">
+                <td class="mail-ontact text-right">Kategori</td>
+                <td class="mail-subject"><?php 
+                if ($detail->infra == '1') {
+                 echo "INFRASTRUKTUR";
+                }elseif ($detail->infra == '2') {
+                 echo "NON INFRASTRUKTUR";
+                  # code...
+                }
+                 ?></td>
+              </tr>
 
                <tr class="read">
                 <td class="mail-ontact text-right">Program</td>
                 <td class="mail-subject"><?php echo $this->Usulan_model->ambil_program_proyek($detail->id_program)->nama_program; ?></td>
+              </tr>
+              <tr class="read">
+                <td class="mail-ontact text-right">Sektor</td>
+                <td class="mail-subject"><?php echo $this->Usulan_model->ambil_nama_sektor($detail->id_sektor)->nama; ?></td>
+              </tr>
+              <tr class="read">
+                <td class="mail-ontact text-right">Durasi</td>
+                <td class="mail-subject"><?php echo $detail->durasi. " bulan"; ?></td>
+              </tr>
+              <tr class="read">
+                <td class="mail-ontact text-right">Lokasi</td>
+             
+                <td class="mail-subject"><?php $a =  explode(",", $detail->lokasi); 
+                   $banyak_lokasi = (count($a));
+
+                   $lokasi = array();
+
+                   for ($i=0; $i < $banyak_lokasi ; $i++) { 
+                     $lokasi[$i] = $this->Usulan_model->ambil_nama_lokasi($a[$i])->nama;
+                   }
+
+                   $lokasi_fix = implode(",", $lokasi);
+
+                   echo $lokasi_fix;
+
+                ?></td>
+               
+              </tr>
+              <tr class="read">
+                <td class="mail-ontact text-right">Proyeksi Tahun Pertama Penarikan</td>
+                <td class="mail-subject"><?php echo $detail->proyeksi_tahun_pertama_penarikan; ?></td>
+              </tr>
+              <tr class="read">
+                <td class="mail-ontact text-right">Indikasi Lender</td>
+                <td class="mail-subject"><?php echo $this->Bluebook_model->lender($detail->id_lender)->lender; ?></td>
+              </tr>
+              <tr class="read">
+                <td class="mail-ontact text-right">Status Umum</td>
+                <td class="mail-subject"><?php echo $this->Usulan_model->ambil_nama_statusumum($detail->id_status)->nama; ?></td>
+              </tr>
+
+               <tr class="read">
+                <td class="mail-ontact text-right">Status Lembaga</td>
+                <td class="mail-subject"><?php echo $this->Bluebook_model->status_lembaga($detail->id_status_lembaga)->status; ?></td>
+              </tr>
+
+              <tr class="read">
+                <td class="mail-ontact text-right">Status Lender</td>
+                <td class="mail-subject"><?php echo $this->Bluebook_model->status_lender($detail->id_status_lender)->status;?></td>
               </tr>
               <tr class="read">
                 <td class="mail-ontact text-right">Judul EN</td>
@@ -33,10 +102,7 @@
                 <td class="mail-ontact text-right">Judul ID</td>
                 <td class="mail-subject"><?php echo $detail->judul_proyek_id; ?></td>
               </tr>
-              <tr class="read">
-                <td class="mail-ontact text-right">Durasi</td>
-                <td class="mail-subject"><?php echo $detail->durasi. " bulan"; ?></td>
-              </tr>
+            
               <tr class="read">
                 <td class="mail-ontact text-right">Ruang Lingkup ENG</td>
                 <td class="mail-subject"><?php echo  $detail->ruang_lingkup_eng; ?></td>

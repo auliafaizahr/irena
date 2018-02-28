@@ -21,9 +21,27 @@
                 <td class="mail-subject"><?php echo $detail->instansi_pelaksana; ?></td>
               </tr>
                <tr class="read">
+                <td class="mail-ontact text-right">Tahun Usulan</td>
+                <td class="mail-subject"><?php echo $detail->tahun_usulan; ?></td>
+              </tr>
+               <tr class="read">
+                <td class="mail-ontact text-right">Kategori</td>
+                <td class="mail-subject"><?php 
+                if ($detail->infra == '1') {
+                 echo "INFRASTRUKTUR";
+                }elseif ($detail->infra == '2') {
+                 echo "NON INFRASTRUKTUR";
+                  # code...
+                }
+                 ?></td>
+              </tr>
+              <tr class="read">
                 <td class="mail-ontact text-right">Program</td>
                 <td class="mail-subject"><?php echo ($detail->id_program!="")?$this->Usulan_model->ambil_program_proyek($detail->id_program)->nama_program:'';?>
-                </td>
+              </td>
+              <tr class="read">
+                <td class="mail-ontact text-right">Sektor</td>
+                <td class="mail-subject"><?php echo $this->Usulan_model->ambil_nama_sektor($detail->id_sektor)->nama; ?></td>
               </tr>
               <tr class="read">
                 <td class="mail-ontact text-right">Kode Bluebook</td>
@@ -33,6 +51,26 @@
               <tr class="read">
                 <td class="mail-ontact text-right">Kode Greenbook</td>
                 <td class="mail-subject"><?php echo ($detail->id_greenbook!="")?$this->Bluebook_model->kode_greenbook($detail->id_greenbook)->nama:'';?></td>
+              </tr>
+
+              <tr class="read">
+                <td class="mail-ontact text-right">Lokasi</td>
+             
+                <td class="mail-subject"><?php $a =  explode(",", $detail->lokasi); 
+                   $banyak_lokasi = (count($a));
+
+                   $lokasi = array();
+
+                   for ($i=0; $i < $banyak_lokasi ; $i++) { 
+                     $lokasi[$i] = $this->Usulan_model->ambil_nama_lokasi($a[$i])->nama;
+                   }
+
+                   $lokasi_fix = implode(",", $lokasi);
+
+                   echo $lokasi_fix;
+
+                ?></td>
+               
               </tr>
                <tr class="read">
                 <td class="mail-ontact text-right">Indikasi Lender</td>

@@ -40,6 +40,71 @@
                             </div>
                         </div>
 
+                         <div class="form-group">
+                            <label for="tahun_usulan" class="col-sm-3 control-label">Tahun Usulan</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="tahun_usulan" id="tahun_usulan" class="form-control" placeholder="Tahun Usulan" value="<?php echo $detail->tahun_usulan; ?>">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="infra" class="col-sm-3 control-label">Kategori </label>
+                            <div class="col-sm-9">
+                                <select name="infra" id="infra" class="form-control" >
+                                    <?php 
+                                        $query  = $this->Usulan_model->ambil_infra_id($detail->infra); 
+                                        foreach ($query as $key) 
+                                        {
+                                    ?>
+                                        <option value="<?php echo $key->id; ?>"><?php echo $key->nama; ?></option>
+                                    <?php } ?>
+                                    <?php foreach($infra as $row){ ?>
+                                        <option value="<?php echo $row['id']; ?>"><?php echo $row['nama']; ?>
+                                      </option>
+                                    <?php } ?>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="id_sektor" class="col-sm-3 control-label">Sektor </label>
+                            <div class="col-sm-9">
+                                <select name="id_sektor" id="id_sektor" class="form-control" >
+                                    <?php 
+                                        $query  = $this->Usulan_model->ambil_nama_sektor_($detail->id_sektor); 
+                                        foreach ($query as $key) 
+                                        {
+                                    ?>
+                                        <option value="<?php echo $key->id; ?>"><?php echo $key->nama; ?></option>
+                                    <?php } ?>
+                                    <?php foreach($sektor as $row){ ?>
+                                        <option value="<?php echo $row['id']; ?>"><?php echo $row['nama']; ?>
+                                      </option>
+                                    <?php } ?>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="id_status" class="col-sm-3 control-label">Status Umum </label>
+                            <div class="col-sm-9">
+                                <select name="id_status" id="id_status" class="form-control" >
+                                     <?php 
+                                        $query  = $this->Usulan_model->ambil_nama_statusumum_($detail->id_status); 
+                                        foreach ($query as $key) 
+                                        {
+                                    ?>
+                                        <option value="<?php echo $key->id; ?>"><?php echo $key->nama; ?></option>
+                                    <?php } ?>
+                                    <?php foreach($status as $row){ ?>
+                                        <option value="<?php echo $row['id']; ?>"><?php echo $row['nama']; ?>
+                                      </option>
+                                    <?php } ?>
+                                </select>
+                            </div>
+                        </div>
+                        
+
 
                         <div class="form-group">
                             <label for="id_program" class="col-sm-3 control-label">Program </label>
@@ -155,7 +220,8 @@
                                 <textarea name="outcome" id="outcome" class="col-sm-12" rows="5" placeholder="Ringkasan Proyek"><?php echo $detail->outcome; ?></textarea>
                             </div>
                         </div>
-                        
+
+                    
                         <div class="form-group">
                             <label for="durasi" class="col-sm-3 control-label">Durasi</label>
                             <div class="col-sm-6">
@@ -214,6 +280,21 @@
             width: "100%"
         });
 
+        $("#id_sektor").select2({
+            placeholder: "Pilih Tahun",
+            width: "100%"
+        });
+
+        $("#id_status").select2({
+            placeholder: "Pilih Tahun",
+            width: "100%"
+        });
+
+         $("#infra").select2({
+            placeholder: "Pilih Tahun",
+            width: "100%"
+        });
+
          $("#lokasi").select2({
             placeholder: "Pilih Lokasi",
             width: "100%",
@@ -223,34 +304,7 @@
 
         });
 
-     /*     selections = [
-        {id:1,text:'Enhancement'},
-        {id:2,text:'Bug'},
-        {id:3,text:'Duplicate'},
-        {id:4,text:'Invalid'},
-        {id:5,text:'Won\'t Fix'}
-            ];
-
-             var extract_preselected_ids = function(element){
-        var preselected_ids = [];
-        if(element.val())
-            $(element.val().split(",")).each(function () {
-                preselected_ids.push({id: this});
-            });
-        console.log(preselected_ids);
-        return preselected_ids;
-    };
     
-    var preselect = function(preselected_ids){
-        var pre_selections = [];
-        for(index in selections)
-            for(id_index in preselected_ids)
-                if (selections[index].id == preselected_ids[id_index].id)
-                    pre_selections.push(selections[index]);
-        return pre_selections;
-    };
-
-*/
         
         
         $('#id_instansi').change(function () {

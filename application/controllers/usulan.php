@@ -389,12 +389,18 @@ class Usulan extends CI_Controller {
 	public function edit() {
 
 		$this->load->model('Usulan_model');
+		$this->load->model('Greenbook_model');
+		$this->load->model('Bluebook_model');
 		$a = $this->input->post('id');
 		
 		$data['detail'] = $this->Usulan_model->detail_proyek($a);
 		$data['lembaga']= $this->Usulan_model->ambil_instansi();
 		$data['program']= $this->Usulan_model->ambil_program();
 		$data['lokasi'] = $this->Usulan_model->ambil_lokasi();
+		$data['sektor'] = $this->Greenbook_model->ambil_sektor();
+		$data['status'] = $this->Bluebook_model->ambil_statusumum();
+		$data['infra'] = $this->Usulan_model->ambil_infra();
+		
 		
 		
 
