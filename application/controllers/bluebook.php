@@ -129,6 +129,26 @@ class Bluebook extends CI_Controller {
 			}elseif($this->uri->segment(3) == 'edit'){
 				//$data['id']		= $this->input->post('id');
 				$result 		= $this->Bluebook_model->bb_simpan_data_edit($data);
+
+				$lokasi 		= $this->input->post('lokasi');
+				$a 				= explode(",", $lokasi);
+				$panjang_a		= (count($a));
+				$b 				= array();
+
+				for ($i=0; $i < $panjang_a ; $i++) { 
+					$b[$i] = $a[$i];
+				}
+
+				
+
+
+
+
+				/*$isi = array(
+					'id_bb_proyek'  		=> $this->input->post('id'),
+					'id_bb_proyek'  		=> $this->input->post('id'),
+					);*/
+				//$result2		= $this->Bluebook_model->tambah_proyek_lokasi($isi);
 			}
 			
 		}

@@ -117,16 +117,7 @@
                               $is_dk = $this->Greenbook_model->ambil_layak($value['id'])->is_dk;
                               $dk_kasubdit = $this->Greenbook_model->ambil_layak($value['id'])->is_dk_kasubdit;
                              $c = $value['id'];
-
-                      /*  if ($is_dk == '1') {
-                          echo '<a ><i class="btn fa fa-check-square btn-primary"></i></a>';
-                        }else{
-                          echo "<div class='btn-group'>
-                            <button type='button'  class='btn btn-xs  btn-danger' onclick='nilai_dk($layak, $c)' ><i class='fa fa-plus'></i> Tambah ke DK</button>
-                        </div>";
-                        }
-*/
-                     
+                 
                         if ($is_dk == '1') {
 
                             if ($dk_kasubdit == '0') {
@@ -192,26 +183,9 @@
 
 
 <script>
-  function detail_list(page){
-    $.ajax({
-      url: "<?php echo base_url(); ?>"+page,
-      beforeSend: function(){
-        
-        showLoading();
-        $('#loader').fadeOut(1000);
-      },
-      success:function(response){
+ 
+  $(document).on('click', '.layak', function(){  
 
-        $("#tmpModal").html(response);
-        $('#modalDetail').modal('show');
-      },
-      dataType:"html"});
-    return false;
-  }
-
-    $(document).on('click', '.layak', function(){  
-           
-         
              var id = $(this).attr("id"); 
              var kasubdit_layak = $(this).attr("data-kasubdit"); 
              var layak = $(this).attr("data-id"); 
@@ -310,44 +284,12 @@
          });
 
 
-  function nilai_admin(adm, c, kasubdit){
-    console.log("sukses");
-   
-     var id = c;
-     console.log(id); 
-    if (adm == '0') {
-      console.log("sukses");
-  
-    $.ajax({
-      type : 'post',
-                url : "<?php echo base_url(); ?>Usulan/adm",
-                data :  'id='+ id,
-                success : function(response){
-                 $("#tmpModal").html(response);
-                $('#modal_adm').modal('show');
-              
-                //  $('#modalKecil').modal('show');
-               // $('.fetched-data-lagi').html(data);//menampilkan data ke dalam modal
-                },
-                dataType:"html"
-    });
-    } else if ( kasubdit == '0' ){
-     
-     alert('Menunggu penilaian kasubdit')
-      console.log("gagal bray");
-    } else {
-      alert('Selesaikan penilaian kelayakan terlebih dahulu');
-    }
 
-  }
 
    $(document).on('click', '.rekam_gb', function(){  
            
          
-             var id = $(this).attr("id"); 
-           //console.log(id);
-           //var rowid = $(e.relatedTarget).data('id');
-           //console.log(rowid);
+          var id = $(this).attr("id"); 
            $.ajax({
                 type : 'post',
                 url : "<?php echo base_url(); ?>greenbook/tampilkan_log_gb_index",
@@ -397,10 +339,10 @@
      $(document).on('click', '.del-proyek', function(){  
            
           
-          //$('#myModalDetail').modal('show');
+         
              var id = $(this).attr("id"); 
            console.log(id);
-           //var rowid = $(e.relatedTarget).data('id');
+           
            //console.log(rowid);
            $.ajax({
                 type : 'post',
@@ -412,7 +354,7 @@
                 $('#modalHapus').modal('show');
               
               
-                //  $('#modalKecil').modal('show');
+              
                // $('.fetched-data-lagi').html(data);//menampilkan data ke dalam modal
                 },
                 dataType:"html"
@@ -452,8 +394,7 @@
                                          $("#tmpModal").html(response);
                                       $('#modalDK').modal('show');
                                     
-                                      //  $('#modalKecil').modal('show');
-                                     // $('.fetched-data-lagi').html(data);//menampilkan data ke dalam modal
+                                    
                                       },
                                       dataType:"html"
                           });
@@ -471,8 +412,7 @@
                                                $("#tmpModal").html(response);
                                               $('#modalDK ').modal('show');
                                             
-                                              //  $('#modalKecil').modal('show');
-                                             // $('.fetched-data-lagi').html(data);//menampilkan data ke dalam modal
+                                              
                                               },
                                               dataType:"html"
                                   });
@@ -503,8 +443,6 @@
                                          $("#tmpModal").html(response);
                                       $('#modalDK').modal('show');
                                     
-                                      //  $('#modalKecil').modal('show');
-                                     // $('.fetched-data-lagi').html(data);//menampilkan data ke dalam modal
                                       },
                                       dataType:"html"
                           });
@@ -522,8 +460,7 @@
                                                $("#tmpModal").html(response);
                                               $('#modalDK ').modal('show');
                                             
-                                              //  $('#modalKecil').modal('show');
-                                             // $('.fetched-data-lagi').html(data);//menampilkan data ke dalam modal
+                                             
                                               },
                                               dataType:"html"
                                   });
@@ -536,36 +473,6 @@
           
       }
         
-           //console.log(id); 
-  /*        if (layak_kasubdit == '2') {
-            console.log("sukses");
-         console.log(id);
-             $.ajax({
-                     type : 'post',
-                      url : "<?php echo base_url(); ?>Greenbook/tambahkeDK",
-                      data :  'id='+ id,
-                      success : function(response){
-                        console.log("sudah ditambah");
-                        //console.log(response);
-                      
-                       $("#tmpModal").html(response);
-                      $('#modalDK').modal('show');
-                    
-                      //  $('#modalKecil').modal('show');
-                     // $('.fetched-data-lagi').html(data);//menampilkan data ke dalam modal
-                      },
-                      dataType:"html"
-                      
-          });
-             return false;
-          }else {
-              
-              alert("Harus menyelesaikan penilaian kelayakan administrasi terlebih dahulu");
-            console.log("gagal bray");
-              return false;
-          }
-*/
-
 
 
           });
@@ -576,8 +483,7 @@
           
              var id = $(this).attr("id"); 
            console.log(id);
-           //var rowid = $(e.relatedTarget).data('id');
-           //console.log(rowid);
+     
            $.ajax({
                 type : 'post',
                 url : "<?php echo base_url(); ?>Greenbook/detil",
@@ -592,32 +498,23 @@
 
   $(document).on('click', '.edit', function(){  
            
-           // console.log(id);
-           //var rowid = $(e.relatedTarget).data('id');
-           //console.log(rowid);
-          /* $('#myModalDetail').modal('show');
-           });*/
-
-          //$('#ModalEdit').modal('show');
+          
              var id = $(this).attr("id"); 
            console.log(id);
-           //var rowid = $(e.relatedTarget).data('id');
-           //console.log(rowid);
+         
           $.ajax({
                
                 url : "<?php echo base_url(); ?>Greenbook/edit",
                 data :  'id='+ id,
                  type : 'post',
                 success : function(response){
-                //$('.fetched-data-arsip').html(data);//menampilkan data ke dalam modal
+              
 
                   $("#tmpModal").html(response);
                 $('#ModalEdit').modal('show');
                 console.log("hahaha");
                 console.log(id);
-              
-                //  $('#modalKecil').modal('show');
-               // $('.fetched-data-lagi').html(data);//menampilkan data ke dalam modal
+            
                 },
                 dataType:"html"
                 });

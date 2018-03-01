@@ -163,9 +163,14 @@
 								<a href="<?php echo base_url(); ?>usulan/report_pln">Blue Book</a>
 							</li>
 
+
+
                         	<li <?php if($this->uri->segment(1)=="Usulan"){ echo "class='active'"; }	?>>
 								<a href="<?php echo base_url(); ?>Usulan/report_gb">Green Book</a>
 							</li>
+
+						
+
 
 
 					
@@ -177,7 +182,7 @@
                         <ul class="nav nav-second-level">
 
                         	<li <?php if($this->uri->segment(1)=="Program"){ echo "class='active'"; }	?>>
-								<a href="<?php echo base_url(); ?>usulan/report_pln">Peta PHLN</a>
+								<a href="<?php echo base_url(); ?>usulan/map_phln">Peta PHLN</a>
 							</li>
 
                         	<li <?php if($this->uri->segment(1)=="Usulan"){ echo "class='active'"; }	?>>

@@ -38,6 +38,13 @@
                         </div>
 
                         <div class="form-group">
+                            <label for="tahun_usulan" class="col-sm-3 control-label">Tahun Usulan</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="tahun_usulan" id="tahun_usulan" class="form-control" placeholder="Proyeksi Tahun Pertama Penarikan" value="<?php echo $detail->tahun_usulan; ?>">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
                             <label for="id_infra" class="col-sm-3 control-label">Kategori </label>
                             <div class="col-sm-9">
                                 <select name="id_infra" id="id_infra" class="form-control"  >
@@ -233,14 +240,16 @@
                          <div class="form-group">
                             <label for="ruang_lingkup_eng" class="col-sm-3 control-label">Ruang Lingkup EN</label>
                             <div class="col-sm-9">
-                                <input type="text" name="ruang_lingkup_eng" id="" class="form-control" placeholder="Ruang Lingkup dalam Bahasa Inggris" value="<?php echo $detail->ruang_lingkup_eng; ?>">
+                            <textarea name="ruang_lingkup_eng" id="ruang_lingkup_eng" class="col-sm-12" rows="5" placeholder="Ruang Lingkup dalam Bahasa Inggris"><?php echo $detail->ruang_lingkup_eng; ?></textarea>
+                                
                             </div>
                         </div>
 
                          <div class="form-group">
                             <label for="ruang_lingkup_id" class="col-sm-3 control-label">Ruang Lingkup ID</label>
                             <div class="col-sm-9">
-                                <input type="text" name="ruang_lingkup_id" id="ruang_lingkup_id" class="form-control" placeholder="Ruang Lingkup dalam Bahasa Indonesia" value="<?php echo $detail->ruang_lingkup_id; ?>">
+                            <textarea name="ruang_lingkup_id" id="ruang_lingkup_id" class="col-sm-12" rows="5" placeholder="Ruang Lingkup dalam Bahasa Indonesia"><?php echo $detail->ruang_lingkup_id; ?></textarea>
+                             
                             </div>
                         </div>
 
@@ -444,6 +453,8 @@
             var id_status_lembaga                   = $("#id_status_lembaga").val();
             var id_greenbook                   = $("#id_greenbook").val();
             var tgl_dk                   = $("#tgl_dk").val();
+            var tahun_usulan                   = $("#tahun_usulan").val();
+            var lokasi                   = $("#lokasi").val();
             
             var form_data   = new FormData();
             
@@ -468,6 +479,8 @@
             form_data.append('id_status_lembaga', id_status_lembaga);
             form_data.append('id_greenbook', id_greenbook);
             form_data.append('tgl_dk', tgl_dk);
+            form_data.append('tahun_usulan', tahun_usulan);
+            form_data.append('lokasi', lokasi);
 
 
 

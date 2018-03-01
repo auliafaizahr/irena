@@ -2,7 +2,7 @@
     <div class="modal-dialog">
     <div class="modal-content">  
 				<div class="ibox-title">
-					<h5>Penilaian Kelayakan Greenbook</h5>
+					<h5>Penilaian Kelayakan Daftar Kegiatan</h5>
 				</div>
 				<form class="form-horizontal" id="htmlForm" action="" method="post" enctype="multipart/form-data"> 
 					<div class="ibox-content">
@@ -52,9 +52,9 @@
     $(document).ready(function(){
 		$('#check_nilai_layak').change(function() {
 			if($("#check_nilai_layak").is(':checked') == true){
-				$('#nilai_layak').val(1);
+				$('#nilai_layak').val(2);
 			}else{
-				$('#nilai_layak').val(0);
+				$('#nilai_layak').val(1);
 			}
 			
 		});
