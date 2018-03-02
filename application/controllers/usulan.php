@@ -624,6 +624,56 @@ class Usulan extends CI_Controller {
 	{
 		$this->load->model('Bluebook_model');
 
+		$this->load->library('googlemaps');
+
+			
+			$config['center'] = '-0.789275, 113.921327';
+			$config['zoom'] = '4';
+
+			$marker = array();
+			$marker['position'] = '0.7893, 113.9213';
+			$this->googlemaps->initialize($config);
+
+			/*$query1 = "SELECT id_provinsi FROM irena_usulan_lokasi";
+			$b = $this->db->query($query1);*/
+
+			$query = "SELECT * FROM irena_provinsi";
+			$a = $this->db->query($query);
+			foreach ($a->result() as $baris)
+			{
+				$marker = array();
+				$marker['animation'] = 'DROP';
+				$marker['icon'] = base_url().'assets/images/pink.png';
+				//$marker['icon'] = base_url().'assets/images/'.$baris->gambar;
+				$marker['position'] = $baris->latitude.','.$baris->longitude;
+				//$marker['onclick'] = '$("#myModal2'.$baris->id_kabkota.'").modal("show")';
+				$marker['onclick'] = 'alert("tes")';
+				$this->googlemaps->add_marker($marker);
+			}
+
+
+			$query1 = "SELECT * FROM irena_kabkota";
+			$b = $this->db->query($query1);
+			foreach ($b->result() as $baris1)
+			{
+				$marker1 = array();
+				$marker1['animation'] = 'DROP';
+				$marker1['icon'] = base_url().'assets/images/kuning_3.png';
+				//$marker['icon'] = base_url().'assets/images/'.$baris->gambar;
+				$marker1['position'] = $baris1->latitude.','.$baris1->longitude;
+				//$marker['onclick'] = '$("#myModal2'.$baris->id_kabkota.'").modal("show")';
+				//$marker['onclick'] = '$("#myModal2'.$baris->id_kabkota.'").modal("show")';
+				$this->googlemaps->add_marker($marker1);
+			}
+			
+			
+			
+			$data['map'] = $this->googlemaps->create_map();	
+			$data['peta'] = $this->googlemaps->create_map();	
+			
+
+			
+
 		$data['bluebook']= $this->Bluebook_model->semua_bluebook();
 		$data['program']= $this->Bluebook_model->ambil_program();
 		$data['instansi']= $this->Bluebook_model->ambil_instansi();
