@@ -1482,7 +1482,7 @@ class Usulan extends CI_Controller {
         'ruang_lingkup_id'			=> $this->input->post('ruang_lingkup_id'),
         'ruang_lingkup_eng'				=> $this->input->post('ruang_lingkup_eng'),
         'id_instansi'					=> $this->input->post('id_instansi'),
-        'id_infra'					=> $this->input->post('id_infra'),
+        'infra'					=> $this->input->post('id_infra'),
         
         'proyeksi_tahun_pertama_penarikan'			=> $this->input->post('proyeksi_tahun_pertama_penarikan'),
         'dana_usulan'				=> $this->input->post('dana_usulan'),
@@ -1504,6 +1504,27 @@ class Usulan extends CI_Controller {
     			//'is_gb_update_by'			=> $this->session->userdata('id')
     			
     		);
+
+	 	$select2data = $this->input->post('lokasi');
+	 	$array_lokasi = explode(",", $select2data);
+	 	/*$banyak_lokasi = (count($array_lokasi));
+        $lokasi = array();
+
+        for ($i=0; $i < $banyak_lokasi ; $i++) { 
+          $lokasi[$i] = $array_lokasi[$i];
+        }
+*/
+
+	 	print_r($array_lokasi);
+
+	 	$data2 = [];
+	 	foreach($array_lokasi as $lokasi) {
+	 	  $data2[] = [
+	 	    'id_usulan' => $isi['id_usulan'],
+	 	    'id_lokasi' => $lokasi,
+	 	  ];
+	 	}
+	 	$this->db->insert_batch('irena_usulan_lokasi', $data2);
 
     	
     	$this->db->insert('irena_usulan_layak', $isi);
