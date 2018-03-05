@@ -81,6 +81,21 @@ class Daftar_kegiatan extends CI_Controller {
 				$result 				= $this->hibah_model->usulan_simpan_data($data);
 			}elseif($this->uri->segment(3) == 'edit'){
 				//$data['id']		= $this->input->post('id');
+
+				$id_			= $this->input->post('id');
+				$this->dk_model->hapus_dari_lokasi($id_);
+
+				$select2data = $this->input->post('lokasi');
+				$array_lokasi = explode(",", $select2data);
+				
+				$data2 = [];
+				foreach($array_lokasi as $lokasi) {
+				  $data2[] = [
+				    'id_dk_proyek' =>  $id_,
+				    'id_lokasi' => $lokasi,
+				  ];
+				}
+	 			$this->db->insert_batch('irena_dk_lokasi', $data2);
 				$result 		= $this->dk_model->dk_simpan_data_edit($data);
 			}
 			

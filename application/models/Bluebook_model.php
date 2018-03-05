@@ -23,6 +23,14 @@ class Bluebook_model extends CI_Model {
 		return $this->db->query($sql);
 	}
 
+	public function hapus_dari_lokasi($a)
+	{
+
+		$this->db->where('id_bb_proyek', $a);
+		return $this->db->delete('irena_bb_lokasi');
+		
+	}
+
 	
 
 		function bb_simpan_data_edit($data)

@@ -124,6 +124,14 @@ class Usulan_model extends CI_Model {
 		
 	}
 
+		public function hapus_dari_lokasi($a)
+	{
+
+		$this->db->where('id_usulan', $a);
+		return $this->db->delete('irena_usulan_lokasi');
+		
+	}
+
 	/*public function ($a)
 	{
 
@@ -647,6 +655,15 @@ class Usulan_model extends CI_Model {
 
 		return $a->row();
 	}
+
+	public function ambil_view_lokasi_usulan()
+	{
+		$query = "SELECT * FROM `usulan_lokasi` GROUP BY id_lokasi";
+		 $a= $this->db->query($query);
+
+		return $a->result_array();
+	}
+
 
 	public function ambil_rekomen_BB($x)
 	{

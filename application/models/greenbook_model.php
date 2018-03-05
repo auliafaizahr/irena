@@ -17,6 +17,14 @@ class Greenbook_model extends CI_Model {
 	
 	}
 
+	public function hapus_dari_lokasi($a)
+	{
+
+		$this->db->where('id_gb_proyek', $a);
+		return $this->db->delete('irena_gb_lokasi');
+		
+	}
+
 
 	public function ambil_catatan($a)
 	{
@@ -95,6 +103,8 @@ class Greenbook_model extends CI_Model {
 		}		
 			
 	}
+
+	
 
 
 		function usulan_simpan_data($data)

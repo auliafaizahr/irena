@@ -450,7 +450,8 @@ class Usulan extends CI_Controller {
 		$this->Usulan_model->hapus_dari_layak($a);
 		$this->Usulan_model->hapus_dari_adm($a);
 		$this->Usulan_model->hapus_dari_dok($a);
-		$this->Usulan_model->hapus_dari_log($a);
+		//$this->Usulan_model->hapus_dari_log($a);
+		$this->Usulan_model->hapus_dari_lokasi($a);
 		
     }
 
@@ -637,7 +638,77 @@ class Usulan extends CI_Controller {
 			/*$query1 = "SELECT id_provinsi FROM irena_usulan_lokasi";
 			$b = $this->db->query($query1);*/
 
-			$query = "SELECT * FROM irena_provinsi";
+			$query = "SELECT * FROM usulan_lokasi GROUP BY id_lokasi";
+			$a = $this->db->query($query);
+			foreach ($a->result() as $baris)
+			{
+				$marker = array();
+				$marker['animation'] = 'DROP';
+				$marker['icon'] = base_url().'assets/images/map_abu.png';
+				//$marker['icon'] = base_url().'assets/images/'.$baris->gambar;
+				$marker['position'] = $baris->lat.','.$baris->longitude;
+				//$marker['onclick'] = '$("#myModal2'.$baris->id_kabkota.'").modal("show")';
+				//$marker['onclick'] = 'alert("tes")';
+				$this->googlemaps->add_marker($marker);
+			}
+
+			$query = "SELECT * FROM irena_view_bb_lokasi GROUP BY id_lokasi";
+			$a = $this->db->query($query);
+			foreach ($a->result() as $baris)
+			{
+				$marker = array();
+				$marker['animation'] = 'DROP';
+				$marker['icon'] = base_url().'assets/images/map_biru.png';
+				//$marker['icon'] = base_url().'assets/images/'.$baris->gambar;
+				$marker['position'] = $baris->lat.','.$baris->longitude;
+				//$marker['onclick'] = '$("#myModal2'.$baris->id_kabkota.'").modal("show")';
+				//$marker['onclick'] = 'alert("tes")';
+				$this->googlemaps->add_marker($marker);
+			}
+
+			$query = "SELECT * FROM irena_view_gb_lokasi GROUP BY id_lokasi";
+			$a = $this->db->query($query);
+			foreach ($a->result() as $baris)
+			{
+				$marker = array();
+				$marker['animation'] = 'DROP';
+				$marker['icon'] = base_url().'assets/images/map_hijau.png';
+				//$marker['icon'] = base_url().'assets/images/'.$baris->gambar;
+				$marker['position'] = $baris->lat.','.$baris->longitude;
+				//$marker['onclick'] = '$("#myModal2'.$baris->id_proyek.'").modal("show")';
+				$marker['onclick'] = 'bukaDetail('.$baris->id_lokasi.')';
+				$this->googlemaps->add_marker($marker);
+			}
+
+			$query = "SELECT * FROM irena_view_dk_lokasi GROUP BY id_lokasi";
+			$a = $this->db->query($query);
+			foreach ($a->result() as $baris)
+			{
+				$marker = array();
+				$marker['animation'] = 'DROP';
+				$marker['icon'] = base_url().'assets/images/map_kuning.png';
+				//$marker['icon'] = base_url().'assets/images/'.$baris->gambar;
+				$marker['position'] = $baris->lat.','.$baris->longitude;
+				//$marker['onclick'] = '$("#myModal2'.$baris->id_kabkota.'").modal("show")';
+				//$marker['click'] = base_url().'application/controllers/program/tampil_program';
+				$this->googlemaps->add_marker($marker);
+			}
+/*
+			$query = "SELECT * FROM irena_view_la_lokasi GROUP BY id_lokasi";
+			$a = $this->db->query($query);
+			foreach ($a->result() as $baris)
+			{
+				$marker = array();
+				$marker['animation'] = 'DROP';
+				$marker['icon'] = base_url().'assets/images/map_coklat.png';
+				//$marker['icon'] = base_url().'assets/images/'.$baris->gambar;
+				$marker['position'] = $baris->lat.','.$baris->longitude;
+				//$marker['onclick'] = '$("#myModal2'.$baris->id_kabkota.'").modal("show")';
+				$marker['onclick'] = 'alert("tes")';
+				$this->googlemaps->add_marker($marker);
+			}*/
+/*
+			$query = "SELECT * FROM usulan_lokasi GROUP BY id_lokasi";
 			$a = $this->db->query($query);
 			foreach ($a->result() as $baris)
 			{
@@ -645,14 +716,15 @@ class Usulan extends CI_Controller {
 				$marker['animation'] = 'DROP';
 				$marker['icon'] = base_url().'assets/images/pink.png';
 				//$marker['icon'] = base_url().'assets/images/'.$baris->gambar;
-				$marker['position'] = $baris->latitude.','.$baris->longitude;
+				$marker['position'] = $baris->lat.','.$baris->longitude;
 				//$marker['onclick'] = '$("#myModal2'.$baris->id_kabkota.'").modal("show")';
 				$marker['onclick'] = 'alert("tes")';
 				$this->googlemaps->add_marker($marker);
 			}
+*/
 
 
-			$query1 = "SELECT * FROM irena_kabkota";
+			/*$query1 = "SELECT * FROM irena_kabkota";
 			$b = $this->db->query($query1);
 			foreach ($b->result() as $baris1)
 			{
@@ -665,7 +737,7 @@ class Usulan extends CI_Controller {
 				//$marker['onclick'] = '$("#myModal2'.$baris->id_kabkota.'").modal("show")';
 				$this->googlemaps->add_marker($marker1);
 			}
-			
+			*/
 			
 			
 			$data['map'] = $this->googlemaps->create_map();	
@@ -673,13 +745,13 @@ class Usulan extends CI_Controller {
 			
 
 			
-
+/*
 		$data['bluebook']= $this->Bluebook_model->semua_bluebook();
 		$data['program']= $this->Bluebook_model->ambil_program();
 		$data['instansi']= $this->Bluebook_model->ambil_instansi();
 		$data['lender']= $this->Bluebook_model->semua_lender();
 		$data['sektor']= $this->Bluebook_model->ambil_sektor();
-		$data['status']= $this->Bluebook_model->ambil_statusumum();
+		$data['status']= $this->Bluebook_model->ambil_statusumum();*/
 		
     	$this->load->view('templates/header'); 
 		$this->load->view('Peta/map_phln', $data);
@@ -941,7 +1013,22 @@ class Usulan extends CI_Controller {
 				
 				$result 				= $this->hibah_model->usulan_simpan_data($data);
 			}elseif($this->uri->segment(3) == 'edit'){
-				//$data['id']		= $this->input->post('id');
+				$id_			= $this->input->post('id');
+				$this->Usulan_model->hapus_dari_lokasi($id_);
+
+				$select2data = $this->input->post('lokasi');
+				$array_lokasi = explode(",", $select2data);
+				
+				$data2 = [];
+				foreach($array_lokasi as $lokasi) {
+				  $data2[] = [
+				    'id_usulan' =>  $id_,
+				    'id_lokasi' => $lokasi,
+				  ];
+				}
+	 			$this->db->insert_batch('irena_usulan_lokasi', $data2);
+
+
 				$result 		= $this->Usulan_model->usulan_simpan_data_edit($data);
 			}
 			
@@ -1507,16 +1594,7 @@ class Usulan extends CI_Controller {
 
 	 	$select2data = $this->input->post('lokasi');
 	 	$array_lokasi = explode(",", $select2data);
-	 	/*$banyak_lokasi = (count($array_lokasi));
-        $lokasi = array();
-
-        for ($i=0; $i < $banyak_lokasi ; $i++) { 
-          $lokasi[$i] = $array_lokasi[$i];
-        }
-*/
-
-	 	print_r($array_lokasi);
-
+	 
 	 	$data2 = [];
 	 	foreach($array_lokasi as $lokasi) {
 	 	  $data2[] = [
@@ -1524,12 +1602,13 @@ class Usulan extends CI_Controller {
 	 	    'id_lokasi' => $lokasi,
 	 	  ];
 	 	}
-	 	$this->db->insert_batch('irena_usulan_lokasi', $data2);
 
     	
     	$this->db->insert('irena_usulan_layak', $isi);
     	$this->db->insert('irena_usulan_adm', $isi);
     	$this->db->insert('irena_usulkan_bb', $isi);
+	 	$this->db->insert_batch('irena_usulan_lokasi', $data2);
+
     	$status['success'] 			= true;
 
 		}

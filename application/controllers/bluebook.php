@@ -128,17 +128,24 @@ class Bluebook extends CI_Controller {
 				$result 				= $this->hibah_model->usulan_simpan_data($data);
 			}elseif($this->uri->segment(3) == 'edit'){
 				//$data['id']		= $this->input->post('id');
+
+				$id_					= $this->input->post('id');
+				$this->Bluebook_model->hapus_dari_lokasi($id_);
+
+				$select2data 			= $this->input->post('lokasi');
+				$array_lokasi			= explode(",", $select2data);
+				
+				$data2 = [];
+				foreach($array_lokasi as $lokasi) {
+				  $data2[] = [
+				    'id_bb_proyek' 		=>  $id_,
+				    'id_lokasi' 		=> $lokasi,
+				  ];
+				}
+	 			$this->db->insert_batch('irena_bb_lokasi', $data2);
 				$result 		= $this->Bluebook_model->bb_simpan_data_edit($data);
 
-				$lokasi 		= $this->input->post('lokasi');
-				$a 				= explode(",", $lokasi);
-				$panjang_a		= (count($a));
-				$b 				= array();
-
-				for ($i=0; $i < $panjang_a ; $i++) { 
-					$b[$i] = $a[$i];
-				}
-
+			
 				
 
 

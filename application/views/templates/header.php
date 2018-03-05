@@ -26,6 +26,9 @@
     <link href="<?php //echo base_url(); ?>assets/inspinia/css/plugins/dataTables/dataTables.responsive.css" rel="stylesheet">
     <link href="<?php //echo base_url(); ?>assets/inspinia/css/plugins/dataTables/dataTables.tableTools.min.css" rel="stylesheet">
 	-->
+
+	<script src="<?php echo base_url(); ?>assets/inspinia/js/jquery-2.1.1.js"></script>
+    <script src="<?php echo base_url(); ?>assets/inspinia/js/plugins/jquery-ui/jquery-ui.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css">
 	
 	<!-- Data Picker -->

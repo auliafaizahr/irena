@@ -11,6 +11,12 @@
 		
 		</div>
     </div>
+
+        <script>
+
+        
+        
+    </script>
 	
 	 <!-- jQuery UI -->
     
@@ -63,6 +69,11 @@
 
 	 
 	<script src="<?php echo base_url(); ?>assets/js/app2.js"></script>
+
+	<script type="text/javascript">
+		
+		
+	</script>
 
 </body>
 </html>

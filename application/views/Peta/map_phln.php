@@ -55,23 +55,7 @@
 				</div>
 			</div>
 		</div>
-		
-		<div class="col-lg-6">
-			<div class="ibox float-e-margins">
-				<div class="ibox-title">
-					<h5>Sebaran Proyek Greenbook Berdasarkan Lokasi</h5> <?php //var_dump( $this->db->last_query()); ?>
-					<div class="ibox-tools">
-						<a class="collapse-link">
-							<i class="fa fa-chevron-up"></i>
-						</a>
-					</div>
-				</div>
-				<div class="ibox-content">
-					<?php echo $map['js']; ?>
-					<?php echo $map['html']; ?>
-					</div>
-				</div>
-			</div>
+
 		</div>
 	</div>
 	
@@ -80,7 +64,21 @@
 </div>
 
 <script>
-	
+	function bukaDetail(id_lokasi) {
+        	
+        	$.ajax({
+        	                  type : 'post',
+        	                  url : "<?php echo base_url(); ?>usulan/tambah_usulan",
+        	                  data :  'id='+ id_lokasi,
+        	                   success : function(response){
+        	                  $("#tmpModal").html(response);
+        	                   $('#modalTambah').modal('show');
+        	                                  
+        	                              
+        	                   },
+        	                  dataType:"html"
+        	});
+        }
 </script>
 
  
