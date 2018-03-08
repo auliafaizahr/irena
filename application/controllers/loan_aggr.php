@@ -180,6 +180,116 @@ class Loan_aggr extends CI_Controller {
 
     }
 
+    function la_simpan()
+	{
+    	$this->load->model('Usulan_model');
+    	$this->load->model('Bluebook_model');
+
+		$status = array('success' => false, 'messages' => array());
+
+
+		$this->form_validation->set_rules("id_instansi", "Instansi ", "trim|required");
+		$this->form_validation->set_rules("instansi_pelaksana", "Instansi Pelaksana", "trim|required");
+		$this->form_validation->set_rules("id_program", "Program", "trim|required");
+		$this->form_validation->set_rules("proyeksi_tahun_pertama_penarikan", "Tahun Pertama Penarikan", "trim|required");
+		$this->form_validation->set_rules("durasi", "Durasi", "trim|required|is_natural_no_zero");
+		$this->form_validation->set_rules("judul_proyek_id", "Judul Proyek dalam Bahasa Indonesia", "trim|required");
+		$this->form_validation->set_rules("judul_proyek_eng", "Judul Proyek dalam Bahasa Inggris", "trim|required");
+		$this->form_validation->set_rules("ruang_lingkup_id", "Ruang Lingkup dalam Bahasa Indonesia", "trim|required");
+		$this->form_validation->set_rules("ruang_lingkup_eng", "Ruang Lingkup dalam Bahasa Inggris", "trim|required");
+		$this->form_validation->set_rules("dana_pendamping", "Dana Pendamping", "trim|required|numeric");
+		$this->form_validation->set_rules("nilai_hibah", "Nilai Hibah", "trim|required");
+		$this->form_validation->set_rules("nilai_pinjaman", "Nilai Pinjaman", "trim|required");
+		$this->form_validation->set_rules("output", "Output", "trim|required");
+		$this->form_validation->set_rules("outcome", "Outcome", "trim|required");
+		$this->form_validation->set_rules("id_bluebook", "Kode Bluebook", "trim|required");
+		$this->form_validation->set_rules("id_lender", "Lender", "trim|required");
+		$this->form_validation->set_rules("id_status_lender", "Status Lender", "trim|required");
+		$this->form_validation->set_rules("id_status_lembaga", "Status Lembaga", "trim|required");
+	
+		
+		//$this->form_validation->set_rules("berkas", "Berka arsip", "required");
+		$this->form_validation->set_message('required', '%s harus diisi');
+		$this->form_validation->set_message('is_natural_no_zero', '%s harus diisi dengan angka dan lebih dari 0');
+
+		$this->form_validation->set_error_delimiters('<p class="text-danger">', '</p>');
+
+		if ($this->form_validation->run() == FALSE) {
+			foreach ($_POST as $key => $value) {
+				$status['messages'][$key] = form_error($key);
+			}
+			
+		}else{ //validasi benar semua
+			foreach ($_POST as $key => $value) {
+				$status['messages'][$key] = form_error($key);
+			}
+			
+			$status['success'] = true;
+			
+			$data 					= $_POST;
+			/*$data['update_by']		= $this->session->userdata('id');
+			$data['update_date']	= date('Y-m-d H:i:s');*/
+			
+			if($this->uri->segment(3) == 'tambah'){
+				$data['nilai_admin']		= 0;
+				$data['nilai_admin_ket']	= "-";
+				$data['nilai_admin_id']		= $this->session->userdata('id');
+				$data['nilai_admin_date']	= date('Y-m-d H:i:s');
+				$data['nilai_layak']		= 0;
+				$data['nilai_layak_ket']	= "-";
+				$data['nilai_layak_id']		= $this->session->userdata('id');
+				$data['nilai_layak_date']	= date('Y-m-d H:i:s');
+				$data['masuk_drkh']			= 0;
+				$data['masuk_drkh_ket']		= "-";
+				$data['masuk_drkh_id']		= $this->session->userdata('id');
+				$data['masuk_drkh_date']	= date('Y-m-d H:i:s');
+				
+				$result 				= $this->hibah_model->usulan_simpan_data($data);
+			}elseif($this->uri->segment(3) == 'edit'){
+				//$data['id']		= $this->input->post('id');
+
+				$id_					= $this->input->post('id');
+				$id_bb					= $this->input->post('id_bluebook');
+				$id_gb					= $this->input->post('id_greenbook');
+				$this->la_model->hapus_dari_lokasi($id_);
+
+				$select2data 			= $this->input->post('lokasi');
+				$array_lokasi			= explode(",", $select2data);
+				
+				$data2 = [];
+				foreach($array_lokasi as $lokasi) {
+				  $data2[] = [
+				    'id_bb_proyek' 		=>  $id_,
+				    'id_bb' 		=>  $id_bb,
+				    'id_gb' 		=>  $id_bb,
+				    'id_lokasi' 		=> $lokasi,
+				  ];
+				}
+	 			$this->db->insert_batch('irena_bb_lokasi', $data2);
+				$result 		= $this->Bluebook_model->bb_simpan_data_edit($data);
+
+			
+				/*
+
+				CREATE VIEW irena_view_bb_lokasi AS
+				SELECT irena_bb_lokasi.id AS id_proyek, irena_bb_lokasi.id_bb AS id_bb, irena_bb_lokasi.id_lokasi AS id_lokasi, irena_provinsi_kabkota.nama AS lokasi, irena_provinsi_kabkota.latitude AS latitude, irena_provinsi_kabkota.longitude AS longitude FROM irena_bb_lokasi JOIN irena_provinsi_kabkota ON irena_bb_lokasi.id_lokasi = irena_provinsi_kabkota.id
+
+*/
+
+
+				/*$isi = array(
+					'id_bb_proyek'  		=> $this->input->post('id'),
+					'id_bb_proyek'  		=> $this->input->post('id'),
+					);*/
+				//$result2		= $this->Bluebook_model->tambah_proyek_lokasi($isi);
+			}
+			
+		}
+
+		echo json_encode($status);
+
+	}
+
 	
 	
 

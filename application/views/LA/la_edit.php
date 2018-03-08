@@ -371,7 +371,7 @@
 
 
             $.ajax({
-                url: '<?php echo base_url(); ?>hibah/usulan_simpan/edit',
+                url: '<?php echo base_url(); ?>loan_aggr/la_simpan/edit',
                 dataType: 'json',
                 cache: false,
                 contentType: false,

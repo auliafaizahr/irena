@@ -89,6 +89,8 @@ class Greenbook extends CI_Controller {
 			}elseif($this->uri->segment(3) == 'edit'){
 				//$data['id']		= $this->input->post('id');
 				$id_			= $this->input->post('id');
+				$id_bb			= $this->input->post('id_bluebook');
+				$id_gb			= $this->input->post('id_greenbook');
 				$this->Greenbook_model->hapus_dari_lokasi($id_);
 
 				$select2data = $this->input->post('lokasi');
@@ -98,6 +100,8 @@ class Greenbook extends CI_Controller {
 				foreach($array_lokasi as $lokasi) {
 				  $data2[] = [
 				    'id_gb_proyek' =>  $id_,
+				    'id_bb' =>  $id_bb,
+				    'id_gb' =>  $id_gb,
 				    'id_lokasi' => $lokasi,
 				  ];
 				}

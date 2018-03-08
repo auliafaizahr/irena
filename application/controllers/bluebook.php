@@ -22,6 +22,36 @@ class Bluebook extends CI_Controller {
 			
 	}
 
+	public function detail_map()
+	{
+		$this->load->model('Greenbook_model');
+		 $this->load->model('Usulan_model');
+		 $this->load->model('Bluebook_model');
+		$id_lokasi = $this->input->post('id');
+		$data['data']= $this->Usulan_model->ambil_proyek_usulan();
+		
+		$data['lembaga']= $this->Usulan_model->ambil_instansi();
+		$data['program']= $this->Usulan_model->ambil_program();
+		$data['arsip'] = $this->Usulan_model->ambil_arsip();
+		$data['lokasi'] = $this->Usulan_model->ambil_lokasi();
+		
+		$data['lembaga']= $this->Usulan_model->ambil_instansi();
+		$data['status_lembaga']= $this->Bluebook_model->semua_status_lembaga();
+		$data['status_lender']= $this->Bluebook_model->semua_status_lender();
+		$data['bluebook']= $this->Bluebook_model->semua_bluebook();
+		$data['greenbook']= $this->Greenbook_model->ambil_greenbook();
+		$data['provinsi']= $this->Greenbook_model->ambil_provinsi();
+		$data['sektor']= $this->Greenbook_model->ambil_sektor();
+		
+		$data['lender']= $this->Bluebook_model->semua_lender();
+	
+
+
+		$this->load->view('Peta/modal_bb', $data);
+	}
+
+
+
 	
 	public function index()
 	{
@@ -130,6 +160,10 @@ class Bluebook extends CI_Controller {
 				//$data['id']		= $this->input->post('id');
 
 				$id_					= $this->input->post('id');
+				$id_bb					= $this->input->post('id_bluebook');
+				$id_instansi			= $this->input->post('id_instansi');
+				$id_lender				= $this->input->post('id_lender');
+				$id_status				= $this->input->post('id_status');
 				$this->Bluebook_model->hapus_dari_lokasi($id_);
 
 				$select2data 			= $this->input->post('lokasi');
@@ -139,6 +173,9 @@ class Bluebook extends CI_Controller {
 				foreach($array_lokasi as $lokasi) {
 				  $data2[] = [
 				    'id_bb_proyek' 		=>  $id_,
+				    'id_instansi' 		=>  $id_instansi,
+				    'id_status' 		=>  $id_status,
+				    'id_bb' 			=>  $id_bb,
 				    'id_lokasi' 		=> $lokasi,
 				  ];
 				}
@@ -146,9 +183,15 @@ class Bluebook extends CI_Controller {
 				$result 		= $this->Bluebook_model->bb_simpan_data_edit($data);
 
 			
-				
+				/*
 
+				CREATE VIEW irena_view_bb_lokasi AS
+				SELECT irena_bb_lokasi.id AS id_proyek, irena_bb_lokasi.id_bb AS id_bb, irena_bb_lokasi.id_lokasi AS id_lokasi, irena_provinsi_kabkota.nama AS lokasi, irena_provinsi_kabkota.latitude AS latitude, irena_provinsi_kabkota.longitude AS longitude FROM irena_bb_lokasi JOIN irena_provinsi_kabkota ON irena_bb_lokasi.id_lokasi = irena_provinsi_kabkota.id
 
+				CREATE VIEW irena_view_bb_lokasi AS
+				SELECT irena_bb_lokasi.id AS id_proyek, irena_instansi_2.nama_instansi AS instansi, irena_bluebook_proyek.judul_proyek_eng AS judul_proyek, irena_bluebook_proyek.nilai_pinjaman AS nilai_pinjaman, irena_lender.lender AS lender, irena_bb_lokasi.id_bb AS id_bb, irena_bluebook_kode.nama AS bluebook, irena_status_umum.nama AS status_, irena_bb_lokasi.id_lokasi AS id_lokasi, irena_provinsi_kabkota.nama AS lokasi, irena_provinsi_kabkota.latitude AS latitude, irena_provinsi_kabkota.longitude AS longitude FROM irena_bluebook_proyek JOIN irena_lender ON irena_bluebook_proyek.id_lender = irena_lender.id JOIN irena_status_umum ON irena_bluebook_proyek.id_status = irena_status_umum.id JOIN irena_instansi_2 ON irena_bluebook_proyek.id_instansi = irena_instansi_2.nama_instansi JOIN irena_provinsi_kabkota ON irena_bb_lokasi.id_lokasi = irena_provinsi_kabkota.id JOIN irena_bluebook_kode ON irena_bluebook_proyek.id_bluebook = irena_bluebook_kode.id   
+
+*/
 
 
 				/*$isi = array(

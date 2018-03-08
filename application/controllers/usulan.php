@@ -482,6 +482,34 @@ class Usulan extends CI_Controller {
 		$this->load->view('Usulan/tambah_manual', $data);
 	}
 
+	public function detail_map()
+	{
+		$this->load->model('Greenbook_model');
+		 $this->load->model('Usulan_model');
+		 $this->load->model('Bluebook_model');
+		$id_lokasi = $this->input->post('id');
+		$data['data']= $this->Usulan_model->ambil_proyek_usulan();
+		
+		$data['lembaga']= $this->Usulan_model->ambil_instansi();
+		$data['program']= $this->Usulan_model->ambil_program();
+		$data['arsip'] = $this->Usulan_model->ambil_arsip();
+		$data['lokasi'] = $this->Usulan_model->ambil_lokasi();
+		
+		$data['lembaga']= $this->Usulan_model->ambil_instansi();
+		$data['status_lembaga']= $this->Bluebook_model->semua_status_lembaga();
+		$data['status_lender']= $this->Bluebook_model->semua_status_lender();
+		$data['bluebook']= $this->Bluebook_model->semua_bluebook();
+		$data['greenbook']= $this->Greenbook_model->ambil_greenbook();
+		$data['provinsi']= $this->Greenbook_model->ambil_provinsi();
+		$data['sektor']= $this->Greenbook_model->ambil_sektor();
+		
+		$data['lender']= $this->Bluebook_model->semua_lender();
+	
+
+
+		$this->load->view('Peta/modal_bb', $data);
+	}
+
 
 
     public function tambah_baru_dokumen()
@@ -660,9 +688,10 @@ class Usulan extends CI_Controller {
 				$marker['animation'] = 'DROP';
 				$marker['icon'] = base_url().'assets/images/map_biru.png';
 				//$marker['icon'] = base_url().'assets/images/'.$baris->gambar;
-				$marker['position'] = $baris->lat.','.$baris->longitude;
+				$marker['position'] = $baris->latitude.','.$baris->longitude;
 				//$marker['onclick'] = '$("#myModal2'.$baris->id_kabkota.'").modal("show")';
 				//$marker['onclick'] = 'alert("tes")';
+				$marker['onclick'] = 'bukaDetailBB('.$baris->id_lokasi.')';
 				$this->googlemaps->add_marker($marker);
 			}
 
@@ -674,9 +703,9 @@ class Usulan extends CI_Controller {
 				$marker['animation'] = 'DROP';
 				$marker['icon'] = base_url().'assets/images/map_hijau.png';
 				//$marker['icon'] = base_url().'assets/images/'.$baris->gambar;
-				$marker['position'] = $baris->lat.','.$baris->longitude;
+				$marker['position'] = $baris->latitude.','.$baris->longitude;
 				//$marker['onclick'] = '$("#myModal2'.$baris->id_proyek.'").modal("show")';
-				$marker['onclick'] = 'bukaDetail('.$baris->id_lokasi.')';
+				//$marker['onclick'] = 'bukaDetail('.$baris->id_lokasi.')';
 				$this->googlemaps->add_marker($marker);
 			}
 
@@ -688,7 +717,7 @@ class Usulan extends CI_Controller {
 				$marker['animation'] = 'DROP';
 				$marker['icon'] = base_url().'assets/images/map_kuning.png';
 				//$marker['icon'] = base_url().'assets/images/'.$baris->gambar;
-				$marker['position'] = $baris->lat.','.$baris->longitude;
+				$marker['position'] = $baris->latitude.','.$baris->longitude;
 				//$marker['onclick'] = '$("#myModal2'.$baris->id_kabkota.'").modal("show")';
 				//$marker['click'] = base_url().'application/controllers/program/tampil_program';
 				$this->googlemaps->add_marker($marker);

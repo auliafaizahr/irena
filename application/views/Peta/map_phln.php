@@ -64,15 +64,15 @@
 </div>
 
 <script>
-	function bukaDetail(id_lokasi) {
+	function bukaDetailBB(id_lokasi) {
         	
         	$.ajax({
         	                  type : 'post',
-        	                  url : "<?php echo base_url(); ?>usulan/tambah_usulan",
+        	                  url : "<?php echo base_url(); ?>Bluebook/detail_map",
         	                  data :  'id='+ id_lokasi,
         	                   success : function(response){
         	                  $("#tmpModal").html(response);
-        	                   $('#modalTambah').modal('show');
+        	                   $('#modalDetail').modal('show');
         	                                  
         	                              
         	                   },
@@ -81,4 +81,3 @@
         }
 </script>
 
- 

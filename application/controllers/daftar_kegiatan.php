@@ -83,6 +83,8 @@ class Daftar_kegiatan extends CI_Controller {
 				//$data['id']		= $this->input->post('id');
 
 				$id_			= $this->input->post('id');
+				$id_bb			= $this->input->post('id_bluebook');
+				$id_gb			= $this->input->post('id_greenbook');
 				$this->dk_model->hapus_dari_lokasi($id_);
 
 				$select2data = $this->input->post('lokasi');
@@ -92,6 +94,8 @@ class Daftar_kegiatan extends CI_Controller {
 				foreach($array_lokasi as $lokasi) {
 				  $data2[] = [
 				    'id_dk_proyek' =>  $id_,
+				    'id_gb' =>  $id_gb,
+				    'id_bb' =>  $id_bb,
 				    'id_lokasi' => $lokasi,
 				  ];
 				}

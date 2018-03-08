@@ -31,6 +31,15 @@ class La_model extends CI_Model {
 		return $a->row();
 	}
 
+	public function hapus_dari_lokasi($a)
+	{
+
+		$this->db->where('id_la_proyek', $a);
+		return $this->db->delete('irena_la_lokasi');
+		
+	}
+
+
 
 		function save_update($isi2)
 	{
