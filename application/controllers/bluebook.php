@@ -27,8 +27,8 @@ class Bluebook extends CI_Controller {
 		$this->load->model('Greenbook_model');
 		 $this->load->model('Usulan_model');
 		 $this->load->model('Bluebook_model');
-		$id_lokasi = $this->input->post('id');
-		$data['data']= $this->Bluebook_model->ambil_proyek_berdasarkan_lokasi($id_lokasi);
+		$data['id_lokasi'] = $this->input->post('id');
+		//$data['data']= $this->Bluebook_model->ambil_proyek_berdasarkan_lokasi();
 		
 		$data['lembaga']= $this->Usulan_model->ambil_instansi();
 		$data['program']= $this->Usulan_model->ambil_program();
@@ -58,8 +58,8 @@ class Bluebook extends CI_Controller {
 		$this->load->model('Greenbook_model');
 		$this->load->model('dk_model');
 		$data['instansi'] = array();
-		//$id_lokasi = $this->input->post('id');
-		$id_lokasi = '339';
+		$id_lokasi = $this->uri->segment(3);
+		//$id_lokasi = '339';
 		$data['data']= $this->Bluebook_model->ambil_proyek_berdasarkan_lokasi($id_lokasi);
 
 		

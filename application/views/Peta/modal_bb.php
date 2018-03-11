@@ -11,6 +11,7 @@
 				
 					<div  id="div_index">
 					</div>
+					<input type="hidden" name="id_lokasi" id="id_lokasi" class="form-control" value="<?php echo $id_lokasi; ?>">
 				</div>
 			</div>
 			<div class="modal-footer">                  
@@ -52,7 +53,9 @@
 	}
 	
 	function segarkan_data(){
-		$.get("<?php echo base_url(); ?>bluebook/tampilkan_proyek_lokasi", function(data) {
+		var id = $("#id_lokasi").val(); 
+		console.log(id);
+		$.get("<?php echo base_url(); ?>bluebook/tampilkan_proyek_lokasi/"+id, function(data) {
 			$("#div_index").html(data);
 		});
 	}
