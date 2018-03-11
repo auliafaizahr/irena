@@ -50,7 +50,7 @@
 				<div class="ibox-content css-animation-box">
 
 					<?php echo $peta['js']; ?>
-					<?php echo $peta['html']; ?>
+					<?php echo $peta['html']; ?>s
 					
 				</div>
 			</div>
@@ -71,6 +71,7 @@
         	                  url : "<?php echo base_url(); ?>Bluebook/detail_map",
         	                  data :  'id='+ id_lokasi,
         	                   success : function(response){
+        	          
         	                  $("#tmpModal").html(response);
         	                   $('#modalDetail').modal('show');
         	                                  

@@ -23,6 +23,12 @@ class Bluebook_model extends CI_Model {
 		return $this->db->query($sql);
 	}
 
+	public function ambil_proyek_berdasarkan_lokasi($x)
+	{
+		$sql = "SELECT * FROM irena_view_bb_lokasi WHERE id_lokasi = '$x' ";
+		return $this->db->query($sql)->result_array();
+	}
+
 	public function hapus_dari_lokasi($a)
 	{
 

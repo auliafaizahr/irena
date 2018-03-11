@@ -3,7 +3,7 @@
     <div class="modal-content">
       <div class="ibox">
         <div class="ibox-title">
-          <h5>Detail Proyek Greenbook</h5>
+          <h5>Proyek Bluebook pada Lokasi</h5>
         </div>
 
         	<div id="loader1" class="loader1" style='visibility: hidden;'></div>
@@ -13,9 +13,15 @@
 					</div>
 				</div>
 			</div>
+			<div class="modal-footer">                  
+			   
+			    <button type="button" id="tblTutup" class="btn btn-white" data-dismiss="modal">Tutup</button>
+			</div>
 		</div>
+		
 	</div>
 </div>
+
 
 
 <div id="tmpModal2"></div>
@@ -46,7 +52,7 @@
 	}
 	
 	function segarkan_data(){
-		$.get("<?php echo base_url(); ?>daftar_kegiatan/tampilkan_dk_list", function(data) {
+		$.get("<?php echo base_url(); ?>bluebook/tampilkan_proyek_lokasi", function(data) {
 			$("#div_index").html(data);
 		});
 	}
