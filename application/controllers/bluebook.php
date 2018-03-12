@@ -199,6 +199,8 @@ class Bluebook extends CI_Controller {
 				    'id_instansi' 		=>  $id_instansi,
 				    'id_status' 		=>  $id_status,
 				    'id_bb' 			=>  $id_bb,
+				    'id_lender' 		=>  $id_lender,
+				    
 				    'id_lokasi' 		=> $lokasi,
 				  ];
 				}
