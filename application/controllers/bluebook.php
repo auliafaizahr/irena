@@ -235,6 +235,11 @@ class Bluebook extends CI_Controller {
 				/*
 				//untuk ngambil id_lokasi yang sama
 
+				SELECT irena_view_bb_lokasi.id_proyek AS id_bb_proyek, irena_view_gb_lokasi.id_proyek AS id_gb_proyek, irena_view_dk_lokasi.id_proyek AS id_dk_proyek FROM irena_view_bb_lokasi 
+				LEFT JOIN irena_view_gb_lokasi ON irena_view_bb_lokasi.id_lokasi = irena_view_gb_lokasi.id_lokasi
+				FULL JOIN irena_view_dk_lokasi ON irena_view_bb_lokasi.id_lokasi = irena_view_dk_lokasi.id_lokasi
+				ORDER BY id_bb_proyek
+
 				SELECT irena_view_bb_lokasi.id_proyek AS id_bb_proyek, irena_view_bb_lokasi.id_lokasi AS id_lokasi, irena_view_gb_lokasi.id_proyek AS id_gb_proyek, irena_view FROM irena_view_bb_lokasi, irena_view_gb_lokasi WHERE irena_view_bb_lokasi.id_lokasi IN (SELECT irena_view_gb_lokasi.id_lokasi FROM irena_view_gb_lokasi) GROUP BY id_lokasi
 
 				SELECT irena_view_bb_lokasi.id_proyek AS id_bb_proyek, irena_view_bb_lokasi.id_lokasi AS id_lokasi, irena_view_gb_lokasi.id_proyek AS id_gb_proyek FROM irena_view_bb_lokasi, irena_view_gb_lokasi WHERE irena_view_bb_lokasi.id_lokasi IN (SELECT irena_view_gb_lokasi.id_lokasi FROM irena_view_gb_lokasi) GROUP BY id_lokasi
@@ -246,6 +251,7 @@ class Bluebook extends CI_Controller {
 				SELECT irena_view_bb_lokasi.id_proyek AS id_bb_proyek, irena_view_bb_lokasi.id_lokasi AS id_lokasi, irena_view_gb_lokasi.id_proyek AS id_gb_proyek, irena_view_gb_lokasi.id_lokasi AS lokasi_proyek_gb FROM irena_view_bb_lokasi, irena_view_gb_lokasi WHERE irena_view_bb_lokasi.id_lokasi IN (SELECT irena_view_gb_lokasi.id_lokasi FROM irena_view_gb_lokasi)
 
 				SELECT irena_view_bb_lokasi.id_proyek AS id_bb_proyek, irena_view_bb_lokasi.id_lokasi AS id_lokasi, irena_view_gb_lokasi.id_proyek AS id_gb_proyek, irena_view_dk_lokasi.id_proyek AS id_dk_proyek FROM irena_view_bb_lokasi, irena_view_gb_lokasi, irena_view_dk_lokasi WHERE irena_view_bb_lokasi.id_lokasi IN (SELECT irena_view_gb_lokasi.id_lokasi FROM irena_view_gb_lokasi) OR irena_view_bb_lokasi.id_lokasi IN(SELECT irena_view_dk_lokasi.id_lokasi) GROUP BY id_lokasi
+
 
 				CREATE VIEW irena_view_bb_lokasi AS
 				SELECT irena_bb_lokasi.id AS id_proyek, irena_bb_lokasi.id_bb AS id_bb, irena_bb_lokasi.id_lokasi AS id_lokasi, irena_provinsi_kabkota.nama AS lokasi, irena_provinsi_kabkota.latitude AS latitude, irena_provinsi_kabkota.longitude AS longitude FROM irena_bb_lokasi JOIN irena_provinsi_kabkota ON irena_bb_lokasi.id_lokasi = irena_provinsi_kabkota.id

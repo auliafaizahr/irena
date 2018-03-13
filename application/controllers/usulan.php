@@ -669,7 +669,7 @@ class Usulan extends CI_Controller {
 
 			/*SELECT irena_view_bb_lokasi.id_proyek AS id_bb_proyek, irena_view_dk_lokasi.id_proyek AS id_dk_proyek FROM irena_view_bb_lokasi, irena_view_dk_lokasi WHERE irena_view_bb_lokasi.id_lokasi IN (SELECT irena_view_dk_lokasi.id_lokasi FROM irena_view_dk_lokasi)*/
 
-			$query = "SELECT * FROM usulan_lokasi GROUP BY id_lokasi";
+			$query = "SELECT * FROM irena_view_gabung_lokasi GROUP BY id_lokasi";
 			//$query2 = "SELECT * FROM irena_view_bb_lokasi GROUP BY id_lokasi";
 			$a = $this->db->query($query);
 			//$b = $this->db->query($query2)->result();
@@ -680,14 +680,15 @@ class Usulan extends CI_Controller {
 				$marker['animation'] = 'DROP';
 				$marker['icon'] = base_url().'assets/images/map_abu.png';
 				//$marker['icon'] = base_url().'assets/images/'.$baris->gambar;
-				$marker['position'] = $baris->lat.','.$baris->longitude;
+				$marker['position'] = $baris->latitude.','.$baris->longitude;
 				$id_lokasi = $baris->id_lokasi;
+				$marker['onclick'] = 'bukaDetailBB('.$baris->id_lokasi.')';
 				//$marker['onclick'] = '$("#myModal2'.$baris->id_kabkota.'").modal("show")';
 				//$marker['onclick'] = 'alert("tes")';
 				$this->googlemaps->add_marker($marker);
 			}
 
-			$query = "SELECT * FROM irena_view_bb_lokasi GROUP BY id_lokasi";
+			/*$query = "SELECT * FROM irena_view_bb_lokasi GROUP BY id_lokasi";
 			$a = $this->db->query($query);
 			foreach ($a->result() as $baris)
 			{
@@ -697,14 +698,10 @@ class Usulan extends CI_Controller {
 				//$marker['icon'] = base_url().'assets/images/'.$baris->gambar;
 
 				$marker['position'] = $baris->latitude.','.$baris->longitude;
-					/*if (condition) {
-						# code...
-					}*/
-				//$marker['onclick'] = '$("#myModal2'.$baris->id_kabkota.'").modal("show")';
-				//$marker['onclick'] = 'alert("tes")';
+					
 				$marker['onclick'] = 'bukaDetailBB('.$baris->id_lokasi.')';
 				$this->googlemaps->add_marker($marker);
-			}
+			}*/
 
 			/*$query = "SELECT * FROM irena_view_gb_lokasi GROUP BY id_lokasi";
 			$a = $this->db->query($query);
@@ -722,7 +719,7 @@ class Usulan extends CI_Controller {
 			*/
 
 
-			$query = "SELECT * FROM irena_view_dk_lokasi GROUP BY id_lokasi";
+			/*$query = "SELECT * FROM irena_view_dk_lokasi GROUP BY id_lokasi";
 			$a = $this->db->query($query);
 			foreach ($a->result() as $baris)
 			{
@@ -734,7 +731,7 @@ class Usulan extends CI_Controller {
 				//$marker['onclick'] = '$("#myModal2'.$baris->id_kabkota.'").modal("show")';
 				//$marker['click'] = base_url().'application/controllers/program/tampil_program';
 				$this->googlemaps->add_marker($marker);
-			}
+			}*/
 /*
 			$query = "SELECT * FROM irena_view_la_lokasi GROUP BY id_lokasi";
 			$a = $this->db->query($query);
