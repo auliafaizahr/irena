@@ -73,6 +73,30 @@ class Bluebook extends CI_Controller {
 		$this->load->view('Peta/bb_proyek_list', $data);
 	}
 
+	public function tampilkan_proyek_lokasi_2()
+	{
+		$this->load->model('Bluebook_model');
+		$this->load->model('hibah_model');
+		$this->load->model('Usulan_model');
+		$this->load->model('Greenbook_model');
+		$this->load->model('dk_model');
+		$data['instansi'] = array();
+		$id_lokasi = $this->uri->segment(3);
+		//$id_lokasi = '339';
+		$data['data']= $this->Bluebook_model->ambil_proyek_berdasarkan_lokasi($id_lokasi);
+
+		
+		//$data['data']= $this->Bluebook_model->ambil_proyek_berdasarkan_lokasi();
+		$data['lembaga']= $this->Greenbook_model->ambil_instansi();
+		$data['program']= $this->Greenbook_model->ambil_program();
+		$data['arsip'] = $this->Greenbook_model->ambil_arsip();
+			
+
+		$data['dpp'] = $this->hibah_model->ambil_proyek_drkh();
+		$this->load->view('Peta/bb_proyek_list', $data);
+	}
+
+
 
 
 	
@@ -209,9 +233,25 @@ class Bluebook extends CI_Controller {
 
 			
 				/*
+				//untuk ngambil id_lokasi yang sama
+
+				SELECT irena_view_bb_lokasi.id_proyek AS id_bb_proyek, irena_view_bb_lokasi.id_lokasi AS id_lokasi, irena_view_gb_lokasi.id_proyek AS id_gb_proyek, irena_view FROM irena_view_bb_lokasi, irena_view_gb_lokasi WHERE irena_view_bb_lokasi.id_lokasi IN (SELECT irena_view_gb_lokasi.id_lokasi FROM irena_view_gb_lokasi) GROUP BY id_lokasi
+
+				SELECT irena_view_bb_lokasi.id_proyek AS id_bb_proyek, irena_view_bb_lokasi.id_lokasi AS id_lokasi, irena_view_gb_lokasi.id_proyek AS id_gb_proyek FROM irena_view_bb_lokasi, irena_view_gb_lokasi WHERE irena_view_bb_lokasi.id_lokasi IN (SELECT irena_view_gb_lokasi.id_lokasi FROM irena_view_gb_lokasi) GROUP BY id_lokasi
+
+				SELECT irena_view_bb_lokasi.id_proyek AS id_bb_proyek, irena_view_bb_lokasi.id_lokasi AS id_lokasi, irena_view_gb_lokasi.id_proyek AS id_gb_proyek, irena_view_dk_lokasi.id_proyek AS id_dk_proyek FROM irena_view_bb_lokasi, irena_view_gb_lokasi, irena_view_dk_lokasi WHERE irena_view_bb_lokasi.id_lokasi IN (SELECT irena_view_gb_lokasi.id_lokasi FROM irena_view_gb_lokasi) OR irena_view_bb_lokasi.id_lokasi IN(SELECT irena_view_dk_lokasi.id_lokasi) OR irena_view_gb_lokasi.id_lokasi IN (SELECT irena_view_dk_lokasi.id_lokasi)  GROUP BY id_lokasi
+
+				SELECT irena_view_bb_lokasi.id_proyek AS id_bb_proyek, irena_view_bb_lokasi.id_lokasi AS id_lokasi, irena_view_gb_lokasi.id_proyek AS id_gb_proyek, irena_view_dk_lokasi.id_proyek AS id_dk_proyek FROM irena_view_bb_lokasi, irena_view_gb_lokasi, irena_view_dk_lokasi WHERE irena_view_bb_lokasi.id_lokasi IN (SELECT irena_view_gb_lokasi.id_lokasi FROM irena_view_gb_lokasi) OR irena_view_bb_lokasi.id_lokasi IN(SELECT irena_view_dk_lokasi.id_lokasi) OR irena GROUP BY id_lokasi
+
+				SELECT irena_view_bb_lokasi.id_proyek AS id_bb_proyek, irena_view_bb_lokasi.id_lokasi AS id_lokasi, irena_view_gb_lokasi.id_proyek AS id_gb_proyek, irena_view_gb_lokasi.id_lokasi AS lokasi_proyek_gb FROM irena_view_bb_lokasi, irena_view_gb_lokasi WHERE irena_view_bb_lokasi.id_lokasi IN (SELECT irena_view_gb_lokasi.id_lokasi FROM irena_view_gb_lokasi)
+
+				SELECT irena_view_bb_lokasi.id_proyek AS id_bb_proyek, irena_view_bb_lokasi.id_lokasi AS id_lokasi, irena_view_gb_lokasi.id_proyek AS id_gb_proyek, irena_view_dk_lokasi.id_proyek AS id_dk_proyek FROM irena_view_bb_lokasi, irena_view_gb_lokasi, irena_view_dk_lokasi WHERE irena_view_bb_lokasi.id_lokasi IN (SELECT irena_view_gb_lokasi.id_lokasi FROM irena_view_gb_lokasi) OR irena_view_bb_lokasi.id_lokasi IN(SELECT irena_view_dk_lokasi.id_lokasi) GROUP BY id_lokasi
 
 				CREATE VIEW irena_view_bb_lokasi AS
 				SELECT irena_bb_lokasi.id AS id_proyek, irena_bb_lokasi.id_bb AS id_bb, irena_bb_lokasi.id_lokasi AS id_lokasi, irena_provinsi_kabkota.nama AS lokasi, irena_provinsi_kabkota.latitude AS latitude, irena_provinsi_kabkota.longitude AS longitude FROM irena_bb_lokasi JOIN irena_provinsi_kabkota ON irena_bb_lokasi.id_lokasi = irena_provinsi_kabkota.id
+
+				CREATE VIEW irena_view_gb_lokasi AS
+				SELECT irena_gb_lokasi.id AS id_proyek, irena_instansi_2.nama_instansi AS instansi, irena_greenbook_proyek.judul_proyek_eng AS judul_proyek, irena_greenbook_proyek.nilai_pinjaman AS nilai_pinjaman, irena_lender.lender AS lender, irena_gb_lokasi.id_bb AS id_bb, irena_bluebook_kode.nama AS bluebook,  irena_gb_lokasi.id_lokasi AS id_lokasi,irena_gb_lokasi.id_gb AS id_gb, irena_greenbook_kode.nama AS kode_gb, irena_provinsi_kabkota.nama AS lokasi, irena_provinsi_kabkota.latitude AS latitude, irena_provinsi_kabkota.longitude AS longitude FROM irena_gb_lokasi JOIN irena_lender ON irena_gb_lokasi.id_lender = irena_lender.id JOIN irena_instansi_2 ON irena_gb_lokasi.id_instansi = irena_instansi_2.nama_instansi JOIN irena_provinsi_kabkota ON irena_gb_lokasi.id_lokasi = irena_provinsi_kabkota.id JOIN irena_bluebook_kode ON irena_gb_lokasi.id_bb = irena_bluebook_kode.id JOIN irena_greenbook_kode ON irena_gb_lokasi.id_gb = irena_greenbook_kode.id JOIN irena_greenbook_proyek ON irena_gb_lokasi.id_gb_proyek = irena_greenbook_proyek.id
 
 				CREATE VIEW irena_view_bb_lokasi AS
 				SELECT irena_bb_lokasi.id AS id_proyek, irena_instansi_2.nama_instansi AS instansi, irena_bluebook_proyek.judul_proyek_eng AS judul_proyek, irena_bluebook_proyek.nilai_pinjaman AS nilai_pinjaman, irena_lender.lender AS lender, irena_bb_lokasi.id_bb AS id_bb, irena_bluebook_kode.nama AS bluebook, irena_status_umum.nama AS status_, irena_bb_lokasi.id_lokasi AS id_lokasi, irena_provinsi_kabkota.nama AS lokasi, irena_provinsi_kabkota.latitude AS latitude, irena_provinsi_kabkota.longitude AS longitude FROM irena_bluebook_proyek JOIN irena_lender ON irena_bluebook_proyek.id_lender = irena_lender.id JOIN irena_status_umum ON irena_bluebook_proyek.id_status = irena_status_umum.id JOIN irena_instansi_2 ON irena_bluebook_proyek.id_instansi = irena_instansi_2.nama_instansi JOIN irena_provinsi_kabkota ON irena_bb_lokasi.id_lokasi = irena_provinsi_kabkota.id JOIN irena_bluebook_kode ON irena_bluebook_proyek.id_bluebook = irena_bluebook_kode.id   

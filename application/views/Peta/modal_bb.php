@@ -3,17 +3,34 @@
     <div class="modal-content">
       <div class="ibox">
         <div class="ibox-title">
-          <h5>Proyek Bluebook pada Lokasi</h5>
+          <h5>Proyek  pada Lokasi</h5>
         </div>
 
         	<div id="loader1" class="loader1" style='visibility: hidden;'></div>
 				<div class="ibox-content" >
+					<center><h5>Proyek Bluebook</h5></center>
 				
 					<div  id="div_index">
 					</div>
 					<input type="hidden" name="id_lokasi" id="id_lokasi" class="form-control" value="<?php echo $id_lokasi; ?>">
+
+
+				
+
+				
+					<center><h5>Proyek Greenbook</h5></center>
+				
+					<div  id="div_index_2">
+					</div>
+					<input type="hidden" name="id_lokasi2" id="id_lokasi2" class="form-control" value="<?php echo $id_lokasi; ?>">
+
+					
 				</div>
-			</div>
+			
+
+			<div id="loader1" class="loader1" style='visibility: hidden;'></div>
+				
+			
 			<div class="modal-footer">                  
 			   
 			    <button type="button" id="tblTutup" class="btn btn-white" data-dismiss="modal">Tutup</button>
@@ -57,6 +74,14 @@
 		console.log(id);
 		$.get("<?php echo base_url(); ?>bluebook/tampilkan_proyek_lokasi/"+id, function(data) {
 			$("#div_index").html(data);
+		});
+	}
+
+	function segarkan_data2(){
+		var id = $("#id_lokasi2").val(); 
+		console.log(id);
+		$.get("<?php echo base_url(); ?>bluebook/tampilkan_proyek_lokasi_2/"+id, function(data) {
+			$("#div_index_2").html(data);
 		});
 	}
 
@@ -111,6 +136,7 @@
 	
 	$(document).ready(function(){
 		segarkan_data();
+		segarkan_data2();
 		
 		$('#btnDetil').click(function(){
 			$.ajax({
