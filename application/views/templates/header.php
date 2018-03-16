@@ -83,6 +83,8 @@
 
 <body>
 	<div id="loader" class="loader" style='visibility: hidden;'></div>
+	<div id="tmpModal10"></div>
+
 	<div id="tmpModal"></div>
     <div id="wrapper">
         <nav class="navbar-default navbar-static-side" role="navigation">
@@ -185,7 +187,15 @@
                         <ul class="nav nav-second-level">
 
                         	<li <?php if($this->uri->segment(1)=="Program"){ echo "class='active'"; }	?>>
-								<a href="<?php echo base_url(); ?>usulan/map_phln">Peta PHLN</a>
+								<a href="<?php echo base_url(); ?>usulan/map_phln"><span class="nav-label">Peta PHLN</span><span class="fa arrow"></a>
+								  <ul class="nav nav-third-level">
+								  <li <?php if($this->uri->segment(2)=="map_phln"){ echo "class='active'"; }	?>>
+								  <a href="<?php echo base_url(); ?>usulan/map_phln">Persebaran Semua</span></a></li>
+								  <li><a href="<?php echo base_url(); ?>usulan/map_bb">Perseberan Bluebook</span></a></li>
+								  <li><a href="<?php echo base_url(); ?>usulan/map_gb">Persebaran Greenbook</span></a></li>
+								  <li><a href="<?php echo base_url(); ?>">Persebaran DK</span></a></li>
+								  <li><a href="<?php echo base_url(); ?>">Persebaran LA</span></a></li>
+								  </ul>
 							</li>
 
                         	<li <?php if($this->uri->segment(1)=="Usulan"){ echo "class='active'"; }	?>>
@@ -193,7 +203,7 @@
 							</li>
 
 							<li <?php if($this->uri->segment(1)=="Usulan"){ echo "class='active'"; }	?>>
-								<a href="<?php echo base_url(); ?>Usulan/report_gb">Peta PHLN dan SBSN</a>
+								<a href="<?php echo base_url(); ?>usulan/map_gabung_1">Peta PHLN dan SBSN</a>
 							</li>
 
 						</ul>

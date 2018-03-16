@@ -58,7 +58,7 @@
      
       <td><?php 
 
-                                echo $value['nilai_pinjaman'];
+                                echo number_format($value['nilai_pinjaman']);
                             ?></td>
       <td> <?php 
                             $g = $this->Bluebook_model->lender($value['id_lender']);
@@ -464,6 +464,7 @@
           });
 
   
+
  
 
   $(document).on('click', '.detail', function(){  

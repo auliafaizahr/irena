@@ -121,6 +121,30 @@ class Greenbook extends CI_Controller {
 
 	}
 
+	public function tampilkan_proyek_lokasi()
+	{
+		$this->load->model('Bluebook_model');
+		$this->load->model('hibah_model');
+		$this->load->model('Usulan_model');
+		$this->load->model('Greenbook_model');
+		$this->load->model('dk_model');
+		$data['instansi'] = array();
+		$id_lokasi = $this->uri->segment(3);
+		//$id_lokasi = '339';
+		$data['data']= $this->Greenbook_model->ambil_proyek_berdasarkan_lokasi($id_lokasi);
+
+		
+		//$data['data']= $this->Bluebook_model->ambil_proyek_berdasarkan_lokasi();
+		$data['lembaga']= $this->Greenbook_model->ambil_instansi();
+		$data['program']= $this->Greenbook_model->ambil_program();
+		$data['arsip'] = $this->Greenbook_model->ambil_arsip();
+			
+
+		$data['dpp'] = $this->hibah_model->ambil_proyek_drkh();
+		$this->load->view('Peta/gb_proyek_list', $data);
+	}
+
+
 	public function edit()
 	{
 		$this->load->model('Bluebook_model');

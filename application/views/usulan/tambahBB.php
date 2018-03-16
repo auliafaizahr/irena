@@ -146,7 +146,7 @@
 			form_data.append('outcome', outcome);
 			form_data.append('nilai_hibah', nilai_hibah);
 			form_data.append('nilai_pinjaman', nilai_pinjaman);
-			form_data.append('dana_pendamping', outcome);
+			form_data.append('dana_pendamping', dana_pendamping);
 			form_data.append('tahun_usulan', tahun_usulan);
 			form_data.append('id_sektor', id_sektor);
 			form_data.append('lokasi', lokasi);
@@ -156,7 +156,6 @@
 			
 			
 			
-
 
             $.ajax({
             	 type: 'POST',

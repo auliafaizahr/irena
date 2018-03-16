@@ -131,6 +131,29 @@ class Daftar_kegiatan extends CI_Controller {
     	$this->load->view('daftar_keg/catatan_dk', $data);
     }
 
+    public function tampilkan_proyek_lokasi()
+	{
+		$this->load->model('Bluebook_model');
+		$this->load->model('hibah_model');
+		$this->load->model('Usulan_model');
+		$this->load->model('Greenbook_model');
+		$this->load->model('dk_model');
+		$data['instansi'] = array();
+		$id_lokasi = $this->uri->segment(3);
+		//$id_lokasi = '339';
+		$data['data']= $this->dk_model->ambil_proyek_berdasarkan_lokasi($id_lokasi);
+
+		
+		//$data['data']= $this->Bluebook_model->ambil_proyek_berdasarkan_lokasi();
+		$data['lembaga']= $this->Greenbook_model->ambil_instansi();
+		$data['program']= $this->Greenbook_model->ambil_program();
+		$data['arsip'] = $this->Greenbook_model->ambil_arsip();
+			
+
+		$data['dpp'] = $this->hibah_model->ambil_proyek_drkh();
+		$this->load->view('Peta/dk_proyek_list', $data);
+	}
+
     function tampilkan_log_dk_index()
 	{
     	$this->load->model('dk_model');
@@ -460,15 +483,32 @@ class Daftar_kegiatan extends CI_Controller {
 			*/
 			
 			$data['update_by']			= $this->session->userdata('id');
-			
-			//$data['nilai_admin_id']		= $this->session->userdata('id');
-			$data['update_at']			= date('Y-m-d H:i:s');
-			$data['is_layak']			= "1";
+
 			$data['id']					= $this->input->post('id');
+
 			
+			date_default_timezone_set('Asia/Jakarta');
+			if ($this->session->userdata('id_user_level') != '5') {
+
+			//$data['nilai_admin_id']		= $this->session->userdata('id');
+			$data['update_by']			= $this->session->userdata('id');
+			$data['update_at']			= date('Y-m-d H:i:s');
+			$data['is_kasubdit_layak']		= '0';
+			$data['is_layak']			= $this->input->post('nilai_layak');
+			$data['catatan_staff_layak']			= $this->input->post('nilai_layak_ket');
 			$result 					= $this->dk_model->usulan_simpan_data($data);
 			$status['success'] 			= true;
 			$data 						= $_POST;
+
+			}elseif ($this->session->userdata('id_user_level') == '5') {
+				$data['kasubdit_layak_by']			= $this->session->userdata('id');
+				$data['kasubdit_layak_at']			= date('Y-m-d H:i:s');
+				$data['is_kasubdit_layak']			= $this->input->post('nilai_layak');
+				$data['layak_catatan_kasubdit']			= $this->input->post('nilai_layak_ket');
+				$result 					= $this->dk_model->usulan_simpan_data($data);
+				$status['success'] 			= true;
+				$data 						= $_POST;
+			}
 
 			
 			

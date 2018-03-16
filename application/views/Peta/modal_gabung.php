@@ -34,6 +34,12 @@
 					</div>
 					<input type="hidden" name="id_lokasi2" id="id_lokasi2" class="form-control" value="<?php echo $id_lokasi; ?>">
 
+					<center><h5>Proyek SBSN</h5></center>
+				
+					<div  id="div_index_5">
+					</div>
+					<input type="hidden" name="id_lokasi2" id="id_lokasi2" class="form-control" value="<?php echo $id_lokasi; ?>">
+
 
 
 					
@@ -108,65 +114,26 @@
 	function segarkan_data4(){
 		var id = $("#id_lokasi2").val(); 
 		console.log(id);
-		$.get("<?php echo base_url(); ?>loan_aggr/tampilkan_proyek_lokasi_2/"+id, function(data) {
+		$.get("<?php echo base_url(); ?>loan_aggr/tampilkan_proyek_lokasi/"+id, function(data) {
 			$("#div_index_4").html(data);
 		});
 	}
 
-	$(document).on('click', '.rekam', function(){  
-           
-         
-             var id = $(this).attr("id"); 
-           console.log(id);
-           //var rowid = $(e.relatedTarget).data('id');
-           //console.log(rowid);
-           $.ajax({
-                type : 'post',
-                url : "<?php echo base_url(); ?>Usulan/arsip",
-                data :  'id='+ id,
-                success : function(response){
-                //$('.fetched-data-arsip').html(data);//menampilkan data ke dalam modal
-  
-                  $("#tmpModal").html(response);
-                $('#modal_arsip').modal('show');
-              
-                //  $('#modalKecil').modal('show');
-               // $('.fetched-data-lagi').html(data);//menampilkan data ke dalam modal
-                },
-                dataType:"html"
-                });
-            });
+	function segarkan_data5(){
+		var id = $("#id_lokasi2").val(); 
+		console.log(id);
+		$.get("<?php echo base_url(); ?>sbsn/tampilkan_proyek_lokasi/"+id, function(data) {
+			$("#div_index_5").html(data);
+		});
+	}
 
-	$(document).on('click', '#tmbhBttn', function(){  
-           
-      /* $('#myModalDetail').modal('show');
-           });*/
-
-            var id = $(this).attr("id"); 
-           console.log(id);
-           //var rowid = $(e.relatedTarget).data('id');
-           //console.log(rowid);
-           $.ajax({
-                type : 'post',
-                url : "<?php echo base_url(); ?>Usulan/tambah_usulan",
-                
-                success : function(response){
-                
-                  $("#tmpModal").html(response);
-                $('#modalTambah').modal('show');
-          
-                //  $('#modalKecil').modal('show');
-               // $('.fetched-data-lagi').html(data);//menampilkan data ke dalam modal
-                },
-                dataType:"html"
-            });
-          });
 	
 	$(document).ready(function(){
 		segarkan_data();
 		segarkan_data2();
 		segarkan_data3();
 		segarkan_data4();
+		segarkan_data5();
 		
 		$('#btnDetil').click(function(){
 			$.ajax({

@@ -116,11 +116,11 @@
               
               <tr class="read">
                 <td class="mail-ontact text-right">Ruang Lingkup ENG</td>
-                <td class="mail-subject"><?php echo  $detail->ruang_lingkup_eng; ?></td>
+                <td class="mail-subject"><?php echo  nl2br($detail->ruang_lingkup_eng); ?></td>
               </tr>
               <tr class="read">
                 <td class="mail-ontact text-right">Ruang Lingkup ID</td>
-                <td class="mail-subject"><?php echo  $detail->ruang_lingkup_id; ?></td>
+                <td class="mail-subject"><?php echo  nl2br($detail->ruang_lingkup_id); ?></td>
               </tr>
                <tr class="read">
                 <td class="mail-ontact text-right">Nilai Pinjaman</td>
@@ -137,11 +137,11 @@
               </tr>
               <tr class="read">
                 <td class="mail-ontact text-right">Output</td>
-                <td class="mail-subject"><?php echo $detail->output; ?></td>
+                <td class="mail-subject"><?php echo nl2br($detail->output); ?></td>
               </tr>
               <tr class="read">
                 <td class="mail-ontact text-right">Outcome</td>
-                <td class="mail-subject"><?php echo $detail->outcome; ?></td>
+                <td class="mail-subject"><?php echo nl2br($detail->outcome); ?></td>
               </tr>
               <tr class="read">
                 <td class="mail-ontact text-right">Penilaian Kelayakan</td>

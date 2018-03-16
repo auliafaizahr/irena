@@ -1,14 +1,13 @@
-<table class="table table-hover" id="example2"  width="100%"> 
+<table class="table table-hover" id="example_example"  width="100%"> 
   <thead>
     <tr>
       <!-- <th style="display:none;">Update date</th> -->
       <th style="width:300px;">Instansi Pengusul</th>
       <th class="text-center" style="width:300px;">Judul Proyek</th>
 
-      <th class="text-center">Bluebook</th>
-      <th class="text-center">Greenbook</th>
-      <th> Pinjaman </th>
-      <th> Lender </th>
+    
+      <th> Nilai </th>
+      <th> DPP </th>
      
      
      
@@ -21,142 +20,22 @@
       <tr class="gradeX">
        
         <td><?php echo $value['instansi']; ?></td>
-        <td><?php echo $value['judul_proyek']; ?></td>
-        <td><?php echo $value['gb']; ?></td>
-        <td><?php echo $value['bb']; ?></td>
-        <td><?php echo $value['nilai_pinjaman']; ?></td>
-        <td><?php echo $value['lender']; ?></td>
-      
+        <td><?php echo $value['judul']; ?></td>
+        <td><?php echo $value['nilai']; ?></td>
+        <td><?php echo $value['dpp']; ?></td>
+       
+
       </tr>
       <?php endforeach; ?>
-    </tbody>
+    </tbody> 
   
 </table>
 
-
+<div id="tmpModal5"></div>
 <script>
 
-  function nilai_admin(adm, c, kasubdit){
-    console.log("sukses");
-   
-     var id = c;
-     console.log(id); 
-    if (adm == '0') {
-      console.log("sukses");
-  
-    $.ajax({
-      type : 'post',
-                url : "<?php echo base_url(); ?>Usulan/adm",
-                data :  'id='+ id,
-                success : function(response){
-                 $("#tmpModal").html(response);
-                $('#modal_adm').modal('show');
-              
-                //  $('#modalKecil').modal('show');
-               // $('.fetched-data-lagi').html(data);//menampilkan data ke dalam modal
-                },
-                dataType:"html"
-    });
-    } else if ( kasubdit == '0' ){
-     
-     alert('Menunggu penilaian kasubdit')
-      console.log("gagal bray");
-    } else {
-      alert('Selesaikan penilaian kelayakan terlebih dahulu');
-    }
-
-  }
-
-   $(document).on('click', '.layak', function(){  
-
-             var id = $(this).attr("id"); 
-             var kasubdit_layak = $(this).attr("data-kasubdit"); 
-             var layak = $(this).attr("data-id"); 
-             var user_level = $(this).attr("data-user"); 
-           console.log(id);
-           console.log(kasubdit_layak); //undefined
-           console.log(layak); //undefined
-           console.log(user_level);
 
 
-
-      if (user_level != '5') {
-
-              //cek kasubdit
-           
-
-                  if (kasubdit_layak == '0') {
-
-                      if (layak == '0') {
-
-                           $.ajax({
-                            type : 'post',
-                                      url : "<?php echo base_url(); ?>daftar_kegiatan/layak",
-                                      data :  'id='+ id,
-                                      success : function(response){
-                                         $("#tmpModal").html(response);
-                                      $('#modalLayak2').modal('show');
-                                    
-                                      //  $('#modalKecil').modal('show');
-                                     // $('.fetched-data-lagi').html(data);//menampilkan data ke dalam modal
-                                      },
-                                      dataType:"html"
-                          });
-
-                      } else if(layak != '0'){
-
-                        alert('Belum dinilai oleh kasubdit');
-                        console.log('Belum dinilai oleh kasubdit');
-                      
-                      }
-                      //cek kalo hasil penilaian staff dan kasubdit berbeda
-                  }else if( (kasubdit_layak  == '2' && layak == '1') || (kasubdit_layak == '1' && layak == '2') ){
-                      $.ajax({
-                                    type : 'post',
-                                              url : "<?php echo base_url(); ?>daftar_kegiatan/layak",
-                                              data :  'id='+ id,
-                                              success : function(response){
-                                               $("#tmpModal").html(response);
-                                              $('#modalLayak2').modal('show');
-                                            
-                                              //  $('#modalKecil').modal('show');
-                                             // $('.fetched-data-lagi').html(data);//menampilkan data ke dalam modal
-                                              },
-                                              dataType:"html"
-                                  });
-                     }         
-              }
-
-      if (user_level == '5') {
-
-              //cek kasubdit
-                  if (kasubdit_layak == '0') {
-
-                      if (layak != '0') {
-
-                           $.ajax({
-                            type : 'post',
-                                      url : "<?php echo base_url(); ?>daftar_kegiatan/layak",
-                                      data :  'id='+ id,
-                                      success : function(response){
-                                         $("#tmpModal").html(response);
-                                      $('#modalLayak2').modal('show');
-                                    
-                                      //  $('#modalKecil').modal('show');
-                                     // $('.fetched-data-lagi').html(data);//menampilkan data ke dalam modal
-                                      },
-                                      dataType:"html"
-                          });
-                      } 
-                      //cek kalo hasil penilaian staff dan kasubdit berbeda
-                  }
-        
-              }
-         
-         });
-
-  
- 
 
 
   $(document).on('click', '.catatan', function(){  
@@ -193,6 +72,27 @@
     dataType:"html"});
     return false;
   }
+
+  $(document).on('click', '.detail', function(){  
+         
+        
+
+           var id = $(this).attr("id"); 
+         console.log(id);
+         //var rowid = $(e.relatedTarget).data('id');
+         //console.log(rowid);p
+         $.ajax({
+              type : 'post',
+              url : "<?php echo base_url(); ?>Bluebook/detil",
+              data :  'id='+ id,
+              success : function(response){
+              $("#tmpModal10").html(response);
+              $('#modalDetail').modal('show');
+              },
+
+              dataType:"html"
+          });
+        });
 
    $(document).on('click', '.rekam_dk', function(){  
            
@@ -301,7 +201,7 @@
   
  
 
-  $(document).on('click', '.detail', function(){  
+  $(document).on('click', '.detail_dk', function(){  
            
           
           
@@ -323,7 +223,7 @@
 
   
   $(document).ready(function(){
-    $('#example2').DataTable({
+    $('#example_example').DataTable({
       responsive: true,
       "dom": 'T<"clear">lfrtip',
       "order": [[ 0, "desc" ]]

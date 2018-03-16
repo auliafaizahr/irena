@@ -84,6 +84,26 @@
 								<input type="text" name="judul" id="judul" class="form-control" placeholder="Judul Proyek" value="<?php echo $usulan->judul; ?>">
 							</div>
 						</div>
+
+						 <div class="form-group">
+                            <label for="lokasi" class="col-sm-2 control-label">Lokasi </label>
+                            <div class="col-sm-10">
+                                <select name="lokasi" id="lokasi" class="form-control" multiple>
+                           
+                                <?php $key = array($detail->lokasi);
+                                $a = array();
+                                $a = explode(",", $detail->lokasi);
+                                $key2 = array("1", "2", "4", "3");
+                                 
+
+
+                                foreach($lokasi as $row ){ ?>
+                                <option value="<?php echo $row['id']; ?>" <?php echo in_array($row['id'] , $a) ? 'selected' : '' ?>><?php echo $row['nama']; ?>
+                                 </option>
+                                 <?php } ?>
+                                 </select>
+                            </div>
+                        </div>
 						
 						<div class="form-group">
 							<label for="nilai" class="col-sm-2 control-label">Nilai</label>
@@ -168,6 +188,14 @@
 			placeholder: "Pilih Kategori Proyek",
 			width: "100%"
 		});
+
+		$("#lokasi").select2({
+			placeholder: "Pilih Lokasi Proyek",
+			width: "100%",
+			multiple:true,
+            tags: true
+		});
+		
 		
 		
 		
@@ -207,6 +235,9 @@
 			var latar_belakang 				= $("#latar_belakang").val();
 			var tujuan 						= $("#tujuan").val();
 			var ruang_lingkup 				= $("#ruang_lingkup").val();
+			var lokasi 						= $("#lokasi").val();
+			var id_instansi 						= $("#id_instansi").val();
+			
 			
             var form_data 	= new FormData();
 			
@@ -221,6 +252,8 @@
 			form_data.append('latar_belakang', latar_belakang);
 			form_data.append('tujuan', tujuan);
 			form_data.append('ruang_lingkup', ruang_lingkup);
+			form_data.append('lokasi', lokasi);
+			form_data.append('id_instansi', id_instansi);
 
 
             $.ajax({

@@ -17,6 +17,13 @@ class La_model extends CI_Model {
 	
 	}
 
+	public function ambil_proyek_berdasarkan_lokasi($x)
+	{
+		$sql = "SELECT * FROM irena_view_la_lokasi WHERE id_lokasi = '$x' ";
+		return $this->db->query($sql)->result_array();
+	}
+
+
 	public function ambil_catatan($a)
 	{
 		 $query = "SELECT * FROM catatan_la WHERE id_la_proyek = '$a' ORDER BY waktu ASC";

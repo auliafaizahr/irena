@@ -1,12 +1,4 @@
-		<div class="footer">
-            <div class="pull-right">
-                For help, please contact The Bigman at <strong><span class="fa fa-phone-square"></span> 1330</strong>.
-            </div>
-            <div>
-                <strong>Copyright</strong> &copy; 2017 Direktorat Perencanaan dan Pengembangan Pendanaan Pembangunan, Bappenas.
-            </div>
-        </div>	
-			
+
 		
 		
 		</div>

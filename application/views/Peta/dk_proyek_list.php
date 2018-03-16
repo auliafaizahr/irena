@@ -1,4 +1,4 @@
-<table class="table table-hover" id="example"  width="100%"> 
+<table class="table table-hover" id="example3"  width="100%"> 
   <thead>
     <tr>
       <!-- <th style="display:none;">Update date</th> -->
@@ -23,9 +23,9 @@
        
         <td><?php echo $value['instansi']; ?></td>
         <td><?php echo $value['judul_proyek']; ?></td>
-        <td><?php echo $value['judul_proyek']; ?></td>
         <td><?php echo $value['bb']; ?></td>
-        <td><?php echo $value['nilai_pinjaman']; ?></td>
+        <td><?php echo $value['gb']; ?></td>
+        <td><?php echo $value['tgl_DK']; ?></td>
         <td><?php echo $value['nilai_pinjaman']; ?></td>
         <td><?php echo $value['lender']; ?></td>
        
@@ -326,7 +326,7 @@
 
   
   $(document).ready(function(){
-    $('#example').DataTable({
+    $('#example3').DataTable({
       responsive: true,
       "dom": 'T<"clear">lfrtip',
       "order": [[ 0, "desc" ]]

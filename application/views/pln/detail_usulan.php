@@ -79,32 +79,32 @@
               </tr>
               <tr class="read">
                 <td class="mail-ontact text-right">Ruang Lingkup ENG</td>
-                <td class="mail-subject"><?php echo  $detail->ruang_lingkup_eng; ?></td>
+                <td class="mail-subject"><?php echo  nl2br($detail->ruang_lingkup_eng); ?></pre></td>
               </tr>
               <tr class="read">
                 <td class="mail-ontact text-right">Ruang Lingkup ID</td>
-                <td class="mail-subject"><?php echo  $detail->ruang_lingkup_id; ?></td>
+                <td class="mail-subject"><?php echo  nl2br($detail->ruang_lingkup_id); ?></td>
               </tr>
                <tr class="read">
                 <td class="mail-ontact text-right">Nilai Pinjaman</td>
-                <td class="mail-subject"><?php echo $detail->dana_usulan . " juta USD"; ?></td>
+                <td class="mail-subject"><?php echo number_format($detail->dana_usulan) . " juta USD"; ?></td>
               </tr>
 
               <tr class="read">
                 <td class="mail-ontact text-right">Nilai Hibah</td>
-                <td class="mail-subject"><?php echo $detail->dana_hibah. " juta USD"; ?></td>
+                <td class="mail-subject"><?php echo number_format($detail->dana_hibah). " juta USD"; ?></td>
               </tr>
               <tr class="read">
                 <td class="mail-ontact text-right">Nilai Dana Pendamping</td>
-                <td class="mail-subject"><?php echo $detail->dana_pendamping. " juta USD"; ?></td>
+                <td class="mail-subject"><?php echo number_format($detail->dana_pendamping). " juta USD"; ?></td>
               </tr>
               <tr class="read">
                 <td class="mail-ontact text-right">Output</td>
-                <td class="mail-subject"><?php echo $detail->output; ?></td>
+                <td class="mail-subject"><?php echo nl2br($detail->output); ?></td>
               </tr>
               <tr class="read">
                 <td class="mail-ontact text-right">Outcome</td>
-                <td class="mail-subject"><?php echo $detail->outcome; ?></td>
+                <td class="mail-subject"><?php echo nl2br($detail->outcome); ?></td>
               </tr>
 
               <tr class="read">
@@ -356,7 +356,7 @@
                           echo $this->Bluebook_model->kode_bluebook($value->id_bluebook)->nama; ?>
                         </td>
                         <td>
-                        <?php  echo $value->nilai_pinjaman; ?>
+                        <?php  echo number_format($value->nilai_pinjaman); ?>
                         </td>
                       </tr>
                       <?php endforeach; ?>
@@ -409,7 +409,7 @@
                         
                         </td>
                         <td>
-                        <?php  echo $value->nilai_pinjaman; ?>
+                        <?php  echo number_format($value->nilai_pinjaman); ?>
                         </td>
                          <td>
                         <?php echo $this->Greenbook_model->lender($value->id_lender)->lender;
@@ -461,7 +461,7 @@
                         
                         </td>
                         <td>
-                        <?php  echo $value->nilai_pinjaman; ?>
+                        <?php  echo number_format($value->nilai_pinjaman); ?>
                         </td>
                          <td>
                         <?php echo $this->Greenbook_model->lender($value->id_lender)->lender;
@@ -512,7 +512,7 @@
                         
                         </td>
                         <td>
-                        <?php  echo $value->nilai_pinjaman; ?>
+                        <?php  echo number_format($value->nilai_pinjaman); ?>
                         </td>
                          <td>
                         <?php echo $this->Greenbook_model->lender($value->id_lender)->lender;

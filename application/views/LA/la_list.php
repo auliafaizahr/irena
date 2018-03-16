@@ -34,7 +34,7 @@
 
       <td><?php 
 
-                                echo $value['nilai_pinjaman'];
+                                echo number_format($value['nilai_pinjaman']);
                             ?></td>
 
        <td> <?php 
@@ -101,86 +101,9 @@
 
 
 <script>
-	function detail_list(page){
-		$.ajax({
-			url: "<?php echo base_url(); ?>"+page,
-			beforeSend: function(){
-				
-				showLoading();
-				$('#loader').fadeOut(1000);
-			},
-			success:function(response){
 
-				$("#tmpModal").html(response);
-				$('#modalDetail').modal('show');
-			},
-			dataType:"html"});
-		return false;
-	}
 
-	function nilai_admin(adm, c, kasubdit){
-    console.log("sukses");
-   
-     var id = c;
-     console.log(id); 
-    if (adm == '0') {
-      console.log("sukses");
-  
-    $.ajax({
-      type : 'post',
-                url : "<?php echo base_url(); ?>Usulan/adm",
-                data :  'id='+ id,
-                success : function(response){
-                 $("#tmpModal").html(response);
-                $('#modal_adm').modal('show');
-              
-                //  $('#modalKecil').modal('show');
-               // $('.fetched-data-lagi').html(data);//menampilkan data ke dalam modal
-                },
-                dataType:"html"
-    });
-    } else if ( kasubdit == '0' ){
-     
-     alert('Menunggu penilaian kasubdit')
-      console.log("gagal bray");
-    } else {
-      alert('Selesaikan penilaian kelayakan terlebih dahulu');
-    }
 
-  }
-	
-	function tampilkan_form_edit(page){
-		$.ajax({
-			url: "<?php echo base_url(); ?>"+page,
-			success:function(response){
-				$("#tmpModal").html(response);
-				$('#modalEdit').modal('show');
-		},
-		dataType:"html"});
-		return false;
-	}
-	
-	function tampilkan_log_usulan_index(page){
-		$.ajax({
-			url: "<?php echo base_url(); ?>"+page,
-			success:function(response){
-				$("#tmpModal").html(response);
-				$('#modalLog').modal('show');
-		},
-		dataType:"html"});
-		return false;
-	}
-	
-	function tampilkan_syarat_usulan(page){
-		$.ajax({
-			url: "<?php echo base_url(); ?>"+page,
-			success:function(response){
-				$("#tmpModal").html(response);
-				$('#modalIndex').modal('show');
-		},
-		dataType:"html"});
-		return false;
-	}
 
 	$(document).on('click', '.catatan', function(){  
            
@@ -206,16 +129,6 @@
                 });
             });
 	
-	function tampilkan_form_hapus(page){
-		$.ajax({
-			url: "<?php echo base_url(); ?>"+page,
-			success:function(response){
-				$("#tmpModal").html(response);
-				$('#modalHapus').modal('show');
-		},
-		dataType:"html"});
-		return false;
-	}
 
 	
      function nilai_layak(layak, nilai_admin, c){
@@ -275,24 +188,6 @@
           });
 	
 	
-	function masuk_dpp(id, nilai_admin, nilai_layak){
-		if(nilai_admin == '1' && nilai_layak == '1'){
-			$.ajax({
-				url: "<?php echo base_url(); ?>sbsn/usulan_tampil_form_masuk_dpp/"+id,
-				beforeSend: function(){
-					showLoading();
-				},
-				success:function(response){
-					$("#tmpModal").html(response);
-					$('#modalNilai').modal('show');
-				},
-				dataType:"html"
-			});
-			
-		}else{
-			alert('Maaf! Penilaian administrasi atau penilaian kelayakan belum dilakukan. Silahkan dilakukan penilaian administrasi dan penilaian kelayakan.');
-		}
-	}
 
 	$(document).on('click', '.detail', function(){  
            

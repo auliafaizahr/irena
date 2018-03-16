@@ -24,6 +24,29 @@ class Sbsn_model extends CI_Model
 		$query = "SELECT * FROM irena_sbsn_dpp ORDER BY nama ASC";
 		return $this->db->query($query)->result();
 	}
+
+		 function hapus_dari_lokasi($a)
+	{
+
+		$this->db->where('id_usulan', $a);
+		return $this->db->delete('irena_sbsn_usulan_lokasi');
+		
+	}
+
+		 function hapus_dari_lokasi_dpp($a)
+	{
+
+		$this->db->where('id_usulan', $a);
+		return $this->db->delete('irena_dpp_lokasi');
+		
+	}
+
+	public function ambil_proyek_berdasarkan_lokasi($x)
+	{
+		$sql = "SELECT * FROM irena_view_sbsn_gabung_lokasi WHERE id_lokasi = '$x' ";
+		return $this->db->query($sql)->result_array();
+	}
+
 	
 	function pilih_kategori_proyek()
 	{

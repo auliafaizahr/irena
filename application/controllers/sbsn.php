@@ -6,6 +6,7 @@ class Sbsn extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->library('parser');
+
 	}
 	
 	function usulan()
@@ -71,16 +72,6 @@ class Sbsn extends CI_Controller {
 		$this->form_validation->set_rules("tujuan", "Tujuan Proyek", "trim|required");
 		$this->form_validation->set_rules("ruang_lingkup", "Ruang Lingkup", "trim|required");
 		
-		/*$this->form_validation->set_rules("nilai_admin", "nilai_admin", "trim|required");
-		$this->form_validation->set_rules("nilai_admin_ket", "nilai_admin_ket", "trim|required");
-		$this->form_validation->set_rules("nilai_admin_id", "nilai_admin_id", "trim|required");
-		$this->form_validation->set_rules("nilai_layak", "nilai_layak", "trim|required");
-		$this->form_validation->set_rules("nilai_layak_ket", "nilai_layak_ket", "trim|required");
-		$this->form_validation->set_rules("nilai_layak_id", "nilai_layak_id", "trim|required");
-		$this->form_validation->set_rules("masuk_dpp", "masuk_dpp", "trim|required");
-		$this->form_validation->set_rules("masuk_dpp_ket", "masuk_dpp_ket", "trim|required");
-		$this->form_validation->set_rules("masuk_dpp_id", "masuk_dpp_id", "trim|required");
-		*/
 		
 		//$this->form_validation->set_rules("berkas", "Berka arsip", "required");
 		$this->form_validation->set_message('required', '%s harus diisi');
@@ -121,6 +112,24 @@ class Sbsn extends CI_Controller {
 				$result 				= $this->sbsn_model->usulan_simpan_data($data);
 			}elseif($this->uri->segment(3) == 'edit'){
 				//$data['id']		= $this->input->post('id');
+				$id_					= $this->input->post('id');
+				$id_instansi			= $this->input->post('id_instansi');
+				$this->sbsn_model->hapus_dari_lokasi($id_);
+
+				$select2data = $this->input->post('lokasi');
+				$array_lokasi = explode(",", $select2data);
+				
+				$data2 = [];
+				foreach($array_lokasi as $lokasi) {
+				  $data2[] = [
+				    'id_usulan' =>  $id_,
+				    'id_instansi' => $id_instansi,
+
+				    'id_lokasi' => $lokasi,
+				  ];
+				}
+	 			$this->db->insert_batch('irena_sbsn_usulan_lokasi', $data2);
+
 				$result 		= $this->sbsn_model->usulan_simpan_data($data);
 			}
 			
@@ -129,13 +138,40 @@ class Sbsn extends CI_Controller {
 		echo json_encode($status);
 
 	}
+
+
+	public function tampilkan_proyek_lokasi()
+	{
+		$this->load->model('Bluebook_model');
+		$this->load->model('hibah_model');
+		$this->load->model('Usulan_model');
+		$this->load->model('Greenbook_model');
+		$this->load->model('dk_model');
+		$this->load->model('sbsn_model');
+		$data['instansi'] = array();
+		$id_lokasi = $this->uri->segment(3);
+		//$id_lokasi = '339';
+		$data['data']= $this->sbsn_model->ambil_proyek_berdasarkan_lokasi($id_lokasi);
+
+		
+		//$data['data']= $this->Bluebook_model->ambil_proyek_berdasarkan_lokasi();
+		$data['lembaga']= $this->Greenbook_model->ambil_instansi();
+		$data['program']= $this->Greenbook_model->ambil_program();
+		$data['arsip'] = $this->Greenbook_model->ambil_arsip();
+			
+
+		$data['dpp'] = $this->hibah_model->ambil_proyek_drkh();
+		$this->load->view('Peta/sbsn_proyek_list', $data);
+	}
 	
 	function usulan_tampil_form_edit()
 	{	
+		$this->load->model('Usulan_model');
 		$id 					= $this->uri->segment(3);
 		$query					= $this->sbsn_model->ambil_tabel_usulan_by_id($id);
 		$data['usulan']			= $query->row();
 		$data['instansi'] 		= $this->sbsn_model->pilih_instansi();
+		$data['lokasi'] 		= $this->Usulan_model->ambil_lokasi();
 		$this->load->view('sbsn/usulan/usulan_edit', $data);
 	}
 	
@@ -622,9 +658,12 @@ class Sbsn extends CI_Controller {
 	
 	function tampilkan_dpp_edit()
 	{
+		$this->load->model('Usulan_model');
 		$id 					= $this->uri->segment(3); //id table of irena_sbsn_usulan_syarat
 		$query					= $this->sbsn_model->ambil_tabel_proyek_dpp_by_id($id);
 		$data['dpp']			= $query->row();
+		
+		$data['lokasi'] 		= $this->Usulan_model->ambil_lokasi();
 		$data['jenis']			= $this->sbsn_model->pilih_id_dpp();
 		$this->load->view('sbsn/dpp/dpp_edit', $data);
 	}
@@ -638,6 +677,7 @@ class Sbsn extends CI_Controller {
 		$this->form_validation->set_rules("id_dpp", "Jenis DPP", "trim|required");
 		$this->form_validation->set_rules("judul", "Nama/Judul Proyek", "trim|required");
 		$this->form_validation->set_rules("nilai", "Nilai Proyek", "trim|required|numeric");
+		$this->form_validation->set_rules("lokasi", "Lokasi", "trim|required");
 
 		$this->form_validation->set_message('required', '%s harus diisi');
 		$this->form_validation->set_message('is_natural_no_zero', '%s harus diisi dengan angka dan lebih dari 0');
@@ -655,6 +695,24 @@ class Sbsn extends CI_Controller {
 			$data 					= $_POST;
 			$data['update_by']		= $this->session->userdata('id');
 			$data['update_date']	= date('Y-m-d H:i:s');
+
+			$id_					= $this->input->post('id_proyek');
+			$id_dpp					= $this->input->post('id_dpp');
+			$this->sbsn_model->hapus_dari_lokasi_dpp($id_);
+
+			$select2data = $this->input->post('lokasi');
+			$array_lokasi = explode(",", $select2data);
+				
+			$data2 = [];
+				foreach($array_lokasi as $lokasi) {
+				  $data2[] = [
+				    'id_usulan' =>  $id_,
+				    'id_dpp' => $id_dpp,
+
+				    'id_lokasi' => $lokasi,
+				  ];
+			}
+	 		$this->db->insert_batch('irena_dpp_lokasi', $data2);
 			
 			$result 		= $this->sbsn_model->dpp_simpan_data($data);
 			

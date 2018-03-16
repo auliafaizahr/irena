@@ -31,6 +31,28 @@ class Dk_model extends CI_Model {
         return $this->db->query($query)->result();
 	}
 
+	public function ambil_proyek_berdasarkan_lokasi($x)
+	{
+		$sql = "SELECT * FROM irena_view_dk_lokasi WHERE id_lokasi = '$x' ";
+		return $this->db->query($sql)->result_array();
+	}
+
+	function usulan_simpan_data($data)
+	{
+		if(array_key_exists('id', $data))
+		{
+			$id = $data['id'];
+			unset($data['id']);
+			$this->db->where('id_proyek_dk',$id);
+			$this->db->update('irena_dk_layak', $data);
+		}
+		else
+		{
+			$this->db->insert('irena_dk_layak', $data);
+		}		
+	}
+
+
 
 	function dk_simpan_data_edit($data)
 	{
@@ -135,20 +157,6 @@ class Dk_model extends CI_Model {
 		return $a->row();
 	}
 
-	function usulan_simpan_data($data)
-	{
-		if(array_key_exists('id', $data))
-		{
-			$id = $data['id'];
-			unset($data['id']);
-			$this->db->where('id_proyek_dk',$id);
-			$this->db->update('irena_dk_layak', $data);
-		}
-		else
-		{
-			$this->db->insert('irena_dk_layak', $data);
-		}		
-	}
 
 
 

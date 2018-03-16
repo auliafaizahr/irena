@@ -32,6 +32,13 @@ class Greenbook_model extends CI_Model {
         return $this->db->query($query)->result();
 	}
 
+	public function ambil_proyek_berdasarkan_lokasi($x)
+	{
+		$sql = "SELECT * FROM irena_view_gb_lokasi WHERE id_lokasi = '$x' ";
+		return $this->db->query($sql)->result_array();
+	}
+
+
 	public function save_update($isi2)
 	{
 		if(array_key_exists('id', $isi2))
@@ -162,6 +169,15 @@ class Greenbook_model extends CI_Model {
 
 		return $a->row();
 	}
+
+	public function ambil_untuk_modal($x)
+	{
+		$query = "SELECT * FROM irena_view_untuk_detail_modal WHERE id = '$x'";
+		 $a= $this->db->query($query);
+
+		return $a->row();
+	}
+
 
 
 	public function detail_proyek($x)

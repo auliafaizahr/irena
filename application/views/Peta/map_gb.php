@@ -5,7 +5,7 @@
 		<div class="col-lg-12">
 			
 				<div class="ibox-title">
-					<h5>Sebaran Proyek Usulan Berdasarkan Lokasi</h5>
+					<h5>Sebaran Proyek Greenbook Berdasarkan Lokasi</h5>
 					<div class="ibox-tools">
 						
 					</div>

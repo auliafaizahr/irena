@@ -84,6 +84,13 @@ class Usulan_model extends CI_Model {
 		return $a->result();
 	}
 
+	public function ambil_proyek_berdasarkan_lokasi($x)
+	{
+		$sql = "SELECT * FROM usulan_lokasi WHERE id_lokasi = '$x' ";
+		return $this->db->query($sql)->result_array();
+	}
+
+
 
 		public function hapus_usulan_fix($a)
 	{
@@ -159,6 +166,14 @@ class Usulan_model extends CI_Model {
 		 $a= $this->db->query($query);
 
 		return $a->row();
+	}
+
+	public function ambil_instansi_untuk_usulan_nama($x)
+	{
+		$query = "SELECT * FROM irena_instansi_2 WHERE id = '$x'";
+		 $a= $this->db->query($query);
+
+		return $a->result_array();
 	}
 
 	function ambil_data_log_usulan_by_id_proyek($id)
@@ -282,6 +297,15 @@ class Usulan_model extends CI_Model {
 		return $a->result();
 	}
 
+		public function ambil_lokasi_proyek_id_nama($x)
+	{
+		
+		$query = "SELECT * FROM irena_provinsi_kabkota WHERE id = '$x'";
+		 $a= $this->db->query($query);
+		return $a->row();
+	}
+
+
 	public function ambil_program_proyek_id($x)
 	{
 		
@@ -332,6 +356,16 @@ class Usulan_model extends CI_Model {
 		return $a->result();
 		
 	}
+
+		public function ambil_untuk_modal($x)
+	{
+		$query = "SELECT * FROM irena_view_untuk_detail_modal WHERE id = '$x'";
+		 $a= $this->db->query($query);
+
+		return $a->row();
+	}
+
+	
 
 
 	public function ambil_dk_detail($x)

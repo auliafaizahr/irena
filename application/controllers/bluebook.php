@@ -28,6 +28,7 @@ class Bluebook extends CI_Controller {
 		 $this->load->model('Usulan_model');
 		 $this->load->model('Bluebook_model');
 		$data['id_lokasi'] = $this->input->post('id');
+		$data['lokasi_nama'] = $this->Usulan_model->ambil_lokasi_proyek_id_nama($data['id_lokasi'])->nama;
 		//$data['data']= $this->Bluebook_model->ambil_proyek_berdasarkan_lokasi();
 		
 		$data['lembaga']= $this->Usulan_model->ambil_instansi();
@@ -49,6 +50,65 @@ class Bluebook extends CI_Controller {
 
 		$this->load->view('Peta/modal_bb', $data);
 	}
+
+	public function detail_map_gabung()
+	{
+		$this->load->model('Greenbook_model');
+		 $this->load->model('Usulan_model');
+		 $this->load->model('Bluebook_model');
+		$data['id_lokasi'] = $this->input->post('id');
+		$data['lokasi_nama'] = $this->Usulan_model->ambil_lokasi_proyek_id_nama($data['id_lokasi'])->nama;
+		//$data['data']= $this->Bluebook_model->ambil_proyek_berdasarkan_lokasi();
+		
+		$data['lembaga']= $this->Usulan_model->ambil_instansi();
+		$data['program']= $this->Usulan_model->ambil_program();
+		$data['arsip'] = $this->Usulan_model->ambil_arsip();
+		$data['lokasi'] = $this->Usulan_model->ambil_lokasi();
+		
+		$data['lembaga']= $this->Usulan_model->ambil_instansi();
+		$data['status_lembaga']= $this->Bluebook_model->semua_status_lembaga();
+		$data['status_lender']= $this->Bluebook_model->semua_status_lender();
+		$data['bluebook']= $this->Bluebook_model->semua_bluebook();
+		$data['greenbook']= $this->Greenbook_model->ambil_greenbook();
+		$data['provinsi']= $this->Greenbook_model->ambil_provinsi();
+		$data['sektor']= $this->Greenbook_model->ambil_sektor();
+		
+		$data['lender']= $this->Bluebook_model->semua_lender();
+	
+
+
+		$this->load->view('Peta/modal_gabung', $data);
+	}
+
+	public function detail_map_gabung_1()
+	{
+		$this->load->model('Greenbook_model');
+		 $this->load->model('Usulan_model');
+		 $this->load->model('Bluebook_model');
+		$data['id_lokasi'] = $this->input->post('id');
+		$data['lokasi_nama'] = $this->Usulan_model->ambil_lokasi_proyek_id_nama($data['id_lokasi'])->nama;
+		//$data['data']= $this->Bluebook_model->ambil_proyek_berdasarkan_lokasi();
+		
+		$data['lembaga']= $this->Usulan_model->ambil_instansi();
+		$data['program']= $this->Usulan_model->ambil_program();
+		$data['arsip'] = $this->Usulan_model->ambil_arsip();
+		$data['lokasi'] = $this->Usulan_model->ambil_lokasi();
+		
+		$data['lembaga']= $this->Usulan_model->ambil_instansi();
+		$data['status_lembaga']= $this->Bluebook_model->semua_status_lembaga();
+		$data['status_lender']= $this->Bluebook_model->semua_status_lender();
+		$data['bluebook']= $this->Bluebook_model->semua_bluebook();
+		$data['greenbook']= $this->Greenbook_model->ambil_greenbook();
+		$data['provinsi']= $this->Greenbook_model->ambil_provinsi();
+		$data['sektor']= $this->Greenbook_model->ambil_sektor();
+		
+		$data['lender']= $this->Bluebook_model->semua_lender();
+	
+
+
+		$this->load->view('Peta/modal_phln_sbsn', $data);
+	}
+
 
 	public function tampilkan_proyek_lokasi()
 	{

@@ -40,6 +40,27 @@
 								<input type="text" name="nilai" id="nilai" class="form-control" placeholder="Nilai Proyek (Rp)" value="<?php echo $dpp->nilai; ?>">
 							</div>
 						</div>
+
+						<div class="form-group">
+							<label for="nilai" class="col-sm-2 control-label">Lokasi</label>
+							<div class="col-sm-10">
+							<select name="lokasi" id="lokasi" class="form-control" multiple>
+                           
+                                <?php $key = array($dpp->lokasi);
+                                $a = array();
+                                $a = explode(",", $detail->lokasi);
+                              
+                                 
+
+
+                                foreach($lokasi as $row ){ ?>
+                                <option value="<?php echo $row['id']; ?>" <?php echo in_array($row['id'] , $a) ? 'selected' : '' ?>><?php echo $row['nama']; ?>
+                                 </option>
+                                 <?php } ?>
+                            </select>
+								
+							</div>
+						</div>
 						
 						
 						<input type="hidden" name="id" class="form-control" id="id" value="<?php  echo $dpp->id; ?>">
@@ -62,6 +83,14 @@
 			placeholder: "Pilih Tahun Usulan",
 			width: "100%"
 		});
+
+		$("#lokasi").select2({
+			placeholder: "Pilih Lokasi Proyek",
+			width: "100%",
+			multiple:true,
+            tags: true
+		});
+		
 		
 		$('#htmlForm').submit(function(e) {
 			e.preventDefault();
@@ -73,6 +102,7 @@
 			var id_dpp 		= $("#id_dpp").val();
 			var judul 		= $("#judul").val();
 			var nilai 		= $("#nilai").val();
+			var lokasi 		= $("#lokasi").val();
 			
             var form_data 	= new FormData();
 			
@@ -81,6 +111,10 @@
 			form_data.append('id_dpp', id_dpp);
 			form_data.append('judul', judul);
 			form_data.append('nilai', nilai);
+			form_data.append('lokasi', lokasi);
+
+			console.log(id);
+			console.log(id_proyek);
 
 
             $.ajax({

@@ -125,7 +125,7 @@
                             </div>
                         </div>
 
-                         <div class="form-group">
+                        <div class="form-group">
                             <label for="lokasi" class="col-sm-3 control-label">Lokasi </label>
                             <div class="col-sm-9">
                                 <select name="lokasi" id="lokasi" class="form-control" multiple>
@@ -173,14 +173,16 @@
                          <div class="form-group">
                             <label for="ruang_lingkup_eng" class="col-sm-3 control-label">Ruang Lingkup EN</label>
                             <div class="col-sm-9">
-                                <input type="text" name="ruang_lingkup_eng" id="" class="form-control" placeholder="Ruang Lingkup dalam Bahasa Inggris" value="<?php echo $detail->ruang_lingkup_eng; ?>">
+                             <textarea name="ruang_lingkup_eng" id="ruang_lingkup_eng" class="col-sm-12" rows="5" placeholder="Ruang Lingkup dalam Bahasa Inggris"><?php echo $detail->ruang_lingkup_eng; ?></textarea>
+                                
                             </div>
                         </div>
 
                          <div class="form-group">
                             <label for="ruang_lingkup_id" class="col-sm-3 control-label">Ruang Lingkup ID</label>
                             <div class="col-sm-9">
-                                <input type="text" name="ruang_lingkup_id" id="ruang_lingkup_id" class="form-control" placeholder="Ruang Lingkup dalam Bahasa Indonesia" value="<?php echo $detail->ruang_lingkup_id; ?>">
+                                 <textarea name="ruang_lingkup_id" id="ruang_lingkup_id" class="col-sm-12" rows="5" placeholder="Ruang Lingkup dalam Bahasa Indonesia"><?php echo $detail->ruang_lingkup_id; ?></textarea>
+                                
                             </div>
                         </div>
 

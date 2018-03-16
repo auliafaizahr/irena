@@ -27,7 +27,7 @@
 			<td><a class="detail" id="<?php echo $value['id'];  ?>" data-id="<?php echo $value['id'];  ?>" ><?php echo $value['judul_proyek_id']; ?></td>
 			<td><?php  $d = $this->Usulan_model->ambil_program_proyek($value['id_program'])->nama_program;
 			echo $d; ?></td>
-			<td><?php echo $value['dana_usulan'];; ?></a></td>
+			<td><?php echo number_format($value['dana_usulan']); ?></a></td>
 			<td><?php 
                         $adm = $this->Usulan_model->ambil_adm($value['id'])->is_lengkap;
                         $kasubdit_adm = $this->Usulan_model->ambil_adm($value['id'])->is_kasubdit;
@@ -143,9 +143,7 @@
                        if ($gb == '1') {
                           echo '<a class="usul_btn" id="'.$c.'"><i class="btn fa fa-check-square btn-primary"></i></a>';
                         }else{
-                          echo "
-                            <a><i class='btn fa fa-times-circle btn-danger'></i></a>
-                        ";
+                        echo "<a><i class='btn fa fa-times-circle btn-danger'></i></a>";
                         }
 
                          ?>

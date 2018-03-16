@@ -31,14 +31,6 @@
       <td><?php  $d = $this->Usulan_model->ambil_program_proyek($value['id_program'])->nama_program;
       echo $d; ?></td>
 
-      <td><?php 
-
-              if($value['id_bluebook']!= ""){
-                  echo $this->Bluebook_model->kode_bluebook($value['id_bluebook'])->nama;; 
-               }else {
-                  echo ""; 
-                    }  ?>
-      </td>
 
 
        <td><?php 
@@ -51,10 +43,20 @@
                                 echo ""; 
                             }
                              ?>
-                        </td>
+      </td>
+
+      
       <td><?php 
 
-                                echo $value['nilai_pinjaman'];
+              if($value['id_bluebook']!= ""){
+                  echo $this->Bluebook_model->kode_bluebook($value['id_bluebook'])->nama;; 
+               }else {
+                  echo ""; 
+                    }  ?>
+      </td>
+      <td><?php 
+
+                                echo number_format($value['nilai_pinjaman']);
                             ?></td>
       <td> <?php 
                             $g = $this->Bluebook_model->lender($value['id_lender']);
