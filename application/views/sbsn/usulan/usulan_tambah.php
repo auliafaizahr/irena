@@ -67,6 +67,26 @@
 								<input type="text" name="nilai" id="nilai" class="form-control" placeholder="Nilai Proyek (Rp)">
 							</div>
 						</div>
+
+						<div class="form-group">
+                            <label for="lokasi" class="col-sm-3 control-label">Lokasi </label>
+                            <div class="col-sm-9">
+                                <select name="lokasi" id="lokasi" class="form-control" multiple>
+                           
+                                <?php $key = array($detail->lokasi);
+                                $a = array();
+                                $a = explode(",", $detail->lokasi);
+                                $key2 = array("1", "2", "4", "3");
+                                 
+
+
+                                foreach($lokasi as $row ){ ?>
+                                <option value="<?php echo $row['id']; ?>" <?php echo in_array($row['id'] , $a) ? 'selected' : '' ?>><?php echo $row['nama']; ?>
+                                 </option>
+                                 <?php } ?>
+                                 </select>
+                            </div>
+                        </div>
 						
 						<div class="form-group">
 							<label for="single_multi" class="col-sm-3 control-label">Pelaksanaan Proyek</label>
@@ -140,6 +160,14 @@
 			placeholder: "Pilih Kategori Proyek",
 			width: "100%"
 		});
+
+		$("#lokasi").select2({
+			placeholder: "Pilih Lokasi Proyek",
+			width: "100%",
+			multiple:true,
+            tags: true
+		});
+		
 		
 		
 		
@@ -169,6 +197,7 @@
 			var me 			= $(this);
 			
 			var id_instansi_eselon_satu 	= $("#id_instansi_eselon_satu").val();
+			var id_instansi 	= $("#id_instansi").val();
 			var id_dpp 						= $("#id_dpp").val();
 			var id_kategori_proyek 			= $("#id_kategori_proyek").val();
 			var judul 						= $("#judul").val();
@@ -178,6 +207,7 @@
 			var latar_belakang 				= $("#latar_belakang").val();
 			var tujuan 						= $("#tujuan").val();
 			var ruang_lingkup 				= $("#ruang_lingkup").val();
+			var lokasi 				= $("#lokasi").val();
 			
             var form_data 	= new FormData();
  
@@ -191,6 +221,8 @@
 			form_data.append('latar_belakang', latar_belakang);
 			form_data.append('tujuan', tujuan);
 			form_data.append('ruang_lingkup', ruang_lingkup);
+			form_data.append('lokasi', lokasi);
+			form_data.append('id_instansi', id_instansi);
 
 
             $.ajax({

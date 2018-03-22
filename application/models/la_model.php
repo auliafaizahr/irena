@@ -23,6 +23,21 @@ class La_model extends CI_Model {
 		return $this->db->query($sql)->result_array();
 	}
 
+		function la_simpan_data_edit($data)
+	{
+		if(array_key_exists('id', $data))
+		{
+			$id = $data['id'];
+			unset($data['id']);
+			$this->db->where('id',$id);
+			$this->db->update('irena_la_proyek', $data);
+		}
+		else
+		{
+			$this->db->insert('irena_la_proyek', $data);
+		}		
+	}
+
 
 	public function ambil_catatan($a)
 	{

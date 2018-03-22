@@ -112,7 +112,7 @@
 			var ruang_lingkup_eng 	= $("#ruang_lingkup_eng").val();
 			var id_instansi 		= $("#id_instansi").val();
 			var id_program		 	= $("#id_program").val();
-			var instansi_pelaksana		 	= $("#id_instansi_pelaksana").val();
+			var instansi_pelaksana		 	= $("#instansi_pelaksana").val();
 			var proyeksi_tahun_pertama_penarikan		 	= $("#proyeksi_tahun_pertama_penarikan").val();
 			var id_lender		 	= $("#id_lender").val();
 			var id_eselon_1		 	= $("#id_eselon_1").val();

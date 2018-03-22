@@ -46,6 +46,39 @@
               <tr class="read">
                 <td class="mail-ontact text-right">Sektor</td>
                 <td class="mail-subject"><?php echo $this->Usulan_model->ambil_nama_sektor($detail->id_sektor)->nama; ?></td>
+                
+              </tr>
+              <tr class="read">
+              <td class="mail-ontact text-right">Sektor</td>
+               <td class="mail-subject">
+                 
+                 <ul class="nav nav-tabs tabs-up" id="friends">
+                       <li><a href="#contacts" id="contacts_tab" data-toggle="tab" rel="tooltip"> Contacts </a></li>
+                       <li><a href="#friends_list" class="media_node span" id="friends_list_tab" data-toggle="tab" data-url="<?php echo base_url(); ?>usulan/tampilkan_tes" rel="tooltip"> Friends list</a></li>
+                       <li><a href="#awaiting_request" class="media_node span" id="awaiting_request_tab" data-toggle="tab" rel="tooltip">Awaiting request</a></li>
+                 </ul>
+
+                 <div class="tab-content">
+                      <div class="tab-pane active" id="contacts">
+
+                       </div>
+                       <div class="tab-pane" id="friends_list">
+
+                       </div>
+                       <div class="tab-pane  urlbox span8" id="awaiting_request">
+                       <table>
+                         
+                         <th>
+                           <td>
+                             Hai Ini Cek
+                           </td>
+                         </th>
+
+                       </table>
+                       </div>
+                </div>
+               </td>
+                
               </tr>
 
               <tr class="read">
@@ -453,7 +486,7 @@
                      </thead>
 
                       <tbody>
-                    <?php $dk_detail = $this->Usulan_model->ambil_la_detail($detail->id);
+                    <?php $la_detail = $this->Usulan_model->ambil_la_detail($detail->id_usulan);
 
                       foreach ($la_detail as $key => $value):
                         # code...
@@ -517,15 +550,31 @@
 
 
 <script>
+
+
+
     $(document).ready(function(){
-    $("#select_instansi").select2({
-      placeholder: "Pilih Instansi",
-      width: "100%"
-    });
+   
     
     $("#select_tahun").select2({
       placeholder: "Pilih Tahun Usulan",
       width: "100%"
+    });
+
+    $('#friends a').click(function(e) {
+      e.preventDefault();
+        var $this = $(this),
+            loadurl = $this.data('url'),
+            targ = $this.attr('href');
+            id = $this.attr('id');
+
+        $.get(loadurl, function(data) {
+          console.log(data)
+            $(targ).html(data);
+        });
+
+        $this.tab("show");
+        return false;
     });
 
 

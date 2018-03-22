@@ -1,4 +1,4 @@
-					<div id="container" style="min-width: 400px; max-width: 800px; height: 400px; margin: 0 auto"></div>
+<div id="container" style="min-width: 400px; max-width: 800px; height: 400px; margin: 0 auto"></div>
 					
 					<container>
   <table class="table table-striped table-hover js-table" id="example_">
@@ -6,7 +6,7 @@
       <tr>
         <th>Lender</th>
         <th>Total Nilai Pinjaman</th>
-        <th>Actions</th>
+        
       </tr>
     </thead>
     <tbody>
@@ -14,20 +14,10 @@
    
     <tr data-toggle="collapse" data-target="#collapse4039" class="clickable">
       <td><?php echo $value['nama']; ?></td>
-      <td><?php echo $value['total']; ?></td>
+      <td><?php echo number_format($value['total']); ?></td>
    
      
-      <td>
-        <div class="btn-group btn-group-sm" role="group" aria-label="...">
-          <div class="btn-group " role="group" aria-label="Voir le detail">
-            <a id="<?php echo $value['id_instansi']; ?>" class="parents js-view-parents" data-href="formation_json_parents" data-id=4039 data-toggle="tooltip" data-placement="top" alt="Voir les details" title="Details">
-              <span class="glyphicon glyphicon-eye-close" aria-hidden="true" style="color:black; margin: 5px;"></span>
-            </a>
-          </div>
-
-        </div>
-        <input type="hidden" name="untuk_id" value="<?php echo $value['id_instansi'];?>">
-      </td>
+    
     </tr>
     <?php endforeach;   ?>
         <input type="hidden" name="fetch_id" id="fetch_id" value="<?php echo $id; ?>">

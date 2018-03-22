@@ -52,6 +52,23 @@ class Dk_model extends CI_Model {
 		}		
 	}
 
+		public function tambah_ke_LA($data)
+	{
+		
+		if(array_key_exists('id', $data))
+		{
+			$id = $data['id_dk_proyek'];
+			unset($data['id_dk_proyek']);
+			$this->db->where('id_dk_proyek',$id);
+			$this->db->update('irena_la_proyek', $data);
+		}
+		else
+		{
+			$this->db->insert('irena_la_proyek', $data);
+		}		
+			
+	}
+
 
 
 	function dk_simpan_data_edit($data)

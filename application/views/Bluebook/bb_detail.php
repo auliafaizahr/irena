@@ -438,16 +438,16 @@
                      </thead>
 
                      <tbody>
-                     <?php $dk_detail = $this->Usulan_model->ambil_dk_detail($detail->id_usulan);
+                     <?php $la_detail = $this->Usulan_model->ambil_la_detail($detail->id_usulan);
 
-                       foreach ($dk_detail as $key => $value):
+                       foreach ($la_detail as $key => $value):
                          # code...
                        
                       ?>
                        <tr>
                          <td>
                           <?php 
-                          echo $value->tgl_DK;
+                          echo $value->tgl_LA;
                            ?>
                          
                          </td>

@@ -124,7 +124,7 @@
               </tr>
                <tr class="read">
                 <td class="mail-ontact text-right">Nilai Pinjaman</td>
-                <td class="mail-subject"><?php echo ($detail->nilai_pinjaman!="")?$detail->nilai_pinjaman:'';?></td>
+                <td class="mail-subject"><?php echo number_format(($detail->nilai_pinjaman!="")?$detail->nilai_pinjaman:'');?></td>
               </tr>
 
               <tr class="read">
@@ -185,7 +185,7 @@
                     }
 
                     if ($this->dk_model->ambil_layak($detail->id)->is_layak != '0') {
-                       $user = $this->dk_model->ambil_layak($detail->id)->update_by;
+                       $user = $this->dk_model->ambil_layak($detail->id)->is_la_update_by;
                       $nama = $this->Usulan_model->ambil_user($user)->nama_depan;
                       echo "<p> Penilaian dilakukan oleh ";
                       echo "<b>".$nama."</b> </br>";
@@ -281,155 +281,208 @@
                 </td>
               </tr>
 
+              <?php if($this->Usulan_model->ambil_untuk_modal($detail->id_usulan)->id_proyek_bb != '' || $this->Usulan_model->ambil_untuk_modal($detail->id_usulan)->id_proyek_bb != NULL){ ?>
                <tr class="read">
-                <td class="mail-ontact text-right">Detail Bluebook</td>
-                <td class="mail-subject">
-                  <table class="table table-bordered">
-                    <thead>
-                      <tr>
-                        <th style="width: 300px;" tabindex="0">
-                          Bluebook
-                        </th>
+                 <td class="mail-ontact text-right">Detail Bluebook</td>
+                 <td class="mail-subject">
+                   <table class="table table-bordered">
+                     <thead>
+                       <tr>
+                         <th style="width: 300px;" tabindex="0">
+                           Bluebook
+                         </th>
 
-                        <th>
-                          Nilai (dalam USD)
-                        </th>
-                      </tr>
-                    </thead>
+                         <th>
+                           Nilai (dalam USD)
+                         </th>
+                         
+                       </tr>
+                     </thead>
 
-                    <tbody>
-                      <tr>
-                        <td>
-                          Bluebook 2015
-                        </td>
-                        <td>
-                         200
-                        </td>
-                      </tr>
-                    </tbody>
+                     <tbody>
+                    <?php $bb_detail = $this->Usulan_model->ambil_bb_detail($detail->id_usulan);
 
-                  </table>
-                </td>
-              </tr>
-
-                <tr class="read">
-                <td class="mail-ontact text-right">Detail Greenbook</td>
-                <td class="mail-subject">
-                  <table class="table table-bordered">
-                    <thead>
-                      <tr>
-                        <th style="width: 300px;" tabindex="0">
-                          Greenbook
-                        </th>
-
-                        <th>
-                          Nilai (dalam USD)
-                        </th>
-
-                        <th>
-                         Lender
-                        </th>
-                      </tr>
-                    </thead>
-
-                    <tbody>
+                      foreach ($bb_detail as $key => $value):
+                        # code...
+                      
+                     ?>
                       <tr>
                         <td>
-                          Bluebook 2015
+                         <?php 
+
+                          echo $this->Bluebook_model->kode_bluebook($value->id_bluebook)->nama; ?>
                         </td>
                         <td>
-                         200
-                        </td>
-                        <td>
-                         Lender
+                        <?php  echo number_format($value->nilai_pinjaman); ?>
                         </td>
                       </tr>
-                    </tbody>
+                       <?php endforeach; ?>
+                     </tbody>
 
-                  </table>
-                </td>
-              </tr>
+                   </table>
+                 </td>
+               </tr>
+
+               <?php }; ?>
+
+               <?php if($this->Usulan_model->ambil_untuk_modal($detail->id_usulan)->id_proyek_gb != '' || $this->Usulan_model->ambil_untuk_modal($detail->id_usulan)->id_proyek_gb != NULL){ ?>
+               <tr class="read">
+                 <td class="mail-ontact text-right">Detail Greenbook</td>
+                 <td class="mail-subject">
+                   <table class="table table-bordered">
+                     <thead>
+                       <tr>
+                         <th style="width: 300px;" tabindex="0">
+                           Greenbook
+                         </th>
+
+                         <th>
+                           Nilai (dalam USD)
+                         </th>
+                         <th>
+                          Lender
+                         </th>
+                       </tr>
+                     </thead>
+
+                     <tbody>
+                    <?php $gb_detail = $this->Usulan_model->ambil_gb_detail($detail->id_usulan);
+
+                      foreach ($gb_detail as $key => $value):
+                        # code...
+                      
+                     ?>
+                      <tr>
+                        <td>
+                         <?php 
+                         if($value->id_greenbook != ''){
+                         echo $this->Greenbook_model->kode_greenbook($value->id_greenbook)->nama;
+                        }else{
+                          echo "";
+                        }
+                          ?>
+                        
+                        </td>
+                        <td>
+                        <?php  echo number_format($value->nilai_pinjaman); ?>
+                        </td>
+                         <td>
+                        <?php echo $this->Greenbook_model->lender($value->id_lender)->lender;
+                         ?>
+                        </td>
+                      </tr>
+                      <?php endforeach; ?>
+                     </tbody>
+
+                   </table>
+                 </td>
+               </tr>
+
+               <?php }; ?>
 
              
-              <tr class="read">
-                <td class="mail-ontact text-right">Detail DK</td>
-                <td class="mail-subject">
-                  <table class="table table-bordered">
-                    <thead>
-                      <tr>
-                        <th style="width: 300px;" tabindex="0">
-                          Tanggal DK
-                        </th>
+            <?php if($this->Usulan_model->ambil_untuk_modal($detail->id_usulan)->id_proyek_dk != '' || $this->Usulan_model->ambil_untuk_modal($detail->id_usulan)->id_proyek_dk != NULL){ ?>
+               <tr class="read">
+                 <td class="mail-ontact text-right">Detail Daftar Kegiatan</td>
+                 <td class="mail-subject">
+                   <table class="table table-bordered">
+                     <thead>
+                       <tr>
+                         <th style="width: 300px;" tabindex="0">
+                           Tanggal DK
+                         </th>
 
-                        <th>
-                          Nilai (dalam USD)
-                        </th>
-                        <th>
-                         Lender
-                        </th>
-                      </tr>
-                    </thead>
+                         <th>
+                           Nilai (dalam USD)
+                         </th>
+                         <th>
+                          Lender
+                         </th>
+                       </tr>
+                     </thead>
 
-                    <tbody>
+                     <tbody>
+                    <?php $dk_detail = $this->Usulan_model->ambil_dk_detail($detail->id_usulan);
+
+                      foreach ($dk_detail as $key => $value):
+                        # code...
+                      
+                     ?>
                       <tr>
                         <td>
-                          Tanggal DK
+                         <?php echo $value->tgl_DK; ?>
+                        
                         </td>
                         <td>
-                         200
+                        <?php  echo number_format($value->nilai_pinjaman); ?>
                         </td>
-
                          <td>
-                         Lender
+                        <?php echo $this->Greenbook_model->lender($value->id_lender)->lender;
+                         ?>
                         </td>
                       </tr>
+                      <?php endforeach; ?>
                     </tbody>
 
-                  </table>
-                </td>
-              </tr>
+                   </table>
+                 </td>
+               </tr>
+
+               <?php }; ?>
 
 
-                <?php if($this->dk_model->ambil_layak($detail->id)->is_la_kasubdit == '2' && $this->dk_model->ambil_layak($detail->id)->is_la == '2' ){ ?>
-              <tr class="read">
-                <td class="mail-ontact text-right">Detail Detail LA</td>
-                <td class="mail-subject">
-                  <table class="table table-bordered">
-                    <thead>
-                      <tr>
-                        <th style="width: 300px;" tabindex="0">
-                          Tanggal LA
-                        </th>
 
-                        <th>
-                          Nilai (dalam USD)
-                        </th>
-                        <th>
-                         Lender
-                        </th>
-                      </tr>
-                    </thead>
+             <!--  -->
 
-                    <tbody>
+               <?php if($this->Usulan_model->ambil_untuk_modal($detail->id_usulan)->id_proyek_la != '' || $this->Usulan_model->ambil_untuk_modal($detail->id_usulan)->id_proyek_la != NULL){ ?>
+               <tr class="read">
+                 <td class="mail-ontact text-right">Detail Loan Agreement</td>
+                 <td class="mail-subject">
+                   <table class="table table-bordered">
+                     <thead>
+                       <tr>
+                         <th style="width: 300px;" tabindex="0">
+                           Tanggal LA
+                         </th>
+
+                         <th>
+                           Nilai (dalam USD)
+                         </th>
+                         <th>
+                          Lender
+                         </th>
+                       </tr>
+                     </thead>
+
+                      <tbody>
+                    <?php $la_detail = $this->Usulan_model->ambil_la_detail($detail->id_usulan);
+
+                      foreach ($la_detail as $key => $value):
+                        # code...
+                      
+                     ?>
                       <tr>
                         <td>
-                          Tanggal DK
+                         <?php echo $value->tgl_LA; ?>
+                        
                         </td>
                         <td>
-                         200
+                        <?php  echo number_format($value->nilai_pinjaman); ?>
                         </td>
-
                          <td>
-                         Lender
+                        <?php echo $this->Greenbook_model->lender($value->id_lender)->lender;
+                         ?>
                         </td>
                       </tr>
+                      <?php endforeach; ?>
                     </tbody>
 
-                  </table>
-                </td>
-              </tr>
+                   </table>
+                 </td>
+               </tr>
 
-              <?php }; ?>
+               <?php }; ?>
+
 
              
              

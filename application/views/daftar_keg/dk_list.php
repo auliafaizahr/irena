@@ -135,10 +135,10 @@
                         if ($is_la == '1') {
 
                             if ($la_kasubdit == '0') {
-                                echo "<a id='".$value['id']."' class='tambahkeLA' data-id='".$is_la."' data-kasubdit='".$la_kasubdit."'  data-user='".$user_level."'><i class='btn fa fa-times-circle btn-warning'></i></a>";
+                                echo "<a id='".$value['id']."' class='tambahkeLA' data-id='".$is_la."' data-kasubdit='".$la_kasubdit."' data-layak='".$kasubdit_layak."'  data-user='".$user_level."'><i class='btn fa fa-times-circle btn-warning'></i></a>";
                                  
                             }elseif ($la_kasubdit == '1') {
-                                 echo "<a id='".$value['id']."' class='tambahkeLA' data-id='".$is_la."' data-kasubdit='".$la_kasubdit."'  data-user='".$user_level."'><i class='btn fa fa-warning btn-warning'></i></a>";
+                                 echo "<a id='".$value['id']."' data-layak='".$kasubdit_layak."'  class='tambahkeLA' data-id='".$is_la."' data-kasubdit='".$la_kasubdit."'  data-user='".$user_level."'><i class='btn fa fa-warning btn-warning'></i></a>";
                                  
                             }else{
                                 echo '<a ><i class="btn fa fa-times-circle btn-danger" ></i></a>';
@@ -149,10 +149,10 @@
 
                          
                           if ($la_kasubdit == '0') {
-                            echo "<a id='".$value['id']."' class='tambahkeLA' data-id='".$is_la."' data-kasubdit='".$la_kasubdit."'  data-user='".$user_level."'><i class='btn fa fa-check-square btn-warning'></i></a>";
+                            echo "<a id='".$value['id']."' data-layak='".$kasubdit_layak."' class='tambahkeLA' data-id='".$is_la."' data-kasubdit='".$la_kasubdit."'  data-user='".$user_level."'><i class='btn fa fa-check-square btn-warning'></i></a>";
                              
                           }elseif ($la_kasubdit == '1') {
-                            echo "<a id='".$value['id']."' class='tambahkeLA' data-id='".$is_la."' data-kasubdit='".$la_kasubdit."'  data-user='".$user_level."' ><i class='btn fa fa-warning btn-warning'></i></a>";
+                            echo "<a id='".$value['id']."' data-layak='".$kasubdit_layak."' class='tambahkeLA' data-id='".$is_la."' data-kasubdit='".$la_kasubdit."'  data-user='".$user_level."' ><i class='btn fa fa-warning btn-warning'></i></a>";
                             
                           }else{
                             echo '<a ><i class="btn fa fa-check-square btn-primary"></i></a>'; 
@@ -161,7 +161,7 @@
                         }else{
                           //echo "<a   id='".$c."' layak='".$c."' onclick='nilai_admin($adm)'><i class=' btn fa fa-times-circle btn-danger'></i></a>";
                           echo "<div class='btn-group'>
-                            <button type='button'  class='btn btn-xs  btn-danger'  data-user='".$user_level."' id='".$value['id']."' data-kasubdit='".$la_kasubdit."' data-id='".$is_la."'  ><i class='fa fa-plus'></i> Tambah ke LA</button>
+                            <button type='button' data-layak='".$kasubdit_layak."'  class='tambahkeLA btn btn-xs  btn-danger'  data-user='".$user_level."' id='".$value['id']."' data-kasubdit='".$la_kasubdit."' data-id='".$is_la."'  ><i class='fa fa-plus'></i> Tambah ke LA</button>
                         </div>";
                          // echo "<a id='".$value['id']."' class='tambahBB' ><i class='btn fa fa-plus  btn-danger'></i></a>";
                           
@@ -348,16 +348,118 @@
                 });
      });
   
-  function tampilkan_form_hapus(page){
-    $.ajax({
-      url: "<?php echo base_url(); ?>"+page,
-      success:function(response){
-        $("#tmpModal").html(response);
-        $('#modalHapus').modal('show');
-    },
-    dataType:"html"});
-    return false;
-  }
+
+  $(document).on('click', '.tambahkeLA', function(){  
+
+        var id = $(this).attr("id"); 
+        var usul_DK = $(this).attr("data-id"); 
+        var kasubdit = $(this).attr("data-kasubdit"); 
+        var layak = $(this).attr("data-layak");
+        var user_level = $(this).attr("data-user"); 
+
+
+        console.log(id);
+        console.log(usul_DK);
+        console.log(kasubdit);
+        console.log(layak);
+
+        if (user_level != '5') {
+
+              //cek kasubdit
+              if (layak == '2') {
+                  if (kasubdit == '0') {
+                      if (usul_DK == '0') {
+                           $.ajax({
+                            type : 'post',
+                                      url : "<?php echo base_url(); ?>daftar_kegiatan/tambahkeLA",
+                                      data :  'id='+ id,
+                                      success : function(response){
+                                         $("#tmpModal").html(response);
+                                      $('#modalLA').modal('show');
+                                    
+                                    
+                                      },
+                                      dataType:"html"
+                          });
+                      } else if(usul_DK != '0'){
+                        alert('Belum dinilai oleh kasubdit');
+                        console.log('Belum dinilai oleh kasubdit');                     
+                     }
+                      //cek kalo hasil penilaian staff dan kasubdit berbeda
+                  }else if( (kasubdit  == '2' && usul_DK == '1') || (kasubdit == '1' && usul_DK == '2') ){
+                      $.ajax({
+                                    type : 'post',
+                                              url : "<?php echo base_url(); ?>daftar_kegiatan/tambahkeLA",
+                                              data :  'id='+ id,
+                                              success : function(response){
+                                               $("#tmpModal").html(response);
+                                              $('#modalLA ').modal('show');
+                                            
+                                              
+                                              },
+                                              dataType:"html"
+                                  });
+                   
+                             
+                        
+                          
+              }else if (layak != 2) {
+                alert('Belum bisa melanjutkan proses ini');
+              }
+          
+      }
+    }
+
+           if (user_level == '5') {
+
+            console.log("ini di kasubdit");
+
+              //cek kasubdit
+              if (layak == '2') {
+                  if (kasubdit == '0') {
+                      if (usul_DK == '2') {
+                           $.ajax({
+                            type : 'post',
+                                      url : "<?php echo base_url(); ?>daftar_kegiatan/tambahkeLA",
+                                      data :  'id='+ id,
+                                      success : function(response){
+                                         $("#tmpModal").html(response);
+                                      $('#modalLA').modal('show');
+                                    
+                                      },
+                                      dataType:"html"
+                          });
+                      } else if(usul_DK != '0'){
+                        alert('Belum dinilai oleh kasubdit');
+                        console.log('Belum dinilai oleh kasubdit');                     
+                     }
+                      //cek kalo hasil penilaian staff dan kasubdit berbeda
+                  }else if( (kasubdit  == '2' && usul_DK == '1') || (kasubdit == '1' && usul_DK == '2') ){
+                      $.ajax({
+                                    type : 'post',
+                                              url : "<?php echo base_url(); ?>daftar_kegiatan/tambahkeLA",
+                                              data :  'id='+ id,
+                                              success : function(response){
+                                               $("#tmpModal").html(response);
+                                              $('#modalLA ').modal('show');
+                                            
+                                             
+                                              },
+                                              dataType:"html"
+                                  });
+                  }        
+                        
+                          
+              }else if (layak != 2) {
+                alert('Belum bisa melanjutkan proses ini');
+              }
+          
+      }
+        
+
+
+          });
+
 
    $(document).on('click', '.rekam_dk', function(){  
            

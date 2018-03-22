@@ -154,7 +154,7 @@
                          <div class="form-group">
                             <label for="dana_usulan" class="col-sm-3 control-label">Nilai Pinjaman</label>
                             <div class="col-sm-9">
-                                <input type="text" name="dana_usulan" id="dana_usulan" class="form-control" placeholder="Dana Pinjaman yang Diajukan" value="">
+                                <input type="text" data-mask="999-999-999-999" name="dana_usulan" id="dana_usulan" class="form-control" placeholder="Dana Pinjaman yang Diajukan" value="">
                             </div>
                         </div>
 
@@ -244,6 +244,10 @@
             placeholder: "Pilih Sektor",
             width: "100%"
         });
+
+       /* $(".inputmask").inputmask({
+           mask: '999-999-999-999'
+        });*/
         
          $("#lokasi").select2({
             placeholder: "Pilih Lokasi",

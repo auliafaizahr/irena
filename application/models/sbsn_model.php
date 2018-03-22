@@ -18,6 +18,17 @@ class Sbsn_model extends CI_Model
 		$query = "SELECT * FROM irena_instansi ORDER BY nama ASC";
 		return $this->db->query($query)->result();
 	}
+
+
+	public function last()
+	{
+		$query = "SELECT id FROM irena_sbsn_proyek ORDER BY ID DESC LIMIT 1";
+
+
+		$a = $this->db->query($query);
+
+		return $a->row();
+	}
 	
 	function pilih_id_dpp()
 	{

@@ -53,6 +53,12 @@ class Usulan extends CI_Controller {
 		$this->load->view('Usulan/usulan_list', $data);
 	}
 
+		public function tampilkan_tes()
+	{
+		
+		$this->load->view('Peta/tes');
+	}
+
 	
 	
 	public function tampil_usulan()
@@ -377,11 +383,48 @@ class Usulan extends CI_Controller {
 		$this->load->model('Greenbook_model');
 		$this->load->model('Bluebook_model');
 		$a = $this->input->post('id');
+		$data['a'] = $this->input->post('id');
 		$data['detail'] = $this->Usulan_model->detail_proyek($a);
 
 		
 		
-		$this->load->view('PLN/detail_usulan', $data);
+		$this->load->view('Usulan/detail_usulan_modal', $data);
+		//$this->load->view('templates/footer1');
+		
+	}
+
+		public function detil_isi()
+	{
+
+		$this->load->model('Usulan_model');
+		$this->load->model('dk_model');
+		$this->load->model('Greenbook_model');
+		$this->load->model('Bluebook_model');
+		//$a = $this->input->post('id');
+		$a = $this->uri->segment(3);
+		$data['detail'] = $this->Usulan_model->detail_proyek($a);
+
+		
+		
+		$this->load->view('Usulan/isi_detail_usulan', $data);
+		//$this->load->view('templates/footer1');
+		
+	}
+
+		public function kronologis()
+	{
+
+		$this->load->model('Usulan_model');
+		$this->load->model('dk_model');
+		$this->load->model('Greenbook_model');
+		$this->load->model('Bluebook_model');
+		//$a = $this->input->post('id');
+		$a = $this->uri->segment(3);
+		$data['detail'] = $this->Usulan_model->detail_proyek($a);
+
+		
+		
+		$this->load->view('Usulan/kronologis_list');
 		//$this->load->view('templates/footer1');
 		
 	}
@@ -1985,25 +2028,32 @@ class Usulan extends CI_Controller {
     	$this->db->insert('irena_usulan_pln', $data);
 
 	 	$isi = array(
-    			'id_usulan' 		=> $this->Usulan_model->last()->id,
+    			'id_usulan' 		=> $this->Usulan_model->last()->id
+    			
     			//'is_gb_update_by'			=> $this->session->userdata('id')
     			
     		);
+
 	 	$this->db->insert('irena_usulan_layak', $isi);
     	$this->db->insert('irena_usulan_adm', $isi);
     	$this->db->insert('irena_usulkan_bb', $isi);
-	 	
 
 	 	$select2data = $this->input->post('lokasi');
 	 	$array_lokasi = explode(",", $select2data);
-	 
+	 	$id_instansi			= $this->input->post('id_instansi');
+
 	 	$data2 = [];
 	 	foreach($array_lokasi as $lokasi) {
 	 	  $data2[] = [
 	 	    'id_usulan' => $isi['id_usulan'],
 	 	    'id_lokasi' => $lokasi,
+	 	    'id_instansi' => $id_instansi,
 	 	  ];
 	 	}
+	 	
+	 	
+
+	 	
 
     	$this->db->insert_batch('irena_usulan_lokasi', $data2);
     	

@@ -10,18 +10,35 @@
                     <div class="ibox-content">
                         
                         <div class="form-group">
-                            <label for="id_instansi" class="col-sm-3 control-label">Instansi</label>
+                            <label for="id_instansi" class="col-sm-3 control-label">Instansi Pengusul</label>
                             <div class="col-sm-9">
-                                
+                                <select id="id_instansi" class="form-control" >
+                                  
+                                      
+                                    <?php 
+                                        $query  = $this->Usulan_model->ambil_instansi_id($detail->id_instansi); 
+                                        foreach ($query as $key) 
+                                        {
+                                    ?>
+                                        <option value="<?php echo $key->id; ?>"><?php echo $key->nama_instansi; ?></option>
+                                    <?php } ?>
+                                    
+                                    <?php foreach($lembaga as $row){ ?>
+                                        <option value="<?php echo $row['id_lembaga']; ?>"><?php echo $row['nama_instansi']; ?>
+                                      </option>
+                                    <?php } ?>
+                                </select>
                             </div>
                         </div>
-                        
+                  
+
                         <div class="form-group">
-                            <label for="id_eselon_1" class="col-sm-3 control-label">Instansi Eselon I</label>
+                            <label for="id_eselon_1" class="col-sm-3 control-label">Instansi Pelaksana </label>
                             <div class="col-sm-9">
-                               
+                                <textarea name="instansi_pelaksana" id="instansi_pelaksana" class="col-sm-12" rows="5" placeholder="instansi_pelaksana"><?php echo $detail->instansi_pelaksana; ?></textarea>
                             </div>
                         </div>
+
 
 
                         <div class="form-group">
@@ -37,6 +54,39 @@
                                     <?php } ?>
                                     <?php foreach($program as $row){ ?>
                                         <option value="<?php echo $row['id']; ?>"><?php echo $row['nama_program']; ?>
+                                      </option>
+                                    <?php } ?>
+                                </select>
+                            </div>
+                        </div>
+
+
+                     <div class="form-group">
+                            <label for="infra" class="col-sm-3 control-label">Kategori </label>
+                            <div class="col-sm-9">
+                                <select name="infra" id="infra" class="form-control" >
+                                    <?php 
+                                        $query  = $this->Usulan_model->ambil_infra_id($detail->infra); 
+                                        foreach ($query as $key) 
+                                        {
+                                    ?>
+                                        <option value="<?php echo $key->id; ?>"><?php echo $key->nama; ?></option>
+                                    <?php } ?>
+                                    <?php foreach($infra as $row){ ?>
+                                        <option value="<?php echo $row['id']; ?>"><?php echo $row['nama']; ?>
+                                      </option>
+                                    <?php } ?>
+                                </select>
+                            </div>
+                        </div>
+
+                    <div class="form-group">
+                            <label for="id_sektor" class="col-sm-3 control-label">Sektor </label>
+                            <div class="col-sm-9">
+                                <select name="id_sektor" id="id_sektor" class="form-control"  >
+                                     
+                                    <?php foreach($sektor as $row){ ?>
+                                        <option value="<?php echo $row['id']; ?>"><?php echo $row['nama']; ?>
                                       </option>
                                     <?php } ?>
                                 </select>
@@ -89,6 +139,27 @@
                             </div>
                         </div>
                         
+
+                        <div class="form-group">
+                            <label for="lokasi" class="col-sm-3 control-label">Lokasi </label>
+                            <div class="col-sm-9">
+                                <select name="lokasi" id="lokasi" class="form-control" multiple>
+                           
+                                <?php $key = array($detail->lokasi);
+                                $a = array();
+                                $a = explode(",", $detail->lokasi);
+                                $key2 = array("1", "2", "4", "3");
+                                 
+
+
+                                foreach($lokasi as $row ){ ?>
+                                <option value="<?php echo $row['id']; ?>" <?php echo in_array($row['id'] , $a) ? 'selected' : '' ?>><?php echo $row['nama']; ?>
+                                 </option>
+                                 <?php } ?>
+                                 </select>
+                            </div>
+                        </div>
+
                      
                         <div class="form-group">
                             <label for="judul_proyek_eng" class="col-sm-3 control-label">Judul EN</label>
@@ -107,14 +178,15 @@
                          <div class="form-group">
                             <label for="ruang_lingkup_eng" class="col-sm-3 control-label">Ruang Lingkup EN</label>
                             <div class="col-sm-9">
-                                <input type="text" name="ruang_lingkup_eng" id="" class="form-control" placeholder="Ruang Lingkup dalam Bahasa Inggris" value="<?php echo $detail->ruang_lingkup_eng; ?>">
+                             <textarea name="ruang_lingkup_eng" id="ruang_lingkup_eng" class="col-sm-12" rows="5" placeholder="Ruang Lingkup dalam Bahasa Inggris"><?php echo $detail->ruang_lingkup_eng; ?></textarea>
                             </div>
+                               
                         </div>
 
                          <div class="form-group">
                             <label for="ruang_lingkup_id" class="col-sm-3 control-label">Ruang Lingkup ID</label>
                             <div class="col-sm-9">
-                                <input type="text" name="ruang_lingkup_id" id="ruang_lingkup_id" class="form-control" placeholder="Ruang Lingkup dalam Bahasa Indonesia" value="<?php echo $detail->ruang_lingkup_id; ?>">
+                                <textarea name="ruang_lingkup_id" id="ruang_lingkup_id" class="col-sm-12" rows="5" placeholder="Ruang Lingkup dalam Bahasa Indonesia"><?php echo $detail->ruang_lingkup_id; ?></textarea>
                             </div>
                         </div>
 
@@ -304,6 +376,20 @@
             placeholder: "Pilih Kode Greenbook",
             width: "100%"
         });
+
+          $("#id_sektor").select2({
+            placeholder: "Pilih Sektor",
+            width: "100%"
+        });
+        
+        $("#lokasi").select2({
+            placeholder: "Pilih Lokasi",
+            width: "100%",
+            multiple:true,
+            tags: true
+        });
+        
+        
         
         
 
@@ -341,33 +427,60 @@
         $('#htmlForm').submit(function(e) {
             e.preventDefault();
 
+            
             var me          = $(this);
             
             var id                          = $("#id").val();
-            var id_instansi_eselon_satu     = $("#id_instansi_eselon_satu").val();
-            var id_jenis                    = $("#id_jenis").val();
-            var id_donor                    = $("#id_donor").val();
-            var judul_en                    = $("#judul_en").val();
-            var judul_id                    = $("#judul_id").val();
+            var id_instansi                          = $("#id_instansi").val();
+          
+            var instansi_pelaksana     = $("#instansi_pelaksana").val();
+            var id_program                    = $("#id_program").val();
+            var proyeksi_tahun_pertama_penarikan                    = $("#proyeksi_tahun_pertama_penarikan").val();
+            var judul_proyek_id                    = $("#judul_proyek_id").val();
+            var judul_proyek_eng                    = $("#judul_proyek_eng").val();
             var durasi                      = $("#durasi").val();
-            var id_mata_uang                = $("#id_mata_uang").val();
-            var nilai_hibah                 = $("#nilai_hibah").val();
-            var nilai_dp                    = $("#nilai_dp").val();
-            var ringkasan                   = $("#ringkasan").val();
+            var ruang_lingkup_id                = $("#ruang_lingkup_id").val();
+            var ruang_lingkup_eng                 = $("#ruang_lingkup_eng").val();
+            var dana_pendamping                 = $("#dana_pendamping").val();
+            var nilai_hibah                    = $("#dana_hibah").val();
+            var nilai_pinjaman                   = $("#nilai_pinjaman").val();
+            var output                   = $("#output").val();
+            var outcome                   = $("#outcome").val();
+            var id_bluebook                   = $("#id_bluebook").val();
+            var id_lender                   = $("#id_lender").val();
+            var id_status_lender                   = $("#id_status_lender").val();
+            var id_status_lembaga                   = $("#id_status_lembaga").val();
+            var id_greenbook                   = $("#id_greenbook").val();
+            var tgl_dk                   = $("#tgl_dk").val();
+            var tahun_usulan                   = $("#tahun_usulan").val();
+            var lokasi                   = $("#lokasi").val();
             
             var form_data   = new FormData();
             
             form_data.append('id', id);
-            form_data.append('id_instansi_eselon_satu', id_instansi_eselon_satu);
-            form_data.append('id_donor', id_donor);
-            form_data.append('id_jenis', id_jenis);
-            form_data.append('judul_en', judul_en);
-            form_data.append('judul_id', judul_id);
-            form_data.append('durasi', durasi);
-            form_data.append('id_mata_uang', id_mata_uang);
+            form_data.append('id_instansi', id_instansi);
+            form_data.append('instansi_pelaksana', instansi_pelaksana);
+            form_data.append('id_program', id_program);
+            form_data.append('proyeksi_tahun_pertama_penarikan', proyeksi_tahun_pertama_penarikan);
+            form_data.append('judul_proyek_id', judul_proyek_id);
+            form_data.append('judul_proyek_eng', judul_proyek_eng);
+            form_data.append('ruang_lingkup_id', ruang_lingkup_id);
+            form_data.append('ruang_lingkup_eng', ruang_lingkup_eng);
+            form_data.append('dana_pendamping', dana_pendamping);
             form_data.append('nilai_hibah', nilai_hibah);
-            form_data.append('nilai_dp', nilai_dp);
-            form_data.append('ringkasan', ringkasan);
+            form_data.append('nilai_pinjaman', nilai_pinjaman);
+            form_data.append('output', output);
+            form_data.append('outcome', outcome);
+            form_data.append('durasi', durasi);
+            form_data.append('id_bluebook', id_bluebook);
+            form_data.append('id_lender', id_lender);
+            form_data.append('id_status_lender', id_status_lender);
+            form_data.append('id_status_lembaga', id_status_lembaga);
+            form_data.append('id_greenbook', id_greenbook);
+            form_data.append('tgl_dk', tgl_dk);
+            form_data.append('tahun_usulan', tahun_usulan);
+            form_data.append('lokasi', lokasi);
+
 
 
             $.ajax({

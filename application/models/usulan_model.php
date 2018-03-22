@@ -357,6 +357,8 @@ class Usulan_model extends CI_Model {
 		
 	}
 
+
+
 		public function ambil_untuk_modal($x)
 	{
 		$query = "SELECT * FROM irena_view_untuk_detail_modal WHERE id = '$x'";
@@ -697,6 +699,14 @@ class Usulan_model extends CI_Model {
 
 		return $a->result_array();
 	}
+
+	/*public function ambil_view_lokasi_usulan($x)
+	{
+		$query = "Select id_instansi FROM irena_bluebook_proyek WHERE id_bluebook = '$x' GROUP BY id_instansi";
+		 $a= $this->db->query($query);
+
+		return $a->result_array();
+	}*/
 
 
 	public function ambil_rekomen_BB($x)

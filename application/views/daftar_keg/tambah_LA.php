@@ -29,7 +29,7 @@
 										<input type="hidden" name="id_instansi" id="id_instansi" class="form-control" value="<?php echo $detail->id_instansi; ?>">
 										<input type="hidden" name="id_status_lender" id="id_status_lender" class="form-control" value="<?php echo $detail->id_status_lender; ?>">
 										<input type="hidden" name="id_status_lembaga" id="id_status_lembaga" class="form-control" value="<?php echo $detail->id_status_lembaga; ?>">
-										<input type="hidden" name="id_instansi_pelaksana" id="id_instansi_pelaksana" class="form-control" value="<?php echo $detail->id_instansi_pelaksana; ?>">
+										<input type="hidden" name="id_instansi_pelaksana" id="id_instansi_pelaksana" class="form-control" value="<?php echo $detail->instansi_pelaksana; ?>">
 										<input type="hidden" name="judul_proyek_id" id="judul_proyek_id" class="form-control" value="<?php echo $detail->judul_proyek_id; ?>">
 										<input type="hidden" name="judul_proyek_eng" id="judul_proyek_eng" class="form-control" value="<?php echo $detail->judul_proyek_eng; ?>">
 										<input type="hidden" name="ruang_lingkup_id" id="ruang_lingkup_id" class="form-control" value="<?php echo $detail->ruang_lingkup_id; ?>">
@@ -38,6 +38,10 @@
 										<input type="hidden" name="output" id="output" class="form-control" value="<?php echo $detail->output; ?>">
 										<input type="hidden" name="outcome" id="outcome" class="form-control" value="<?php echo $detail->outcome; ?>">
 										<input type="hidden" name="nilai_pinjaman" id="nilai_pinjaman" class="form-control" value="<?php echo $detail->nilai_pinjaman; ?>">
+										<input type="hidden" name="infra" id="infra" class="form-control" value="<?php echo $detail->infra; ?>">
+										<input type="hidden" name="id_bb_proyek" id="id_bb_proyek" class="form-control" value="<?php echo $detail->id_bb_proyek; ?>">
+										<input type="hidden" name="id_gb_proyek" id="id_gb_proyek" class="form-control" value="<?php echo $detail->id_gb_proyek; ?>">
+										<input type="hidden" name="tahun_usulan" id="tahun_usulan" class="form-control" value="<?php echo $detail->tahun_usulan; ?>">
 										
 										<input type="hidden" name="nilai_hibah" id="nilai_hibah" class="form-control" value="<?php echo $detail->nilai_hibah; ?>">
 										<input type="hidden" name="tgl_DK" id="tgl_DK" class="form-control" value="<?php echo $detail->tgl_DK; ?>">
@@ -45,6 +49,8 @@
 										<input type="hidden" name="id_eselon_1" id="id_eselon_1" class="form-control" value="<?php echo $detail->id_eselon_1; ?>">
 										<input type="hidden" name="dana_pendamping" id="dana_pendamping" class="form-control" value="<?php echo $detail->dana_pendamping; ?>">
 										<input type="hidden" name="proyeksi_tahun_pertama_penarikan" id="proyeksi_tahun_pertama_penarikan" class="form-control" value="<?php echo $detail->proyeksi_tahun_pertama_penarikan; ?>">
+										<input type="hidden" name="id_sektor" id="id_sektor" class="form-control" value="<?php echo $detail->id_sektor; ?>">
+										<input type="hidden" name="lokasi" id="lokasi" class="form-control" value="<?php echo $detail->lokasi; ?>">
 									
 									</label>
 								</div>
@@ -76,9 +82,9 @@
     $(document).ready(function(){
 		$('#check_nilai_layak').change(function() {
 			if($("#check_nilai_layak").is(':checked') == true){
-				$('#nilai_layak').val(1);
+				$('#nilai_layak').val(2);
 			}else{
-				$('#nilai_layak').val(0);
+				$('#nilai_layak').val(1);
 			}
 			
 		});
@@ -98,7 +104,9 @@
 			var judul_proyek_id 	= $("#judul_proyek_id").val();
 			var judul_proyek_eng 	= $("#judul_proyek_eng").val();
 			var judul_proyek_eng 	= $("#judul_proyek_eng").val();
-			var id_instansi 		= $("#id_instansi_pelaksana").val();
+			var ruang_lingkup_id 	= $("#ruang_lingkup_id").val();
+			var ruang_lingkup_eng 	= $("#ruang_lingkup_eng").val();
+			var id_instansi 		= $("#id_instansi").val();
 			var id_program		 	= $("#id_program").val();
 			var id_instansi_pelaksana		 	= $("#id_instansi_pelaksana").val();
 			var proyeksi_tahun_pertama_penarikan		 	= $("#proyeksi_tahun_pertama_penarikan").val();
@@ -111,11 +119,17 @@
 			var dana_pendamping		 	= $("#dana_pendamping").val();
 			var id_status_lembaga		 	= $("#id_status_lembaga").val();
 			var id_status_lender		 	= $("#id_status_lender").val();
-			var tgl_DK		 	= $("#tgl_DK").val();
+			var infra		 	= $("#infra").val();
 			var id_bluebook		 	= $("#id_bluebook").val();
 			var id_greenbook		 	= $("#id_greenbook").val();
 			var tgl_DK		 	= $("#tgl_DK").val();
 			var id_usulan 		= $("#id_usulan").val();
+			var id_bb_proyek 		= $("#id_bb_proyek").val();
+			var id_gb_proyek 		= $("#id_gb_proyek").val();
+			var tahun_usulan 		= $("#tahun_usulan").val();
+			var durasi 		= $("#durasi").val();
+			var id_sektor 		= $("#id_sektor").val();
+			var lokasi 		= $("#lokasi").val();
 			
             var form_data 	= new FormData();
 			
@@ -141,6 +155,15 @@
 			form_data.append('id_bluebook', id_bluebook);
 			form_data.append('id_usulan', id_usulan);
 			form_data.append('tgl_DK', tgl_DK);
+			form_data.append('infra', infra);
+			form_data.append('id_bb_proyek', id_bb_proyek);
+			form_data.append('id_gb_proyek', id_gb_proyek);
+			form_data.append('tahun_usulan', tahun_usulan);
+			form_data.append('ruang_lingkup_id', ruang_lingkup_id);
+			form_data.append('ruang_lingkup_eng', ruang_lingkup_eng);
+			form_data.append('durasi', durasi);
+			form_data.append('id_sektor', id_sektor);
+			form_data.append('lokasi', lokasi);
 			
 			
 

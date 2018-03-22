@@ -156,20 +156,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <label for="lokasi" class="col-sm-3 control-label">Lokasi</label>
-                            <div class="col-sm-9">
-
-                                <select name="lokasi" id="lokasi" class="form-control"  >
-                                     
-                                    <?php foreach($lokasi as $row){ ?>
-                                        <option value="<?php echo $row['id']; ?>"><?php echo $row['nama']; ?>
-                                      </option>
-                                    <?php } ?>
-                                </select>
-                               <!-- <textarea name="lokasi" id="lokasi" class="col-sm-12" rows="5" placeholder="Lokasi"></textarea> -->
-                            </div>
-                        </div>
+                       
 
 
                          <div class="form-group">

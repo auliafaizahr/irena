@@ -47,7 +47,7 @@
 							</tr>
 							<tr class="read">
 								<td class="mail-ontact text-right">Output</td>
-								<td class="mail-subject"><?php echo $usulan->output; ?></td>
+								<td class="mail-subject"><?php echo nl2br($usulan->output); ?></td>
 							</tr>
 							<tr class="read">
 								<td class="mail-ontact text-right">Latar Belakang</td>

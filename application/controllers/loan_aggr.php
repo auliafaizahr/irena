@@ -130,6 +130,10 @@ class Loan_aggr extends CI_Controller {
 		$data['status_lender']= $this->Bluebook_model->semua_status_lender();
 		$data['bluebook']= $this->Bluebook_model->semua_bluebook();
 		$data['greenbook']= $this->Greenbook_model->ambil_greenbook();
+		$data['sektor'] = $this->Greenbook_model->ambil_sektor();
+		$data['lokasi'] = $this->Usulan_model->ambil_lokasi();
+
+
 		
 		$data['lender']= $this->Bluebook_model->semua_lender();
 		$data['program']= $this->Usulan_model->ambil_program();
@@ -178,6 +182,30 @@ class Loan_aggr extends CI_Controller {
 		$this->load->view('LA/la_list', $data);
 	}
 
+	public function tampilkan_la_monev_list()
+	{
+		$this->load->model('Bluebook_model');
+		$this->load->model('hibah_model');
+		$this->load->model('Usulan_model');
+		$this->load->model('Greenbook_model');
+		$this->load->model('la_model');
+		
+		
+
+		
+		$data['instansi'] = array();
+
+		
+		$data['data']= $this->la_model->ambil_proyek_la();
+		$data['lembaga']= $this->Greenbook_model->ambil_instansi();
+		$data['program']= $this->Greenbook_model->ambil_program();
+		$data['arsip'] = $this->Greenbook_model->ambil_arsip();
+			
+
+		$data['dpp'] = $this->hibah_model->ambil_proyek_drkh();
+		$this->load->view('LA/la_monev_list', $data);
+	}
+
 	public function update() {
 		$this->load->model('la_model');
 	 	$a	= $this->input->post('id');
@@ -209,6 +237,7 @@ class Loan_aggr extends CI_Controller {
 	{
     	$this->load->model('Usulan_model');
     	$this->load->model('Bluebook_model');
+    	$this->load->model('la_model');
 
 		$status = array('success' => false, 'messages' => array());
 
@@ -286,12 +315,12 @@ class Loan_aggr extends CI_Controller {
 				  $data2[] = [
 				    'id_bb_proyek' 		=>  $id_,
 				    'id_bb' 		=>  $id_bb,
-				    'id_gb' 		=>  $id_bb,
+				    'id_gb' 		=>  $id_gb,
 				    'id_lokasi' 		=> $lokasi,
 				  ];
 				}
-	 			$this->db->insert_batch('irena_bb_lokasi', $data2);
-				$result 		= $this->Bluebook_model->bb_simpan_data_edit($data);
+	 			$this->db->insert_batch('irena_la_lokasi', $data2);
+				$result 		= $this->la_model->la_simpan_data_edit($data);
 
 			
 				/*

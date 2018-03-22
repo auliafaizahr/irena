@@ -7,7 +7,7 @@
       <tr>
         <th>Kategori</th>
         <th>Total Nilai Pinjaman</th>
-        <th>Actions</th>
+        <!-- <th>Actions</th> -->
       </tr>
     </thead>
     <tbody>
@@ -15,10 +15,10 @@
    
     <tr data-toggle="collapse" data-target="#collapse4039" class="clickable">
       <td><?php echo $value['nama']; ?></td>
-      <td><?php echo $value['total']; ?></td>
+      <td><?php echo number_format($value['total']); ?></td>
    
      
-      <td>
+     <!--  <td>
         <div class="btn-group btn-group-sm" role="group" aria-label="...">
           <div class="btn-group " role="group" aria-label="Voir le detail">
             <a id="" class="parents js-view-parents" data-href="formation_json_parents" data-id=4039 data-toggle="tooltip" data-placement="top" alt="Voir les details" title="Details">
@@ -28,7 +28,7 @@
 
         </div>
         <input type="hidden" name="untuk_id" value="">
-      </td>
+      </td> -->
     </tr>
     <?php endforeach;   ?>
      <input type="hidden" name="fetch_id" id="fetch_id" value="<?php echo $id; ?>">

@@ -32,18 +32,22 @@
                       <!--  <li><a href="#" id="contacts_tab" data-toggle="tab" rel="tooltip"> Contacts </a></li>
                        <li><a href="#" class="media_node span" id="friends_list_tab" data-toggle="tab" data-url="#" rel="tooltip"> Friends list</a></li> -->
                        <li><a href="#awaiting_request" class="media_node span" id="awaiting_request_tab" data-url="<?php echo base_url(); ?>loan_aggr/tampilkan_la_list" data-toggle="tab" rel="tooltip">Daftar Proyek</a></li>
-                       <li><a href="#awaiting_request" class="media_node span" id="friends_list_tab" data-url="<?php echo base_url(); ?>loan_aggr/tampilkan_la_monev_list" data-toggle="tab" rel="tooltip">Penyerapan</a></li>
+                        <li><a href="#awaiting_request" class="media_node span" id="awaiting_request_tab" data-url="<?php echo base_url(); ?>usulan/tampilkan_usulan_list" data-toggle="tab" rel="tooltip">Penyerapan</a></li>
                  </ul>
 
                  <div class="tab-content">
                       <div class="tab-panel panel-default  active" id="contacts">
+                      		<div class="ibox-content" >
                       		
+                      			
+                      		</div>
                        </div>
-                       <div class="tab-panel " id="friends_list">
+                       <div class="tab-pane" id="friends_list">
 
                        </div>
                        <div class="tab-panel panel-default  urlbox span8" id="awaiting_request">
-                     
+                     <!--   <div  id="div_index">
+                      			</div> -->
                        </div>
                 </div>
 				
@@ -115,7 +119,7 @@
             id = $this.attr('id');
 
         $.get(loadurl, function(data) {
-          //console.log(data)
+          console.log(data)
             $(targ).html(data);
         });
 
