@@ -30,7 +30,7 @@
 								<a href="#" onclick="tampilkan_form_edit('hibah/tampilkan_form_log_usulan_edit/<?php echo $row->id; ?>')">Edit</a>
 							</li>
 							<li>
-								<a href="#" onclick="tampilkan_form_hapus('hibah/tampilkan_form_log_usulan_hapus/<?php echo $row->id; ?>')"><span class="text-danger" ><strong>Hapus</strong></span></a>
+								<a href="#" onclick="tampilkan_form_hapus('usulan/tampilkan_form_log_usulan_hapus/<?php echo $row->id; ?>')"><span class="text-danger" ><strong>Hapus</strong></span></a>
 							</li>
 						</ul>
 					</div>

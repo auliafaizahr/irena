@@ -136,9 +136,50 @@ function usulan_simpan_data($data)
 		return $a->row();
 	}
 
+	public function total_kegiatan_bb($x)
+	{
+		$query = "SELECT COUNT(IF(irena_bluebook_proyek.id_bluebook = '$x', irena_bluebook_proyek.id, NULL)) AS total_kegiatan FROM irena_bluebook_proyek";
+		 $a= $this->db->query($query);
+
+		return $a->row()->total_kegiatan;
+	}
+
+	public function total_nilai_bb($x)
+	{
+		$query = "SELECT SUM(IF(irena_bluebook_proyek.id_bluebook = '$x', irena_bluebook_proyek.nilai_pinjaman, 0)) AS total_nilai FROM irena_bluebook_proyek JOIN irena_usulan_pln ON irena_usulan_pln.id = irena_bluebook_proyek.id_usulan";
+		 $a= $this->db->query($query);
+
+		return $a->row()->total_nilai;
+	}
+
+	public function total_kegiatan_la($x)
+	{
+		$query = "SELECT COUNT(IF(irena_bluebook_proyek.id_bluebook = '$x' AND irena_usulan_pln.is_LA = 1, irena_bluebook_proyek.id, NULL)) AS total_kegiatan FROM irena_bluebook_proyek JOIN irena_usulan_pln ON irena_usulan_pln.id = irena_bluebook_proyek.id_usulan";
+		 $a= $this->db->query($query);
+
+		return $a->row()->total_kegiatan;
+	}
+
+		public function total_nilai_la($x)
+	{
+		$query = "SELECT SUM(IF(irena_bluebook_proyek.id_bluebook = '$x' AND irena_usulan_pln.is_LA = 1, irena_bluebook_proyek.nilai_pinjaman, 0)) AS total_nilai FROM irena_bluebook_proyek JOIN irena_usulan_pln ON irena_usulan_pln.id = irena_bluebook_proyek.id_usulan";
+		 $a= $this->db->query($query);
+
+		return $a->row()->total_nilai;
+	}
+
+
 		public function detail_proyek($x)
 	{
 		$query = "SELECT * FROM irena_bluebook_proyek WHERE id = '$x'";
+		 $a= $this->db->query($query);
+
+		return $a->row();
+	}
+
+	public function detail_proyek_by_usulan($x)
+	{
+		$query = "SELECT * FROM irena_bluebook_proyek WHERE id_usulan = '$x'";
 		 $a= $this->db->query($query);
 
 		return $a->row();

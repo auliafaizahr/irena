@@ -139,6 +139,14 @@ class Usulan_model extends CI_Model {
 		
 	}
 
+		public function hapus_dari_histori($a)
+	{
+
+		$this->db->where('id_usulan', $a);
+		return $this->db->delete('irena_usulan_historis');
+		
+	}
+
 	/*public function ($a)
 	{
 
@@ -187,6 +195,21 @@ class Usulan_model extends CI_Model {
 	}
 
 	function log_usulan_simpan_data($data)
+	{
+		if(array_key_exists('id', $data))
+		{
+			$id=$data['id'];
+			unset($data['id']);
+			$this->db->where('id',$id);
+			$this->db->update('irena_usulan_pln_log',$data);
+		}
+		else
+		{
+			$this->db->insert('irena_usulan_pln_log',$data);
+		}		
+	}
+
+		function hapus_log_data($data)
 	{
 		if(array_key_exists('id', $data))
 		{
@@ -349,9 +372,18 @@ class Usulan_model extends CI_Model {
 		
 	}
 
+	public function all_banding($x)
+	{
+		
+		$query = "SELECT * FROM irena_view_untuk_detail_modal WHERE id = '$x' ORDER BY id_greenbook";
+		 $a= $this->db->query($query);
+		return $a->result_array();
+		
+	}
+
 	public function ambil_gb_detail($x)
 	{
-		$query = "SELECT * FROM irena_greenbook_proyek WHERE id_usulan = '$x'";
+		$query = "SELECT * FROM irena_greenbook_proyek WHERE id_usulan = '$x' ORDER BY id_greenbook";
 		 $a= $this->db->query($query);
 		return $a->result();
 		
@@ -478,6 +510,14 @@ class Usulan_model extends CI_Model {
 		return $a->result_array();
 	}
 
+	public function ambil_usulan()
+	{
+		$query = "SELECT * FROM irena_usulan_pln ORDER BY id ASC";
+		 $a= $this->db->query($query);
+
+		return $a->result_array();
+	}
+
 	public function ambil_program()
 	{
 		$query = "SELECT * FROM irena_program_pln";
@@ -509,6 +549,16 @@ class Usulan_model extends CI_Model {
 
 		return $a->row();
 	}
+
+	public function detail_proyek_2($x)
+	{
+		$query = "SELECT * FROM irena_view_usulan_terkait WHERE id_usulan_baru = '$x'";
+		 $a= $this->db->query($query);
+
+		return $a->result_array();
+	}
+
+
 
 	public function detail_proyek_lokasi_saja($x)
 	{

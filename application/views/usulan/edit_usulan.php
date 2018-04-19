@@ -8,9 +8,45 @@
                 <form class="form-horizontal" id="htmlForm" action="" method="post" enctype="multipart/form-data">
                 
                     <div class="ibox-content">
+
+                      <div class="form-group">
+                            <label for="status_usulan" class="col-sm-3 control-label">Jenis Usulan</label>
+                            <div class="col-sm-9">
+                                <select id="status_usulan" class="form-control" >
+                                  
+                                    
+                                    <option value="0">Baru</option>
+                                    <option value="1">Perubahan</option>
+                                    
+                                      
+                                </select>
+                            </div>
+                     </div>
+
+
+                     <div class="form-group">
+                            <label for="id_usulan_hub" class="col-sm-3 control-label">Usulan Terkait</label>
+                            <div class="col-sm-9">
+                                <select id="id_usulan_hub" class="form-control" >
+                                  
+                                <?php $key = array($detail->id_usulan_hub);
+                                $a = array();
+                                $a = explode(",", $detail->id_usulan_hub);
+                                $key2 = array("1", "2", "4", "3");
+                                 
+
+
+                                foreach($usulan as $row ){ ?>
+                                <option value="<?php echo $row['id']; ?>" <?php echo in_array($row['id'] , $a) ? 'selected' : '' ?>><?php echo $row['judul_proyek_eng']; ?>
+                                 </option>
+                                 <?php } ?>
+                                      
+                                </select>
+                            </div>
+                    </div>
                         
                         <div class="form-group">
-                            <label for="id_instansi" class="col-sm-3 control-label">Instansi</label>
+                            <label for="id_instansi" class="col-sm-3 control-label">Instansi Pengusul</label>
                             <div class="col-sm-9">
                             <select id="id_instansi" class="form-control" >
 
@@ -149,7 +185,7 @@
 
                         
                         <div class="form-group">
-                            <label for="proyeksi_tahun_pertama_penarikan" class="col-sm-3 control-label">Proyeksi Tahun Pertama Penarikan</label>
+                            <label for="proyeksi_tahun_pertama_penarikan" class="col-sm-3 control-label">Perkiraan Tahun Pertama Pelaksanaan</label>
                             <div class="col-sm-9">
                                 <input type="text" name="proyeksi_tahun_pertama_penarikan" id="proyeksi_tahun_pertama_penarikan" class="form-control" placeholder="Proyeksi Tahun Pertama Penarikan" value="<?php echo $detail->proyeksi_tahun_pertama_penarikan; ?>">
                             </div>
@@ -297,6 +333,12 @@
             width: "100%"
         });
 
+        $("#id_usulan_hub").select2({
+            placeholder: "Pilih Usulan Terkait",
+            multiple:true,
+            width: "100%"
+        });
+
          $("#lokasi").select2({
             placeholder: "Pilih Lokasi",
             width: "100%",
@@ -350,6 +392,13 @@
             var output                   = $("#output").val();
             var outcome                   = $("#outcome").val();
             var lokasi                   = $("#lokasi").val();
+
+            if (status_usulan == 0 ) {
+                var id_usulan_hub                    = 0;
+            }else{
+                var id_usulan_hub                    = $("#id_usulan_hub").val();
+            }
+            
             
             var form_data   = new FormData();
             
@@ -369,6 +418,8 @@
             form_data.append('outcome', outcome);
             form_data.append('durasi', durasi);
             form_data.append('lokasi', lokasi);
+            form_data.append('status_usulan', status_usulan);
+            form_data.append('id_usulan_hub', id_usulan_hub);
                         console.log(lokasi);
            
 

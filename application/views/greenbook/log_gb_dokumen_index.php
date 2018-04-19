@@ -13,7 +13,7 @@
 				<div class="ibox-content">
 					<div class="alert alert-warning">
 						<p>Proyek <strong><?php echo $usulan->judul_proyek_eng; ?></strong> yang diusulkan oleh <strong><?php echo $this->Usulan_model->ambil_nama_instansi($usulan->id_instansi)->nama_instansi;  ?></strong></p>
-						<input type="hidden" name="id" class="form-control" id="id" value="<?php echo $usulan->id; ?>" >
+						<input type="hidden" name="id" class="form-control" id="id" value="<?php echo $usulan->id_usulan; ?>" >
 
 					</div>
 					<div id="tabel">
@@ -97,7 +97,7 @@
 	function segarkan_log2(){
 		var id = $("#id").val();
            console.log(id);
-		$.get("<?php echo base_url(); ?>usulan/tampilkan_dok_usulan_list/"+id, function(data) {
+		$.get("<?php echo base_url(); ?>bluebook/tampilkan_dok_bb_list/"+id, function(data) {
 			$("#tabel2").html(data);
 		});
 	}

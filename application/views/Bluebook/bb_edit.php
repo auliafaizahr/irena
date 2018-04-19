@@ -8,6 +8,66 @@
                 <form class="form-horizontal" id="htmlForm" action="" method="post" enctype="multipart/form-data">
                 
                     <div class="ibox-content">
+
+                    <div class="form-group">
+                            <label for="id_bluebook" class="col-sm-3 control-label"> Bluebook </label>
+                            <div class="col-sm-9">
+                                <select name="id_bluebook" id="id_bluebook" class="form-control" >
+                                     <?php 
+                                        $query  = $this->Usulan_model->ambil_bb($detail->id_bluebook); 
+                                        foreach ($query as $key) 
+                                        {
+                                    ?>
+                                        <option value="<?php echo $key->id; ?>"><?php echo $key->nama; ?></option>
+                                    <?php } ?>
+                                    <?php foreach($bluebook as $row){ ?>
+                                        <option value="<?php echo $row['id']; ?>"><?php echo $row['nama']; ?>
+                                      </option>
+                                    <?php } ?>
+                                </select>
+                            </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="tahun_usulan" class="col-sm-3 control-label">Tahun Usulan</label>
+                        <div class="col-sm-9">
+                            <input type="text" name="tahun_usulan" id="tahun_usulan" class="form-control" placeholder="Tahun Usulan" value="<?php echo $detail->tahun_usulan; ?>">
+                        </div>
+                    </div>
+
+
+                     <div class="form-group">
+                            <label for="judul_proyek_eng" class="col-sm-3 control-label">Judul EN</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="judul_proyek_eng" id="judul_proyek_eng" class="form-control" placeholder="Judul Proyek Dalam Bahasa Inggris" value="<?php echo $detail->judul_proyek_eng; ?>">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="judul_proyek_id" class="col-sm-3 control-label">Judul ID</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="judul_proyek_id" id="judul_proyek_id" class="form-control" placeholder="Judul Proyek Dalam Bahasa Indonesia" value="<?php echo $detail->judul_proyek_id; ?>">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="id_program" class="col-sm-3 control-label">Program </label>
+                            <div class="col-sm-9">
+                                <select name="id_program" id="id_program" class="form-control" >
+                                     <?php 
+                                        $query  = $this->Usulan_model->ambil_program_proyek_id($detail->id_program); 
+                                        foreach ($query as $key) 
+                                        {
+                                    ?>
+                                        <option value="<?php echo $key->id; ?>"><?php echo $key->nama_program; ?></option>
+                                    <?php } ?>
+                                    <?php foreach($program as $row){ ?>
+                                        <option value="<?php echo $row['id']; ?>"><?php echo $row['nama_program']; ?>
+                                      </option>
+                                    <?php } ?>
+                                </select>
+                            </div>
+                        </div>
                         
                         <div class="form-group">
                             <label for="id_instansi" class="col-sm-3 control-label">Instansi Pengusul</label>
@@ -38,27 +98,70 @@
                             </div>
                         </div>
 
+                        <div class="form-group">
+                            <label for="durasi" class="col-sm-3 control-label">Durasi</label>
+                            <div class="col-sm-6">
+                                <input type="text" name="durasi" id="durasi" class="form-control" placeholder="Durasi Pelaksanaan (dalam bulan)" value="<?php echo $detail->durasi; ?>">
+                            </div>
+                            <label for="durasi" class="col-sm-3">Bulan</label>
+                        </div>
 
                         <div class="form-group">
-                            <label for="id_program" class="col-sm-3 control-label">Program </label>
+                            <label for="lokasi" class="col-sm-3 control-label">Lokasi </label>
                             <div class="col-sm-9">
-                                <select name="id_program" id="id_program" class="form-control" >
-                                     <?php 
-                                        $query  = $this->Usulan_model->ambil_program_proyek_id($detail->id_program); 
-                                        foreach ($query as $key) 
-                                        {
-                                    ?>
-                                        <option value="<?php echo $key->id; ?>"><?php echo $key->nama_program; ?></option>
-                                    <?php } ?>
-                                    <?php foreach($program as $row){ ?>
-                                        <option value="<?php echo $row['id']; ?>"><?php echo $row['nama_program']; ?>
-                                      </option>
-                                    <?php } ?>
-                                </select>
+                                <select name="lokasi" id="lokasi" class="form-control" multiple>
+                           
+                                <?php $key = array($detail->lokasi);
+                                $a = array();
+                                $a = explode(",", $detail->lokasi);
+                                $key2 = array("1", "2", "4", "3");
+                                 
+
+
+                                foreach($lokasi as $row ){ ?>
+                                <option value="<?php echo $row['id']; ?>" <?php echo in_array($row['id'] , $a) ? 'selected' : '' ?>><?php echo $row['nama']; ?>
+                                 </option>
+                                 <?php } ?>
+                                 </select>
                             </div>
                         </div>
 
-                           <div class="form-group">
+                         <div class="form-group">
+                            <label for="ruang_lingkup_eng" class="col-sm-3 control-label">Ruang Lingkup EN</label>
+                            <div class="col-sm-9">
+                             <textarea name="ruang_lingkup_eng" id="ruang_lingkup_eng" class="col-sm-12" rows="5" placeholder="Ruang Lingkup dalam Bahasa Inggris"><?php echo $detail->ruang_lingkup_eng; ?></textarea>
+                            </div>
+                               
+                        </div>
+
+                         <div class="form-group">
+                            <label for="ruang_lingkup_id" class="col-sm-3 control-label">Ruang Lingkup ID</label>
+                            <div class="col-sm-9">
+                                <textarea name="ruang_lingkup_id" id="ruang_lingkup_id" class="col-sm-12" rows="5" placeholder="Ruang Lingkup dalam Bahasa Indonesia"><?php echo $detail->ruang_lingkup_id; ?></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="output" class="col-sm-3 control-label">Output</label>
+                            <div class="col-sm-9">
+                                <textarea name="output" id="output" class="col-sm-12" rows="5" placeholder="Output Proyek"><?php echo $detail->output; ?></textarea>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label for="judul_id" class="col-sm-3 control-label">Outcome</label>
+                            <div class="col-sm-9">
+                                <textarea name="outcome" id="outcome" class="col-sm-12" rows="5" placeholder="Ringkasan Proyek"><?php echo $detail->outcome; ?></textarea>
+                            </div>
+                        </div>
+                        
+
+
+
+                        
+
+                     <div class="form-group">
                             <label for="infra" class="col-sm-3 control-label">Kategori </label>
                             <div class="col-sm-9">
                                 <select name="infra" id="infra" class="form-control" >
@@ -90,89 +193,22 @@
                             </div>
                         </div>
 
-                         <div class="form-group">
-                            <label for="tahun_usulan" class="col-sm-3 control-label">Tahun Usulan</label>
-                            <div class="col-sm-9">
-                                <input type="text" name="tahun_usulan" id="tahun_usulan" class="form-control" placeholder="Tahun Usulan" value="<?php echo $detail->tahun_usulan; ?>">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="id_bluebook" class="col-sm-3 control-label">Kode Bluebook </label>
-                            <div class="col-sm-9">
-                                <select name="id_bluebook" id="id_bluebook" class="form-control" >
-                                     <?php 
-                                        $query  = $this->Usulan_model->ambil_bb($detail->id_bluebook); 
-                                        foreach ($query as $key) 
-                                        {
-                                    ?>
-                                        <option value="<?php echo $key->id; ?>"><?php echo $key->nama; ?></option>
-                                    <?php } ?>
-                                    <?php foreach($bluebook as $row){ ?>
-                                        <option value="<?php echo $row['id']; ?>"><?php echo $row['nama']; ?>
-                                      </option>
-                                    <?php } ?>
-                                </select>
-                            </div>
-                        </div>
+                       
+                        
                         
                         <div class="form-group">
-                            <label for="proyeksi_tahun_pertama_penarikan" class="col-sm-3 control-label">Proyeksi Tahun Pertama Penarikan</label>
+                            <label for="proyeksi_tahun_pertama_penarikan" class="col-sm-3 control-label">Perkiraan Tahun Pertama Pelaksanaan</label>
                             <div class="col-sm-9">
                                 <input type="text" name="proyeksi_tahun_pertama_penarikan" id="proyeksi_tahun_pertama_penarikan" class="form-control" placeholder="Proyeksi Tahun Pertama Penarikan" value="<?php echo $detail->proyeksi_tahun_pertama_penarikan; ?>">
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <label for="lokasi" class="col-sm-3 control-label">Lokasi </label>
-                            <div class="col-sm-9">
-                                <select name="lokasi" id="lokasi" class="form-control" multiple>
-                           
-                                <?php $key = array($detail->lokasi);
-                                $a = array();
-                                $a = explode(",", $detail->lokasi);
-                                $key2 = array("1", "2", "4", "3");
-                                 
-
-
-                                foreach($lokasi as $row ){ ?>
-                                <option value="<?php echo $row['id']; ?>" <?php echo in_array($row['id'] , $a) ? 'selected' : '' ?>><?php echo $row['nama']; ?>
-                                 </option>
-                                 <?php } ?>
-                                 </select>
-                            </div>
-                        </div>
-
+                       
                         
                      
-                        <div class="form-group">
-                            <label for="judul_proyek_eng" class="col-sm-3 control-label">Judul EN</label>
-                            <div class="col-sm-9">
-                                <input type="text" name="judul_proyek_eng" id="judul_proyek_eng" class="form-control" placeholder="Judul Proyek Dalam Bahasa Inggris" value="<?php echo $detail->judul_proyek_eng; ?>">
-                            </div>
-                        </div>
+                       
+
                         
-                        <div class="form-group">
-                            <label for="judul_proyek_id" class="col-sm-3 control-label">Judul ID</label>
-                            <div class="col-sm-9">
-                                <input type="text" name="judul_proyek_id" id="judul_proyek_id" class="form-control" placeholder="Judul Proyek Dalam Bahasa Indonesia" value="<?php echo $detail->judul_proyek_id; ?>">
-                            </div>
-                        </div>
-
-                         <div class="form-group">
-                            <label for="ruang_lingkup_eng" class="col-sm-3 control-label">Ruang Lingkup EN</label>
-                            <div class="col-sm-9">
-                             <textarea name="ruang_lingkup_eng" id="ruang_lingkup_eng" class="col-sm-12" rows="5" placeholder="Ruang Lingkup dalam Bahasa Inggris"><?php echo $detail->ruang_lingkup_eng; ?></textarea>
-                            </div>
-                               
-                        </div>
-
-                         <div class="form-group">
-                            <label for="ruang_lingkup_id" class="col-sm-3 control-label">Ruang Lingkup ID</label>
-                            <div class="col-sm-9">
-                                <textarea name="ruang_lingkup_id" id="ruang_lingkup_id" class="col-sm-12" rows="5" placeholder="Ruang Lingkup dalam Bahasa Indonesia"><?php echo $detail->ruang_lingkup_id; ?></textarea>
-                            </div>
-                        </div>
 
                          <div class="form-group">
                             <label for="nilai_pinjaman" class="col-sm-3 control-label">Nilai Pinjaman</label>
@@ -255,7 +291,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="id_status_lembaga" class="col-sm-3 control-label">Status Kesiapan K/L</label>
+                            <label for="id_status_lembaga" class="col-sm-3 control-label">Status Kesiapan Instansi Pengusul</label>
                             <div class="col-sm-9">
                                 <select name="id_status_lembaga" id="id_status_lembaga" class="form-control" >
                                      <?php 
@@ -277,28 +313,8 @@
 
 
 
-                        <div class="form-group">
-                            <label for="output" class="col-sm-3 control-label">Output</label>
-                            <div class="col-sm-9">
-                                <textarea name="output" id="output" class="col-sm-12" rows="5" placeholder="Output Proyek"><?php echo $detail->output; ?></textarea>
-                            </div>
-                        </div>
-
-
-                        <div class="form-group">
-                            <label for="judul_id" class="col-sm-3 control-label">Outcome</label>
-                            <div class="col-sm-9">
-                                <textarea name="outcome" id="outcome" class="col-sm-12" rows="5" placeholder="Ringkasan Proyek"><?php echo $detail->outcome; ?></textarea>
-                            </div>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="durasi" class="col-sm-3 control-label">Durasi</label>
-                            <div class="col-sm-6">
-                                <input type="text" name="durasi" id="durasi" class="form-control" placeholder="Durasi Pelaksanaan (dalam bulan)" value="<?php echo $detail->durasi; ?>">
-                            </div>
-                            <label for="durasi" class="col-sm-3">Bulan</label>
-                        </div>
+                       
+                    
 
                         <input type="hidden" name="id" class="form-control" id="id" value="<?php echo $detail->id; ?>">
                     </div>
@@ -435,7 +451,7 @@
             var ruang_lingkup_id                = $("#ruang_lingkup_id").val();
             var ruang_lingkup_eng                 = $("#ruang_lingkup_eng").val();
             var dana_pendamping                 = $("#dana_pendamping").val();
-            var nilai_hibah                    = $("#dana_hibah").val();
+            var nilai_hibah                    = $("#nilai_hibah").val();
             var nilai_pinjaman                   = $("#nilai_pinjaman").val();
             var output                   = $("#output").val();
             var outcome                   = $("#outcome").val();

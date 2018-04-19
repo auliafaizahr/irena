@@ -23,9 +23,11 @@ class Loan_aggr extends CI_Controller {
 	{
     	$this->load->model('dk_model');
     	$this->load->model('la_model');
+    	$this->load->model('Bluebook_model');
+    	$this->load->model('Usulan_model');
 
 		$id_proyek							= $this->input->post('id');
-		$data['usulan']						= $this->la_model->detail_proyek($id_proyek);
+		$data['usulan']						= $this->Bluebook_model->detail_proyek_by_usulan($id_proyek);
 		//$data['usulan']			= $query->row();
 		$this->load->view('LA/log_la_dokumen_index', $data);
 		//$this->load->view('sbsn/usulan/log_usulan_index');
@@ -301,6 +303,8 @@ class Loan_aggr extends CI_Controller {
 				$result 				= $this->hibah_model->usulan_simpan_data($data);
 			}elseif($this->uri->segment(3) == 'edit'){
 				//$data['id']		= $this->input->post('id');
+				$result 		= $this->la_model->la_simpan_data_edit($data);
+				
 
 				$id_					= $this->input->post('id');
 				$id_bb					= $this->input->post('id_bluebook');
@@ -313,14 +317,13 @@ class Loan_aggr extends CI_Controller {
 				$data2 = [];
 				foreach($array_lokasi as $lokasi) {
 				  $data2[] = [
-				    'id_bb_proyek' 		=>  $id_,
+				    'id_la_proyek' 		=>  $id_,
 				    'id_bb' 		=>  $id_bb,
 				    'id_gb' 		=>  $id_gb,
 				    'id_lokasi' 		=> $lokasi,
 				  ];
 				}
 	 			$this->db->insert_batch('irena_la_lokasi', $data2);
-				$result 		= $this->la_model->la_simpan_data_edit($data);
 
 			
 				/*

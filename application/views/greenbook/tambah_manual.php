@@ -267,7 +267,7 @@
                         <input type="hidden" name="id" class="form-control" id="id" value="">
                     </div>
                     <div class="modal-footer">                  
-                        <button type="button" class="btn btn-primary">Simpan</button>
+                        <button type="submit" class="btn btn-primary">Simpan</button>
                         <button type="button" id="tblTutup" class="btn btn-white" data-dismiss="modal">Tutup</button>
                     </div>
                 </form>
@@ -415,15 +415,16 @@
             var proyeksi_tahun_pertama_penarikan                    = $("#proyeksi_tahun_pertama_penarikan").val();
             var outcome                    = $("#outcome").val();
             var output                    = $("#output").val();
-            var id_instansi_pelaksana                    = $("#id_instansi_pelaksana").val();
+            var instansi_pelaksana                    = $("#instansi_pelaksana").val();
             var id_sektor                    = $("#id_sektor").val();
             var id_infra                    = $("#id_infra").val();
+            var lokasi                    = $("#lokasi").val();
             
             var form_data   = new FormData();
             
             form_data.append('id', id);
             form_data.append('id_instansi', id_instansi);
-            form_data.append('id_instansi_pelaksana', id_instansi_pelaksana);
+            form_data.append('instansi_pelaksana', instansi_pelaksana);
             form_data.append('id_lender', id_lender);
             form_data.append('judul_proyek_eng', judul_proyek_eng);
             form_data.append('judul_proyek_id', judul_proyek_id);
@@ -456,7 +457,7 @@
                 type: 'post',
                 success: function(response){
                     if (response.success == true) {
-                        $('#modalEdit').modal('hide');
+                        $('#ModalEdit').modal('hide');
                         segarkan_data();
                         notif("Informasi", "Data berhasil disimpan.");
                     }

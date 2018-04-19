@@ -53,7 +53,32 @@ class Usulan extends CI_Controller {
 		$this->load->view('Usulan/usulan_list', $data);
 	}
 
-		public function tampilkan_tes()
+	public function riwayat_usulan()
+	{
+		$this->load->model('hibah_model');
+		$this->load->model('Usulan_model');
+		$id = $this->uri->segment(3);
+
+			$data['instansi'] = array();
+
+			
+			$data['data']= $this->Usulan_model->ambil_proyek_usulan();
+			$data['riwayat']= $this->Usulan_model->detail_proyek_2($id);
+			
+			$data['lembaga']= $this->Usulan_model->ambil_instansi();
+			$data['program']= $this->Usulan_model->ambil_program();
+			$data['arsip'] = $this->Usulan_model->ambil_arsip();
+
+			
+
+		$data['dpp'] = $this->hibah_model->ambil_proyek_drkh();
+		$this->load->view('Usulan/riwayat_usulan', $data);
+	}
+
+
+	
+
+	public function tampilkan_tes()
 	{
 		
 		$this->load->view('Peta/tes');
@@ -347,12 +372,38 @@ class Usulan extends CI_Controller {
 		//$data['detail'] = $this->Bluebook_model->ambil_proyek_per_bb($a);
 
 		$data['id'] = $this->uri->segment(3);
+		if ($data['id'] == '0' || $data['id'] == NULL || $data['id'] == 'undefined') {
+			$data['id'] = 2;
+		}
 		
 		$data['detail'] = $this->Bluebook_model->ambil_grafik_status_per_bb($data['id']);
 		
 		
 		$this->load->view('report/bluebook/report_bb_status', $data);
 	}
+
+
+	public function filter_statusumum_bluebook_dashboard()
+	{
+
+		$this->load->model('Usulan_model');
+		$this->load->model('Bluebook_model');
+			
+		$id = $this->input->post('id');
+		$a = $this->uri->segment(3);
+		//$data['detail'] = $this->Bluebook_model->ambil_proyek_per_bb($a);
+
+		$data['id'] = $this->uri->segment(3);
+		if ($data['id'] == '0' || $data['id'] == NULL || $data['id'] == 'undefined') {
+			$data['id'] = 2;
+		}
+		
+		$data['detail'] = $this->Bluebook_model->ambil_grafik_status_per_bb($data['id']);
+		
+		
+		$this->load->view('report/dashboard/bb_status', $data);
+	}
+
 
 	public function filter_statusumum_isi_bluebook()
 	{
@@ -362,9 +413,17 @@ class Usulan extends CI_Controller {
 		$this->load->model('Bluebook_model');
 			
 		$id = $this->input->post('id');
+	
+		$a = $this->input->post('id');
+
 		$a = $this->uri->segment(3);
 		//$data['detail'] = $this->Bluebook_model->ambil_proyek_per_bb($a);
 
+
+		if ($a == '0' || $a == NULL || $a == 'undefined' || $a == '') {
+			$a = 2;
+		}
+		
 		
 		foreach ($this->Bluebook_model->ambil_grafik_status_per_bb($a) as $row) {
 			$data[] = array(
@@ -388,7 +447,7 @@ class Usulan extends CI_Controller {
 
 		
 		
-		$this->load->view('Usulan/detail_usulan_modal', $data);
+		$this->load->view('Usulan/isi_detail_usulan', $data);
 		//$this->load->view('templates/footer1');
 		
 	}
@@ -444,6 +503,8 @@ class Usulan extends CI_Controller {
 		$data['sektor'] = $this->Greenbook_model->ambil_sektor();
 		$data['status'] = $this->Bluebook_model->ambil_statusumum();
 		$data['infra'] = $this->Usulan_model->ambil_infra();
+		$data['usulan']= $this->Usulan_model->ambil_usulan();
+
 		
 		
 		
@@ -504,6 +565,7 @@ class Usulan extends CI_Controller {
 		$this->load->model('Greenbook_model');
 		 $this->load->model('Usulan_model');
 		 $this->load->model('Bluebook_model');
+
 		$data['data']= $this->Usulan_model->ambil_proyek_usulan();
 		
 		$data['lembaga']= $this->Usulan_model->ambil_instansi();
@@ -512,6 +574,7 @@ class Usulan extends CI_Controller {
 		$data['lokasi'] = $this->Usulan_model->ambil_lokasi();
 		
 		$data['lembaga']= $this->Usulan_model->ambil_instansi();
+		$data['usulan']= $this->Usulan_model->ambil_usulan();
 		$data['status_lembaga']= $this->Bluebook_model->semua_status_lembaga();
 		$data['status_lender']= $this->Bluebook_model->semua_status_lender();
 		$data['bluebook']= $this->Bluebook_model->semua_bluebook();
@@ -669,7 +732,7 @@ class Usulan extends CI_Controller {
 					if(isset($_FILES['berkas']["name"]) and $_FILES['berkas']["name"]<>""){
 					//$status['messages']['berkas'] = '<p class="text-success">File berhasil diupload</p>';
 					}else{
-						$status['messages']['berkas'] = '<p class="text-danger">Silahkan pilih files.</p>';
+						$status['messages']['berkas'] = '<p class="text-danger">fSilahkan pilih files.</p>';
 					}
 				}
 			}
@@ -692,6 +755,127 @@ class Usulan extends CI_Controller {
 		$this->load->view('pln/report_pln', $data);
 		$this->load->view('templates/footer'); 
 	}
+
+		public function dashboard_pln()
+	{
+		$this->load->model('Bluebook_model');
+
+		$id = $this->input->post('id');
+		$id = $this->uri->segment(3);
+
+
+		if ($id == '0' || $id == NULL) {
+			$id = 2;
+		}
+
+		$data['bluebook']= $this->Bluebook_model->semua_bluebook();
+		$data['program']= $this->Bluebook_model->ambil_program();
+		$data['instansi']= $this->Bluebook_model->ambil_instansi();
+		$data['lender']= $this->Bluebook_model->semua_lender();
+		$data['sektor']= $this->Bluebook_model->ambil_sektor();
+		$data['status']= $this->Bluebook_model->ambil_statusumum();
+		$data['total_kegiatan']= $this->Bluebook_model->total_kegiatan_bb($id);
+		$data['total_sudah_LA']= $this->Bluebook_model->total_kegiatan_la($id);
+		$data['total_nilai']= $this->Bluebook_model->total_nilai_bb($id);
+		$data['total_nilai_LA']= $this->Bluebook_model->total_nilai_la($id);
+		$data['nama_bb']= $this->Bluebook_model->kode_bluebook($id)->nama;
+
+		$this->load->model('Bluebook_model');
+
+		$this->load->library('googlemaps');
+
+			
+			$config['center'] = '-0.789275, 113.921327';
+			$config['zoom'] = '4';
+			$config['map_name'] = 'peta_2';
+			$config['fullscreenControl'] = 'true';
+
+
+			$marker = array();
+			$marker['position'] = '0.7893, 113.9213';
+			//$marker['fullscreenControl'] = 'TRUE';
+			$this->googlemaps->initialize($config);
+
+			/*$query1 = "SELECT id_provinsi FROM irena_usulan_lokasi";
+			$b = $this->db->query($query1);*/
+
+			/*SELECT irena_view_bb_lokasi.id_proyek AS id_bb_proyek, irena_view_dk_lokasi.id_proyek AS id_dk_proyek FROM irena_view_bb_lokasi, irena_view_dk_lokasi WHERE irena_view_bb_lokasi.id_lokasi IN (SELECT irena_view_dk_lokasi.id_lokasi FROM irena_view_dk_lokasi)*/
+
+			$query = "SELECT * FROM irena_view_la_lokasi GROUP BY id_lokasi";
+			//$query2 = "SELECT * FROM irena_view_bb_lokasi GROUP BY id_lokasi";
+			$a = $this->db->query($query);
+			//$b = $this->db->query($query2)->result();
+
+			foreach ($a->result() as $baris)
+			{
+				$marker = array();
+				$marker['animation'] = 'DROP';
+				$marker['icon'] = base_url().'assets/images/map_kuning.png';
+				//$marker['icon'] = base_url().'assets/images/'.$baris->gambar;
+				$marker['position'] = $baris->latitude.','.$baris->longitude;
+				$id_lokasi = $baris->id_lokasi;
+				$marker['onclick'] = 'bukaDetailgabung_1('.$baris->id_lokasi.')';
+				//$marker['onclick'] = '$("#myModal2'.$baris->id_kabkota.'").modal("show")';
+				//$marker['onclick'] = 'alert("tes")';
+				$this->googlemaps->add_marker($marker);
+			}
+			$data['peta_2'] = $this->googlemaps->create_map();	
+
+
+		
+		
+    	$this->load->view('templates/header'); 
+		$this->load->view('report/dashboard/dashboard_pln', $data);
+		$this->load->view('templates/footer'); 
+	}
+
+	public function dashboard_total_kegiatan_bb()
+	{
+		$this->load->model('Bluebook_model');
+
+		//$id = $this->input->post('id');
+		$id= $this->uri->segment(3);
+
+
+		if ($id == '0' || $id == NULL) {
+			$id = 2;
+		}
+
+		$data['total_kegiatan']= $this->Bluebook_model->total_kegiatan_bb($id);
+		$data['total_nilai']= $this->Bluebook_model->total_nilai_bb($id);
+
+
+		
+		
+    
+		$this->load->view('report/dashboard/total_kegiatan_BB', $data);
+		
+	}
+
+	public function dashboard_total_kegiatan_la()
+	{
+		$this->load->model('Bluebook_model');
+
+		//$id = $this->input->post('id');
+		$id = $this->uri->segment(3);
+		
+		if ($id == '0' || $id == NULL) {
+			$id = 2;
+		}
+
+		$data['total_kegiatan']= $this->Bluebook_model->total_kegiatan_bb($id);
+		$data['total_nilai']= $this->Bluebook_model->total_nilai_bb($id);
+		$data['total_sudah_LA']= $this->Bluebook_model->total_kegiatan_la($id);
+		$data['total_nilai_LA']= $this->Bluebook_model->total_nilai_la($id);
+		
+		
+    
+		$this->load->view('report/dashboard/total_kegiatan_LA', $data);
+		
+	}
+
+
+
 
 		public function map_phln()
 	{
@@ -781,8 +965,40 @@ class Usulan extends CI_Controller {
 
 
 
-			/*$query = "SELECT * FROM irena_view_dk_lokasi GROUP BY id_lokasi";
+		
+    	$this->load->view('templates/header'); 
+		$this->load->view('Peta/map_phln', $data);
+		$this->load->view('templates/footer'); 
+	}
+
+	public function map_la()
+	{
+		$this->load->model('Bluebook_model');
+
+		$this->load->library('googlemaps');
+
+			
+			$config['center'] = '-0.789275, 113.921327';
+			$config['zoom'] = '4';
+			$config['map_name'] = 'peta_2';
+			$config['fullscreenControl'] = 'true';
+
+
+			$marker = array();
+			$marker['position'] = '0.7893, 113.9213';
+			//$marker['fullscreenControl'] = 'TRUE';
+			$this->googlemaps->initialize($config);
+
+			/*$query1 = "SELECT id_provinsi FROM irena_usulan_lokasi";
+			$b = $this->db->query($query1);*/
+
+			/*SELECT irena_view_bb_lokasi.id_proyek AS id_bb_proyek, irena_view_dk_lokasi.id_proyek AS id_dk_proyek FROM irena_view_bb_lokasi, irena_view_dk_lokasi WHERE irena_view_bb_lokasi.id_lokasi IN (SELECT irena_view_dk_lokasi.id_lokasi FROM irena_view_dk_lokasi)*/
+
+			$query = "SELECT * FROM irena_view_la_lokasi GROUP BY id_lokasi";
+			//$query2 = "SELECT * FROM irena_view_bb_lokasi GROUP BY id_lokasi";
 			$a = $this->db->query($query);
+			//$b = $this->db->query($query2)->result();
+
 			foreach ($a->result() as $baris)
 			{
 				$marker = array();
@@ -790,72 +1006,128 @@ class Usulan extends CI_Controller {
 				$marker['icon'] = base_url().'assets/images/map_kuning.png';
 				//$marker['icon'] = base_url().'assets/images/'.$baris->gambar;
 				$marker['position'] = $baris->latitude.','.$baris->longitude;
+				$id_lokasi = $baris->id_lokasi;
+				$marker['onclick'] = 'bukaDetailBB('.$baris->id_lokasi.')';
 				//$marker['onclick'] = '$("#myModal2'.$baris->id_kabkota.'").modal("show")';
-				//$marker['click'] = base_url().'application/controllers/program/tampil_program';
+				//$marker['onclick'] = 'alert("tes")';
 				$this->googlemaps->add_marker($marker);
-			}*/
-/*
+			}
+			$data['peta_2'] = $this->googlemaps->create_map();	
+
+
+			
+			$config['center'] = '-0.789275, 113.921327';
+			$config['zoom'] = '4';
+			$config['map_name'] = 'peta';
+
+
+			$marker = array();
+			$marker['position'] = '0.7893, 113.9213';
+			$this->googlemaps->initialize($config);
+
+
 			$query = "SELECT * FROM irena_view_la_lokasi GROUP BY id_lokasi";
 			$a = $this->db->query($query);
 			foreach ($a->result() as $baris)
 			{
 				$marker = array();
 				$marker['animation'] = 'DROP';
-				$marker['icon'] = base_url().'assets/images/map_coklat.png';
+				$marker['icon'] = base_url().'assets/images/map_hijau.png';
 				//$marker['icon'] = base_url().'assets/images/'.$baris->gambar;
-				$marker['position'] = $baris->lat.','.$baris->longitude;
-				//$marker['onclick'] = '$("#myModal2'.$baris->id_kabkota.'").modal("show")';
-				$marker['onclick'] = 'alert("tes")';
+				$marker['position'] = $baris->latitude.','.$baris->longitude;
+				//$marker['onclick'] = '$("#myModal2'.$baris->id_proyek.'").modal("show")';
+				//$marker['onclick'] = 'bukaDetail('.$baris->id_lokasi.')';
 				$this->googlemaps->add_marker($marker);
-			}*/
-/*
-			$query = "SELECT * FROM usulan_lokasi GROUP BY id_lokasi";
+			}
+			
+			$data['peta'] = $this->googlemaps->create_map();	
+
+		
+    	$this->load->view('templates/header'); 
+		$this->load->view('Peta/map_la', $data);
+		$this->load->view('templates/footer'); 
+	}
+
+	public function map_la_dashboard()
+	{
+		$this->load->library('googlemaps');
+
+		$this->load->model('Bluebook_model');
+
+
+			
+			$config['center'] = '-0.789275, 113.921327';
+			$config['zoom'] = '4';
+			$config['map_name'] = 'peta_2';
+			$config['fullscreenControl'] = 'true';
+
+
+			$marker = array();
+			$marker['position'] = '0.7893, 113.9213';
+			//$marker['fullscreenControl'] = 'TRUE';
+			$this->googlemaps->initialize($config);
+
+			/*$query1 = "SELECT id_provinsi FROM irena_usulan_lokasi";
+			$b = $this->db->query($query1);*/
+
+			/*SELECT irena_view_bb_lokasi.id_proyek AS id_bb_proyek, irena_view_dk_lokasi.id_proyek AS id_dk_proyek FROM irena_view_bb_lokasi, irena_view_dk_lokasi WHERE irena_view_bb_lokasi.id_lokasi IN (SELECT irena_view_dk_lokasi.id_lokasi FROM irena_view_dk_lokasi)*/
+
+			$query = "SELECT * FROM irena_view_la_lokasi GROUP BY id_lokasi";
+			//$query2 = "SELECT * FROM irena_view_bb_lokasi GROUP BY id_lokasi";
+			$a = $this->db->query($query);
+			//$b = $this->db->query($query2)->result();
+
+			foreach ($a->result() as $baris)
+			{
+				$marker = array();
+				$marker['animation'] = 'DROP';
+				$marker['icon'] = base_url().'assets/images/map_kuning.png';
+				//$marker['icon'] = base_url().'assets/images/'.$baris->gambar;
+				$marker['position'] = $baris->latitude.','.$baris->longitude;
+				$id_lokasi = $baris->id_lokasi;
+				$marker['onclick'] = 'bukaDetailBB('.$baris->id_lokasi.')';
+				//$marker['onclick'] = '$("#myModal2'.$baris->id_kabkota.'").modal("show")';
+				//$marker['onclick'] = 'alert("tes")';
+				$this->googlemaps->add_marker($marker);
+			}
+			$data['peta_2'] = $this->googlemaps->create_map();	
+
+
+			
+			$config['center'] = '-0.789275, 113.921327';
+			$config['zoom'] = '4';
+			$config['map_name'] = 'peta';
+
+
+			$marker = array();
+			$marker['position'] = '0.7893, 113.9213';
+			$this->googlemaps->initialize($config);
+
+
+			$query = "SELECT * FROM irena_view_la_lokasi GROUP BY id_lokasi";
 			$a = $this->db->query($query);
 			foreach ($a->result() as $baris)
 			{
 				$marker = array();
 				$marker['animation'] = 'DROP';
-				$marker['icon'] = base_url().'assets/images/pink.png';
+				$marker['icon'] = base_url().'assets/images/map_hijau.png';
 				//$marker['icon'] = base_url().'assets/images/'.$baris->gambar;
-				$marker['position'] = $baris->lat.','.$baris->longitude;
-				//$marker['onclick'] = '$("#myModal2'.$baris->id_kabkota.'").modal("show")';
-				$marker['onclick'] = 'alert("tes")';
+				$marker['position'] = $baris->latitude.','.$baris->longitude;
+				//$marker['onclick'] = '$("#myModal2'.$baris->id_proyek.'").modal("show")';
+				//$marker['onclick'] = 'bukaDetail('.$baris->id_lokasi.')';
 				$this->googlemaps->add_marker($marker);
 			}
-*/
-
-
-			/*$query1 = "SELECT * FROM irena_kabkota";
-			$b = $this->db->query($query1);
-			foreach ($b->result() as $baris1)
-			{
-				$marker1 = array();
-				$marker1['animation'] = 'DROP';
-				$marker1['icon'] = base_url().'assets/images/kuning_3.png';
-				//$marker['icon'] = base_url().'assets/images/'.$baris->gambar;
-				$marker1['position'] = $baris1->latitude.','.$baris1->longitude;
-				//$marker['onclick'] = '$("#myModal2'.$baris->id_kabkota.'").modal("show")';
-				//$marker['onclick'] = '$("#myModal2'.$baris->id_kabkota.'").modal("show")';
-				$this->googlemaps->add_marker($marker1);
-			}
-			*/
-			
-			
-			
 
 			
-/*
-		$data['bluebook']= $this->Bluebook_model->semua_bluebook();
-		$data['program']= $this->Bluebook_model->ambil_program();
-		$data['instansi']= $this->Bluebook_model->ambil_instansi();
-		$data['lender']= $this->Bluebook_model->semua_lender();
-		$data['sektor']= $this->Bluebook_model->ambil_sektor();
-		$data['status']= $this->Bluebook_model->ambil_statusumum();*/
+			$data['peta'] = $this->googlemaps->create_map();	
+
 		
-    	$this->load->view('templates/header'); 
-		$this->load->view('Peta/map_phln', $data);
-		$this->load->view('templates/footer'); 
+    	
+		$this->load->view('Report/dashboard/isi_map_dashboard', $data);
+		
+	
 	}
+
 
 	public function tampilkan_proyek_lokasi()
 	{
@@ -1268,6 +1540,22 @@ class Usulan extends CI_Controller {
 
     }
 
+      public function tes_kosong()
+    {
+    	$this->load->model('Usulan_model');
+		$a = $this->input->post('id');
+		$data['detail'] = $this->Usulan_model->detail_proyek($a);
+		$data['lembaga']= $this->Usulan_model->ambil_instansi();
+
+		$data['dok_tambahan'] = $this->Usulan_model->ambil_dokumen_tambahan_usulan($a);
+
+    	$this->load->view('PLN/tes_kosong', $data);
+    	//$this->load->view('templates/footer1');
+    
+
+    }
+
+
     function lookup2()
 	{
 		$json = [];
@@ -1355,8 +1643,17 @@ class Usulan extends CI_Controller {
     public function tambahBB()
     {
     	$this->load->model('Usulan_model');
+    	$this->load->model('Bluebook_model');
+    	$this->load->model('Greenbook_model');
     	$id = $this->input->post('id');
     	$data['detail'] = $this->Usulan_model->detail_proyek($id);
+    	$data['lembaga']= $this->Usulan_model->ambil_instansi();
+		$data['program']= $this->Usulan_model->ambil_program();
+		$data['lokasi'] = $this->Usulan_model->ambil_lokasi();
+		$data['sektor'] = $this->Greenbook_model->ambil_sektor();
+		$data['status'] = $this->Bluebook_model->ambil_statusumum();
+		$data['infra'] = $this->Usulan_model->ambil_infra();
+		$data['bluebook']= $this->Bluebook_model->semua_bluebook();
     	//$this->Usulan_model->tambahBB($id);
     	$this->load->view('usulan/tambahBB', $data);
     }
@@ -1453,6 +1750,7 @@ class Usulan extends CI_Controller {
 			}elseif($this->uri->segment(3) == 'edit'){
 				$id_			= $this->input->post('id');
 				$this->Usulan_model->hapus_dari_lokasi($id_);
+				$this->Usulan_model->hapus_dari_histori($id_);
 				$id_instansi			= $this->input->post('id_instansi');
 
 
@@ -1467,7 +1765,21 @@ class Usulan extends CI_Controller {
 				    'id_lokasi' => $lokasi,
 				  ];
 				}
+
+				$data_histori = $this->input->post('id_usulan_hub');
+				$array_usulan = explode(",", $data_histori);
+
+				$data3 = [];
+				foreach($array_usulan as $usulan) {
+					$data3[] = [
+					'id_usulan' => $id_,
+					'id_usulan_terkait' => $usulan,
+					  ];
+				}
+
 	 			$this->db->insert_batch('irena_usulan_lokasi', $data2);
+				$this->db->insert_batch('irena_usulan_historis', $data3);
+
 
 
 				$result 		= $this->Usulan_model->usulan_simpan_data_edit($data);
@@ -1630,6 +1942,7 @@ class Usulan extends CI_Controller {
 			        'id_sektor'			=>  $this->input->post('id_sektor'),
 			        'infra'			=>  $this->input->post('infra'),
 			        'id_status'			=>  $this->input->post('id_status'),
+			        'id_bluebook'			=>  $this->input->post('id_bluebook'),
 			        'lokasi'			=>  $this->input->post('lokasi'),
 			   		 );
 
@@ -1815,7 +2128,7 @@ class Usulan extends CI_Controller {
 			$status['messages']['nilai_admin'] = $nilai_admin;
 			*/
 			
-                      date_default_timezone_set('Asia/Jakarta');
+            date_default_timezone_set('Asia/Jakarta');
 
             if ($this->session->userdata('id_user_level') != '5') {
 	            $data['update_by']			= $this->session->userdata('id');
@@ -1850,6 +2163,18 @@ class Usulan extends CI_Controller {
 		}
 		echo json_encode($status);
 	
+	}
+
+	function tampilkan_form_log_usulan_hapus()
+	{	
+		$data['id'] = $this->uri->segment(3);
+		$this->load->view('usulan/log_usulan_hapus', $data);
+	}
+
+	function log_usulan_hapus()
+	{	
+		$id 	= $this->input->post('id');
+		$query	= $this->usulan_hapus->log_usulan_hapus_data($id);
 	}
 
 
@@ -1894,6 +2219,8 @@ class Usulan extends CI_Controller {
 
 	function log_usulan_simpan()
 	{
+
+		
 		$status = array('success' => false, 'messages' => array());
 
 		//$this->form_validation->set_rules("id_proyek", "Proyek", "trim|required");
@@ -2023,6 +2350,8 @@ class Usulan extends CI_Controller {
         'instansi_pelaksana'				=> $this->input->post('instansi_pelaksana'),
         'tahun_usulan'				=> $this->input->post('tahun_usulan'),
         'id_sektor'				=> $this->input->post('id_sektor'),
+        'status_usulan'				=> $this->input->post('status_usulan'),
+        'id_usulan_hub'				=> $this->input->post('id_usulan_hub'),
    		 );
 
     	$this->db->insert('irena_usulan_pln', $data);
@@ -2042,6 +2371,8 @@ class Usulan extends CI_Controller {
 	 	$array_lokasi = explode(",", $select2data);
 	 	$id_instansi			= $this->input->post('id_instansi');
 
+	 	
+
 	 	$data2 = [];
 	 	foreach($array_lokasi as $lokasi) {
 	 	  $data2[] = [
@@ -2050,12 +2381,24 @@ class Usulan extends CI_Controller {
 	 	    'id_instansi' => $id_instansi,
 	 	  ];
 	 	}
+
+	 	$data_histori = $this->input->post('id_usulan_hub');
+	 	$array_usulan = explode(",", $data_histori);
+
+	 	$data3 = [];
+	 	foreach($array_usulan as $usulan) {
+	 	  $data3[] = [
+	 	    'id_usulan' => $isi['id_usulan'],
+	 	    'id_usulan_terkait' => $usulan,
+	 	  ];
+	 	}
 	 	
 	 	
 
 	 	
 
     	$this->db->insert_batch('irena_usulan_lokasi', $data2);
+    	$this->db->insert_batch('irena_usulan_historis', $data3);
     	
 
     	$status['success'] 			= true;

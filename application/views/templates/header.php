@@ -85,6 +85,7 @@
 	<div id="loader" class="loader" style='visibility: hidden;'></div>
 	<div id="tmpModal10"></div>
 
+	<div id="tmpModal2"></div>
 	<div id="tmpModal"></div>
     <div id="wrapper">
         <nav class="navbar-default navbar-static-side" role="navigation">
@@ -128,15 +129,19 @@
                   
 
                     <li <?php if($this->uri->segment(1)=="perencanaan"){ echo "class='active'"; }	?>>
-                        <a href="<?php echo base_url(); ?>perencanaan"><i class="fa fa-building-o"></i> <span class="nav-label">Pinjaman Luar Negeri</span><span class="fa arrow"></span></a>
+                        <a href="<?php echo base_url(); ?>Program/tampil_program"><i class="fa fa-building-o"></i> <span class="nav-label">Pinjaman Luar Negeri</span><span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
+
+                        	<li <?php if($this->uri->segment(1)=="Program"){ echo "class='active'"; }	?>>
+								<a href="<?php echo base_url(); ?>Usulan/dashboard_pln">Dashboard</a>
+							</li>
 
                         	<li <?php if($this->uri->segment(1)=="Program"){ echo "class='active'"; }	?>>
 								<a href="<?php echo base_url(); ?>Program/tampil_program">Program</a>
 							</li>
 
                         	<li <?php if($this->uri->segment(1)=="Usulan"){ echo "class='active'"; }	?>>
-								<a href="<?php echo base_url(); ?>Usulan/tampil_index">Usulan</a>
+								<a href="<?php echo base_url(); ?>Usulan/tampil_index">Usulan Proyek</a>
 							</li>
 
 
@@ -194,13 +199,13 @@
 								  <li><a href="<?php echo base_url(); ?>usulan/map_bb">Perseberan Bluebook</span></a></li>
 								  <li><a href="<?php echo base_url(); ?>usulan/map_gb">Persebaran Greenbook</span></a></li>
 								  <li><a href="<?php echo base_url(); ?>">Persebaran DK</span></a></li>
-								  <li><a href="<?php echo base_url(); ?>">Persebaran LA</span></a></li>
+								  <li><a href="<?php echo base_url(); ?>usulan/map_la">Persebaran LA</span></a></li>
 								  </ul>
 							</li>
 
-                        	<li <?php if($this->uri->segment(1)=="Usulan"){ echo "class='active'"; }	?>>
+                        	<!-- <li <?php if($this->uri->segment(1)=="Usulan"){ echo "class='active'"; }	?>>
 								<a href="<?php echo base_url(); ?>Usulan/report_gb">Peta SBSN</a>
-							</li>
+							</li> -->
 
 							<li <?php if($this->uri->segment(1)=="Usulan"){ echo "class='active'"; }	?>>
 								<a href="<?php echo base_url(); ?>usulan/map_gabung_1">Peta PHLN dan SBSN</a>

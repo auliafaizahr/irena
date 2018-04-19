@@ -27,7 +27,7 @@
          
        </td>
 
-			<td><a class="detail" id="<?php echo $value['id'];  ?>" data-id="<?php echo $value['id'];  ?>" ><?php echo $value['judul_proyek_id']; ?></td>
+			<td><a class="detail" id="<?php echo $value['id'];  ?>" data-id="<?php echo $value['id'];  ?>" ><?php echo $value['judul_proyek_eng']; ?></td>
 
 			<td><?php  $d = $this->Usulan_model->ambil_program_proyek($value['id_program'])->nama_program;
 			echo $d; ?></td>
@@ -172,7 +172,7 @@
                            <button data-toggle="dropdown" class="btn btn-white dropdown-toggle" type="button" >Aksi <span class="caret"></span></button>
                            
                            <ul class="dropdown-menu pull-right">
-                                                   <li><a  data-toggle="" data-target="modal" class="rekam" id="<?php echo $value['id']; ?>">Rekam Jejak</a></li>
+                                                   <li><a  data-toggle="" data-target="modal" class="rekam" id="<?php echo $value['id_usulan']; ?>">Rekam Jejak</a></li>
                                                    <li><a  data-toggle="" data-target="modal" class="catatan" id="<?php echo $value['id']; ?>">Catatan</a></li>
                                                    <li><a  data-toggle="" data-target="modal" class="edit" id="<?php echo $value['id']; ?>" >Edit</a></li>
                                                     <li><a  class="del-proyek" id="<?php echo $value['id']; ?>">Hapus</a></li>
@@ -605,10 +605,11 @@
             });
           });
 
-	 $(document).on('click', '.rekam', function(){  
+	 $(document).on('click', '.rekam_bb', function(){  
            
          
              var id = $(this).attr("id"); 
+             console.log(id);
            //console.log(id);
            //var rowid = $(e.relatedTarget).data('id');
            //console.log(rowid);

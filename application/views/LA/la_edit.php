@@ -133,7 +133,7 @@
                         </div>
                         
                         <div class="form-group">
-                            <label for="proyeksi_tahun_pertama_penarikan" class="col-sm-3 control-label">Proyeksi Tahun Pertama Penarikan</label>
+                            <label for="proyeksi_tahun_pertama_penarikan" class="col-sm-3 control-label">Perkiraan Tahun Pertama Pelaksanaan</label>
                             <div class="col-sm-9">
                                 <input type="text" name="proyeksi_tahun_pertama_penarikan" id="proyeksi_tahun_pertama_penarikan" class="form-control" placeholder="Proyeksi Tahun Pertama Penarikan" value="<?php echo $detail->proyeksi_tahun_pertama_penarikan; ?>">
                             </div>
@@ -236,7 +236,7 @@
                             <label for="tgl" class="col-sm-3 control-label">Tanggal LA</label>
                             <div class="col-sm-9">
                                 <div class="input-group date" >
-                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" name= "tgl" id="tgl" class="form-control" value="" data-date-format='yyyy-mm-dd'>
+                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" name= "tgl" id="tgl_la" class="form-control" value="" data-date-format='yyyy-mm-dd'>
                                 </div>
                             </div>
                         </div>
@@ -306,7 +306,7 @@
                             <label for="durasi" class="col-sm-3">Bulan</label>
                         </div>
 
-                        <input type="hidden" name="id" class="form-control" id="id" value="">
+                        <input type="hidden" name="id" class="form-control" id="id" value="<?php echo $detail->id; ?>">
                     </div>
                     <div class="modal-footer">                  
                         <button type="submit"class="btn btn-primary">Simpan</button>
@@ -398,7 +398,11 @@
             width: "100%"
         });
 
-         $("#tgl").datepicker({
+         $("#tgl_la").datepicker({
+            todayHighlight: true
+         });
+
+          $("#tgl_dk").datepicker({
             todayHighlight: true
          });
         
@@ -451,7 +455,8 @@
             var id_status_lender                   = $("#id_status_lender").val();
             var id_status_lembaga                   = $("#id_status_lembaga").val();
             var id_greenbook                   = $("#id_greenbook").val();
-            var tgl_dk                   = $("#tgl_dk").val();
+           
+            var tgl_la                   = $("#tgl_la").val();
             var tahun_usulan                   = $("#tahun_usulan").val();
             var lokasi                   = $("#lokasi").val();
             
@@ -477,9 +482,10 @@
             form_data.append('id_status_lender', id_status_lender);
             form_data.append('id_status_lembaga', id_status_lembaga);
             form_data.append('id_greenbook', id_greenbook);
-            form_data.append('tgl_dk', tgl_dk);
+           
             form_data.append('tahun_usulan', tahun_usulan);
             form_data.append('lokasi', lokasi);
+            form_data.append('tgl_la', tgl_la);
 
 
 

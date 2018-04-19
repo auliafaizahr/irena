@@ -10,13 +10,56 @@
                     <div class="ibox-content">
 
                      <div class="form-group">
+                            <label for="status_usulan" class="col-sm-3 control-label">Jenis Usulan</label>
+                            <div class="col-sm-9">
+                                <select id="status_usulan" class="form-control" >
+                                  
+                                    
+                                    <option value="0">Baru</option>
+                                    <option value="1">Perubahan</option>
+                                    
+                                      
+                                </select>
+                            </div>
+                     </div>
+
+
+                     <div class="form-group">
+                            <label for="id_usulan_hub" class="col-sm-3 control-label">Usulan Terkait</label>
+                            <div class="col-sm-9">
+                                <select id="id_usulan_hub" class="form-control" >
+                                  
+                                    <?php foreach($usulan as $row){ ?>
+                                        <option value="<?php echo $row['id']; ?>"><?php echo $row['judul_proyek_eng']; ?>
+                                      </option>
+                                    <?php } ?>
+                                      
+                                </select>
+                            </div>
+                    </div>
+
+                     <div class="form-group">
                             <label for="tahun_usulan" class="col-sm-3 control-label">Tahun Usulan</label>
                             <div class="col-sm-9">
                                 <input type="text" name="tahun_usulan" id="tahun_usulan" class="form-control" placeholder="Tahun Usulan" value="">
                             </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="judul_proyek_eng" class="col-sm-3 control-label">Judul EN</label>
+                        <div class="col-sm-9">
+                            <input type="text" name="judul_proyek_eng" id="judul_proyek_eng" class="form-control" placeholder="Judul Proyek Dalam Bahasa Inggris" value="">
                         </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="judul_proyek_id" class="col-sm-3 control-label">Judul ID</label>
+                        <div class="col-sm-9">
+                            <input type="text" name="judul_proyek_id" id="judul_proyek_id" class="form-control" placeholder="Judul Proyek Dalam Bahasa Indonesia" value="">
+                        </div>
+                    </div>
                         
-                        <div class="form-group">
+                    <div class="form-group">
                             <label for="id_instansi" class="col-sm-3 control-label">Instansi Pengusul</label>
                             <div class="col-sm-9">
                                 <select id="id_instansi" class="form-control" >
@@ -28,16 +71,9 @@
                                       
                                 </select>
                             </div>
-                        </div>
+                    </div>
                         
-                     <!--    <div class="form-group">
-                            <label for="id_eselon_1" class="col-sm-3 control-label">Instansi Eselon I</label>
-                            <div class="col-sm-9">
-                                <select name="id_eselon_1" id="id_eselon_1" class="form-control" >
-                                 
-                                </select>
-                            </div>
-                        </div> -->
+               
 
                          <div class="form-group">
                             <label for="instansi_pelaksana" class="col-sm-3 control-label">Instansi Pelaksana </label>
@@ -46,10 +82,70 @@
                             </div>
                         </div>
 
+                    <div class="form-group">
+                        <label for="ruang_lingkup_eng" class="col-sm-3 control-label">Ruang Lingkup EN</label>
+                        <div class="col-sm-9">
+                        <textarea name="ruang_lingkup_eng" id="ruang_lingkup_eng" class="col-sm-12" rows="5"  placeholder="Ruang Lingkup dalam Bahasa Inggris" ></textarea>
+                            
+                        </div>
+                    </div>
+
+                     <div class="form-group">
+                        <label for="ruang_lingkup_id" class="col-sm-3 control-label">Ruang Lingkup ID</label>
+                        <div class="col-sm-9">
+                        <textarea name="ruang_lingkup_id" id="ruang_lingkup_id" rows="5" class="col-sm-12" placeholder="Ruang Lingkup dalam Bahasa Indonesia" ></textarea>
+                            <!-- <input type="text" name="ruang_lingkup_id" id="ruang_lingkup_id" class="form-control" placeholder="Ruang Lingkup dalam Bahasa Indonesia" value=""> -->
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="lokasi" class="col-sm-3 control-label">Lokasi</label>
+                        <div class="col-sm-9">
+
+                            <select name="lokasi" id="lokasi" class="form-control"  >
+                                 
+                                <?php foreach($lokasi as $row){ ?>
+                                    <option value="<?php echo $row['id']; ?>"><?php echo $row['nama']; ?>
+                                  </option>
+                                <?php } ?>
+                            </select>
+                           <!-- <textarea name="lokasi" id="lokasi" class="col-sm-12" rows="5" placeholder="Lokasi"></textarea> -->
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="output" class="col-sm-3 control-label">Output</label>
+                        <div class="col-sm-9">
+                            <textarea name="output" id="output" class="col-sm-12" rows="5" placeholder="Output Proyek"></textarea>
+                        </div>
+                    </div>
 
 
+                    <div class="form-group">
+                        <label for="judul_id" class="col-sm-3 control-label">Outcome</label>
+                        <div class="col-sm-9">
+                            <textarea name="outcome" id="outcome" class="col-sm-12" rows="5" placeholder="Ringkasan Proyek"></textarea>
+                        </div>
+                    </div>
 
-                        <div class="form-group">
+                    <div class="form-group">
+                        <label for="durasi" class="col-sm-3 control-label">Durasi</label>
+                        <div class="col-sm-6">
+                            <input type="text" name="durasi" id="durasi" class="form-control" placeholder="Durasi Pelaksanaan (dalam bulan)" value="">
+                        </div>
+                        <label for="durasi" class="col-sm-3">Bulan</label>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="proyeksi_tahun_pertama_penarikan" class="col-sm-3 control-label">Perkiraan Tahun Pertama Pelaksanaan</label>
+                        <div class="col-sm-9">
+                            <input type="text" name="proyeksi_tahun_pertama_penarikan" id="proyeksi_tahun_pertama_penarikan" class="form-control" placeholder="Proyeksi Tahun Pertama Penarikan" value="">
+                        </div>
+                    </div>
+                    
+
+                    <div class="form-group">
                             <label for="id_program" class="col-sm-3 control-label">Program </label>
                             <div class="col-sm-9">
                                 <select name="id_program" id="id_program" class="form-control"  >
@@ -60,7 +156,7 @@
                                     <?php } ?>
                                 </select>
                             </div>
-                        </div>
+                    </div>
 
 
                         <div class="form-group">
@@ -85,64 +181,6 @@
                                       
                                    
                                 </select>
-                            </div>
-                        </div>
-
-
-                        <div class="form-group">
-                            <label for="lokasi" class="col-sm-3 control-label">Lokasi</label>
-                            <div class="col-sm-9">
-
-                                <select name="lokasi" id="lokasi" class="form-control"  >
-                                     
-                                    <?php foreach($lokasi as $row){ ?>
-                                        <option value="<?php echo $row['id']; ?>"><?php echo $row['nama']; ?>
-                                      </option>
-                                    <?php } ?>
-                                </select>
-                               <!-- <textarea name="lokasi" id="lokasi" class="col-sm-12" rows="5" placeholder="Lokasi"></textarea> -->
-                            </div>
-                        </div>
-
-             
-
-                       
-                        
-                        <div class="form-group">
-                            <label for="proyeksi_tahun_pertama_penarikan" class="col-sm-3 control-label">Proyeksi Tahun Pertama Penarikan</label>
-                            <div class="col-sm-9">
-                                <input type="text" name="proyeksi_tahun_pertama_penarikan" id="proyeksi_tahun_pertama_penarikan" class="form-control" placeholder="Proyeksi Tahun Pertama Penarikan" value="">
-                            </div>
-                        </div>
-                        
-                     
-                        <div class="form-group">
-                            <label for="judul_proyek_eng" class="col-sm-3 control-label">Judul EN</label>
-                            <div class="col-sm-9">
-                                <input type="text" name="judul_proyek_eng" id="judul_proyek_eng" class="form-control" placeholder="Judul Proyek Dalam Bahasa Inggris" value="">
-                            </div>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="judul_proyek_id" class="col-sm-3 control-label">Judul ID</label>
-                            <div class="col-sm-9">
-                                <input type="text" name="judul_proyek_id" id="judul_proyek_id" class="form-control" placeholder="Judul Proyek Dalam Bahasa Indonesia" value="">
-                            </div>
-                        </div>
-
-                         <div class="form-group">
-                            <label for="ruang_lingkup_eng" class="col-sm-3 control-label">Ruang Lingkup EN</label>
-                            <div class="col-sm-9">
-                            <textarea name="ruang_lingkup_eng" id="ruang_lingkup_eng" class="col-sm-12" rows="5"  placeholder="Ruang Lingkup dalam Bahasa Inggris" ></textarea>
-                                
-                            </div>
-                        </div>
-
-                         <div class="form-group">
-                            <label for="ruang_lingkup_id" class="col-sm-3 control-label">Ruang Lingkup ID</label>
-                            <div class="col-sm-9">
-                            <textarea name="ruang_lingkup_id" id="ruang_lingkup_id" rows="5" class="col-sm-12" placeholder="Ruang Lingkup dalam Bahasa Indonesia" ></textarea>
-                                <!-- <input type="text" name="ruang_lingkup_id" id="ruang_lingkup_id" class="form-control" placeholder="Ruang Lingkup dalam Bahasa Indonesia" value=""> -->
                             </div>
                         </div>
 
@@ -172,38 +210,10 @@
                             </div>
                         </div>
 
-                         
-
-
-
-
-                        <div class="form-group">
-                            <label for="output" class="col-sm-3 control-label">Output</label>
-                            <div class="col-sm-9">
-                                <textarea name="output" id="output" class="col-sm-12" rows="5" placeholder="Output Proyek"></textarea>
-                            </div>
-                        </div>
-
-
-                        <div class="form-group">
-                            <label for="judul_id" class="col-sm-3 control-label">Outcome</label>
-                            <div class="col-sm-9">
-                                <textarea name="outcome" id="outcome" class="col-sm-12" rows="5" placeholder="Ringkasan Proyek"></textarea>
-                            </div>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="durasi" class="col-sm-3 control-label">Durasi</label>
-                            <div class="col-sm-6">
-                                <input type="text" name="durasi" id="durasi" class="form-control" placeholder="Durasi Pelaksanaan (dalam bulan)" value="">
-                            </div>
-                            <label for="durasi" class="col-sm-3">Bulan</label>
-                        </div>
-
                         <input type="hidden" name="id" class="form-control" id="id" value="">
                     </div>
                     <div class="modal-footer">                  
-                        <button type="submit"class="btn btn-primary">Simpan</button>
+                        <button type="submit" class="btn btn-primary">Simpan</button>
                         <button type="button" id="tblTutup" class="btn btn-white" data-dismiss="modal">Tutup</button>
                     </div>
                 </form>
@@ -224,6 +234,12 @@
             placeholder: "Pilih Instansi",
             width: "100%"
         });
+
+        $("#id_usulan_hub").select2({
+            placeholder: "Pilih Usulan Terkait",
+            multiple:true,
+            width: "100%"
+        });
      
          $("#id_infra").select2({
             placeholder: "Pilih Kategori",
@@ -242,6 +258,11 @@
 
           $("#id_sektor").select2({
             placeholder: "Pilih Sektor",
+            width: "100%"
+        });
+
+        $("#status_usulan").select2({
+            placeholder: "Pilih Jenis Usulan",
             width: "100%"
         });
 
@@ -289,6 +310,14 @@
             var id_sektor                    = $("#id_sektor").val();
             var id_infra                    = $("#id_infra").val();
             var Kategori                    = $("#Kategori").val();
+            var status_usulan                    = $("#status_usulan").val();
+
+            if (status_usulan == 0 ) {
+                var id_usulan_hub                    = 0;
+            }else{
+                var id_usulan_hub                    = $("#id_usulan_hub").val();
+            }
+         
             
            
             
@@ -315,6 +344,8 @@
             form_data.append('proyeksi_tahun_pertama_penarikan', proyeksi_tahun_pertama_penarikan);
             form_data.append('id_infra', id_infra);
             form_data.append('Kategori', Kategori);
+            form_data.append('status_usulan', status_usulan);
+            form_data.append('id_usulan_hub', id_usulan_hub);
     
             
 

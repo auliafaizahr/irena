@@ -4,11 +4,20 @@
     <div class="modal-content">
       <div class="ibox">
         <div class="ibox-title">
-          <h5>Detail Usulan</h5>
+        <h5>Detail Proyek <?php echo $detail->judul_proyek_eng; ?> </h5>
         </div>
         <div class="ibox-content">
           <table class="table table-hover table-mail">
             <tbody>
+
+            <tr class="read">
+              <td class="mail-ontact text-right">Judul EN</td>
+              <td class="mail-subject"><?php echo $detail->judul_proyek_eng; ?></td>
+            </tr>
+            <tr class="read">
+              <td class="mail-ontact text-right">Judul ID</td>
+              <td class="mail-subject"><?php echo $detail->judul_proyek_id; ?></td>
+            </tr>
               <tr class="read">
                 <td class="mail-ontact text-right">Instansi Pengusul</td>
                 <td class="mail-subject"><?php echo $this->Usulan_model->ambil_instansi_untuk_usulan($detail->id_instansi)->nama_instansi; ?></td>
@@ -39,21 +48,14 @@
                 <td class="mail-subject"><?php echo $this->Usulan_model->ambil_program_proyek($detail->id_program)->nama_program; ?></td>
               </tr>
               <tr class="read">
-                <td class="mail-ontact text-right">Proyeksi Tahun Pertama Penarikan</td>
+                <td class="mail-ontact text-right">Perkiraan Tahun Pertama Pelaksanaan</td>
                 <td class="mail-subject"><?php echo $detail->proyeksi_tahun_pertama_penarikan; ?></td>
               </tr>
               <tr class="read">
                 <td class="mail-ontact text-right">Sektor</td>
                 <td class="mail-subject"><?php echo $this->Usulan_model->ambil_nama_sektor($detail->id_sektor)->nama; ?></td>
               </tr>
-              <tr class="read">
-                <td class="mail-ontact text-right">Judul EN</td>
-                <td class="mail-subject"><?php echo $detail->judul_proyek_eng; ?></td>
-              </tr>
-              <tr class="read">
-                <td class="mail-ontact text-right">Judul ID</td>
-                <td class="mail-subject"><?php echo $detail->judul_proyek_id; ?></td>
-              </tr>
+              
               <tr class="read">
                 <td class="mail-ontact text-right">Durasi</td>
                 <td class="mail-subject"><?php echo $detail->durasi. " bulan"; ?></td>

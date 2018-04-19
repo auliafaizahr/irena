@@ -27,6 +27,45 @@
                                 </select>
                             </div>
                         </div>
+                        <div class="form-group">
+                            <label for="is_lengkap" class="col-sm-4 control-label">Kelengkapan Administrasi</label>
+                            <div class="col-sm-8">
+                                <input type="checkbox" id="is_usulan_menteri"> Usulan Menteri / Sekjen
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="is_lengkap" class="col-sm-4 control-label"></label>
+                            <div class="col-sm-8">
+                                <input type="checkbox" id="is_dipk_duk"> DIPK
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="is_lengkap" class="col-sm-4 control-label"></label>
+                            <div class="col-sm-8">
+                                <input type="checkbox" id="is_duk"> DUK
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="is_lengkap" class="col-sm-4 control-label"></label>
+                            <div class="col-sm-8">
+                                <input type="checkbox" id="is_rek_menteri_dn"> Rekomendasi Menteri Dalam Negeri
+                        </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="is_lengkap" class="col-sm-4 control-label"></label>
+                            <div class="col-sm-8">
+                                <input type="checkbox" id="is_rek_menteri_bumn"> Rekomendasi Menteri BUMN
+                        </div>
+                        </div>
+
+                         <div class="form-group">
+                            <label for="is_lengkap" class="col-sm-4 control-label"></label>
+                            <div class="col-sm-8">
+                                <input type="checkbox" id="is_setuju_ia"> Surat Persetujuan Implementing Agency
+                               </div>
+                         </div>
+
 						<div class="form-group">
 							<label for="nilai_admin_ket" class="col-sm-4 control-label">Keterangan</label>
 							<div class="col-sm-8">

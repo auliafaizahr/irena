@@ -123,7 +123,7 @@
                 },
                 dataType:"html"
             });
-          });
+    });
 	
 	$(document).ready(function(){
 		segarkan_data();
@@ -186,6 +186,7 @@
 				dataType:"html"});
 			return false;
 		});
- 
+
+	
 	});
 </script> 

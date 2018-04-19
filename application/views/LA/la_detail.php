@@ -63,7 +63,7 @@
               </tr>
               
               <tr class="read">
-                <td class="mail-ontact text-right">Proyeksi Tahun Pertama Penarikan</td>
+                <td class="mail-ontact text-right">Perkiraan Tahun Pertama Pelaksanaan</td>
                 <td class="mail-subject"><?php echo $detail->proyeksi_tahun_pertama_penarikan; ?></td>
               </tr>
 

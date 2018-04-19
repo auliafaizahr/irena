@@ -42,7 +42,7 @@
 </div>
 
 
-<div id="tmpModal2"></div>
+<div id="tmpModal3"></div>
 <script>
 	$(document).ready(function(){
 		segarkan_log();
@@ -59,7 +59,7 @@
 				url: "<?php echo base_url(); ?>usulan/tampilkan_form_log_usulan_tambah/"+id,
 				success:function(response){
 					//$("body").addClass("modal-open"); //untuk scroll
-					$("#tmpModal2").html(response);
+					$("#tmpModal3").html(response);
 					$('#modalTambah').modal('show');
 				},
 				dataType:"html"});

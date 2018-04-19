@@ -77,12 +77,12 @@
 		$('#loader1').fadeOut(1000);
 	}
 	
-/*	function segarkan_data(){
+	function segarkan_data(){
 		$.get("<?php echo base_url(); ?>loan_aggr/tampilkan_la_list", function(data) {
 			$("#div_index").html(data);
 		});
 	}
-*/
+
 	$(document).on('click', '.rekam', function(){  
            
          

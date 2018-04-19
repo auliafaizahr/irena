@@ -90,9 +90,9 @@
                             <div class="col-sm-10">
                                 <select name="lokasi" id="lokasi" class="form-control" multiple>
                            
-                                <?php $key = array($detail->lokasi);
+                                <?php $key = array($usulan->lokasi);
                                 $a = array();
-                                $a = explode(",", $detail->lokasi);
+                                $a = explode(",", $usulan->lokasi);
                                 $key2 = array("1", "2", "4", "3");
                                  
 

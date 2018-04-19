@@ -40,7 +40,7 @@
                         <div class="form-group">
                             <label for="tahun_usulan" class="col-sm-3 control-label">Tahun Usulan</label>
                             <div class="col-sm-9">
-                                <input type="text" name="tahun_usulan" id="tahun_usulan" class="form-control" placeholder="Proyeksi Tahun Pertama Penarikan" value="<?php echo $detail->tahun_usulan; ?>">
+                                <input type="text" name="tahun_usulan" id="tahun_usulan" class="form-control" placeholder="Tahun Usulan" value="<?php echo $detail->tahun_usulan; ?>">
                             </div>
                         </div>
 
@@ -129,7 +129,7 @@
                         </div>
                         
                         <div class="form-group">
-                            <label for="proyeksi_tahun_pertama_penarikan" class="col-sm-3 control-label">Proyeksi Tahun Pertama Penarikan</label>
+                            <label for="proyeksi_tahun_pertama_penarikan" class="col-sm-3 control-label">Perkiraan Tahun Pertama Pelaksanaan</label>
                             <div class="col-sm-9">
                                 <input type="text" name="proyeksi_tahun_pertama_penarikan" id="proyeksi_tahun_pertama_penarikan" class="form-control" placeholder="Proyeksi Tahun Pertama Penarikan" value="<?php echo $detail->proyeksi_tahun_pertama_penarikan; ?>">
                             </div>

@@ -254,9 +254,10 @@ class Greenbook extends CI_Controller {
 	{
     	$this->load->model('Usulan_model');
     	$this->load->model('Greenbook_model');
+    	$this->load->model('Bluebook_model');
 
 		$id_proyek							= $this->input->post('id');
-		$data['usulan']						= $this->Greenbook_model->detail_proyek($id_proyek);
+		$data['usulan']						= $this->Bluebook_model->detail_proyek_by_usulan($id_proyek);
 		//$data['usulan']			= $query->row();
 		$this->load->view('Greenbook/log_gb_dokumen_index', $data);
 		//$this->load->view('sbsn/usulan/log_usulan_index');
@@ -1059,41 +1060,85 @@ class Greenbook extends CI_Controller {
     {
     	$this->load->model('Usulan_model');
     	$this->load->model('Greenbook_model');
+    	$status = array('success' => false, 'messages' => array());
 
+    	$this->form_validation->set_rules("id_program", "Program", "trim|required");
+		$this->form_validation->set_rules("instansi_pelaksana", "Instansi Pelaksana", "trim|required");
+		$this->form_validation->set_rules("id_instansi", "Instansi Pengusul", "trim|required");
+		$this->form_validation->set_rules("judul_proyek_eng", "Judul Proyek Eng", "trim|required");
+		$this->form_validation->set_rules("judul_proyek_id", "Judul Proyek ID", "trim|required");
+		$this->form_validation->set_rules("ruang_lingkup_id", "Ruang Lingkup ID", "trim|required");
+		$this->form_validation->set_rules("ruang_lingkup_eng", "Ruang Lingkup ENG", "trim|required");
+		$this->form_validation->set_rules("proyeksi_tahun_pertama_penarikan", "Tahun Pertama Penarikan", "trim|required");
+		$this->form_validation->set_rules("nilai_pinjaman", "Nilai Pinjaman", "trim|required");
+		$this->form_validation->set_rules("nilai_hibah", "Nilai Hibah", "trim|required");
+		$this->form_validation->set_rules("dana_pendamping", "Dana Pendamping", "trim|required");
+		$this->form_validation->set_rules("outcome", "Outcome", "trim|required");
+		$this->form_validation->set_rules("output", "Output", "trim|required");
+		
+		$this->form_validation->set_rules("lokasi", "Lokasi", "trim|required");
+		$this->form_validation->set_rules("durasi", "Durasi", "trim|required");
+		$this->form_validation->set_rules("id_sektor", "Sektor", "trim|required");
+		$this->form_validation->set_rules("id_infra", "Kategori", "trim|required");
+		//$this->form_validation->set_rules("berkas", "Berka arsip", "required");
+		$this->form_validation->set_message('required', '%s harus diisi');
+		$this->form_validation->set_message('is_natural_no_zero', '%s harus diisi dengan angka dan lebih dari 0');
+
+		$this->form_validation->set_error_delimiters('<p class="text-danger">', '</p>');
+
+		if ($this->form_validation->run() == FALSE) {
+			foreach ($_POST as $key => $value) {
+				$status['messages'][$key] = form_error($key);
+			}
+		}else{ //validasi benar semua
+
+		
     	$data = array(
         'id_program'				=> $this->input->post('id_program'),
-        'judul_proyek_id'			=> $this->input->post('judul_proyek_id'),
-        'judul_proyek_eng'			=> $this->input->post('judul_proyek_eng'),
-        'ruang_lingkup_id'			=> $this->input->post('ruang_lingkup_id'),
-        'ruang_lingkup_eng'				=> $this->input->post('ruang_lingkup_eng'),
-        'id_instansi'					=> $this->input->post('id_instansi'),
-        'instansi_pelaksana'			=> $this->input->post('instansi_pelaksana'),
-        'proyeksi_tahun_pertama_penarikan'			=> $this->input->post('proyeksi_tahun_pertama_penarikan'),
-        'nilai_pinjaman'				=> $this->input->post('nilai_pinjaman'),
-        'nilai_hibah'				=> $this->input->post('nilai_hibah'),
-        'durasi'				=> $this->input->post('durasi'),
-        'output'				=> $this->input->post('output'),
-        'outcome'				=> $this->input->post('outcome'),
-        'dana_pendamping'				=> $this->input->post('dana_pendamping'),
+        
    		 );
 
     	$this->db->insert('irena_greenbook_proyek', $data);
-/*
-    	$query = "SELECT id FROM irena_usulan_layak ORDER BY ID DESC LIMIT 1";
-    	$a = $this->db->query($query);
-*/
-    	$isi = array(
-    			'id_usulan' 		=> $this->Usulan_model->last()->id,
+
+	 	/*$isi = array(
+    			'id_usulan' 		=> $this->Usulan_model->last()->id
+    			
+    			//'is_gb_update_by'			=> $this->session->userdata('id')
     			
     		);
 
-    	
-    	$this->db->insert('irena_usulan_layak', $isi);
+	 	$this->db->insert('irena_usulan_layak', $isi);
     	$this->db->insert('irena_usulan_adm', $isi);
     	$this->db->insert('irena_usulkan_bb', $isi);
 
-    	return true;
+	 	$select2data = $this->input->post('lokasi');
+	 	$array_lokasi = explode(",", $select2data);
+	 	$id_instansi			= $this->input->post('id_instansi');
+
+	 	$data2 = [];
+	 	foreach($array_lokasi as $lokasi) {
+	 	  $data2[] = [
+	 	    'id_usulan' => $isi['id_usulan'],
+	 	    'id_lokasi' => $lokasi,
+	 	    'id_instansi' => $id_instansi,
+	 	  ];
+	 	}
+	 	
+	 	
+
+	 	
+
+    	$this->db->insert_batch('irena_usulan_lokasi', $data2);
+    	*/
+
+    	$status['success'] 			= true;
+
+		}
+    	 echo json_encode($status);
     }
+
+
+
 
 
 	

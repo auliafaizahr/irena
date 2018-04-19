@@ -17,6 +17,27 @@ class Program extends CI_Controller {
 			$this->load->view('PLN/program');
 			$this->load->view('templates/footer'); 
 	}
+
+		public function tampilkan_program_list()
+	{
+		$this->load->model('hibah_model');
+		$this->load->model('Usulan_model');
+		$this->load->model('Program_model');
+			$data['instansi'] = array();
+
+			
+			$data['data']= $this->Program_model->ambil_list_program();
+			
+			$data['lembaga']= $this->Usulan_model->ambil_instansi();
+			$data['program']= $this->Usulan_model->ambil_program();
+			$data['arsip'] = $this->Usulan_model->ambil_arsip();
+
+			
+
+		$data['dpp'] = $this->hibah_model->ambil_proyek_drkh();
+		$this->load->view('Program/program_list', $data);
+	}
+
 	
 	public function ambil_usulan() {
 		
@@ -89,9 +110,148 @@ class Program extends CI_Controller {
 		//$data['isi'] = $this->ambil_bb_untuk_gb();
 		
 		$this->load->view('templates/header'); 
-		$this->load->view('PLN/program', $data);
+		$this->load->view('Program/program_index', $data);
 		$this->load->view('templates/footer'); 
 	}
+
+	public function edit() {
+
+		$this->load->model('Usulan_model');
+		$this->load->model('Greenbook_model');
+		$this->load->model('Bluebook_model');
+		$this->load->model('Program_model');
+		$a = $this->input->post('id');
+		
+		
+		$data['lembaga']= $this->Usulan_model->ambil_instansi();
+		$data['program']= $this->Usulan_model->ambil_program();
+		$data['lokasi'] = $this->Usulan_model->ambil_lokasi();
+		$data['sektor'] = $this->Greenbook_model->ambil_sektor();
+		$data['status'] = $this->Bluebook_model->ambil_statusumum();
+		$data['infra'] = $this->Usulan_model->ambil_infra();
+		$data['detail'] = $this->Program_model->detail_program($a);
+		$data['bluebook']= $this->Bluebook_model->semua_bluebook();
+		$data['lembaga']= $this->Usulan_model->ambil_instansi();
+
+		
+		
+		
+
+       $this->load->view('Program/edit_program', $data);
+       // /$this->load->view('templates/footer1');
+
+     
+    }
+
+    function usulan_simpan()
+	{
+    	$this->load->model('Usulan_model');
+    	$this->load->model('Program_model');
+
+		$status = array('success' => false, 'messages' => array());
+
+
+		$this->form_validation->set_rules("nama_program", "Nama Program ", "trim|required");
+		$this->form_validation->set_rules("judul_eng", "Judul dalam Bahasa Inggris", "trim|required");
+		$this->form_validation->set_rules("id_bluebook", "Kode Bluebook", "trim|required");
+		$this->form_validation->set_rules("id_instansi", "Instansi", "trim|required");
+		$this->form_validation->set_rules("latar_belakang_eng", "Latar Belakang", "trim|required");
+		$this->form_validation->set_rules("ruang_lingkup_eng", "Ruang Lingkup", "trim|required");
+		$this->form_validation->set_rules("outcome", "Outcome", "trim|required");
+		
+	
+		
+		//$this->form_validation->set_rules("berkas", "Berka arsip", "required");
+		$this->form_validation->set_message('required', '%s harus diisi');
+		$this->form_validation->set_message('is_natural_no_zero', '%s harus diisi dengan angka dan lebih dari 0');
+
+		$this->form_validation->set_error_delimiters('<p class="text-danger">', '</p>');
+
+		if ($this->form_validation->run() == FALSE) {
+			foreach ($_POST as $key => $value) {
+				$status['messages'][$key] = form_error($key);
+			}
+			
+		}else{ //validasi benar semua
+			foreach ($_POST as $key => $value) {
+				$status['messages'][$key] = form_error($key);
+			}
+			
+			$status['success'] = true;
+			
+			$data 					= $_POST;
+			/*$data['update_by']		= $this->session->userdata('id');
+			$data['update_date']	= date('Y-m-d H:i:s');*/
+			
+			if($this->uri->segment(3) == 'tambah'){
+				$id			= $this->input->post('id');
+				
+				
+				$result 				= $this->Program_model->program_simpan_data($data);
+			}elseif($this->uri->segment(3) == 'edit'){
+				
+				
+
+				$result 		= $this->Program_model->program_simpan_data($data);
+			}
+			
+		}
+
+		echo json_encode($status);
+
+	}
+
+	   public function tambah_program()
+	{
+		$this->load->model('Greenbook_model');
+		 $this->load->model('Usulan_model');
+		 $this->load->model('Bluebook_model');
+		$data['data']= $this->Usulan_model->ambil_proyek_usulan();
+		
+		$data['lembaga']= $this->Usulan_model->ambil_instansi();
+		$data['program']= $this->Usulan_model->ambil_program();
+		$data['arsip'] = $this->Usulan_model->ambil_arsip();
+		$data['lokasi'] = $this->Usulan_model->ambil_lokasi();
+		
+		$data['lembaga']= $this->Usulan_model->ambil_instansi();
+		$data['status_lembaga']= $this->Bluebook_model->semua_status_lembaga();
+		$data['status_lender']= $this->Bluebook_model->semua_status_lender();
+		$data['bluebook']= $this->Bluebook_model->semua_bluebook();
+		$data['greenbook']= $this->Greenbook_model->ambil_greenbook();
+		$data['provinsi']= $this->Greenbook_model->ambil_provinsi();
+		$data['sektor']= $this->Greenbook_model->ambil_sektor();
+		
+		$data['lender']= $this->Bluebook_model->semua_lender();
+	
+
+
+		$this->load->view('Program/tambah_program', $data);
+	}
+
+
+
+		public function detil()
+	{
+
+		$this->load->model('Usulan_model');
+		$this->load->model('dk_model');
+		$this->load->model('Greenbook_model');
+		$this->load->model('Bluebook_model');
+		$this->load->model('Program_model');
+		$a = $this->input->post('id');
+		//$data['a'] = $this->input->post('id');
+		$id_bb = $this->input->post('id_bb');
+		$data['detail'] = $this->Program_model->detail_program($a);
+		$data['isi'] = $this->Program_model->ambil_list_program_by_id($a);
+		$data['proyek'] = $this->Program_model->ambil_proyek_program($a, $id_bb);
+
+		
+		
+		$this->load->view('Program/detail_program', $data);
+		//$this->load->view('templates/footer1');
+		
+	}
+
 
 	public function detail()
 	{
@@ -133,11 +293,6 @@ class Program extends CI_Controller {
 		
 		echo json_encode($output);
 		
-	}
-
-	public function tambah_program()
-	{
-		$this->load->model('Program_model');		
 	}
 
 	
