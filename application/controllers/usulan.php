@@ -21,6 +21,28 @@ class Usulan extends CI_Controller {
 			$this->load->view('templates/footer'); 
 	}
 
+	function tampilkan_form_log_usulan_edit()
+	{	
+		$this->load->model('hibah_model');
+		$this->load->model('Usulan_model');
+		$id 							= $this->uri->segment(3);
+		$query							= $this->hibah_model->ambil_data_log_usulan_by_id($id);
+		$data['log_usulan']				= $query->row();
+		$data['id_log_kategori']		= $this->hibah_model->pilih_log_kategori();
+		$this->load->view('pln/log_usulan_edit', $data);
+	}
+
+	/*function tampilkan_dok_usulan_edit()
+	{	
+		$this->load->model('hibah_model');
+		$this->load->model('Usulan_model');
+		$id 					= $this->uri->segment(3); //id table of irena_sbsn_usulan_syarat
+		$query					= $this->hibah_model->ambil_dok_usulan_by_id($id);
+		$data['dok']			= $query->row();
+		$this->load->view('pln/dok_usulan_edit', $data);
+	}*/
+	
+
 	public function tampil_index()
 	{
 		if(is_logged_in()) {
@@ -2163,6 +2185,17 @@ class Usulan extends CI_Controller {
 		}
 		echo json_encode($status);
 	
+	}
+
+	function tampilkan_dok_usulan_edit()
+	{	
+    	$this->load->model('Usulan_model');
+    	$this->load->model('hibah_model');
+
+		$id 					= $this->uri->segment(3); //id table of irena_sbsn_usulan_syarat
+		$query					= $this->Usulan_model->ambil_dok_usulan_by_id($id);
+		$data['dok']			= $query->row();
+		$this->load->view('pln/dok_usulan_edit', $data);
 	}
 
 	function tampilkan_form_log_usulan_hapus()

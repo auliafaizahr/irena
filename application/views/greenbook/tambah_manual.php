@@ -89,6 +89,20 @@
                             </div>
                         </div>
 
+                         <div class="form-group">
+                            <label for="id_usulan_hub" class="col-sm-3 control-label">Usulan Terkait</label>
+                            <div class="col-sm-9">
+                                <select id="id_usulan_hub" class="form-control" >
+                                  
+                                    <?php foreach($usulan as $row){ ?>
+                                        <option value="<?php echo $row['id']; ?>"><?php echo $row['judul_proyek_eng']; ?>
+                                      </option>
+                                    <?php } ?>
+                                      
+                                </select>
+                            </div>
+                        </div>
+
 
                         <div class="form-group">
                             <label for="id_greenbook" class="col-sm-3 control-label">Kode Greenbook </label>
@@ -104,9 +118,9 @@
                         </div>
                         
                         <div class="form-group">
-                            <label for="proyeksi_tahun_pertama_penarikan" class="col-sm-3 control-label">Proyeksi Tahun Pertama Penarikan</label>
+                            <label for="proyeksi_tahun_pertama_penarikan" class="col-sm-3 control-label">Proyeksi Tahun Pertama Pelaksanaan</label>
                             <div class="col-sm-9">
-                                <input type="text" name="proyeksi_tahun_pertama_penarikan" id="proyeksi_tahun_pertama_penarikan" class="form-control" placeholder="Proyeksi Tahun Pertama Penarikan" value="">
+                                <input type="text" name="proyeksi_tahun_pertama_penarikan" id="proyeksi_tahun_pertama_penarikan" class="form-control" placeholder="Proyeksi Tahun Pertama Pelaksanaan" value="">
                             </div>
                         </div>
 
@@ -353,6 +367,12 @@
 
          $("#id_status_lender").select2({
             placeholder: "Pilih Status Lender",
+            width: "100%"
+        });
+
+        $("#id_usulan_hub").select2({
+            placeholder: "Pilih Usulan Terkait",
+            multiple:true,
             width: "100%"
         });
 

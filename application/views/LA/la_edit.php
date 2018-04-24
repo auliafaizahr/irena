@@ -233,10 +233,10 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="tgl" class="col-sm-3 control-label">Tanggal LA</label>
+                            <label for="tgl_LA" class="col-sm-3 control-label">Tanggal LA</label>
                             <div class="col-sm-9">
                                 <div class="input-group date" >
-                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" name= "tgl" id="tgl_la" class="form-control" value="" data-date-format='yyyy-mm-dd'>
+                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" name= "tgl_LA" id="tgl_LA" class="form-control" value="<?php echo $detail->tgl_LA; ?>" data-date-format='yyyy-mm-dd'>
                                 </div>
                             </div>
                         </div>
@@ -398,7 +398,7 @@
             width: "100%"
         });
 
-         $("#tgl_la").datepicker({
+         $("#tgl_LA").datepicker({
             todayHighlight: true
          });
 
@@ -456,7 +456,7 @@
             var id_status_lembaga                   = $("#id_status_lembaga").val();
             var id_greenbook                   = $("#id_greenbook").val();
            
-            var tgl_la                   = $("#tgl_la").val();
+            var tgl_LA                   = $("#tgl_LA").val();
             var tahun_usulan                   = $("#tahun_usulan").val();
             var lokasi                   = $("#lokasi").val();
             
@@ -485,7 +485,7 @@
            
             form_data.append('tahun_usulan', tahun_usulan);
             form_data.append('lokasi', lokasi);
-            form_data.append('tgl_la', tgl_la);
+            form_data.append('tgl_LA', tgl_LA);
 
 
 

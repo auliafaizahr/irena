@@ -743,15 +743,20 @@
 
                      <tbody>
 
-                   <?php $all_detail = $this->Usulan_model->all_banding($detail->id);
+                   <?php 
 
+                      $all_detail = $this->Usulan_model->all_banding($detail->id);
+                      $banding_bb = $this->Usulan_model->banding_ambil_bb_saja($detail->id);
+
+                      foreach ($banding_bb as $key => $value2):
                       foreach ($all_detail as $key => $value):
+                     
                         # code...
                       
                      ?>
                    <tr>
                     <td> <b>  Bluebook  </b> <br> 
-                   <?php echo $value['nama_bb']; ?> <br/> </td>
+                   <?php echo $value2['nama_bb']; ?> <br/> </td>
                    <td> <b>  Greenbook  </b> <br> 
                    <?php echo $value['nama_gb']; ?> <br/> </td>
                    <td> <b>  Tanggal DK </b> <br> 
@@ -774,7 +779,7 @@
 
                     <tr>
                      <td> <b>  Judul Kegiatan </b> <br> 
-                    <?php echo $value['bb_judul']; ?> <br/> </td>
+                    <?php echo $value2['bb_judul']; ?> <br/> </td>
                     <td> <b>  Judul Kegiatan </b> <br> 
                     <?php echo $value['gb_judul']; ?> <br/> </td>
                     <td> <b>  Judul Kegiatan </b> <br> 
@@ -785,7 +790,7 @@
 
                     <tr>
                      <td>  <b>  Instansi Pelaksana </b> <br> 
-                    <?php echo nl2br($value['bb_pelaksana']); ?> <br> </td>
+                    <?php echo nl2br($value2['bb_pelaksana']); ?> <br> </td>
                     <td>  <b>  Instansi Pelaksana </b> <br> 
                     <?php echo nl2br($value['gb_pelaksana']); ?> <br> </td>
                     <td> <b>  Instansi Pelaksana </b> <br> 
@@ -797,7 +802,7 @@
 
                     <tr>
                     <td> <b>  Ruang Lingkup </b> <br> 
-                     <?php echo nl2br($value['bb_ruang_lingkup']); ?> </td>
+                     <?php echo nl2br($value2['bb_ruang_lingkup']); ?> </td>
                     <td> <b>  Ruang Lingkup </b> <br> 
                      <?php echo nl2br($value['gb_ruang_lingkup']); ?> </td>
                     <td> <b>  Ruang Lingkup </b> <br>
@@ -809,7 +814,7 @@
 
                     <tr>
                      <td>  <b> Nilai Pinjaman</b> <br>   
-                    <?php echo  number_format($value['bb_pinjaman']); ?></td>
+                    <?php echo  number_format($value2['bb_pinjaman']); ?></td>
                     <td>  <b> Nilai Pinjaman</b> <br>   
                     <?php echo  number_format($value['gb_pinjaman']); ?></td>
                     <td> <b> Nilai Pinjaman</b> <br>   
@@ -822,8 +827,8 @@
                     <tr>
                     <td>  <b> Lokasi </b> <br> 
                       <?php 
-                      if ($value['bb_lokasi'] != NULL || $value['bb_lokasi'] != "" ) {
-                        $a =  explode(",", $value['bb_lokasi']); 
+                      if ($value2['bb_lokasi'] != NULL || $value2['bb_lokasi'] != "" ) {
+                        $a =  explode(",", $value2['bb_lokasi']); 
                                          $banyak_lokasi = (count($a));
 
                                          $lokasi = array();
@@ -912,7 +917,7 @@
 
                      <tr>
                     <td> <b> Durasi </b> <br> 
-                     <?php echo  number_format($value['bb_durasi']); ?> bulan </td>
+                     <?php echo  number_format($value2['bb_durasi']); ?> bulan </td>
                     <td> <b> Durasi </b> <br> 
                      <?php echo  number_format($value['gb_durasi']); ?> bulan </td>
                     <td>  <b> Durasi </b> <br> 
@@ -930,6 +935,7 @@
 
                     </tbody>
 
+                    <?php endforeach; ?>
                     <?php endforeach; ?>
 
                     </tbody>

@@ -1155,6 +1155,8 @@ class Greenbook extends CI_Controller {
 		$data['lembaga']= $this->Usulan_model->ambil_instansi();
 		$data['program']= $this->Usulan_model->ambil_program();
 		$data['arsip'] = $this->Usulan_model->ambil_arsip();
+		$data['usulan']= $this->Usulan_model->ambil_usulan();
+		
 		
 		$data['lembaga']= $this->Usulan_model->ambil_instansi();
 		$data['status_lembaga']= $this->Bluebook_model->semua_status_lembaga();

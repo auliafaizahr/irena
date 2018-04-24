@@ -138,10 +138,10 @@
                      
                       
                         <div class="form-group">
-                            <label for="tgl_dk" class="col-sm-3 control-label">Tanggal DK</label>
+                            <label for="tgl_DK" class="col-sm-3 control-label">Tanggal DK</label>
                             <div class="col-sm-9">
                                 <div class="input-group date" >
-                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" name= "tgl_dk" id="tgl_dk" class="form-control" value="<?php echo $detail->tgl_DK; ?>" data-date-format='yyyy-mm-dd'>
+                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" name= "tgl_DK" id="tgl_DK" class="form-control" value="<?php echo $detail->tgl_DK; ?>" data-date-format='yyyy-mm-dd'>
                                 </div>
                             </div>
                         </div>
@@ -399,7 +399,7 @@
             width: "100%"
         });
 
-         $("#tgl_dk").datepicker({
+         $("#tgl_DK").datepicker({
             todayHighlight: true
          });
         
@@ -452,7 +452,7 @@
             var id_status_lender                   = $("#id_status_lender").val();
             var id_status_lembaga                   = $("#id_status_lembaga").val();
             var id_greenbook                   = $("#id_greenbook").val();
-            var tgl_dk                   = $("#tgl_dk").val();
+            var tgl_DK                   = $("#tgl_DK").val();
             var tahun_usulan                   = $("#tahun_usulan").val();
             var lokasi                   = $("#lokasi").val();
             
@@ -478,7 +478,7 @@
             form_data.append('id_status_lender', id_status_lender);
             form_data.append('id_status_lembaga', id_status_lembaga);
             form_data.append('id_greenbook', id_greenbook);
-            form_data.append('tgl_dk', tgl_dk);
+            form_data.append('tgl_DK', tgl_DK);
             form_data.append('tahun_usulan', tahun_usulan);
             form_data.append('lokasi', lokasi);
 

@@ -17,6 +17,12 @@ class Usulan_model extends CI_Model {
 	
 	}
 
+	function ambil_dok_usulan_by_id($id)
+	{
+		$sql="SELECT * FROM irena_usulan_pln_dok WHERE id = '$id'";
+		return $this->db->query($sql);
+	}
+
 	function ambil_data_instansi_es_1_by_id_instansi($id)
 	{
 		 $query = "SELECT * FROM irena_eselon_1 WHERE id_instansi = '$id' ORDER BY nama_eselon_1 ASC";
@@ -376,6 +382,15 @@ class Usulan_model extends CI_Model {
 	{
 		
 		$query = "SELECT * FROM irena_view_untuk_detail_modal WHERE id = '$x' ORDER BY id_greenbook";
+		 $a= $this->db->query($query);
+		return $a->result_array();
+		
+	}
+
+	public function banding_ambil_bb_saja($x)
+	{
+		
+		$query = "SELECT * FROM irena_view_untuk_detail_modal WHERE id = '$x' GROUP BY id_proyek_bb";
 		 $a= $this->db->query($query);
 		return $a->result_array();
 		

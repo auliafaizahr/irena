@@ -24,7 +24,7 @@
                      </div>
 
 
-                     <div class="form-group">
+                    <div class="form-group">
                             <label for="id_usulan_hub" class="col-sm-3 control-label">Usulan Terkait</label>
                             <div class="col-sm-9">
                                 <select id="id_usulan_hub" class="form-control" >

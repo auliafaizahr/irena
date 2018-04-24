@@ -27,7 +27,7 @@
 						<button data-toggle="dropdown" class="btn btn-white dropdown-toggle" type="button"><span class="caret"></span></button>
 						<ul class="dropdown-menu pull-right">
 							<li>
-								<a href="#" onclick="tampilkan_form_edit('hibah/tampilkan_form_log_usulan_edit/<?php echo $row->id; ?>')">Edit</a>
+								<a href="#" onclick="tampilkan_form_edit('usulan/tampilkan_dok_usulan_edit/<?php echo $row->id; ?>')">Edit</a>
 							</li>
 							<li>
 								<a href="#" onclick="tampilkan_form_hapus('hibah/tampilkan_form_log_usulan_hapus/<?php echo $row->id; ?>')"><span class="text-danger" ><strong>Hapus</strong></span></a>
@@ -43,7 +43,7 @@
 		<?php endforeach; ?>
 	</tbody>
 </table>
-
+<div id="tmpModal5"></div>
 <script>
 	$(document).ready(function(){
 		$('#example_lampiran2').DataTable({
@@ -75,7 +75,7 @@
 		$.ajax({
 			url: "<?php echo base_url(); ?>"+page,
 			success:function(response){
-				$("#tmpModal2").html(response);
+				$("#tmpModal5").html(response);
 				$('#modalEdit').modal('show');
 		},
 		dataType:"html",

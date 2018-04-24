@@ -76,7 +76,7 @@
 				url: "<?php echo base_url(); ?>usulan/tampilkan_form_dok_usulan_tambah/"+id,
 				success:function(response){
 					//$("body").addClass("modal-open"); //untuk scroll
-					$("#tmpModal2").html(response);
+					$("#tmpModal3").html(response);
 					$('#modalTambahDokumen').modal('show');
 				},
 				dataType:"html"});

@@ -128,11 +128,11 @@
 					
                   
 
-                    <li <?php if($this->uri->segment(1)=="perencanaan"){ echo "class='active'"; }	?>>
+                    <li <?php if($this->uri->segment(1)=="usulan"){ echo "class='active'"; }	?>>
                         <a href="<?php echo base_url(); ?>Program/tampil_program"><i class="fa fa-building-o"></i> <span class="nav-label">Pinjaman Luar Negeri</span><span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
 
-                        	<li <?php if($this->uri->segment(1)=="Program"){ echo "class='active'"; }	?>>
+                        	<li <?php if($this->uri->segment(2)=="dashboard_pln"){ echo "class='active'"; }	?>>
 								<a href="<?php echo base_url(); ?>Usulan/dashboard_pln">Dashboard</a>
 							</li>
 
@@ -140,7 +140,7 @@
 								<a href="<?php echo base_url(); ?>Program/tampil_program">Program</a>
 							</li>
 
-                        	<li <?php if($this->uri->segment(1)=="Usulan"){ echo "class='active'"; }	?>>
+                        	<li <?php if($this->uri->segment(1)=="Usulan" && $this->uri->segment(2)=="tampil_index" ){ echo "class='active'"; }	?>>
 								<a href="<?php echo base_url(); ?>Usulan/tampil_index">Usulan Proyek</a>
 							</li>
 
@@ -191,7 +191,7 @@
                         <a href="<?php echo base_url(); ?>"><i class="fa fa-map-marker"></i> <span class="nav-label">Peta Pendanaan</span><span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
 
-                        	<li <?php if($this->uri->segment(1)=="Program"){ echo "class='active'"; }	?>>
+                        	<li <?php if($this->uri->segment(2)=="map_phln"){ echo "class='active'"; }	?>>
 								<a href="<?php echo base_url(); ?>usulan/map_phln"><span class="nav-label">Peta PHLN</span><span class="fa arrow"></a>
 								  <ul class="nav nav-third-level">
 								  <li <?php if($this->uri->segment(2)=="map_phln"){ echo "class='active'"; }	?>>
