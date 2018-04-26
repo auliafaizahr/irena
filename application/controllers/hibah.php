@@ -344,12 +344,7 @@ class Hibah extends CI_Controller {
 						->limit(10)
 						->get("irena_arsip");
 			$json = $query->result();
-			/*
-			$q= $this->input->get("q");
-			$sql =  "SELECT id, no + ' ' + perihal as text FROM irena_arsip
-					WHERE no LIKE '%$q%' OR perihal LIKE  '%$q%' LIMIT 10";
-			$query = 	$this->db->query($sql);		
-			$json = $query->result();*/
+			
 		}
 		
 		echo json_encode($json);

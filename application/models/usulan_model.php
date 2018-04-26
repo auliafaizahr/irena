@@ -23,6 +23,16 @@ class Usulan_model extends CI_Model {
 		return $this->db->query($sql);
 	}
 
+	function ambil_data_log_usulan_by_id($id)
+	{
+		$sql = "	SELECT * FROM irena_view_usulan_pln_log
+					WHERE 
+						id = '$id' 
+					";
+						
+		return $this->db->query($sql);
+	}
+
 	function ambil_data_instansi_es_1_by_id_instansi($id)
 	{
 		 $query = "SELECT * FROM irena_eselon_1 WHERE id_instansi = '$id' ORDER BY nama_eselon_1 ASC";
@@ -204,7 +214,7 @@ class Usulan_model extends CI_Model {
 	{
 		if(array_key_exists('id', $data))
 		{
-			$id=$data['id'];
+			$id = $data['id'];
 			unset($data['id']);
 			$this->db->where('id',$id);
 			$this->db->update('irena_usulan_pln_log',$data);
@@ -219,7 +229,7 @@ class Usulan_model extends CI_Model {
 	{
 		if(array_key_exists('id', $data))
 		{
-			$id=$data['id'];
+			$id = $data['id'];
 			unset($data['id']);
 			$this->db->where('id',$id);
 			$this->db->update('irena_usulan_pln_log',$data);
@@ -698,9 +708,19 @@ class Usulan_model extends CI_Model {
 
 	function tambah_dok_usulan($data)
 	{
-		
+		if(array_key_exists('id', $data))
+		{
+			$id = $data['id'];
+			unset($data['id']);
+			$this->db->where('id',$id);
+			$this->db->update('irena_usulan_pln_dok',$data);
+		}
+		else
+		{
 			$this->db->insert('irena_usulan_pln_dok',$data);
 		
+		}
+			
 	}
 
 	function instansi_by_eselon1($a)

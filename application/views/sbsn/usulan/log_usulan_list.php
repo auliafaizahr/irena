@@ -41,7 +41,7 @@
 		<?php endforeach; ?>
 	</tbody>
 </table>
-
+<div id="tmpModal11"></div>
 <script>
 	$(document).ready(function(){
 		$('#example_lampiran').DataTable({
@@ -73,7 +73,7 @@
 		$.ajax({
 			url: "<?php echo base_url(); ?>"+page,
 			success:function(response){
-				$("#tmpModal2").html(response);
+				$("#tmpModal11").html(response);
 				$('#modalEdit').modal('show');
 		},
 		dataType:"html",

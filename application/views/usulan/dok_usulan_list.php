@@ -43,7 +43,7 @@
 		<?php endforeach; ?>
 	</tbody>
 </table>
-<div id="tmpModal5"></div>
+
 <script>
 	$(document).ready(function(){
 		$('#example_lampiran2').DataTable({
@@ -64,7 +64,7 @@
 			},
 			success:function(response){
 
-				$("#tmpModal2").html(response);
+				$("#tmpModal3").html(response);
 				$('#modalDetail').modal('show');
 			},
 			dataType:"html"});
@@ -75,7 +75,7 @@
 		$.ajax({
 			url: "<?php echo base_url(); ?>"+page,
 			success:function(response){
-				$("#tmpModal5").html(response);
+				$("#tmpModal3").html(response);
 				$('#modalEdit').modal('show');
 		},
 		dataType:"html",
@@ -90,7 +90,7 @@
 		$.ajax({
 			url: "<?php echo base_url(); ?>"+page,
 			success:function(response){
-				$("#tmpModal2").html(response);
+				$("#tmpModal3").html(response);
 				$('#modalHapus').modal('show');
 		},
 		dataType:"html"});

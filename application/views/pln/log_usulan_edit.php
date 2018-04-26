@@ -116,7 +116,7 @@
 			form_data.append('deskripsi', deskripsi);
 
             $.ajax({
-                url: '<?php echo base_url(); ?>hibah/log_usulan_simpan/<?php  echo $this->uri->segment(3); ?>',
+                url: '<?php echo base_url(); ?>usulan/log_usulan_simpan/<?php  echo $this->uri->segment(3); ?>',
                 dataType: 'json',
                 cache: false,
                 contentType: false,

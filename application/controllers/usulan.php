@@ -26,21 +26,12 @@ class Usulan extends CI_Controller {
 		$this->load->model('hibah_model');
 		$this->load->model('Usulan_model');
 		$id 							= $this->uri->segment(3);
-		$query							= $this->hibah_model->ambil_data_log_usulan_by_id($id);
+		$query							= $this->Usulan_model->ambil_data_log_usulan_by_id($id);
 		$data['log_usulan']				= $query->row();
 		$data['id_log_kategori']		= $this->hibah_model->pilih_log_kategori();
 		$this->load->view('pln/log_usulan_edit', $data);
 	}
 
-	/*function tampilkan_dok_usulan_edit()
-	{	
-		$this->load->model('hibah_model');
-		$this->load->model('Usulan_model');
-		$id 					= $this->uri->segment(3); //id table of irena_sbsn_usulan_syarat
-		$query					= $this->hibah_model->ambil_dok_usulan_by_id($id);
-		$data['dok']			= $query->row();
-		$this->load->view('pln/dok_usulan_edit', $data);
-	}*/
 	
 
 	public function tampil_index()
@@ -746,7 +737,7 @@ class Usulan extends CI_Controller {
 					unset($data['berkas_lama']);
 					$data['update_by']		= $this->session->userdata('id');
 					$data['update_date'] 	= date('Y-m-d H:i:s');
-					$result 	= $this->hibah_model->dok_usulan_simpan_data($data);
+					$result 	= $this->Usulan_model->tambah_dok_usulan($data);
 					$data 					= $_POST;
 				}else{
 					
@@ -754,7 +745,7 @@ class Usulan extends CI_Controller {
 					if(isset($_FILES['berkas']["name"]) and $_FILES['berkas']["name"]<>""){
 					//$status['messages']['berkas'] = '<p class="text-success">File berhasil diupload</p>';
 					}else{
-						$status['messages']['berkas'] = '<p class="text-danger">fSilahkan pilih files.</p>';
+						$status['messages']['berkas'] = '<p class="text-danger">Silahkan pilih files.</p>';
 					}
 				}
 			}
@@ -2276,6 +2267,8 @@ class Usulan extends CI_Controller {
 		}else{ //validasi benar semua
 
 			$data 					= $_POST;
+			$data['id'] 					= $this->uri->segment(3);
+
 			$data['update_by']		= $this->session->userdata('id');
 			$data['update_date']	= date('Y-m-d H:i:s');
 			$result 				= $this->Usulan_model->log_usulan_simpan_data($data);

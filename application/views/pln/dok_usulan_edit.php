@@ -29,7 +29,7 @@
 							<label for="berkas" class="col-sm-2 control-label">File</label>
 							<div class="col-sm-10">
 								<input type="file" name="berkas" id="berkas" size="30"> 
-								<a href="<?php echo base_url(); ?>uploads/hibah/<?php echo $dok->berkas; ?>" target="_blank" class="btn btn-info btn-xs" type="button"><i class="fa fa-download"></i> Lihat</a>
+								<a href="<?php echo base_url(); ?>uploads/PLN/<?php echo $dok->berkas; ?>" target="_blank" class="btn btn-info btn-xs" type="button"><i class="fa fa-download"></i> Lihat</a>
 							</div>
 						</div>
 						<input type="hidden" name="id" id="id" class="form-control" value="<?php  echo $dok->id; ?>">
@@ -40,7 +40,7 @@
 					</div>
 					<div class="modal-footer">					
 						<button type="submit" class="btn btn-primary">Simpan</button>
-						<button type="button" id="tblTutup1" class="btn btn-white" data-dismiss="modal">Tutup</button>
+						<button type="button" id="tblTutup" class="btn btn-white" data-dismiss="modal">Tutup</button>
 					</div>
 				</form>
 			</div>
@@ -81,7 +81,7 @@
 			
 
             $.ajax({
-                url: '<?php echo base_url(); ?>hibah/dok_usulan_simpan/edit',
+                url: '<?php echo base_url(); ?>usulan/dok_usulan_simpan/edit',
                 dataType: 'json',
                 cache: false,
                 contentType: false,

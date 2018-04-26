@@ -38,7 +38,7 @@
 					</div>
 					<div class="modal-footer">					
 						<button type="submit" class="btn btn-primary">Simpan</button>
-						<button type="button" id="tblTutup" class="btn btn-white" data-dismiss="modal">Tutup</button>
+						<button type="button" id="tblTutup" class="btn btn-white" data-dismiss="modalTambah">Tutup</button>
 					</div>
 				</form>
 			</div>
