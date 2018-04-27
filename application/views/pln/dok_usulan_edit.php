@@ -78,10 +78,11 @@
 			form_data.append('berkas', berkas);
 			form_data.append('berkas_lama', berkas_lama);
 			
-			
+			console.log(id);
+			console.log("diatas ini id yg itu tea");
 
             $.ajax({
-                url: '<?php echo base_url(); ?>usulan/dok_usulan_simpan/edit',
+            url: '<?php echo base_url(); ?>usulan/tambah_baru_dokumen/edit',
                 dataType: 'json',
                 cache: false,
                 contentType: false,
@@ -91,7 +92,7 @@
                 success: function(response){
                     if (response.success == true) {
 						$('#modalEdit').modal('hide');
-						segarkan_syarat();
+						segarkan_log2();
 						notif("Informasi", "Data berhasil disimpan.");
 					}
 					else {

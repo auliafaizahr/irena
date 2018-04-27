@@ -732,13 +732,16 @@ class Usulan extends CI_Controller {
 				
 				if($panel == "edit"){
 					$status['success'] = true;
+					$data 					= $_POST;
 					date_default_timezone_set('Asia/Jakarta');
 					unset($data['berkas']);
 					unset($data['berkas_lama']);
+					$data['id'] 					= $this->input->post('id');
+
 					$data['update_by']		= $this->session->userdata('id');
 					$data['update_date'] 	= date('Y-m-d H:i:s');
 					$result 	= $this->Usulan_model->tambah_dok_usulan($data);
-					$data 					= $_POST;
+					
 				}else{
 					
 					$status['success'] = false;
