@@ -169,6 +169,112 @@ class Usulan extends CI_Controller {
     	 $this->load->view('report/bluebook/report_bb_kl', $data);
 	}
 
+	function dok_usulan_simpan()
+	{	
+		
+		$status = array('success' => false, 'messages' => array());
+
+		$this->form_validation->set_rules("kat", "Kategori dok. pendukung", "trim|required");
+		$this->form_validation->set_rules("nama", "Nama File", "trim|required");
+		$this->form_validation->set_rules("ket", "Keterangan", "trim|required");
+		
+		//$this->form_validation->set_rules("berkas", "Berka arsip", "required");
+		$this->form_validation->set_message('required', '%s harus diisi');
+		$this->form_validation->set_message('is_natural_no_zero', '%s harus diisi dengan angka dan lebih dari 0');
+
+		$this->form_validation->set_error_delimiters('<p class="text-danger">', '</p>');
+		
+		$panel = $this->uri->segment(3);
+		
+		if ($this->form_validation->run() == FALSE) {
+			foreach ($_POST as $key => $value) {
+				$status['messages'][$key] = form_error($key);
+			}
+			
+			if($panel == "tambah"){
+				if(isset($_FILES['berkas']["name"]) and $_FILES['berkas']["name"]<>""){
+					//$status['messages']['berkas'] = '<p class="text-success">File berhasil diupload</p>';
+				}else{
+					$status['messages']['berkas'] = '<p class="text-danger">Silahkan pilih files.</p>';
+				}
+			}
+			
+		}else{ //validasi benar semua
+			foreach ($_POST as $key => $value) {
+				$status['messages'][$key] = form_error($key);
+			}
+			
+			$status['success'] = true;
+			
+			if(isset($_FILES['berkas']["name"]) and $_FILES['berkas']["name"]<>""){
+				//$status['success'] = false;
+				
+				$id_proyek 		= $this->input->post('id_proyek');
+				$new_name 	= $id_proyek.'-'.$_FILES["berkas"]['name'];
+				
+				$config['allowed_types'] 	= '*';
+				$config['max_size']  		= '0';
+				$config['upload_path'] 		= './uploads/sbsn/';
+				$config['file_name'] 		= $new_name;
+				
+				$this->load->library('upload', $config);
+				
+				$berkas_lama = $this->input->post('berkas_lama');
+				//cek lagi apakah nama berkas masih sama dengan nama file
+
+				if($berkas_lama == $new_name){
+					$status['success'] = false;
+					$status['messages']['berkas'] = '<p class="text-danger">File ini sudah ada. Silahkan pilih file lain atau ganti nama saja.</p>';
+				}else{
+					
+					if ( ! $this->upload->do_upload('berkas')){
+						$error = $this->upload->display_errors();
+						$status['success'] = false;
+						$status['messages']['berkas'] = $error;
+					}else{
+					
+						$dataupload = $this->upload->data();
+						$msg = $dataupload['file_name']." berhasil diupload";
+
+						$status['messages']['berkas'] = '<p>'.$msg.'</p>';
+						$status['success'] = true;
+
+						$data 					= $_POST;
+						unset($data['berkas_lama']);
+						$data['berkas'] 		= $dataupload['file_name'];
+						$data['update_by']		= $this->session->userdata('id');
+						$data['update_date'] 	= date('Y-m-d H:i:s');
+						$result 				= $this->Usulan_model->tambah_dok_usulan($data);
+					}
+				}
+				
+			}else{
+				
+				if($panel == "edit"){
+					
+					$status['success'] = true;
+					$data 					= $_POST;
+					unset($data['berkas']);
+					unset($data['berkas_lama']);
+					$data['id']		= $this->input->post('id');
+
+					$data['update_by']		= $this->session->userdata('id');
+					$data['update_date'] 	= date('Y-m-d H:i:s');
+					$result 	= $this->Usulan_model->tambah_dok_usulan($data);
+					
+				}elseif($panel == "tambah"){
+					$status['success'] = false;
+					if(isset($_FILES['berkas']["name"]) and $_FILES['berkas']["name"]<>""){
+					//$status['messages']['berkas'] = '<p class="text-success">File berhasil diupload</p>';
+					}else{
+						$status['messages']['berkas'] = '<p class="text-danger">Silahkan pilih files.</p>';
+					}
+				}
+			}
+		}
+		echo json_encode($status);
+	}
+
 	public function filter_kl_isi_bluebook()
 	{
 
@@ -731,7 +837,6 @@ class Usulan extends CI_Controller {
 				
 				
 				if($panel == "edit"){
-					$status['success'] = true;
 					$data 					= $_POST;
 					date_default_timezone_set('Asia/Jakarta');
 					unset($data['berkas']);
@@ -741,6 +846,7 @@ class Usulan extends CI_Controller {
 					$data['update_by']		= $this->session->userdata('id');
 					$data['update_date'] 	= date('Y-m-d H:i:s');
 					$result 	= $this->Usulan_model->tambah_dok_usulan($data);
+					$status['success'] = true;
 					
 				}else{
 					

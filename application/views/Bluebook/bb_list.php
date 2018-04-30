@@ -172,7 +172,7 @@
                            <button data-toggle="dropdown" class="btn btn-white dropdown-toggle" type="button" >Aksi <span class="caret"></span></button>
                            
                            <ul class="dropdown-menu pull-right">
-                                                   <li><a  data-toggle="" data-target="modal" class="rekam" id="<?php echo $value['id_usulan']; ?>">Rekam Jejak</a></li>
+                                                   <li><a  data-toggle="" data-target="modal" class="rekam_bb" id="<?php echo $value['id_usulan']; ?>">Rekam Jejak</a></li>
                                                    <li><a  data-toggle="" data-target="modal" class="catatan" id="<?php echo $value['id']; ?>">Catatan</a></li>
                                                    <li><a  data-toggle="" data-target="modal" class="edit" id="<?php echo $value['id']; ?>" >Edit</a></li>
                                                     <li><a  class="del-proyek" id="<?php echo $value['id']; ?>">Hapus</a></li>

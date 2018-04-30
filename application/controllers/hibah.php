@@ -524,13 +524,14 @@ class Hibah extends CI_Controller {
 				
 				
 				if($panel == "edit"){
-					$status['success'] = true;
 					$data 					= $_POST;
 					unset($data['berkas']);
 					unset($data['berkas_lama']);
 					$data['update_by']		= $this->session->userdata('id');
 					$data['update_date'] 	= date('Y-m-d H:i:s');
 					$result 	= $this->hibah_model->dok_usulan_simpan_data($data);
+					$status['success'] = true;
+					
 				}else{
 					
 					$status['success'] = false;

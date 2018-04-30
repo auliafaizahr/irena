@@ -32,7 +32,7 @@
 								<a href="<?php echo base_url(); ?>uploads/PLN/<?php echo $dok->berkas; ?>" target="_blank" class="btn btn-info btn-xs" type="button"><i class="fa fa-download"></i> Lihat</a>
 							</div>
 						</div>
-						<input type="hidden" name="id" id="id" class="form-control" value="<?php  echo $dok->id; ?>">
+						<input type="hidden" name="id_berkas" id="id_berkas" class="form-control" value="<?php  echo $dok->id; ?>">
 						<input type="hidden" name="berkas_lama" id="berkas_lama" class="form-control" value="<?php echo $dok->berkas; ?>">
 						<input type="hidden" name="id_proyek" id="id_proyek" class="form-control" value="<?php  echo $dok->id_proyek; ?>">
 						<input type="hidden" name="update_by" class="form-control" value="<?php echo $this->session->userdata('id'); ?>">
@@ -60,7 +60,7 @@
 
 			var me 			= $(this);
 			
-			var id 			= $("#id").val();
+			var id_berkas 			= $("#id_berkas").val();
 			var id_proyek 	= $("#id_proyek").val();
 			var kat 		= $("#kat").val();
 			var nama 		= $("#nama").val();
@@ -70,7 +70,7 @@
 			
             var form_data 	= new FormData();
 	
-			form_data.append('id', id);
+			form_data.append('id', id_berkas);
 			form_data.append('id_proyek', id_proyek);
 			form_data.append('kat', kat);
 			form_data.append('nama', nama);
@@ -78,11 +78,17 @@
 			form_data.append('berkas', berkas);
 			form_data.append('berkas_lama', berkas_lama);
 			
-			console.log(id);
+			console.log(id_berkas);
+			console.log(id_proyek);
+			console.log(kat);
+			console.log(nama);
+			console.log(ket);
+			console.log(berkas);
+			console.log(berkas_lama);
 			console.log("diatas ini id yg itu tea");
 
             $.ajax({
-            url: '<?php echo base_url(); ?>usulan/tambah_baru_dokumen/edit',
+            url: '<?php echo base_url(); ?>usulan/dok_usulan_simpan/edit',
                 dataType: 'json',
                 cache: false,
                 contentType: false,

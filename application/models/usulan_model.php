@@ -705,7 +705,6 @@ class Usulan_model extends CI_Model {
 	
 				
 	}
-
 	function tambah_dok_usulan($data)
 	{
 		if(array_key_exists('id', $data))
