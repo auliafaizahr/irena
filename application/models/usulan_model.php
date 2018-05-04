@@ -155,6 +155,22 @@ class Usulan_model extends CI_Model {
 		
 	}
 
+	public function hapus_dari_prov($a)
+	{
+
+		$this->db->where('id_usulan', $a);
+		return $this->db->delete('irena_usulan_prov');
+		
+	}
+
+	public function hapus_dari_kabkota($a)
+	{
+
+		$this->db->where('id_usulan', $a);
+		return $this->db->delete('irena_usulan_kabkota');
+		
+	}
+
 		public function hapus_dari_histori($a)
 	{
 

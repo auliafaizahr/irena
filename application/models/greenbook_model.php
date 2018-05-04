@@ -322,6 +322,14 @@ class Greenbook_model extends CI_Model {
 		return $a->result_array();
 	}
 
+		public function ambil_kabkota()
+	{
+		$query = "SELECT * FROM irena_provinsi_kabkota";
+		 $a= $this->db->query($query);
+
+		return $a->result_array();
+	}
+
 
 	public function ambil_instansi()
 	{

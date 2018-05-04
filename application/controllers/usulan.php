@@ -623,6 +623,8 @@ class Usulan extends CI_Controller {
 		$data['status'] = $this->Bluebook_model->ambil_statusumum();
 		$data['infra'] = $this->Usulan_model->ambil_infra();
 		$data['usulan']= $this->Usulan_model->ambil_usulan();
+		$data['provinsi']= $this->Greenbook_model->ambil_provinsi();
+		$data['kabkota']= $this->Greenbook_model->ambil_kabkota();
 
 		
 		
@@ -699,6 +701,7 @@ class Usulan extends CI_Controller {
 		$data['bluebook']= $this->Bluebook_model->semua_bluebook();
 		$data['greenbook']= $this->Greenbook_model->ambil_greenbook();
 		$data['provinsi']= $this->Greenbook_model->ambil_provinsi();
+		$data['kabkota']= $this->Greenbook_model->ambil_kabkota();
 		$data['sektor']= $this->Greenbook_model->ambil_sektor();
 		
 		$data['lender']= $this->Bluebook_model->semua_lender();
@@ -1873,6 +1876,8 @@ class Usulan extends CI_Controller {
 				$id_			= $this->input->post('id');
 				$this->Usulan_model->hapus_dari_lokasi($id_);
 				$this->Usulan_model->hapus_dari_histori($id_);
+				$this->Usulan_model->hapus_dari_prov($id_);
+				$this->Usulan_model->hapus_dari_kabkota($id_);
 				$id_instansi			= $this->input->post('id_instansi');
 
 
@@ -1898,6 +1903,37 @@ class Usulan extends CI_Controller {
 					'id_usulan_terkait' => $usulan,
 					  ];
 				}
+
+				$data_prov = $this->input->post('id_provinsi');
+	 			$array_prov = explode(",", $data_prov);
+
+				$data4 = [];
+			 	foreach($array_prov as $provinsi) {
+			 	  $data4[] = [
+			 	    'id_usulan' => $id_ ,
+			 	    'id_prov' => $provinsi,
+			 	    'id_instansi' => $id_instansi,
+			 	  ];
+			 	}
+
+			 	$data_kabkota = $this->input->post('id_kabkota');
+	 			$array_kabkota = explode(",", $data_kabkota);
+
+				$data5 = [];
+			 	foreach($array_kabkota as $kabkota) {
+			 	  $data5[] = [
+			 	    'id_usulan' => $id_ ,
+			 	    'id_kabkota' => $kabkota,
+			 	    'id_instansi' => $id_instansi,
+			 	  ];
+			 	}
+	 	
+	 	
+
+	 	
+    			$this->db->insert_batch('irena_usulan_kabkota', $data5);
+	 	
+    			$this->db->insert_batch('irena_usulan_prov', $data4);
 
 	 			$this->db->insert_batch('irena_usulan_lokasi', $data2);
 				$this->db->insert_batch('irena_usulan_historis', $data3);
@@ -2487,6 +2523,8 @@ class Usulan extends CI_Controller {
         'id_sektor'				=> $this->input->post('id_sektor'),
         'status_usulan'				=> $this->input->post('status_usulan'),
         'id_usulan_hub'				=> $this->input->post('id_usulan_hub'),
+        'id_provinsi'				=> $this->input->post('id_provinsi'),
+        'id_kabkota'				=> $this->input->post('id_kabkota'),
    		 );
 
     	$this->db->insert('irena_usulan_pln', $data);
@@ -2527,10 +2565,39 @@ class Usulan extends CI_Controller {
 	 	    'id_usulan_terkait' => $usulan,
 	 	  ];
 	 	}
+
+	 	$data_prov = $this->input->post('id_provinsi');
+	 	$array_prov = explode(",", $data_prov);
+	 
+
+	 	
+
+	 	$data4 = [];
+	 	foreach($array_prov as $provinsi) {
+	 	  $data4[] = [
+	 	    'id_usulan' => $isi['id_usulan'],
+	 	    'id_prov' => $provinsi,
+	 	    'id_instansi' => $id_instansi,
+	 	  ];
+	 	}
+
+	 	$data_kabkota = $this->input->post('id_kabkota');
+	 	$array_kabkota = explode(",", $data_kabkota);
+
+		$data5 = [];
+			 foreach($array_kabkota as $kabkota) {
+			 	  $data5[] = [
+			 	    'id_usulan' => $id_ ,
+			 	    'id_kabkota' => $kabkota,
+			 	    'id_instansi' => $id_instansi,
+			 	  ];
+			 }
 	 	
 	 	
 
 	 	
+    	$this->db->insert_batch('irena_usulan_kabkota', $data5);
+    	$this->db->insert_batch('irena_usulan_prov', $data4);
 
     	$this->db->insert_batch('irena_usulan_lokasi', $data2);
     	$this->db->insert_batch('irena_usulan_historis', $data3);

@@ -160,7 +160,7 @@
                                 </select>
                             </div>
                         </div>
-
+<!-- 
                         <div class="form-group">
                             <label for="lokasi" class="col-sm-3 control-label">Lokasi </label>
                             <div class="col-sm-9">
@@ -174,6 +174,46 @@
 
 
                                 foreach($lokasi as $row ){ ?>
+                                <option value="<?php echo $row['id']; ?>" <?php echo in_array($row['id'] , $a) ? 'selected' : '' ?>><?php echo $row['nama']; ?>
+                                 </option>
+                                 <?php } ?>
+                                 </select>
+                            </div>
+                        </div>
+ -->
+                         <div class="form-group">
+                            <label for="provinsi" class="col-sm-3 control-label">Provinsi </label>
+                            <div class="col-sm-9">
+                                <select name="provinsi" id="provinsi" class="form-control" multiple>
+                           
+                                <?php $key = array($detail->id_provinsi);
+                                $a = array();
+                                $a = explode(",", $detail->id_provinsi);
+                                $key2 = array("1", "2", "4", "3");
+                                 
+
+
+                                foreach($provinsi as $row ){ ?>
+                                <option value="<?php echo $row['id']; ?>" <?php echo in_array($row['id'] , $a) ? 'selected' : '' ?>><?php echo $row['nama']; ?>
+                                 </option>
+                                 <?php } ?>
+                                 </select>
+                            </div>
+                        </div>
+
+                         <div class="form-group">
+                            <label for="kabkota" class="col-sm-3 control-label">Kabupaten / Kota </label>
+                            <div class="col-sm-9">
+                                <select name="kabkota" id="kabkota" class="form-control" multiple>
+                           
+                                <?php $key = array($detail->kabkota);
+                                $a = array();
+                                $a = explode(",", $detail->kabkota);
+                                $key2 = array("1", "2", "4", "3");
+                                 
+
+
+                                foreach($kabkota as $row ){ ?>
                                 <option value="<?php echo $row['id']; ?>" <?php echo in_array($row['id'] , $a) ? 'selected' : '' ?>><?php echo $row['nama']; ?>
                                  </option>
                                  <?php } ?>
@@ -348,6 +388,20 @@
 
         });
 
+          $("#provinsi").select2({
+            placeholder: "Pilih Provinsi",
+            multiple:true,
+            width: "100%"
+        });
+        
+          $("#kabkota").select2({
+            placeholder: "Pilih Kabupaten / Kota",
+            multiple:true,
+            width: "100%"
+        });
+
+
+
     
         
         
@@ -392,6 +446,8 @@
             var output                   = $("#output").val();
             var outcome                   = $("#outcome").val();
             var lokasi                   = $("#lokasi").val();
+            var id_provinsi                    = $("#provinsi").val();
+            var id_kabkota                    = $("#kabkota").val();
 
             if (status_usulan == 0 ) {
                 var id_usulan_hub                    = 0;
@@ -420,6 +476,8 @@
             form_data.append('lokasi', lokasi);
             form_data.append('status_usulan', status_usulan);
             form_data.append('id_usulan_hub', id_usulan_hub);
+            form_data.append('id_provinsi', id_provinsi);
+            form_data.append('id_kabkota', id_kabkota);
                         console.log(lokasi);
            
 

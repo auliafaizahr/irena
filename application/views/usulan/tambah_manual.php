@@ -99,12 +99,32 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="lokasi" class="col-sm-3 control-label">Lokasi</label>
+                            <label class="col-sm-3 control-label">Lokasi </label>
+                           
+                    </div>
+
+                    <div class="form-group">
+                        <label for="lokasi" class="col-sm-3 control-label">Provinsi</label>
                         <div class="col-sm-9">
 
-                            <select name="lokasi" id="lokasi" class="form-control"  >
+                            <select name="provinsi" id="provinsi" class="form-control"  >
                                  
-                                <?php foreach($lokasi as $row){ ?>
+                                <?php foreach($provinsi as $row){ ?>
+                                    <option value="<?php echo $row['id']; ?>"><?php echo $row['nama']; ?>
+                                  </option>
+                                <?php } ?>
+                            </select>
+                           <!-- <textarea name="lokasi" id="lokasi" class="col-sm-12" rows="5" placeholder="Lokasi"></textarea> -->
+                        </div>
+                    </div>
+
+                     <div class="form-group">
+                        <label for="lokasi" class="col-sm-3 control-label">Kabupaten/Kota</label>
+                        <div class="col-sm-9">
+
+                            <select name="kabkota" id="kabkota" class="form-control"  >
+                                 
+                                <?php foreach($kabkota as $row){ ?>
                                     <option value="<?php echo $row['id']; ?>"><?php echo $row['nama']; ?>
                                   </option>
                                 <?php } ?>
@@ -275,6 +295,19 @@
             multiple:true,
             width: "100%"
         });
+
+         $("#provinsi").select2({
+            placeholder: "Pilih Provinsi",
+            multiple:true,
+            width: "100%"
+        });
+        
+          $("#kabkota").select2({
+            placeholder: "Pilih Kabupaten / Kota",
+            multiple:true,
+            width: "100%"
+        });
+        
         
         
         
@@ -306,6 +339,8 @@
             var outcome                    = $("#outcome").val();
             var output                    = $("#output").val();
             var lokasi                    = $("#lokasi").val();
+            var id_provinsi                    = $("#provinsi").val();
+            var id_kabkota                    = $("#kabkota").val();
             var tahun_usulan                    = $("#tahun_usulan").val();
             var id_sektor                    = $("#id_sektor").val();
             var id_infra                    = $("#id_infra").val();
@@ -346,6 +381,8 @@
             form_data.append('Kategori', Kategori);
             form_data.append('status_usulan', status_usulan);
             form_data.append('id_usulan_hub', id_usulan_hub);
+            form_data.append('id_provinsi', id_provinsi);
+            form_data.append('id_kabkota', id_kabkota);
     
             
 
