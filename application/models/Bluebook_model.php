@@ -37,6 +37,24 @@ class Bluebook_model extends CI_Model {
 		
 	}
 
+	public function hapus_dari_prov($a)
+	{
+
+		$this->db->where('id_bb_proyek', $a);
+		return $this->db->delete('irena_bb_prov');
+		
+	}
+
+
+	public function hapus_dari_kabkota($a)
+	{
+
+		$this->db->where('id_bb_proyek', $a);
+		return $this->db->delete('irena_bb_kabkota');
+		
+	}
+
+
 	
 
 		function bb_simpan_data_edit($data)

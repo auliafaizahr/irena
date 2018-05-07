@@ -227,6 +227,46 @@
                             </div>
                         </div>
 
+                         <div class="form-group">
+                            <label for="provinsi" class="col-sm-3 control-label">Provinsi </label>
+                            <div class="col-sm-9">
+                                <select name="provinsi" id="provinsi" class="form-control" multiple>
+                           
+                                <?php $key = array($detail->id_provinsi);
+                                $a = array();
+                                $a = explode(",", $detail->id_provinsi);
+                                $key2 = array("1", "2", "4", "3");
+                                 
+
+
+                                foreach($provinsi as $row ){ ?>
+                                <option value="<?php echo $row['id']; ?>" <?php echo in_array($row['id'] , $a) ? 'selected' : '' ?>><?php echo $row['nama']; ?>
+                                 </option>
+                                 <?php } ?>
+                                 </select>
+                            </div>
+                        </div>
+
+                         <div class="form-group">
+                            <label for="kabkota" class="col-sm-3 control-label">Kabupaten / Kota </label>
+                            <div class="col-sm-9">
+                                <select name="kabkota" id="kabkota" class="form-control" multiple>
+                           
+                                <?php $key = array($detail->kabkota);
+                                $a = array();
+                                $a = explode(",", $detail->kabkota);
+                                $key2 = array("1", "2", "4", "3");
+                                 
+
+
+                                foreach($kabkota as $row ){ ?>
+                                <option value="<?php echo $row['id']; ?>" <?php echo in_array($row['id'] , $a) ? 'selected' : '' ?>><?php echo $row['nama']; ?>
+                                 </option>
+                                 <?php } ?>
+                                 </select>
+                            </div>
+                        </div>
+
 
 
                         

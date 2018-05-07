@@ -1779,6 +1779,8 @@ class Usulan extends CI_Controller {
 		$data['status'] = $this->Bluebook_model->ambil_statusumum();
 		$data['infra'] = $this->Usulan_model->ambil_infra();
 		$data['bluebook']= $this->Bluebook_model->semua_bluebook();
+		$data['provinsi']= $this->Greenbook_model->ambil_provinsi();
+		$data['kabkota']= $this->Greenbook_model->ambil_kabkota();
     	//$this->Usulan_model->tambahBB($id);
     	$this->load->view('usulan/tambahBB', $data);
     }
@@ -2102,6 +2104,8 @@ class Usulan extends CI_Controller {
 			        'id_status'			=>  $this->input->post('id_status'),
 			        'id_bluebook'			=>  $this->input->post('id_bluebook'),
 			        'lokasi'			=>  $this->input->post('lokasi'),
+			        'provinsi'			=>  $this->input->post('id_provinsi'),
+			        'kabkota'			=>  $this->input->post('id_kabkota'),
 			   		 );
 
 					$result2 					= $this->Usulan_model->tambah_ke_BB($data2);
@@ -2113,7 +2117,9 @@ class Usulan extends CI_Controller {
 
 					$result3 					= $this->Usulan_model->tambah_ke_BB_layak($isi);
 
-		    	
+		    		
+				
+				
 		    		
 
 						//$data 						= $_POST;
