@@ -25,6 +25,23 @@ class Dk_model extends CI_Model {
 		
 	}
 
+		public function hapus_dari_prov($a)
+	{
+
+		$this->db->where('id_dk_proyek', $a);
+		return $this->db->delete('irena_dk_prov');
+		
+	}
+
+		public function hapus_dari_kabkota($a)
+	{
+
+		$this->db->where('id_dk_proyek', $a);
+		return $this->db->delete('irena_dk_kabkota');
+		
+	}
+
+
 	public function ambil_catatan($a)
 	{
 		 $query = "SELECT * FROM catatan_dk WHERE id_dk_proyek = '$a' ORDER BY waktu ASC";

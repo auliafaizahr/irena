@@ -452,14 +452,14 @@
         });
 
         $("#provinsi").select2({
-            placeholder: "Pilih Lokasi",
+            placeholder: "Pilih Provinsi",
             width: "100%",
             multiple:true,
             tags: true
         });
 
         $("#kabkota").select2({
-            placeholder: "Pilih Lokasi",
+            placeholder: "Pilih Kabupaten / Kota",
             width: "100%",
             multiple:true,
             tags: true

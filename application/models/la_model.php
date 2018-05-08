@@ -61,6 +61,24 @@ class La_model extends CI_Model {
 		
 	}
 
+	public function hapus_dari_prov($a)
+	{
+
+		$this->db->where('id_la_proyek', $a);
+		return $this->db->delete('irena_la_prov');
+		
+	}
+
+
+	public function hapus_dari_kabkota($a)
+	{
+
+		$this->db->where('id_la_proyek', $a);
+		return $this->db->delete('irena_la_kabkota');
+		
+	}
+
+
 
 
 		function save_update($isi2)

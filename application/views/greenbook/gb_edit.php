@@ -155,6 +155,46 @@
                             </div>
                         </div>
 
+                        <div class="form-group">
+                            <label for="provinsi" class="col-sm-3 control-label">Provinsi </label>
+                            <div class="col-sm-9">
+                                <select name="provinsi" id="provinsi" class="form-control" multiple>
+                           
+                                <?php $key = array($detail->provinsi);
+                                $a = array();
+                                $a = explode(",", $detail->provinsi);
+                                $key2 = array("1", "2", "4", "3");
+                                 
+
+
+                                foreach($provinsi as $row ){ ?>
+                                <option value="<?php echo $row['id']; ?>" <?php echo in_array($row['id'] , $a) ? 'selected' : '' ?>><?php echo $row['nama']; ?>
+                                 </option>
+                                 <?php } ?>
+                                 </select>
+                            </div>
+                        </div>
+
+                         <div class="form-group">
+                            <label for="kabkota" class="col-sm-3 control-label">Kabupaten / Kota </label>
+                            <div class="col-sm-9">
+                                <select name="kabkota" id="kabkota" class="form-control" multiple>
+                           
+                                <?php $key = array($detail->kabkota);
+                                $a = array();
+                                $a = explode(",", $detail->kabkota);
+                                $key2 = array("1", "2", "4", "3");
+                                 
+
+
+                                foreach($kabkota as $row ){ ?>
+                                <option value="<?php echo $row['id']; ?>" <?php echo in_array($row['id'] , $a) ? 'selected' : '' ?>><?php echo $row['nama']; ?>
+                                 </option>
+                                 <?php } ?>
+                                 </select>
+                            </div>
+                        </div>
+
                          <div class="form-group">
                             <label for="id_lender" class="col-sm-3 control-label">Indikasi Lender</label>
                             <div class="col-sm-9">
@@ -386,6 +426,20 @@
             placeholder: "Pilih Status Lender",
             width: "100%"
         });
+
+         $("#provinsi").select2({
+            placeholder: "Pilih Provinsi",
+            width: "100%",
+            multiple:true,
+            tags: true
+        });
+
+        $("#kabkota").select2({
+            placeholder: "Pilih Kabupaten / Kota",
+            width: "100%",
+            multiple:true,
+            tags: true
+        });
         
         
         
@@ -437,6 +491,8 @@
             var id_greenbook                   = $("#id_greenbook").val();
             var tahun_usulan                   = $("#tahun_usulan").val();
             var lokasi                      = $("#lokasi").val();
+             var provinsi                   = $("#provinsi").val();
+            var kabkota                   = $("#kabkota").val();
             
             var form_data   = new FormData();
             
@@ -462,6 +518,8 @@
             form_data.append('id_greenbook', id_greenbook);
             form_data.append('tahun_usulan', tahun_usulan);
             form_data.append('lokasi', lokasi);
+             form_data.append('kabkota', kabkota);
+            form_data.append('provinsi', provinsi);
 
 
             $.ajax({

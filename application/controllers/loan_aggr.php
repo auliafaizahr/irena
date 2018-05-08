@@ -136,6 +136,8 @@ class Loan_aggr extends CI_Controller {
 		$data['lokasi'] = $this->Usulan_model->ambil_lokasi();
 
 
+		$data['provinsi']= $this->Greenbook_model->ambil_provinsi();
+		$data['kabkota']= $this->Greenbook_model->ambil_kabkota();
 		
 		$data['lender']= $this->Bluebook_model->semua_lender();
 		$data['program']= $this->Usulan_model->ambil_program();
@@ -303,16 +305,22 @@ class Loan_aggr extends CI_Controller {
 				$result 				= $this->hibah_model->usulan_simpan_data($data);
 			}elseif($this->uri->segment(3) == 'edit'){
 				//$data['id']		= $this->input->post('id');
-				$result 		= $this->la_model->la_simpan_data_edit($data);
 				
 
 				$id_					= $this->input->post('id');
 				$id_bb					= $this->input->post('id_bluebook');
 				$id_gb					= $this->input->post('id_greenbook');
 				$this->la_model->hapus_dari_lokasi($id_);
+				$this->la_model->hapus_dari_prov($id_);
+				$this->la_model->hapus_dari_kabkota($id_);
 
+				
 				$select2data 			= $this->input->post('lokasi');
+				$isi_prov 				= $this->input->post('provinsi');
+				$isi_kabkota 			= $this->input->post('kabkota');
 				$array_lokasi			= explode(",", $select2data);
+				$array_prov				= explode(",", $isi_prov);
+				$array_kabkota			= explode(",", $isi_kabkota);
 				
 				$data2 = [];
 				foreach($array_lokasi as $lokasi) {
@@ -323,22 +331,36 @@ class Loan_aggr extends CI_Controller {
 				    'id_lokasi' 		=> $lokasi,
 				  ];
 				}
+
+				$data_prov = [];
+				foreach($array_prov as $prov) {
+				  $data_prov[] = [
+				    'id_la_proyek' 		=>  $id_,
+				    'id_bb' 		=>  $id_bb,
+				    'id_gb' 		=>  $id_gb,
+				    
+				    'id_prov' 		=> $prov,
+				  ];
+				}
+
+				$data_kabkota = [];
+				foreach($array_kabkota as $kabkota) {
+				  $data_kabkota[] = [
+				    'id_la_proyek' 		=>  $id_,
+				    'id_bb' 		=>  $id_bb,
+				    'id_gb' 		=>  $id_gb,
+				    
+				    'id_kabkota' 		=> $kabkota,
+				  ];
+				}
 	 			$this->db->insert_batch('irena_la_lokasi', $data2);
+	 			$this->db->insert_batch('irena_la_prov', $data_prov);
+	 			$this->db->insert_batch('irena_la_kabkota', $data_kabkota);
+
+				$result 		= $this->la_model->la_simpan_data_edit($data);
+
 
 			
-				/*
-
-				CREATE VIEW irena_view_bb_lokasi AS
-				SELECT irena_bb_lokasi.id AS id_proyek, irena_bb_lokasi.id_bb AS id_bb, irena_bb_lokasi.id_lokasi AS id_lokasi, irena_provinsi_kabkota.nama AS lokasi, irena_provinsi_kabkota.latitude AS latitude, irena_provinsi_kabkota.longitude AS longitude FROM irena_bb_lokasi JOIN irena_provinsi_kabkota ON irena_bb_lokasi.id_lokasi = irena_provinsi_kabkota.id
-
-*/
-
-
-				/*$isi = array(
-					'id_bb_proyek'  		=> $this->input->post('id'),
-					'id_bb_proyek'  		=> $this->input->post('id'),
-					);*/
-				//$result2		= $this->Bluebook_model->tambah_proyek_lokasi($isi);
 			}
 			
 		}

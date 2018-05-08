@@ -25,6 +25,22 @@ class Greenbook_model extends CI_Model {
 		
 	}
 
+	public function hapus_dari_prov($a)
+	{
+
+		$this->db->where('id_gb_proyek', $a);
+		return $this->db->delete('irena_gb_prov');
+		
+	}
+
+	public function hapus_dari_kabkota($a)
+	{
+
+		$this->db->where('id_gb_proyek', $a);
+		return $this->db->delete('irena_gb_kabkota');
+		
+	}
+
 
 	public function ambil_catatan($a)
 	{

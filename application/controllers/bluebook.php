@@ -639,8 +639,7 @@ class Bluebook extends CI_Controller {
 
        $this->load->view('Bluebook/hapus_BB', $data);
        // /$this->load->view('templates/footer1');
-   /* CREATE VIEW irena_view_bb_lokasi AS
-    SELECT irena_bb_lokasi.id AS id, irena_bb_lokasi.id_bb_proyek AS id_proyek, irena_instansi_2.nama_instansi AS instansi, irena_bluebook_proyek.judul_proyek_eng AS judul_proyek, irena_bb_lokasi.id_lokasi as id_lokasi, irena_provinsi_kabkota.nama AS lokasi, irena_provinsi_kabkota.latitude AS latitude, irena_provinsi_kabkota.longitude AS longitude, irena_status_umum.nama AS status_umum, irena_lender.lender AS lender, irena_bluebook_kode.nama AS bb, irena_bluebook_proyek.nilai_pinjaman AS nilai_pinjaman FROM irena_bb_lokasi JOIN irena_bluebook_proyek ON  irena_bb_lokasi.id_bb_proyek = irena_bluebook_proyek.id JOIN irena_instansi_2 ON irena_bb_lokasi.id_instansi = irena_instansi_2.id JOIN irena_bluebook_kode ON irena_bb_lokasi.id_bb = irena_bluebook_kode.id JOIN irena_lender ON irena_bb_lokasi.id_lender = irena_lender.id JOIN irena_status_umum ON irena_bb_lokasi.id_status = irena_status_umum.id JOIN irena_provinsi_kabkota ON irena_bb_lokasi.id_lokasi = irena_provinsi_kabkota.id*/
+   
     }
 	
 	public function layak()

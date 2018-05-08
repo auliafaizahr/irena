@@ -95,9 +95,15 @@ class Greenbook extends CI_Controller {
 				$id_lender				= $this->input->post('id_lender');
 				$id_status				= $this->input->post('id_status');
 				$this->Greenbook_model->hapus_dari_lokasi($id_);
+				$this->Greenbook_model->hapus_dari_prov($id_);
+				$this->Greenbook_model->hapus_dari_kabkota($id_);
 
-				$select2data = $this->input->post('lokasi');
-				$array_lokasi = explode(",", $select2data);
+				$select2data 			= $this->input->post('lokasi');
+				$isi_prov 				= $this->input->post('provinsi');
+				$isi_kabkota 			= $this->input->post('kabkota');
+				$array_lokasi			= explode(",", $select2data);
+				$array_prov				= explode(",", $isi_prov);
+				$array_kabkota			= explode(",", $isi_kabkota);
 				
 				$data2 = [];
 				foreach($array_lokasi as $lokasi) {
@@ -110,7 +116,38 @@ class Greenbook extends CI_Controller {
 				    'id_lokasi' => $lokasi,
 				  ];
 				}
+
+				$data_prov = [];
+				foreach($array_prov as $prov) {
+				  $data_prov[] = [
+				   'id_gb_proyek' =>  $id_,
+				    'id_bb' =>  $id_bb,
+				    'id_instansi' 		=>  $id_instansi,
+				    'id_lender' 		=>  $id_lender,
+				    'id_gb' =>  $id_gb,
+				  
+				    'id_prov' 		=> $prov,
+
+				  ];
+				}
+
+				$data_kabkota = [];
+				foreach($array_kabkota as $kabkota) {
+				  $data_kabkota[] = [
+				    'id_gb_proyek' =>  $id_,
+				    'id_bb' =>  $id_bb,
+				    'id_instansi' 		=>  $id_instansi,
+				    'id_lender' 		=>  $id_lender,
+				    'id_gb' =>  $id_gb,
+				    
+				    'id_kabkota' 		=> $kabkota,
+
+				  ];
+				}
+				
 	 			$this->db->insert_batch('irena_gb_lokasi', $data2);
+	 			$this->db->insert_batch('irena_gb_prov', $data_prov);
+	 			$this->db->insert_batch('irena_gb_kabkota', $data_kabkota);
 
 				$result 		= $this->Greenbook_model->gb_simpan_data_edit($data);
 			}
@@ -162,6 +199,8 @@ class Greenbook extends CI_Controller {
 		
 		$data['lender']= $this->Bluebook_model->semua_lender();
 		$data['program']= $this->Usulan_model->ambil_program();
+		$data['provinsi']= $this->Greenbook_model->ambil_provinsi();
+		$data['kabkota']= $this->Greenbook_model->ambil_kabkota();
 		
 		$data['a'] = $a;
 
