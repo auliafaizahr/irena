@@ -2,6 +2,7 @@
 	<thead>
 		<tr>
 			<!-- <th style="display:none;">Update date</th> -->
+      <th></th>
 			<th>Instansi Pengusul</th>
 			<th class="text-center" style="width:700px;">Judul Proyek</th>
 			<th class="text-center" style="width:200px;">Program</th>
@@ -20,11 +21,16 @@
 			foreach($data as $key => $value):
 		?>
 		<tr class="gradeX">
+      <?php $c = $value['id']; ?>
 			<!-- td style="display:none;"><?php echo $row->update_date; ?></td> -->
-			<td><?php $c = $value['id'];
-			 $b = $this->Usulan_model->ambil_instansi_untuk_usulan($value['id_instansi'])->nama_instansi;
-			 echo $b; ?></td>
-			<td><a class="detail" id="<?php echo $value['id'];  ?>" data-id="<?php echo $value['id'];  ?>" ><?php echo $value['judul_proyek_eng']; ?></td>
+      <td><?php echo "<a   id='".$c."' onclick='expand_row($c)' > <i class=' btn fa fa-plus '></i></a>";?></td>
+      <td><?php $c = $value['id'];
+       $b = $this->Usulan_model->ambil_instansi_untuk_usulan($value['id_instansi'])->nama_instansi;
+       echo $b; ?></td>
+
+			
+
+			<td ><a class="detail" id="<?php echo $value['id'];  ?>" data-id="<?php echo $value['id'];  ?>" ><?php echo $value['judul_proyek_eng']; ?></td>
 			<td><?php  $d = $this->Usulan_model->ambil_program_proyek($value['id_program'])->nama_program;
 			echo $d; ?></td>
 			<td><?php echo number_format($value['dana_usulan']); ?></a></td>
@@ -348,6 +354,45 @@
 
   }
 
+  function format(){
+    // `d` is the original data object for the row
+/*
+       $.ajax({
+               
+                url : "<?php echo base_url(); ?>Usulan/detail_expand_usulan",
+              
+                 type : 'get',
+                 dataType:'json',
+                success : function(response){
+                alert(response);
+                console.log("isi");
+           
+             
+                },
+                
+          });
+*/
+
+    return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'+
+        '<tr>'+
+            '<td>Bluebook :</td>'+
+            '<td> </td>'+
+        '</tr>'+
+        '<tr>'+
+            '<td>Greenbook :</td>'+
+            '<td> </td>'+
+        '</tr>'+
+        '<tr>'+
+            '<td>Tanggal DK :</td>'+
+            '<td>And any further details here (images etc)...</td>'+
+        '</tr>'+
+        '<tr>'+
+            '<td>Tanggal LA :</td>'+
+            '<td>And any further details here (images etc)...</td>'+
+        '</tr>'+
+    '</table>';
+}
+
   $(document).on('click', '.edit', function(){  
            
         
@@ -369,9 +414,76 @@
              
                 },
                 dataType:"html"
-                });
-            });
+          });
 
+          $.ajax({
+               
+                url : "<?php echo base_url(); ?>Usulan/detail_expand_usulan",
+              
+                 type : 'get',
+                 dataType:'json',
+                success : function(response){
+                alert(response);
+                console.log("isi");
+           
+             
+                },
+                
+          });
+
+
+    });
+
+  function expand_row(c){
+           
+         var table = $('#example').DataTable();
+        var id = $(this).attr("id"); 
+        console.log(c);
+
+        var tr = $(this).closest('tr');
+        var row = table.row( tr );
+        console.log(row);
+
+ 
+        if ( row.child.isShown() ) {
+            // This row is already open - close it
+            row.child.hide();
+            tr.removeClass('shown');
+        }
+        else {
+            // Open this row
+            row.child(format(26)).show();
+            tr.addClass('shown');
+        }
+         
+         
+        
+    }
+
+  /* Formatting function for row details - modify as you need */
+
+ 
+/*$(document).ready(function() {
+    
+     
+    // Add event listener for opening and closing details
+    $('#example tbody').on('click', 'td.details-control', function () {
+        var tr = $(this).closest('tr');
+        var row = table.row( tr );
+ 
+        if ( row.child.isShown() ) {
+            // This row is already open - close it
+            row.child.hide();
+            tr.removeClass('shown');
+        }
+        else {
+            // Open this row
+            row.child( format(row.data()) ).show();
+            tr.addClass('shown');
+        }
+    } );
+} );
+*/
 	
 
 

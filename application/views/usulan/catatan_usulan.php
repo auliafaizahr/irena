@@ -147,28 +147,6 @@
 						$("<div class='alert alert-success'> <p>" + waktu + "<br/>"+ catatan +"</p> </div>").appendTo(".ini_isi");  
 						notif("Informasi", "Data berhasil disimpan.");
 
-
-
-                   /* if (response.success == true) {
-                    	
-						
-					}
-					else {
-						$.each(response.messages, function(key, value) {
-							var element = $('#' + key);
-							
-							element.closest('div.form-group')
-							.removeClass('has-error')
-							.addClass(value.length > 0 ? 'has-error' : 'has-success')
-							.find('.text-danger')
-							.remove();
-							console.log("huhu");
-
-							element.after(value);
-						});
-					}*/
-
-
                 }
 
 

@@ -169,6 +169,17 @@ class Usulan extends CI_Controller {
     	 $this->load->view('report/bluebook/report_bb_kl', $data);
 	}
 
+	function detail_expand_usulan()
+	{
+		$this->load->model('Usulan_model');
+		$this->load->model('Bluebook_model');
+		
+		$data['isi'] = $this->Usulan_model->all_banding(26);
+
+		echo json_encode($data);
+		//var_dump($data);
+	}
+
 	function dok_usulan_simpan()
 	{	
 		

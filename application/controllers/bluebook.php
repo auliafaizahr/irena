@@ -352,6 +352,8 @@ class Bluebook extends CI_Controller {
 
 	}
 
+
+
 		public function tampilkan_bb_list()
 	{
 		$this->load->model('Bluebook_model');
@@ -426,6 +428,17 @@ class Bluebook extends CI_Controller {
 			
 			///
 		}
+
+		echo json_encode($data);
+		//var_dump($data);
+	}
+
+	function detail_expand_usulan()
+	{
+		$this->load->model('Usulan_model');
+		$this->load->model('Bluebook_model');
+		
+		$data['isi'] = $this->Usulan_model->all_banding(26);
 
 		echo json_encode($data);
 		//var_dump($data);
