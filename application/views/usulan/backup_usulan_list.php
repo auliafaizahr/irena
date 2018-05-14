@@ -1,4 +1,4 @@
-<table class="detail table table-hover" id="example"  width="100%"> 
+<table class="table table-hover" id="example"  width="100%"> 
 	<thead>
 		<tr>
 			<!-- <th style="display:none;">Update date</th> -->
@@ -20,7 +20,7 @@
 		<?php
 			foreach($data as $key => $value):
 		?>
-		<tr class="gradeX parent">
+		<tr class="gradeX">
       <?php $c = $value['id']; ?>
       <?php
 
@@ -35,7 +35,7 @@
 
        ?>
 			<!-- td style="display:none;"><?php echo $row->update_date; ?></td> -->
-      <td></td>
+      <td><?php echo "<a   id='".$c."' onclick='expand_row($c)' > <i class='details-control btn fa fa-plus '></i></a>";?></td>
       
       <td><?php $c = $value['id'];
        $b = $this->Usulan_model->ambil_instansi_untuk_usulan($value['id_instansi'])->nama_instansi;
@@ -227,10 +227,6 @@
                             </div>
 			</td>
 		</tr>
-    <tr class="child">
-      <td>Tes 1</td>
-      <td>Tes 2</td>
-    </tr>
 		<?php endforeach; ?>
 	</tbody>
 </table>
@@ -457,6 +453,49 @@
 
 
     });
+
+  function expand_row(c){
+           
+         var table = $('#example').DataTable();
+        var id = $(this).attr("id"); 
+        console.log(c);
+
+        var tr = $(this).closest('tr');
+        var row = table.row( tr );
+        console.log(table);
+
+ 
+       /* if ( row.child.isShown() ) {
+            // This row is already open - close it
+            row.child.hide();
+            tr.removeClass('shown');
+        }
+        else {
+            // Open this row
+            row.child(format()).show();
+            tr.addClass('shown');
+        }*/
+
+
+        $('#example tbody').on('click', 'td.details-control', fuheidinction () {
+        var tr = $(this).closest('tr');
+        var row = table.row( tr );
+ 
+        if ( row.child.isShown() ) {
+            // This row is already open - close it
+            row.child.hide();
+            tr.removeClass('shown');
+        }
+        else {
+            // Open this row
+            row.child( format() ).show();
+            tr.addClass('shown');
+        }
+        } );
+         
+         
+        
+    }
 
   
 
@@ -697,7 +736,6 @@
           });
 
 
- 
 
 	$(document).on('click', '.detail', function(){  
            
@@ -730,39 +768,4 @@
 			"order": [[ 0, "desc" ]]
 		});
 	});
-
-  var table = $('#example').DataTable();
-
-$('#example tbody').on('click', 'td:first-child', function () {
-  var tr = $(this).closest('tr');
-  var row = table.row( tr );
-
-  if (row.child.isShown()) {
-    // This row is already open - close it.
-    row.child.hide();
-    tr.removeClass('shown');
-  } else {
-    // Open row.
-    row.child('foo').show();
-    tr.addClass('shown');
-  }
-});
 </script>
-
-<style type="text/css">
-  th,
-
-div.dataTables_wrapper {
-  
-  margin: 0 auto;
-}
-
-td:first-child {
-  background: url('https://datatables.net/examples/resources/details_open.png') no-repeat center center;
-  cursor: pointer;
-}
-
-tr.shown td:first-child {
-  background: url('https://datatables.net/examples/resources/details_close.png') no-repeat center center;
-}
-</style>

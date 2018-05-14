@@ -551,17 +551,7 @@
 
             $.ajax({
                 url: '<?php echo base_url(); ?>loan_aggr/la_simpan/edit',
-                dataType: 'json',
-                cache: false,
-                contentType: false,
-                processData: false,
-                data: form_data,
-                type: 'post',
-                success: function(response){
-                    if (response.success == true) {
-                        $('#modalEdit').modal('hide');
-                        segarkan_data();
-                        notif("Informasi", "Data berhasil disimpan.");
+                dataTheidi
                     }
                     else {
                         $.each(response.messages, function(key, value) {

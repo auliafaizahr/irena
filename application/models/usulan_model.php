@@ -58,6 +58,15 @@ class Usulan_model extends CI_Model {
 		return $a->row();
 	}
 
+	public function ambil_total_di_gb($x)
+	{
+		$query = "SELECT * from irena_greenbook_proyek where id_usulan = '$x' GROUP BY id_greenbook";
+		 $a= $this->db->query($query);
+
+		return $a->num_rows();
+	}
+
+
 	public function ambil_catatan($a)
 	{
 		 $query = "SELECT * FROM catatan_usulan WHERE id_usulan = '$a' ORDER BY waktu ASC";
