@@ -15,7 +15,7 @@
             
           </div>
        
-          <table class="table table-hover table-mail">
+          <table class="table table-hover table-mail" id="tabel_detail">
             <tbody>
               <tr class="read">
                 <td class="mail-ontact text-right">Status Usulan Proyek</td>

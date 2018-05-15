@@ -1,4 +1,4 @@
-<table class="detail table table-hover" id="example"  width="100%"> 
+<table class="detail_expand table table-hover" id="example_id"  width="100%"> 
 	<thead>
 		<tr>
 			<!-- <th style="display:none;">Update date</th> -->
@@ -35,7 +35,7 @@
 
        ?>
 			<!-- td style="display:none;"><?php echo $row->update_date; ?></td> -->
-      <td></td>
+      <td class="child"></td>
       
       <td><?php $c = $value['id'];
        $b = $this->Usulan_model->ambil_instansi_untuk_usulan($value['id_instansi'])->nama_instansi;
@@ -227,10 +227,10 @@
                             </div>
 			</td>
 		</tr>
-    <tr class="child">
+   <!--  <tr class="child">
       <td>Tes 1</td>
       <td>Tes 2</td>
-    </tr>
+    </tr> -->
 		<?php endforeach; ?>
 	</tbody>
 </table>
@@ -397,22 +397,26 @@
           });
 */
 
-    return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'+
+    return '<table >'+
         '<tr>'+
-            '<td>Bluebook :</td>'+
-            '<td> </td>'+
+            '<td  style="width:500px;" >Bluebook :</td>'+
+            '<td> Nilai Pinjaman : </td>'+
         '</tr>'+
         '<tr>'+
             '<td>Greenbook :</td>'+
-            '<td> </td>'+
+            '<td>Nilai Pinjaman : </td>'+
         '</tr>'+
         '<tr>'+
             '<td>Tanggal DK :</td>'+
-            '<td>And any further details here (images etc)...</td>'+
+            '<td>Nilai Pinjaman : </td>'+
         '</tr>'+
         '<tr>'+
             '<td>Tanggal LA :</td>'+
-            '<td>And any further details here (images etc)...</td>'+
+            '<td>Nilai Pinjaman : </td>'+
+        '</tr>'+
+        '<tr>'+
+            '<td>Catatan Khusus :</td>'+
+            '<td> </td>'+
         '</tr>'+
     '</table>';
 }
@@ -724,16 +728,16 @@
           });
 	
 	$(document).ready(function(){
-		$('#example').DataTable({
+		$('#example_id').DataTable({
 			responsive: true,
 			"dom": 'T<"clear">lfrtip',
 			"order": [[ 0, "desc" ]]
 		});
 	});
 
-  var table = $('#example').DataTable();
+  var table = $('#example_id').DataTable();
 
-$('#example tbody').on('click', 'td:first-child', function () {
+$('#example_id tbody').on('click', 'td:first-child', function () {
   var tr = $(this).closest('tr');
   var row = table.row( tr );
 
@@ -743,7 +747,7 @@ $('#example tbody').on('click', 'td:first-child', function () {
     tr.removeClass('shown');
   } else {
     // Open row.
-    row.child('foo').show();
+    row.child(format()).show();
     tr.addClass('shown');
   }
 });
@@ -757,12 +761,12 @@ div.dataTables_wrapper {
   margin: 0 auto;
 }
 
-td:first-child {
+td.child {
   background: url('https://datatables.net/examples/resources/details_open.png') no-repeat center center;
   cursor: pointer;
 }
 
-tr.shown td:first-child {
+tr.shown td.child {
   background: url('https://datatables.net/examples/resources/details_close.png') no-repeat center center;
 }
 </style>
