@@ -104,6 +104,47 @@
                                  </select>
                             </div>
                         </div>
+
+                          <div class="form-group">
+                            <label for="provinsi" class="col-sm-2 control-label">Provinsi </label>
+                            <div class="col-sm-9">
+                                <select name="provinsi" id="provinsi" class="form-control" multiple>
+                           
+                                <?php $key = array($detail->id_provinsi);
+                                $a = array();
+                                $a = explode(",", $detail->id_provinsi);
+                                $key2 = array("1", "2", "4", "3");
+                                 
+
+
+                                foreach($provinsi as $row ){ ?>
+                                <option value="<?php echo $row['id']; ?>" <?php echo in_array($row['id'] , $a) ? 'selected' : '' ?>><?php echo $row['nama']; ?>
+                                 </option>
+                                 <?php } ?>
+                                 </select>
+                            </div>
+                        </div>
+
+                         <div class="form-group">
+                            <label for="kabkota" class="col-sm-2 control-label">Kabupaten / Kota </label>
+                            <div class="col-sm-9">
+                                <select name="kabkota" id="kabkota" class="form-control" multiple>
+                           
+                                <?php $key = array($detail->kabkota);
+                                $a = array();
+                                $a = explode(",", $detail->kabkota);
+                                $key2 = array("1", "2", "4", "3");
+                                 
+
+
+                                foreach($kabkota as $row ){ ?>
+                                <option value="<?php echo $row['id']; ?>" <?php echo in_array($row['id'] , $a) ? 'selected' : '' ?>><?php echo $row['nama']; ?>
+                                 </option>
+                                 <?php } ?>
+                                 </select>
+                            </div>
+                        </div>
+
 						
 						<div class="form-group">
 							<label for="nilai" class="col-sm-2 control-label">Nilai</label>
@@ -195,6 +236,21 @@
 			multiple:true,
             tags: true
 		});
+
+
+          $("#provinsi").select2({
+            placeholder: "Pilih Provinsi",
+            multiple:true,
+            width: "100%"
+        });
+        
+          $("#kabkota").select2({
+            placeholder: "Pilih Kabupaten / Kota",
+            multiple:true,
+            width: "100%"
+        });
+
+
 		
 		
 		
@@ -236,7 +292,9 @@
 			var tujuan 						= $("#tujuan").val();
 			var ruang_lingkup 				= $("#ruang_lingkup").val();
 			var lokasi 						= $("#lokasi").val();
-			var id_instansi 						= $("#id_instansi").val();
+			//var id_instansi 						= $("#id_instansi").val();
+			var id_provinsi                    = $("#provinsi").val();
+            var id_kabkota                    = $("#kabkota").val();
 			
 			
             var form_data 	= new FormData();
@@ -253,7 +311,9 @@
 			form_data.append('tujuan', tujuan);
 			form_data.append('ruang_lingkup', ruang_lingkup);
 			form_data.append('lokasi', lokasi);
-			form_data.append('id_instansi', id_instansi);
+			//form_data.append('id_instansi', id_instansi);
+			form_data.append('id_provinsi', id_provinsi);
+            form_data.append('id_kabkota', id_kabkota);
 
 
             $.ajax({

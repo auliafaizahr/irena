@@ -69,24 +69,40 @@
 						</div>
 
 						<div class="form-group">
-                            <label for="lokasi" class="col-sm-3 control-label">Lokasi </label>
-                            <div class="col-sm-9">
-                                <select name="lokasi" id="lokasi" class="form-control" multiple>
+                            <label class="col-sm-3 control-label">Lokasi </label>
                            
-                                <?php $key = array($detail->lokasi);
-                                $a = array();
-                                $a = explode(",", $detail->lokasi);
-                                $key2 = array("1", "2", "4", "3");
+                    </div>
+
+                    <div class="form-group">
+                        <label for="lokasi" class="col-sm-3 control-label">Provinsi</label>
+                        <div class="col-sm-9">
+
+                            <select name="provinsi" id="provinsi" class="form-control"  >
                                  
-
-
-                                foreach($lokasi as $row ){ ?>
-                                <option value="<?php echo $row['id']; ?>" <?php echo in_array($row['id'] , $a) ? 'selected' : '' ?>><?php echo $row['nama']; ?>
-                                 </option>
-                                 <?php } ?>
-                                 </select>
-                            </div>
+                                <?php foreach($provinsi as $row){ ?>
+                                    <option value="<?php echo $row['id']; ?>"><?php echo $row['nama']; ?>
+                                  </option>
+                                <?php } ?>
+                            </select>
+                           <!-- <textarea name="lokasi" id="lokasi" class="col-sm-12" rows="5" placeholder="Lokasi"></textarea> -->
                         </div>
+                    </div>
+
+                     <div class="form-group">
+                        <label for="lokasi" class="col-sm-3 control-label">Kabupaten/Kota</label>
+                        <div class="col-sm-9">
+
+                            <select name="kabkota" id="kabkota" class="form-control"  >
+                                 
+                                <?php foreach($kabkota as $row){ ?>
+                                    <option value="<?php echo $row['id']; ?>"><?php echo $row['nama']; ?>
+                                  </option>
+                                <?php } ?>
+                            </select>
+                           <!-- <textarea name="lokasi" id="lokasi" class="col-sm-12" rows="5" placeholder="Lokasi"></textarea> -->
+                        </div>
+                    </div>
+
 						
 						<div class="form-group">
 							<label for="single_multi" class="col-sm-3 control-label">Pelaksanaan Proyek</label>
@@ -167,6 +183,20 @@
 			multiple:true,
             tags: true
 		});
+
+		 $("#provinsi").select2({
+            placeholder: "Pilih Provinsi",
+            multiple:true,
+            width: "100%"
+        });
+        
+          $("#kabkota").select2({
+            placeholder: "Pilih Kabupaten / Kota",
+            multiple:true,
+            width: "100%"
+        });
+        
+        
 		
 		
 		
@@ -208,6 +238,8 @@
 			var tujuan 						= $("#tujuan").val();
 			var ruang_lingkup 				= $("#ruang_lingkup").val();
 			var lokasi 				= $("#lokasi").val();
+			var id_provinsi                    = $("#provinsi").val();
+            var id_kabkota                    = $("#kabkota").val();
 			
             var form_data 	= new FormData();
  
@@ -223,6 +255,8 @@
 			form_data.append('ruang_lingkup', ruang_lingkup);
 			form_data.append('lokasi', lokasi);
 			form_data.append('id_instansi', id_instansi);
+			 form_data.append('id_provinsi', id_provinsi);
+            form_data.append('id_kabkota', id_kabkota);
 
 
             $.ajax({

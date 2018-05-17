@@ -395,7 +395,13 @@
                 },
                 
           });
+
+
 */
+
+  $.get("<?php echo base_url(); ?>greenbook/filter_kl_gb/"+2, function(data) {
+          console.log(data);
+  });
 
     return '<table >'+
         '<tr>'+
@@ -741,6 +747,10 @@ $('#example_id tbody').on('click', 'td:first-child', function () {
   var tr = $(this).closest('tr');
   var row = table.row( tr );
 
+
+
+
+
   if (row.child.isShown()) {
     // This row is already open - close it.
     row.child.hide();
@@ -751,6 +761,8 @@ $('#example_id tbody').on('click', 'td:first-child', function () {
     tr.addClass('shown');
   }
 });
+
+
 </script>
 
 <style type="text/css">

@@ -42,10 +42,13 @@ class Sbsn extends CI_Controller {
 	function tampilkan_usulan_form_tambah()
 	{
 		$this->load->model('Usulan_model');
+		$this->load->model('Greenbook_model');
 		$data['dpp']		= $this->sbsn_model->pilih_id_dpp();
 		$data['instansi'] 	= $this->sbsn_model->pilih_instansi();
 		$data['kat_pro'] 	= $this->sbsn_model->pilih_kategori_proyek();
 		$data['lokasi'] 		= $this->Usulan_model->ambil_lokasi();
+		$data['provinsi']= $this->Greenbook_model->ambil_provinsi();
+		$data['kabkota']= $this->Greenbook_model->ambil_kabkota();
 
 		
 		$this->load->view('sbsn/usulan/usulan_tambah', $data);
@@ -131,15 +134,45 @@ class Sbsn extends CI_Controller {
 				    'id_lokasi' => $lokasi,
 				  ];
 				}
+
+				$data_prov = $this->input->post('id_provinsi');
+	 			$array_prov = explode(",", $data_prov);
+
+				$data4 = [];
+			 	foreach($array_prov as $provinsi) {
+			 	  $data4[] = [
+			 	    'id_usulan' => $id_ ,
+			 	    'id_prov' => $provinsi,
+			 	    'id_instansi' => $id_instansi,
+			 	  ];
+			 	}
+
+			 	$data_kabkota = $this->input->post('id_kabkota');
+	 			$array_kabkota = explode(",", $data_kabkota);
+
+				$data5 = [];
+			 	foreach($array_kabkota as $kabkota) {
+			 	  $data5[] = [
+			 	    'id_usulan' => $id_ ,
+			 	    'id_kabkota' => $kabkota,
+			 	    'id_instansi' => $id_instansi,
+			 	  ];
+			 	}
+
+			 	$this->db->insert_batch('irena_sbsn_usulan_prov', $data4);
+	 			$this->db->insert_batch('irena_sbsn_usulan_kabkota', $data5);
 	 			$this->db->insert_batch('irena_sbsn_usulan_lokasi', $data2);
+	 			
 
 				
 				
 			}elseif($this->uri->segment(3) == 'edit'){
 				//$data['id']		= $this->input->post('id');
 				$id_					= $this->input->post('id');
-				$id_instansi			= $this->input->post('id_instansi');
+				$id_instansi_eselon_satu			= $this->input->post('id_instansi_eselon_satu');
 				$this->sbsn_model->hapus_dari_lokasi($id_);
+				$this->sbsn_model->hapus_dari_usulan_prov($id_);
+				$this->sbsn_model->hapus_dari_usulan_kabkota($id_);
 
 				$select2data = $this->input->post('lokasi');
 				$array_lokasi = explode(",", $select2data);
@@ -148,11 +181,38 @@ class Sbsn extends CI_Controller {
 				foreach($array_lokasi as $lokasi) {
 				  $data2[] = [
 				    'id_usulan' =>  $id_,
-				    'id_instansi' => $id_instansi,
+				    'id_instansi' => $id_instansi_eselon_satu,
 
 				    'id_lokasi' => $lokasi,
 				  ];
 				}
+
+				$data_prov = $this->input->post('id_provinsi');
+	 			$array_prov = explode(",", $data_prov);
+
+				$data4 = [];
+			 	foreach($array_prov as $provinsi) {
+			 	  $data4[] = [
+			 	    'id_usulan' => $id_ ,
+			 	    'id_prov' => $provinsi,
+			 	    'id_instansi' => $id_instansi_eselon_satu,
+			 	  ];
+			 	}
+
+			 	$data_kabkota = $this->input->post('id_kabkota');
+	 			$array_kabkota = explode(",", $data_kabkota);
+
+				$data5 = [];
+			 	foreach($array_kabkota as $kabkota) {
+			 	  $data5[] = [
+			 	    'id_usulan' => $id_ ,
+			 	    'id_kabkota' => $kabkota,
+			 	    'id_instansi' => $id_instansi_eselon_satu,
+			 	  ];
+			 	}
+
+			 	$this->db->insert_batch('irena_sbsn_usulan_prov', $data4);
+	 			$this->db->insert_batch('irena_sbsn_usulan_kabkota', $data5);
 	 			$this->db->insert_batch('irena_sbsn_usulan_lokasi', $data2);
 
 				$result 		= $this->sbsn_model->usulan_simpan_data($data);
@@ -192,11 +252,14 @@ class Sbsn extends CI_Controller {
 	function usulan_tampil_form_edit()
 	{	
 		$this->load->model('Usulan_model');
+		$this->load->model('Greenbook_model');
 		$id 					= $this->uri->segment(3);
 		$query					= $this->sbsn_model->ambil_tabel_usulan_by_id($id);
 		$data['usulan']			= $query->row();
 		$data['instansi'] 		= $this->sbsn_model->pilih_instansi();
 		$data['lokasi'] 		= $this->Usulan_model->ambil_lokasi();
+		$data['provinsi']= $this->Greenbook_model->ambil_provinsi();
+		$data['kabkota']= $this->Greenbook_model->ambil_kabkota();
 		$this->load->view('sbsn/usulan/usulan_edit', $data);
 	}
 	
