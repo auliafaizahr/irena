@@ -408,7 +408,7 @@
     return '<table >'+
         '<tr>'+
             '<td  style="width:500px;" >Bluebook :</td>'+
-            '<td> Nilai Pinjaman : '+d.judul_usulan+' </td>'+
+            '<td> Nilai Pinjaman : '+d.isi[0].judul_usulan+' </td>'+
         '</tr>'+
         '<tr>'+
             '<td>Greenbook :</td>'+
