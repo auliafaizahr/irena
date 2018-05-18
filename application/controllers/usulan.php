@@ -892,6 +892,8 @@ class Usulan extends CI_Controller {
 		$this->load->view('templates/footer'); 
 	}
 
+
+		//map untuk yang di dashboard
 		public function dashboard_pln()
 	{
 		$this->load->model('Bluebook_model');

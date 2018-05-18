@@ -378,7 +378,11 @@
 
   }
 
-  function format(){
+ 
+
+  
+
+  function format(d){
     // `d` is the original data object for the row
 /*
        $.ajax({
@@ -398,15 +402,13 @@
 
 
 */
+  console.log(d);
 
-  $.get("<?php echo base_url(); ?>greenbook/filter_kl_gb/"+2, function(data) {
-          console.log(data);
-  });
 
     return '<table >'+
         '<tr>'+
             '<td  style="width:500px;" >Bluebook :</td>'+
-            '<td> Nilai Pinjaman : </td>'+
+            '<td> Nilai Pinjaman : '+d.judul_usulan+' </td>'+
         '</tr>'+
         '<tr>'+
             '<td>Greenbook :</td>'+
@@ -747,18 +749,20 @@ $('#example_id tbody').on('click', 'td:first-child', function () {
   var tr = $(this).closest('tr');
   var row = table.row( tr );
 
-
-
-
-
   if (row.child.isShown()) {
     // This row is already open - close it.
     row.child.hide();
     tr.removeClass('shown');
   } else {
     // Open row.
-    row.child(format()).show();
-    tr.addClass('shown');
+     $.get("<?php echo base_url(); ?>usulan/detail_expand_usulan", function(data) {
+          console.log(data);
+          row.child(format(data)).show();
+          tr.addClass('shown');
+        
+      });
+   /* row.child(format()).show();
+    tr.addClass('shown');*/
   }
 });
 
