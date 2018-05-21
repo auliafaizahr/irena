@@ -35,7 +35,7 @@
 
        ?>
 			<!-- td style="display:none;"><?php echo $row->update_date; ?></td> -->
-      <td class="child"></td>
+      <td class="child"  data-id="<?php echo $value['id'];  ?>"></td>
       
       <td><?php $c = $value['id'];
        $b = $this->Usulan_model->ambil_instansi_untuk_usulan($value['id_instansi'])->nama_instansi;
@@ -402,30 +402,45 @@
 
 
 */
-  console.log(d);
+  console.log(d.judul_usulan);
+  var results = JSON.parse(d);
+  console.log(results.isi[0].judul_usulan);
 
 
     return '<table >'+
         '<tr>'+
-            '<td  style="width:500px;" >Bluebook :</td>'+
-            '<td> Nilai Pinjaman : '+d.isi[0].judul_usulan+' </td>'+
+            '<td  style="width:200px;" >Bluebook  </td>' +
+            '<td style="width:20px;">  :  </td>'+
+            '<td style="width:220px;">   ' + results.isi[0].nama_bb + ' </td>'+
+            '<td> Nilai Pinjaman   </td>'+
+            '<td style="width:20px;">  :  </td>'+
+            '<td style="width:220px;">   ' + numeral(results.isi[0].bb_pinjaman).format('0,0') + ' </td>'+
         '</tr>'+
         '<tr>'+
-            '<td>Greenbook :</td>'+
-            '<td>Nilai Pinjaman : </td>'+
+            '<td  style="width:200px;" >Greenbook  </td>' +
+            '<td style="width:20px;">  :  </td>'+
+            '<td style="width:220px;">   ' + results.isi[0].nama_gb + ' </td>'+
+            '<td> Nilai Pinjaman   </td>'+
+            '<td style="width:20px;">  :  </td>'+
+            '<td style="width:220px;">   ' + numeral(results.isi[0].gb_pinjaman).format('0,0') + ' </td>'+
         '</tr>'+
         '<tr>'+
-            '<td>Tanggal DK :</td>'+
-            '<td>Nilai Pinjaman : </td>'+
+            '<td  style="width:200px;" >Tanggal DK  </td>' +
+            '<td style="width:20px;">  :  </td>'+
+            '<td style="width:220px;">   ' + dateFormat(results.isi[0].tgl_DK, "fullDate") + ' </td>'+
+            '<td> Nilai Pinjaman   </td>'+
+            '<td style="width:20px;">  :  </td>'+
+            '<td style="width:220px;">   ' + numeral(results.isi[0].dk_pinjaman).format('0,0') + ' </td>'+
         '</tr>'+
         '<tr>'+
-            '<td>Tanggal LA :</td>'+
-            '<td>Nilai Pinjaman : </td>'+
+            '<td  style="width:200px;" >Tanggal LA  </td>' +
+            '<td style="width:20px;">  :  </td>'+
+            '<td style="width:220px;">   ' + dateFormat(results.isi[0].tgl_LA, "fullDate") + ' </td>'+
+            '<td> Nilai Pinjaman   </td>'+
+            '<td style="width:20px;">  :  </td>'+
+            '<td style="width:220px;">   ' + numeral(results.isi[0].la_pinjaman).format('0,0') + ' </td>'+
         '</tr>'+
-        '<tr>'+
-            '<td>Catatan Khusus :</td>'+
-            '<td> </td>'+
-        '</tr>'+
+      
     '</table>';
 }
 
@@ -748,6 +763,7 @@
 $('#example_id tbody').on('click', 'td:first-child', function () {
   var tr = $(this).closest('tr');
   var row = table.row( tr );
+  var id = $(this).attr('data-id');
 
   if (row.child.isShown()) {
     // This row is already open - close it.
@@ -755,8 +771,10 @@ $('#example_id tbody').on('click', 'td:first-child', function () {
     tr.removeClass('shown');
   } else {
     // Open row.
-     $.get("<?php echo base_url(); ?>usulan/detail_expand_usulan", function(data) {
-          console.log(data);
+     $.get("<?php echo base_url(); ?>usulan/detail_expand_usulan/"+id, function(data) {
+          console.log(data[10]);
+          var results = JSON.parse(data);
+          console.log(results.isi[0].judul_usulan);
           row.child(format(data)).show();
           tr.addClass('shown');
         

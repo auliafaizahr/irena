@@ -28,6 +28,8 @@
 	-->
 
 	<script src="<?php echo base_url(); ?>assets/inspinia/js/jquery-2.1.1.js"></script>
+	<script src="<?php echo base_url(); ?>assets/js/date.format.js"></script>
+	<script src="<?php echo base_url(); ?>assets/js/numeral.min.js"></script>
     <script src="<?php echo base_url(); ?>assets/inspinia/js/plugins/jquery-ui/jquery-ui.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css">
 	

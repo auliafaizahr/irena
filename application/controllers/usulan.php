@@ -174,7 +174,8 @@ class Usulan extends CI_Controller {
 		$this->load->model('Usulan_model');
 		$this->load->model('Bluebook_model');
 		
-		$data['isi'] = $this->Usulan_model->all_banding(26);
+		$id = $this->uri->segment(3);
+		$data['isi'] = $this->Usulan_model->all_banding($id);
 
 		echo json_encode($data);
 		//var_dump($data);
@@ -953,6 +954,8 @@ class Usulan extends CI_Controller {
 				$marker['position'] = $baris->latitude.','.$baris->longitude;
 				$id_lokasi = $baris->id_lokasi;
 				$marker['onclick'] = 'bukaDetailgabung_1('.$baris->id_lokasi.')';
+
+				//tambah disini poin untuk polyline
 				//$marker['onclick'] = '$("#myModal2'.$baris->id_kabkota.'").modal("show")';
 				//$marker['onclick'] = 'alert("tes")';
 				$this->googlemaps->add_marker($marker);
