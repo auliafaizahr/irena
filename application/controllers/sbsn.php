@@ -258,8 +258,9 @@ class Sbsn extends CI_Controller {
 		$data['usulan']			= $query->row();
 		$data['instansi'] 		= $this->sbsn_model->pilih_instansi();
 		$data['lokasi'] 		= $this->Usulan_model->ambil_lokasi();
-		$data['provinsi']= $this->Greenbook_model->ambil_provinsi();
-		$data['kabkota']= $this->Greenbook_model->ambil_kabkota();
+		$data['provinsi']		= $this->Greenbook_model->ambil_provinsi();
+		$data['kabkota']		= $this->Greenbook_model->ambil_kabkota();
+		$data['kat_pro'] 		= $this->sbsn_model->pilih_kategori_proyek();
 		$this->load->view('sbsn/usulan/usulan_edit', $data);
 	}
 	

@@ -78,14 +78,39 @@
 							</div>
 						</div>
 
-						<!-- <div class="form-group" id="second_child">
-							<label for="second_child" id="second_child" class="col-sm-2 control-label">Anak</label>
+						<div class="form-group">
+							<label for="second_child" class="col-sm-2 control-label">Anak</label>
 							<select id="second_child" name="second_child" style="display: none">
 							    <option value="1">1</option>
 							    <option value="2">2</option>
 							    <option value="3">3</option>
 							</select>
-						</div> -->
+						</div>
+
+						<div class="form-group">
+						<select id="state" name="state" style="width: 212px;" onclick='test()'>
+						<option value="nsw">New South Wales</option>
+						<option value="qld">Queensland</option>
+						<option value="vic">Victoria</option>
+						<option value="nt">Northern Territory</option>
+						<option value="tas">Tasmania</option>
+						<option value="sa">South Australia</option>
+						<option value="wa">Western Australia</option>
+						<option value="act">Australian Capital Territory</option>
+						<option value="notinoz">Not in Australia</option>
+						 </select>
+						</div>
+
+						<div class="form-group">
+						<select id="extra" name="extra" style="display: none">
+						    <option value="1">1</option>
+						    <option value="2">2</option>
+						    <option value="3">3</option>
+						</select>
+						</div>
+
+						
+
 
 						
 						<div class="form-group">
@@ -114,7 +139,6 @@
                                  </select>
                             </div>
                         </div>
-
 
                           <div class="form-group">
                             <label for="provinsi" class="col-sm-2 control-label">Provinsi </label>
@@ -155,29 +179,6 @@
                                  </select>
                             </div>
                         </div>
-
-                        <fieldset id="timesheet-rows">
-                            <legend>Add Entries</legend>
-
-                            <div class="timesheet-row">
-
-                              
-                                <label>Poin :
-                                    <select name="poin_kabkota[]"   id="poin_kabkota" required>
-
-                                   <?php foreach($kabkota as $row ){ ?>
-                                    <option value="<?php echo $row['id']; ?>" <?php echo in_array($row['id'] , $a) ? 'selected' : '' ?>><?php echo $row['nama']; ?>
-                                     </option>
-                                     <?php } ?>
-                                    </select>
-                                </label>
-
-                                
-
-                            </div>
-
-                            <input type="button" id="add-row" name="add-row" value="Add row" />
-                        </fieldset>
 
 						
 						<div class="form-group">
@@ -284,28 +285,13 @@
             width: "100%"
         });
 
-         $("#poin_kabkota").select2({
-            placeholder: "Pilih Kabupaten / Kota",
-            multiple:true,
-            width: "100%"
-        });
-
-        jQuery(function($){
-            var $button = $('#add-row'),
-                $row = $('.timesheet-row').clone();
-            
-            $button.click(function(){
-                $row.clone().insertBefore( $button );
-            });
-        });
-
 
 		
-		 function test() {
-		    if (document.getElementById('id_kategori_proyek').value == 6) {
-		        document.getElementById('second_child').style.display = 'block';
+		function test() {
+		    if (document.getElementById('state').value == 'notinoz') {
+		        document.getElementById('extra').style.display = 'block';
 		    } else {
-		        document.getElementById('second_child').style.display = 'none';
+		        document.getElementById('extra').style.display = 'none';
 		    }
 		}
 		
