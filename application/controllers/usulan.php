@@ -648,6 +648,27 @@ class Usulan extends CI_Controller {
      
     }
 
+    public function ambil_poin_kabkota() {
+
+		$this->load->model('Usulan_model');
+		$this->load->model('Greenbook_model');
+		$this->load->model('Bluebook_model');
+		$a = $this->input->post('id');
+		
+		
+		$data['kabkota']= $this->Greenbook_model->ambil_kabkota();
+
+		
+		
+		
+		return $data;
+       
+       // /$this->load->view('templates/footer1');
+
+     
+    }
+
+
     public function hapus() {
 
 		$this->load->model('Usulan_model');

@@ -78,14 +78,6 @@
 							</div>
 						</div>
 
-						<!-- <div class="form-group" id="second_child">
-							<label for="second_child" id="second_child" class="col-sm-2 control-label">Anak</label>
-							<select id="second_child" name="second_child" style="display: none">
-							    <option value="1">1</option>
-							    <option value="2">2</option>
-							    <option value="3">3</option>
-							</select>
-						</div> -->
 
 						
 						<div class="form-group">
@@ -156,8 +148,17 @@
                             </div>
                         </div>
 
+                        <div class="form-group">
+                            <label for="kabkota" class="col-sm-2 control-label">Poin </label>
+                            <div class="col-sm-9">
+                              <select name="kabkota" id="e10" class="form-control" >
+                              </select>
+                            </div>
+                        </div>
+
+                        <!-- <div class="form-group">
                         <fieldset id="timesheet-rows">
-                            <legend>Add Entries</legend>
+                            
 
                             <div class="timesheet-row">
 
@@ -172,13 +173,15 @@
                                     </select>
                                 </label>
 
-                                
+								                            
 
                             </div>
+                             <input type="button" id="add-row" name="add-row" value="Add row" />    
 
-                            <input type="button" id="add-row" name="add-row" value="Add row" />
+                           
                         </fieldset>
-
+                        </div>
+ -->
 						
 						<div class="form-group">
 							<label for="nilai" class="col-sm-2 control-label">Nilai</label>
@@ -299,8 +302,28 @@
             });
         });
 
+       var hasil =  $.get("<?php echo base_url(); ?>usulan/ambil_poin_kabkota/", function(data) {
+          console.log(data[10]);
+          var results = JSON.parse(data);
+          console.log(results);
+         	
+         	
+        
+     	 });
 
-		
+        $("#e10").select2({
+	          ajax: {
+			    url: "<?php echo base_url(); ?>usulan/ambil_poin_kabkota/",
+			    dataType: 'json'
+			    // Additional AJAX parameters go here; see the end of this chapter for the full code of this example
+			  }
+	     })
+
+       function tambah_poin_kabkota(argument) {
+       	// body...
+       }
+
+ 
 		 function test() {
 		    if (document.getElementById('id_kategori_proyek').value == 6) {
 		        document.getElementById('second_child').style.display = 'block';
