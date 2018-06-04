@@ -148,40 +148,70 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
+                       <!--  <div class="form-group">
                             <label for="kabkota" class="col-sm-2 control-label">Poin </label>
                             <div class="col-sm-9">
                               <select name="kabkota" id="e10" class="form-control" >
                               </select>
                             </div>
-                        </div>
+                        </div> -->
 
-                        <!-- <div class="form-group">
+                         <div class="form-group timesheet_2-rows" >
                         <fieldset id="timesheet-rows">
                             
 
                             <div class="timesheet-row">
 
                               
-                                <label>Poin :
-                                    <select name="poin_kabkota[]"   id="poin_kabkota" required>
+                                <label class="col-sm-2 control-label" >Poin :    </label>
+                                <div class="col-sm-9">
+                                    <select name="poin_kabkota[]"   class="poin_kabkota"  required>
 
                                    <?php foreach($kabkota as $row ){ ?>
                                     <option value="<?php echo $row['id']; ?>" <?php echo in_array($row['id'] , $a) ? 'selected' : '' ?>><?php echo $row['nama']; ?>
                                      </option>
                                      <?php } ?>
                                     </select>
-                                </label>
+                                </div>
+                             
 
 								                            
 
                             </div>
-                             <input type="button" id="add-row" name="add-row" value="Add row" />    
+                             <input  type="button" id="add-row" name="add-row" value="Add row" />    
 
                            
                         </fieldset>
                         </div>
- -->
+
+                        <div class="form-group" >
+                        <label class="col-sm-2 control-label">Attributes</label>
+                            <div class="multi-field-wrapper">
+                              <div class="multi-fields">
+                                <div class="multi-field" class="col-sm-8">
+                                
+                                <select class="tes" >
+                                <option>Green</option>
+                                <option>Blue</option>
+                                <option>Black</option>
+                                <option>Purple</option>
+                                <option>White</option>
+                                </select>
+                                <select>
+                                <option>XS</option>
+                                <option>Small</option>
+                                <option>Medium</option>
+                                <option>Large</option>
+                                <option>XL</option>
+                                </select>
+                                  <input type="text" placeholder="quantity" name="quantity">
+                                  <button type="button" class="remove-field">Remove</button>
+                                </div>
+                              </div>
+                            <button type="button" class="add-field">Add field</button>
+                          </div>
+                          </div>
+
 						
 						<div class="form-group">
 							<label for="nilai" class="col-sm-2 control-label">Nilai</label>
@@ -287,37 +317,52 @@
             width: "100%"
         });
 
-         $("#poin_kabkota").select2({
+         $(".poin_kabkota").select2({
             placeholder: "Pilih Kabupaten / Kota",
-            multiple:true,
+           
+            width: "100%"
+        });
+
+        $(".tes").select2({
+            placeholder: "Pilih Kabupaten / Kota",
+           
             width: "100%"
         });
 
         jQuery(function($){
             var $button = $('#add-row'),
                 $row = $('.timesheet-row').clone();
-            
+
             $button.click(function(){
+            	
                 $row.clone().insertBefore( $button );
+
+                		$(".poin_kabkota").select2({
+                	                placeholder: "Pilih Kabupaten / Kota",
+                	               
+                	                width: "100%"
+                	    });
+                
+                	
+
+                
+
             });
         });
 
-       var hasil =  $.get("<?php echo base_url(); ?>usulan/ambil_poin_kabkota/", function(data) {
-          console.log(data[10]);
-          var results = JSON.parse(data);
-          console.log(results);
-         	
-         	
-        
-     	 });
+        $('.multi-field-wrapper').each(function() {
+            var $wrapper = $('.multi-fields', this);
+            $(".add-field", $(this)).click(function(e) {
+                $('.multi-field:first-child', $wrapper).clone(true).appendTo($wrapper).find('input').placeholder('quantity').focus();
+                $('.multi-field .tes', $wrapper).select2();
+                
 
-        $("#e10").select2({
-	          ajax: {
-			    url: "<?php echo base_url(); ?>usulan/ambil_poin_kabkota/",
-			    dataType: 'json'
-			    // Additional AJAX parameters go here; see the end of this chapter for the full code of this example
-			  }
-	     })
+            });
+            $('.multi-field .remove-field', $wrapper).click(function() {
+                if ($('.multi-field', $wrapper).length > 1)
+                    $(this).parent('.multi-field').remove();
+            });
+        })
 
        function tambah_poin_kabkota(argument) {
        	// body...

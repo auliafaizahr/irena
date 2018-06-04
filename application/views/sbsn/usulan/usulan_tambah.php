@@ -103,6 +103,14 @@
                         </div>
                     </div>
 
+                    <div class="form-group">
+                            <label for="kabkota" class="col-sm-3 control-label">Poin </label>
+                            <div class="col-sm-9">
+                              <select name="kabkota" id="e10" class="form-control" >
+                              </select>
+                            </div>
+                    </div>
+
 						
 						<div class="form-group">
 							<label for="single_multi" class="col-sm-3 control-label">Pelaksanaan Proyek</label>
@@ -195,6 +203,59 @@
             multiple:true,
             width: "100%"
         });
+
+         $("#poin_kabkota").select2({
+            placeholder: "Pilih Kabupaten / Kota",
+            multiple:true,
+            width: "100%"
+        });
+
+        jQuery(function($){
+            var $button = $('#add-row'),
+                $row = $('.timesheet-row').clone();
+            
+            $button.click(function(){
+                $row.clone().insertBefore( $button );
+            });
+        });
+
+         $("#e10").select2({
+         	 
+	          ajax: {
+			    url: "<?php echo base_url(); ?>usulan/ambil_poin_kabkota/",
+			    dataType: 'json',
+			    delay: 250,
+			      data: function (params) {
+			        return {
+			          q: params.term, // search term
+			          page: params.page
+			        };
+			      },
+			     processResults: function (data, params) {
+			        // parse the results into the format expected by Select2
+			        // since we are using custom formatting functions we do not need to
+			        // alter the remote JSON data, except to indicate that infinite
+			        // scrolling can be used
+			        params.page = params.page || 1;
+
+			        return {
+			          results: data.items,
+			          pagination: {
+			            more: (params.page * 30) < data.total_count
+			          }
+			        };
+			      },
+			      cache: true
+			    },
+			    placeholder: 'Search for a repository',
+			    escapeMarkup: function (markup) { return markup; }, // let our custom formatter work
+			    minimumInputLength: 1,
+			    width: "100%"
+			    
+	     
+
+	 });
+
         
         
 		
