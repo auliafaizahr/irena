@@ -184,34 +184,7 @@
                         </fieldset>
                         </div>
 
-                        <div class="form-group" >
-                        <label class="col-sm-2 control-label">Attributes</label>
-                            <div class="multi-field-wrapper">
-                              <div class="multi-fields">
-                                <div class="multi-field" class="col-sm-8">
-                                
-                                <select class="tes" >
-                                <option>Green</option>
-                                <option>Blue</option>
-                                <option>Black</option>
-                                <option>Purple</option>
-                                <option>White</option>
-                                </select>
-                                <select>
-                                <option>XS</option>
-                                <option>Small</option>
-                                <option>Medium</option>
-                                <option>Large</option>
-                                <option>XL</option>
-                                </select>
-                                  <input type="text" placeholder="quantity" name="quantity">
-                                  <button type="button" class="remove-field">Remove</button>
-                                </div>
-                              </div>
-                            <button type="button" class="add-field">Add field</button>
-                          </div>
-                          </div>
-
+                        
 						
 						<div class="form-group">
 							<label for="nilai" class="col-sm-2 control-label">Nilai</label>
@@ -323,46 +296,28 @@
             width: "100%"
         });
 
-        $(".tes").select2({
-            placeholder: "Pilih Kabupaten / Kota",
-           
-            width: "100%"
-        });
 
         jQuery(function($){
             var $button = $('#add-row'),
                 $row = $('.timesheet-row').clone();
+               // $tombol_hapus = "<div><a href="#" class="remove_field">Remove</a></div>";
 
             $button.click(function(){
             	
-                $row.clone().insertBefore( $button );
+                $row.clone().insertBefore( $button ).append('<div><a href="#" class="remove_field">Remove</a></div>');
+              
 
-                		$(".poin_kabkota").select2({
+                $(".poin_kabkota").select2({
                 	                placeholder: "Pilih Kabupaten / Kota",
                 	               
                 	                width: "100%"
-                	    });
-                
-                	
+               	});
+               	$(".poin_kabkota").last().next().next().remove();
 
-                
 
             });
         });
 
-        $('.multi-field-wrapper').each(function() {
-            var $wrapper = $('.multi-fields', this);
-            $(".add-field", $(this)).click(function(e) {
-                $('.multi-field:first-child', $wrapper).clone(true).appendTo($wrapper).find('input').placeholder('quantity').focus();
-                $('.multi-field .tes', $wrapper).select2();
-                
-
-            });
-            $('.multi-field .remove-field', $wrapper).click(function() {
-                if ($('.multi-field', $wrapper).length > 1)
-                    $(this).parent('.multi-field').remove();
-            });
-        })
 
        function tambah_poin_kabkota(argument) {
        	// body...
@@ -418,7 +373,8 @@
 			//var id_instansi 						= $("#id_instansi").val();
 			var id_provinsi                    = $("#provinsi").val();
             var id_kabkota                    = $("#kabkota").val();
-			
+            var poin_kabkota                    =  $(".poin_kabkota").serializeArray();
+			console.log(poin_kabkota);
 			
             var form_data 	= new FormData();
 			
@@ -437,6 +393,7 @@
 			//form_data.append('id_instansi', id_instansi);
 			form_data.append('id_provinsi', id_provinsi);
             form_data.append('id_kabkota', id_kabkota);
+            form_data.append('poin_kabkota', poin_kabkota);
 
 
             $.ajax({
