@@ -357,6 +357,9 @@
 			e.preventDefault();
 
 			var me 			= $(this);
+
+			var isi_data	= $('#htmlForm').serialize();
+			//var coba_isi_data	= JSON.parse(isi_data);
 			
 			var id						 	= $("#id").val();
 			var id_instansi_eselon_satu 	= $("#id_instansi_eselon_satu").val();
@@ -371,9 +374,14 @@
 			var ruang_lingkup 				= $("#ruang_lingkup").val();
 			var lokasi 						= $("#lokasi").val();
 			//var id_instansi 						= $("#id_instansi").val();
-			var id_provinsi                    = $("#provinsi").val();
-            var id_kabkota                    = $("#kabkota").val();
-            var poin_kabkota                    =  $(".poin_kabkota").serializeArray();
+			var id_provinsi                 = $("#provinsi").val();
+            var id_kabkota                  = $("#kabkota").val();
+            var poin_kabkota                =  $(".poin_kabkota").serializeArray();
+            var arr_poin 					= JSON.stringify(poin_kabkota[0].value);
+            //var ambil_value_saja			= arr_poin[value];
+            //buat tampungan untuk looping arr_poin
+
+
 			console.log(poin_kabkota);
 			
             var form_data 	= new FormData();
@@ -393,26 +401,36 @@
 			//form_data.append('id_instansi', id_instansi);
 			form_data.append('id_provinsi', id_provinsi);
             form_data.append('id_kabkota', id_kabkota);
-            form_data.append('poin_kabkota', poin_kabkota);
+            form_data.append('poin_kabkota', arr_poin);
+
+            console.log(isi_data);
+
 
 
             $.ajax({
                 url: '<?php echo base_url(); ?>sbsn/usulan_simpan/edit',
-                dataType: 'json',
+                //dataType: 'json',
                 cache: false,
                 contentType: false,
                 processData: false,
-                data: form_data,
+                data: isi_data,
                 type: 'post',
                 success: function(response){
                     if (response.success == true) {
 						$('#modalEdit').modal('hide');
+						console.log(data);
+						console.log(form_data);
+						console.log(response);
 						segarkan_data();
 						notif("Informasi", "Data berhasil disimpan.");
 					}
 					else {
 						$.each(response.messages, function(key, value) {
 							var element = $('#' + key);
+							console.log(data);
+							console.log(response);
+							console.log(error);
+
 							
 							element.closest('div.form-group')
 							.removeClass('has-error')

@@ -97,11 +97,14 @@ class Sbsn extends CI_Controller {
 			}
 			
 			$status['success'] = true;
+			var_dump($this->input->post());die();
 			
-			$data 					= $_POST;
+			$data['isi'] 					= $_POST;
 			$data['update_by']		= $this->session->userdata('id');
 			$data['update_date']	= date('Y-m-d H:i:s');
+			//print_r($this->input->post());die();
 			
+			//print_r($data);
 			if($this->uri->segment(3) == 'tambah'){
 				$data['nilai_admin']		= 0;
 				$data['nilai_admin_ket']	= "-";
@@ -186,8 +189,12 @@ class Sbsn extends CI_Controller {
 				
 				
 			}elseif($this->uri->segment(3) == 'edit'){
+				
 				//$data['id']		= $this->input->post('id');
-				$id_					= $this->input->post('id');
+				//var_dump($this->input->post());die();
+
+
+				/*$id_					= $this->input->post('id');
 				$id_instansi_eselon_satu			= $this->input->post('id_instansi_eselon_satu');
 				$this->sbsn_model->hapus_dari_lokasi($id_);
 				$this->sbsn_model->hapus_dari_usulan_prov($id_);
@@ -230,9 +237,11 @@ class Sbsn extends CI_Controller {
 			 	  ];
 			 	}
 
+
+
 			 	$this->db->insert_batch('irena_sbsn_usulan_prov', $data4);
 	 			$this->db->insert_batch('irena_sbsn_usulan_kabkota', $data5);
-	 			$this->db->insert_batch('irena_sbsn_usulan_lokasi', $data2);
+	 			$this->db->insert_batch('irena_sbsn_usulan_lokasi', $data2);*/
 
 				$result 		= $this->sbsn_model->usulan_simpan_data($data);
 			}
