@@ -299,14 +299,23 @@
 
         jQuery(function($){
             var $button = $('#add-row'),
-                $row = $('.timesheet-row').clone();
+                $row = $('.timesheet-row').clone(),
+                $row_2 = $('.timesheet-row');
+
+        	
+
+             var $test = '<div><a href="#" class="remove_field">Remove</a></div>'; 
                // $tombol_hapus = "<div><a href="#" class="remove_field">Remove</a></div>";
 
             $button.click(function(){
+            	var $tambah =  $row.clone().append('<div><a href="#" class="remove_field">Remove</a></div>').insertAfter( $button );
             	
-                $row.clone().insertBefore( $button ).append('<div><a href="#" class="remove_field">Remove</a></div>');
+          	//var $tambah =  $row.append('<div><a href="#" class="remove_field">Remove</a></div>').insertAfter( $button ).clone();
+          		$tambah.clone();
+          	// $row.clone().insertAfter( $button ).append('<div><a href="#" class="remove_field">Remove</a></div>');
+                //$row_2.insertBefore( $button ).append('<div><a href="#" class="remove_field">Remove</a></div>');
+                //$row.append($test);
               
-
                 $(".poin_kabkota").select2({
                 	                placeholder: "Pilih Kabupaten / Kota",
                 	               
@@ -377,12 +386,27 @@
 			var id_provinsi                 = $("#provinsi").val();
             var id_kabkota                  = $("#kabkota").val();
             var poin_kabkota                =  $(".poin_kabkota").serializeArray();
-            var arr_poin 					= JSON.stringify(poin_kabkota[0].value);
+            var panjang						= poin_kabkota.length;
+            //var arr_poin 					= JSON.stringify(poin_kabkota[0].value);
             //var ambil_value_saja			= arr_poin[value];
             //buat tampungan untuk looping arr_poin
 
+            var poin_urut = new Array();
+
+            for(var i = 0; i<panjang; i++){
+            	console.log(JSON.stringify(poin_kabkota[i].value));
+            	poin_urut[i] = poin_kabkota[i].value;
+
+            }
+
+            console.log(poin_urut);
+            var poin_pakai 		= poin_urut.toString();
+
 
 			console.log(poin_kabkota);
+			console.log(poin_pakai);
+			console.log(panjang);
+			//console.log(arr_poin);
 			
             var form_data 	= new FormData();
 			
@@ -401,7 +425,7 @@
 			//form_data.append('id_instansi', id_instansi);
 			form_data.append('id_provinsi', id_provinsi);
             form_data.append('id_kabkota', id_kabkota);
-            form_data.append('poin_kabkota', arr_poin);
+            form_data.append('poin_kabkota', poin_pakai);
 
             console.log(isi_data);
 
@@ -409,27 +433,27 @@
 
             $.ajax({
                 url: '<?php echo base_url(); ?>sbsn/usulan_simpan/edit',
-                //dataType: 'json',
+                dataType: 'json',
                 cache: false,
                 contentType: false,
                 processData: false,
-                data: isi_data,
+                data: form_data,
                 type: 'post',
                 success: function(response){
                     if (response.success == true) {
 						$('#modalEdit').modal('hide');
-						console.log(data);
-						console.log(form_data);
-						console.log(response);
+						//console.log(data);
+						//console.log(form_data);
+						//console.log(response);
 						segarkan_data();
 						notif("Informasi", "Data berhasil disimpan.");
 					}
 					else {
 						$.each(response.messages, function(key, value) {
 							var element = $('#' + key);
-							console.log(data);
-							console.log(response);
-							console.log(error);
+							//console.log(data);
+							//console.log(response);
+							//console.log(error);
 
 							
 							element.closest('div.form-group')

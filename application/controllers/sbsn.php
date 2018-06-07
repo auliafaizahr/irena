@@ -97,9 +97,9 @@ class Sbsn extends CI_Controller {
 			}
 			
 			$status['success'] = true;
-			var_dump($this->input->post());die();
+			//var_dump($this->input->post());die();
 			
-			$data['isi'] 					= $_POST;
+			$data					= $_POST;
 			$data['update_by']		= $this->session->userdata('id');
 			$data['update_date']	= date('Y-m-d H:i:s');
 			//print_r($this->input->post());die();
