@@ -103,6 +103,36 @@
                         </div>
                     </div>
 
+<<<<<<< HEAD
+=======
+                     <div class="form-group timesheet_2-rows" >
+                    <fieldset id="timesheet-rows">
+                        
+
+                        <div class="timesheet-row">
+
+                          
+                            <label class="col-sm-3 control-label" >Poin :    </label>
+                            <div class="col-sm-8">
+                                <select name="poin_kabkota[]"   class="poin_kabkota"  required>
+
+                               <?php foreach($kabkota as $row ){ ?>
+                                <option value="<?php echo $row['id']; ?>" ><?php echo $row['nama']; ?>
+                                 </option>
+                                 <?php } ?>
+                                </select>
+                            </div>
+                         
+
+                                
+
+                        </div>
+                         <input  type="button" id="add-row" name="add-row" value="Add row" />    
+
+                       
+                    </fieldset>
+                    </div>
+>>>>>>> parent of 5923296... poin done
 						
 						<div class="form-group">
 							<label for="single_multi" class="col-sm-3 control-label">Pelaksanaan Proyek</label>
@@ -195,6 +225,77 @@
             multiple:true,
             width: "100%"
         });
+<<<<<<< HEAD
+=======
+
+         
+          $(".poin_kabkota").select2({
+             placeholder: "Pilih Kabupaten / Kota",
+            
+             width: "100%"
+         });
+
+
+         jQuery(function($){
+             var $button = $('#add-row'),
+                 $row = $('.timesheet-row').clone();
+                // $tombol_hapus = "<div><a href="#" class="remove_field">Remove</a></div>";
+
+             $button.click(function(){
+             	
+                 $row.clone().insertBefore( $button ).append('<div><a href="#" class="remove_field">Remove</a></div>');
+               
+
+                 $(".poin_kabkota").select2({
+                 	                placeholder: "Pilih Kabupaten / Kota",
+                 	               
+                 	                width: "100%"
+                	});
+                	$(".poin_kabkota").last().next().next().remove();
+
+
+             });
+         });
+
+/*
+         $("#e10").select2({
+         	 
+	          ajax: {
+			    url: "<?php echo base_url(); ?>usulan/ambil_poin_kabkota/",
+			    dataType: 'json',
+			    delay: 250,
+			      data: function (params) {
+			        return {
+			          q: params.term, // search term
+			          page: params.page
+			        };
+			      },
+			     processResults: function (data, params) {
+			        // parse the results into the format expected by Select2
+			        // since we are using custom formatting functions we do not need to
+			        // alter the remote JSON data, except to indicate that infinite
+			        // scrolling can be used
+			        params.page = params.page || 1;
+
+			        return {
+			          results: data.items,
+			          pagination: {
+			            more: (params.page * 30) < data.total_count
+			          }
+			        };
+			      },
+			      cache: true
+			    },
+			    placeholder: 'Search for a repository',
+			    escapeMarkup: function (markup) { return markup; }, // let our custom formatter work
+			    minimumInputLength: 1,
+			    width: "100%"
+			    
+	     
+
+	 });*/
+
+>>>>>>> parent of 5923296... poin done
         
         
 		

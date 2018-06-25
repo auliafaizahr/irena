@@ -168,7 +168,14 @@ class Sbsn extends CI_Controller {
 				
 			}elseif($this->uri->segment(3) == 'edit'){
 				//$data['id']		= $this->input->post('id');
+<<<<<<< HEAD
 				$id_					= $this->input->post('id');
+=======
+				//var_dump($this->input->post());die();
+
+
+				/*$id_					= $this->input->post('id');
+>>>>>>> parent of 5923296... poin done
 				$id_instansi_eselon_satu			= $this->input->post('id_instansi_eselon_satu');
 				$this->sbsn_model->hapus_dari_lokasi($id_);
 				$this->sbsn_model->hapus_dari_usulan_prov($id_);
@@ -211,9 +218,17 @@ class Sbsn extends CI_Controller {
 			 	  ];
 			 	}
 
+<<<<<<< HEAD
 			 	$this->db->insert_batch('irena_sbsn_usulan_prov', $data4);
 	 			$this->db->insert_batch('irena_sbsn_usulan_kabkota', $data5);
 	 			$this->db->insert_batch('irena_sbsn_usulan_lokasi', $data2);
+=======
+
+
+			 	$this->db->insert_batch('irena_sbsn_usulan_prov', $data4);
+	 			$this->db->insert_batch('irena_sbsn_usulan_kabkota', $data5);
+	 			$this->db->insert_batch('irena_sbsn_usulan_lokasi', $data2);*/
+>>>>>>> parent of 5923296... poin done
 
 				$result 		= $this->sbsn_model->usulan_simpan_data($data);
 			}

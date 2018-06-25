@@ -192,20 +192,35 @@
                             <div class="timesheet-row">
 
                               
+<<<<<<< HEAD
                                 <label>Poin :
                                     <select name="poin_kabkota[]"   id="poin_kabkota" required>
+=======
+                                <label class="col-sm-2 control-label" >Poin :    </label>
+                                <div class="col-sm-9">
+                                    <select name="poin_kabkota[]"   class="poin_kabkota"  required>
+>>>>>>> parent of 5923296... poin done
 
                                    <?php foreach($kabkota as $row ){ ?>
                                     <option value="<?php echo $row['id']; ?>" <?php echo in_array($row['id'] , $a) ? 'selected' : '' ?>><?php echo $row['nama']; ?>
                                      </option>
                                      <?php } ?>
                                     </select>
+<<<<<<< HEAD
                                 </label>
+=======
+                                </div>
+                             
+>>>>>>> parent of 5923296... poin done
 
 								                            
 
                             </div>
+<<<<<<< HEAD
                              <input type="button" id="add-row" name="add-row" value="Add row" />    
+=======
+                             <input  type="button" id="add-row" name="add-row" value="Add row" />    
+>>>>>>> parent of 5923296... poin done
 
                            
                         </fieldset>
@@ -274,6 +289,7 @@
 	</div>
 </div>
 
+<<<<<<< HEAD
 <style type="text/css">
 	/*
 	.hidden {
@@ -315,6 +331,8 @@
 
 </style>
 
+=======
+>>>>>>> parent of 5923296... poin done
 <script>
     $(document).ready(function(){
 		$("#id_instansi").select2({
@@ -372,6 +390,7 @@
             });
         });
 
+<<<<<<< HEAD
        var hasil =  $.get("<?php echo base_url(); ?>usulan/ambil_poin_kabkota/", function(data) {
           console.log(data[10]);
           var results = JSON.parse(data);
@@ -424,6 +443,8 @@
 
                return false;
            });
+=======
+>>>>>>> parent of 5923296... poin done
 
            $("body").on("click", ".del.enabled", function(event) {
                var $parent = $(this).parent();
