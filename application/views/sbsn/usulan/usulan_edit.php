@@ -165,21 +165,25 @@
                               
                                 <label class="col-sm-2 control-label" >Poin :    </label>
                                 <div class="col-sm-9">
-                                    <select name="poin_kabkota[]"   class="poin_kabkota"  required>
+                                    <select name="poin_kabkota[]"   class="poin_kabkota"  disabled="disabled">
 
                                    <?php foreach($kabkota as $row ){ ?>
                                     <option value="<?php echo $row['id']; ?>" <?php echo in_array($row['id'] , $a) ? 'selected' : '' ?>><?php echo $row['nama']; ?>
                                      </option>
                                      <?php } ?>
                                     </select>
+
                                 </div>
+                                 <div class="del disabled hidden"> <input type="button" name="clone" value="Hapus"></div>
+
+                              
                              
 
 								                            
 
                             </div>
-                             <input  type="button" id="add-row" name="add-row" value="Add row" />    
-
+                             <!-- <input  type="button" id="add-row" name="add-row" value="Add row" />     -->
+                             <div class="clone_tombol clone" disabled="disabled"  title="Create new item"><input type="button" name="clone"  value="Tambah"></div>
                            
                         </fieldset>
                         </div>
@@ -247,6 +251,18 @@
 		</div>
 	</div>
 </div>
+
+<style type="text/css">
+	
+	.del {
+    position:relative;
+    float:right;
+    bottom:0px;    
+    right:0px;
+    background-image:url('http://cdn1.iconfinder.com/data/icons/fugue/bonus/icons-24/cross.png');
+	}
+
+</style>
 
 <script>
     $(document).ready(function(){
@@ -326,6 +342,45 @@
 
             });
         });
+
+         $("#id_kategori_proyek").change(function(){
+        	var $id_cek = document.getElementById("id_kategori_proyek").value;
+	       if($id_cek == "5" || $id_cek == "6" || $id_cek == "10" || $id_cek == "11" || $id_cek == "12" || $id_cek == "13" || $id_cek == "16" || $id_cek == "17" || $id_cek == "18" || $id_cek == "27"){
+	       	 $('.poin_kabkota').removeAttr('disabled');
+	       	 $('.clone_tombol').removeAttr('disabled');
+	       }else{
+	       	 $('.poin_kabkota').attr('disabled', 'disabled');
+	       	 $('.clone_tombol').attr('disabled', 'disabled');
+	       }
+	     });
+
+        $(".clone_tombol").click(function() {
+               var
+               $self = $(this),
+                   $element_to_clone = $self.prev(),
+                   $wrapper_parent_element = $self.parent(),
+                   $new_element = $element_to_clone.clone();
+
+               $new_element.find('.del').removeClass('hidden disabled').addClass('enabled');
+
+               $new_element.insertAfter($element_to_clone);
+
+               $(".poin_kabkota").select2({
+                	                placeholder: "Pilih Kabupaten / Kota",
+                	               
+                	                width: "100%"
+               	});
+
+               $(".poin_kabkota").last().next().next().remove();
+
+               return false;
+        });
+
+        $("body").on("click", ".del.enabled", function(event) {
+	        var $parent = $(this).parent();
+	        $parent.remove();
+	        return false;
+   		 });
 
 
        function tambah_poin_kabkota(argument) {

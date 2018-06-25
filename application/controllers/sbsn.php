@@ -194,7 +194,7 @@ class Sbsn extends CI_Controller {
 				//var_dump($this->input->post());die();
 
 
-				/*$id_					= $this->input->post('id');
+				$id_					= $this->input->post('id');
 				$id_instansi_eselon_satu			= $this->input->post('id_instansi_eselon_satu');
 				$this->sbsn_model->hapus_dari_lokasi($id_);
 				$this->sbsn_model->hapus_dari_usulan_prov($id_);
@@ -226,6 +226,7 @@ class Sbsn extends CI_Controller {
 			 	}
 
 			 	$data_kabkota = $this->input->post('id_kabkota');
+			 	$id_kategori = $this->input->post('id_kategori_proyek');
 	 			$array_kabkota = explode(",", $data_kabkota);
 
 				$data5 = [];
@@ -237,11 +238,29 @@ class Sbsn extends CI_Controller {
 			 	  ];
 			 	}
 
+			 	$poin_kabkota = $this->input->post('poin_kabkota');
+			 	//$id_kategori = $this->input->post('id_kategori_proyek');
+	 			$array_poin = explode(",", $poin_kabkota);
+
+			 	$data6 = [];
+			 	$i = 1;
+			 	foreach($array_poin as $kabkota) {
+
+			 	$data6[] = [
+			 	    'id_usulan' => $id_ ,
+			 	    'id_kategori' => $id_kategori ,
+			 	    'id_urut' => $i++,
+			 	    'id_kabkota' => $kabkota,
+			 	  ];
+			 	}
 
 
+
+/*
 			 	$this->db->insert_batch('irena_sbsn_usulan_prov', $data4);
 	 			$this->db->insert_batch('irena_sbsn_usulan_kabkota', $data5);
 	 			$this->db->insert_batch('irena_sbsn_usulan_lokasi', $data2);*/
+	 			$this->db->insert_batch('irena_sbsn_usulan_jalan_kabkota', $data6);
 
 				$result 		= $this->sbsn_model->usulan_simpan_data($data);
 			}

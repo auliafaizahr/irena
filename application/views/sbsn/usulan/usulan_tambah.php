@@ -104,32 +104,36 @@
                     </div>
 
                      <div class="form-group timesheet_2-rows" >
-                    <fieldset id="timesheet-rows">
-                        
+                        <fieldset id="timesheet-rows">
+                            
 
-                        <div class="timesheet-row">
+                            <div class="timesheet-row">
 
-                          
-                            <label class="col-sm-3 control-label" >Poin :    </label>
-                            <div class="col-sm-8">
-                                <select name="poin_kabkota[]"   class="poin_kabkota"  required>
+                              
+                                <label class="col-sm-3 control-label" >Poin :    </label>
+                                <div class="col-sm-8">
+                                    <select name="poin_kabkota[]"   class="poin_kabkota"  required>
 
-                               <?php foreach($kabkota as $row ){ ?>
-                                <option value="<?php echo $row['id']; ?>" ><?php echo $row['nama']; ?>
-                                 </option>
-                                 <?php } ?>
-                                </select>
+                                   <?php foreach($kabkota as $row ){ ?>
+                                    <option value="<?php echo $row['id']; ?>"><?php echo $row['nama']; ?>
+                                     </option>
+                                     <?php } ?>
+                                    </select>
+
+                                </div>
+                                 <div class="del disabled hidden"> <input type="button" name="clone" value="Hapus"></div>
+
+                              
+                             
+
+								                            
+
                             </div>
-                         
-
-                                
-
+                             <!-- <input  type="button" id="add-row" name="add-row" value="Add row" />     -->
+                             <div class="clone"  title="Create new item"><input type="button" name="clone" value="Tambah"></div>
+                           
+                        </fieldset>
                         </div>
-                         <input  type="button" id="add-row" name="add-row" value="Add row" />    
-
-                       
-                    </fieldset>
-                    </div>
 						
 						<div class="form-group">
 							<label for="single_multi" class="col-sm-3 control-label">Pelaksanaan Proyek</label>
@@ -180,6 +184,18 @@
 		</div>
 	</div>
 </div>
+
+<style type="text/css">
+	
+	.del {
+    position:relative;
+    float:right;
+    bottom:0px;    
+    right:0px;
+    background-image:url();
+	}
+
+</style>
 
 
 <script>
@@ -252,46 +268,33 @@
              });
          });
 
-/*
-         $("#e10").select2({
-         	 
-	          ajax: {
-			    url: "<?php echo base_url(); ?>usulan/ambil_poin_kabkota/",
-			    dataType: 'json',
-			    delay: 250,
-			      data: function (params) {
-			        return {
-			          q: params.term, // search term
-			          page: params.page
-			        };
-			      },
-			     processResults: function (data, params) {
-			        // parse the results into the format expected by Select2
-			        // since we are using custom formatting functions we do not need to
-			        // alter the remote JSON data, except to indicate that infinite
-			        // scrolling can be used
-			        params.page = params.page || 1;
+        $(".clone").click(function() {
+               var
+               $self = $(this),
+                   $element_to_clone = $self.prev(),
+                   $wrapper_parent_element = $self.parent(),
+                   $new_element = $element_to_clone.clone();
 
-			        return {
-			          results: data.items,
-			          pagination: {
-			            more: (params.page * 30) < data.total_count
-			          }
-			        };
-			      },
-			      cache: true
-			    },
-			    placeholder: 'Search for a repository',
-			    escapeMarkup: function (markup) { return markup; }, // let our custom formatter work
-			    minimumInputLength: 1,
-			    width: "100%"
-			    
-	     
+               $new_element.find('.del').removeClass('hidden disabled').addClass('enabled');
 
-	 });*/
+               $new_element.insertAfter($element_to_clone);
 
-        
-        
+               $(".poin_kabkota").select2({
+                	                placeholder: "Pilih Kabupaten / Kota",
+                	               
+                	                width: "100%"
+               	});
+
+               $(".poin_kabkota").last().next().next().remove();
+
+               return false;
+        });
+
+        $("body").on("click", ".del.enabled", function(event) {
+	        var $parent = $(this).parent();
+	        $parent.remove();
+	        return false;
+   		});
 		
 		
 		
