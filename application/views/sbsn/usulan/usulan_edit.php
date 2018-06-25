@@ -148,13 +148,42 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
+                         <div class="form-group">
+                        <div class="stuffs_to_clone ">
+                          
+                          			<label for="poin" class="col-sm-2 control-label">Poin Lokasi </label>
+                                        	<div class="col-sm-8">
+                                       <div class="stuff disabled">
+
+                                          <select name="poin_kabkota[]" id="poin_kabkota" class="poin_kabkota " disabled="disabled">
+			                           
+			                                <?php $key = array($detail->kabkota);
+			                                $a = array();
+			                                $a = explode(",", $detail->kabkota);
+			                                $key2 = array("1", "2", "4", "3");
+			                                 
+
+
+			                                foreach($kabkota as $row ){ ?>
+			                                <option value="<?php echo $row['id']; ?>" <?php echo in_array($row['id'] , $a) ? 'selected' : '' ?>><?php echo $row['nama']; ?>
+			                                 </option>
+			                                 <?php } ?>
+			                                 </select>
+                                           <div class="col-sm-1 del disabled hidden"></div>
+                                           <div class="clone" title="Create new item">Tambah Poin</div>
+                                       </div>
+                                       
+                                       </div>
+                        </div>
+                        </div>
+
+                       <!--  <div class="form-group">
                             <label for="kabkota" class="col-sm-2 control-label">Poin </label>
                             <div class="col-sm-9">
                               <select name="kabkota" id="e10" class="form-control" >
                               </select>
                             </div>
-                        </div>
+                        </div> -->
 
                         <!-- <div class="form-group">
                         <fieldset id="timesheet-rows">
@@ -245,6 +274,47 @@
 	</div>
 </div>
 
+<style type="text/css">
+	/*
+	.hidden {
+    display:none;
+}
+
+.stuffs_to_clone {
+    position:relative;
+    border:3px outset green;
+    padding:30px;
+}*/
+
+.del, 
+.clone
+{
+    z-index:999;
+    cursor:pointer;
+    background-position:left center;
+    background-repeat:no-repeat;
+    min-width:5px;
+    min-height:5px;
+    padding-left:26px;
+}
+
+/*.clone {
+    background-image:url('http://cdn1.iconfinder.com/data/icons/musthave/24/Copy.png');
+}
+*/
+.del {
+    position:relative;
+    float:right;
+    bottom:0px;    
+    right:0px;
+    background-image:url('http://cdn1.iconfinder.com/data/icons/fugue/bonus/icons-24/cross.png');
+}
+
+
+
+
+</style>
+
 <script>
     $(document).ready(function(){
 		$("#id_instansi").select2({
@@ -289,7 +359,7 @@
 
          $("#poin_kabkota").select2({
             placeholder: "Pilih Kabupaten / Kota",
-            multiple:true,
+            //disabled: true,
             width: "100%"
         });
 
@@ -311,6 +381,15 @@
         
      	 });
 
+        $("#id_kategori_proyek").change(function(){
+        	var $id_cek = document.getElementById("id_kategori_proyek").value;
+	       if($id_cek == "5" || $id_cek == "6" || $id_cek == "10" || $id_cek == "11" || $id_cek == "12" || $id_cek == "13" || $id_cek == "16" || $id_cek == "17" || $id_cek == "18" || $id_cek == "27"){
+	       	 $('#poin_kabkota').removeAttr('disabled');
+	       }else{
+	       	 $('#poin_kabkota').attr('disabled', 'disabled');
+	       }
+	     });
+
         $("#e10").select2({
 	          ajax: {
 			    url: "<?php echo base_url(); ?>usulan/ambil_poin_kabkota/",
@@ -322,6 +401,36 @@
        function tambah_poin_kabkota(argument) {
        	// body...
        }
+
+       $(document).ready(function() {
+
+           $(".clone").click(function() {
+               var
+               $self = $(this),
+                   $element_to_clone = $self.prev(),
+                   $wrapper_parent_element = $self.parent(),
+                   $new_element = $element_to_clone.clone();
+
+               $new_element.find('.del').removeClass('hidden disabled').addClass('enabled');
+
+               $new_element.insertAfter($element_to_clone);
+               	$(".poin_kabkota").select2({
+               	    placeholder: "Pilih Kabupaten / Kota",
+               	  
+               	    width: "100%"
+               	});
+
+               	$(".poin_kabkota").last().next().next().remove();
+
+               return false;
+           });
+
+           $("body").on("click", ".del.enabled", function(event) {
+               var $parent = $(this).parent();
+               $parent.remove();
+               return false;
+           });
+       });
 
  
 		 function test() {

@@ -1591,13 +1591,29 @@ class Usulan extends CI_Controller {
 				//$marker['onclick'] = 'alert("tes")';
 				$this->googlemaps->add_marker($marker);
 			}
+
+
+			$this->googlemaps->initialize($config);
+
+			$polyline = array();
+			$polyline['points'] = 
+							array(
+							'5.546182, 95.319054',
+						    '0.5070677, 101.4477793');
+
+			/*$polyline['points'] = 
+							array(
+							'5.546182, 95.319054',
+						    '0.5070677, 101.4477793');*/
+			$polyline['infowindow_content'] =  'Hello World';
+			$this->googlemaps->add_polyline($polyline);
 			$data['peta_3'] = $this->googlemaps->create_map();	
 
 
 			$config['center'] = '-0.789275, 113.921327';
 			$config['zoom'] = '4';
 			$config['map_name'] = 'peta';
-
+			
 
 			$marker = array();
 			$marker['position'] = '0.7893, 113.9213';
