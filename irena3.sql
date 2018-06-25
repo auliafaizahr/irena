@@ -347,7 +347,7 @@ CREATE TABLE IF NOT EXISTS `irena_arsip` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=286 DEFAULT CHARSET=latin1;
 
--- Dumping data for table irena3.irena_arsip: ~185 rows (approximately)
+-- Dumping data for table irena3.irena_arsip: ~186 rows (approximately)
 DELETE FROM `irena_arsip`;
 /*!40000 ALTER TABLE `irena_arsip` DISABLE KEYS */;
 INSERT INTO `irena_arsip` (`id`, `id_jenis`, `id_status`, `id_tingkat`, `no`, `perihal`, `dari`, `tgl`, `ringkasan`, `keywords`, `berkas`, `tgl_terima`, `selesai_cat`, `selesai_by`, `selesai_date`, `update_by`, `update_date`) VALUES
@@ -1220,7 +1220,7 @@ CREATE TABLE IF NOT EXISTS `irena_arsip_pln` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
--- Dumping data for table irena3.irena_arsip_pln: ~0 rows (approximately)
+-- Dumping data for table irena3.irena_arsip_pln: ~1 rows (approximately)
 DELETE FROM `irena_arsip_pln`;
 /*!40000 ALTER TABLE `irena_arsip_pln` DISABLE KEYS */;
 INSERT INTO `irena_arsip_pln` (`id`, `id_usulan_proyek`, `id_greenbook_proyek`, `id_bluebook_proyek`, `id_dk_proyek`, `id_la_proyek`, `id_arsip_status`, `id_arsip_file`) VALUES
@@ -1556,7 +1556,7 @@ CREATE TABLE IF NOT EXISTS `irena_dk_kabkota` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
--- Dumping data for table irena3.irena_dk_kabkota: ~0 rows (approximately)
+-- Dumping data for table irena3.irena_dk_kabkota: ~1 rows (approximately)
 DELETE FROM `irena_dk_kabkota`;
 /*!40000 ALTER TABLE `irena_dk_kabkota` DISABLE KEYS */;
 INSERT INTO `irena_dk_kabkota` (`id`, `id_dk_proyek`, `id_instansi`, `id_kabkota`, `id_gb`, `id_bb`, `id_lender`) VALUES
@@ -1651,7 +1651,7 @@ CREATE TABLE IF NOT EXISTS `irena_dk_prov` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
--- Dumping data for table irena3.irena_dk_prov: ~0 rows (approximately)
+-- Dumping data for table irena3.irena_dk_prov: ~1 rows (approximately)
 DELETE FROM `irena_dk_prov`;
 /*!40000 ALTER TABLE `irena_dk_prov` DISABLE KEYS */;
 INSERT INTO `irena_dk_prov` (`id`, `id_dk_proyek`, `id_instansi`, `id_prov`, `id_gb`, `id_bb`, `id_lender`) VALUES
@@ -1999,7 +1999,7 @@ CREATE TABLE IF NOT EXISTS `irena_gb_kabkota` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
--- Dumping data for table irena3.irena_gb_kabkota: ~0 rows (approximately)
+-- Dumping data for table irena3.irena_gb_kabkota: ~1 rows (approximately)
 DELETE FROM `irena_gb_kabkota`;
 /*!40000 ALTER TABLE `irena_gb_kabkota` DISABLE KEYS */;
 INSERT INTO `irena_gb_kabkota` (`id`, `id_gb_proyek`, `id_gb`, `id_bb`, `id_kabkota`, `id_instansi`, `id_lender`) VALUES
@@ -2129,7 +2129,7 @@ CREATE TABLE IF NOT EXISTS `irena_gb_prov` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
--- Dumping data for table irena3.irena_gb_prov: ~0 rows (approximately)
+-- Dumping data for table irena3.irena_gb_prov: ~1 rows (approximately)
 DELETE FROM `irena_gb_prov`;
 /*!40000 ALTER TABLE `irena_gb_prov` DISABLE KEYS */;
 INSERT INTO `irena_gb_prov` (`id`, `id_gb_proyek`, `id_gb`, `id_bb`, `id_prov`, `id_instansi`, `id_lender`) VALUES
@@ -2267,7 +2267,7 @@ CREATE TABLE IF NOT EXISTS `irena_hibah_log` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
 
--- Dumping data for table irena3.irena_hibah_log: ~11 rows (approximately)
+-- Dumping data for table irena3.irena_hibah_log: ~12 rows (approximately)
 DELETE FROM `irena_hibah_log`;
 /*!40000 ALTER TABLE `irena_hibah_log` DISABLE KEYS */;
 INSERT INTO `irena_hibah_log` (`id`, `id_proyek`, `id_log_kategori`, `id_arsip`, `nama`, `deskripsi`, `update_by`, `update_date`) VALUES
@@ -2889,7 +2889,7 @@ CREATE TABLE IF NOT EXISTS `irena_kecamatan` (
   KEY `id_kabkota` (`id_kabkota`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6981 DEFAULT CHARSET=latin1;
 
--- Dumping data for table irena3.irena_kecamatan: ~6.921 rows (approximately)
+-- Dumping data for table irena3.irena_kecamatan: ~6.980 rows (approximately)
 DELETE FROM `irena_kecamatan`;
 /*!40000 ALTER TABLE `irena_kecamatan` DISABLE KEYS */;
 INSERT INTO `irena_kecamatan` (`id`, `id_kabkota`, `nama`, `latitude`, `longitude`) VALUES
@@ -9887,7 +9887,7 @@ CREATE TABLE IF NOT EXISTS `irena_la_kabkota` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
--- Dumping data for table irena3.irena_la_kabkota: ~0 rows (approximately)
+-- Dumping data for table irena3.irena_la_kabkota: ~1 rows (approximately)
 DELETE FROM `irena_la_kabkota`;
 /*!40000 ALTER TABLE `irena_la_kabkota` DISABLE KEYS */;
 INSERT INTO `irena_la_kabkota` (`id`, `id_la_proyek`, `id_kabkota`, `id_bb`, `id_gb`, `id_instansi`, `id_lender`) VALUES
@@ -9926,7 +9926,7 @@ CREATE TABLE IF NOT EXISTS `irena_la_prov` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
--- Dumping data for table irena3.irena_la_prov: ~0 rows (approximately)
+-- Dumping data for table irena3.irena_la_prov: ~1 rows (approximately)
 DELETE FROM `irena_la_prov`;
 /*!40000 ALTER TABLE `irena_la_prov` DISABLE KEYS */;
 INSERT INTO `irena_la_prov` (`id`, `id_la_proyek`, `id_prov`, `id_bb`, `id_gb`, `id_instansi`, `id_lender`) VALUES
@@ -10153,7 +10153,7 @@ CREATE TABLE IF NOT EXISTS `irena_provinsi` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Dumping data for table irena3.irena_provinsi: ~34 rows (approximately)
+-- Dumping data for table irena3.irena_provinsi: ~35 rows (approximately)
 DELETE FROM `irena_provinsi`;
 /*!40000 ALTER TABLE `irena_provinsi` DISABLE KEYS */;
 INSERT INTO `irena_provinsi` (`id`, `nama`, `latitude`, `longitude`) VALUES
@@ -11605,7 +11605,7 @@ CREATE TABLE IF NOT EXISTS `irena_sbsn_proyek_dpp` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
--- Dumping data for table irena3.irena_sbsn_proyek_dpp: ~0 rows (approximately)
+-- Dumping data for table irena3.irena_sbsn_proyek_dpp: ~1 rows (approximately)
 DELETE FROM `irena_sbsn_proyek_dpp`;
 /*!40000 ALTER TABLE `irena_sbsn_proyek_dpp` DISABLE KEYS */;
 INSERT INTO `irena_sbsn_proyek_dpp` (`id`, `id_proyek`, `id_dpp`, `judul`, `nilai`, `update_by`, `update_date`) VALUES
@@ -11975,9 +11975,9 @@ CREATE TABLE IF NOT EXISTS `irena_user_log` (
   `on_off` bit(1) DEFAULT NULL,
   `update_date` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=190 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=185 DEFAULT CHARSET=latin1;
 
--- Dumping data for table irena3.irena_user_log: ~153 rows (approximately)
+-- Dumping data for table irena3.irena_user_log: ~184 rows (approximately)
 DELETE FROM `irena_user_log`;
 /*!40000 ALTER TABLE `irena_user_log` DISABLE KEYS */;
 INSERT INTO `irena_user_log` (`id`, `id_user`, `on_off`, `update_date`) VALUES
@@ -12164,12 +12164,7 @@ INSERT INTO `irena_user_log` (`id`, `id_user`, `on_off`, `update_date`) VALUES
 	(181, 20, b'1', '2018-05-15 11:11:15'),
 	(182, 20, b'1', '2018-05-17 04:12:49'),
 	(183, 20, b'1', '2018-05-18 06:13:37'),
-	(184, 20, b'1', '2018-05-18 08:58:20'),
-	(185, 20, b'1', '2018-05-21 03:50:36'),
-	(186, 20, b'1', '2018-05-22 04:47:58'),
-	(187, 20, b'1', '2018-05-22 06:22:16'),
-	(188, 20, b'1', '2018-05-23 04:42:07'),
-	(189, 20, b'1', '2018-05-23 06:30:51');
+	(184, 20, b'1', '2018-05-18 08:58:20');
 /*!40000 ALTER TABLE `irena_user_log` ENABLE KEYS */;
 
 -- Dumping structure for table irena3.irena_usulan_adm
@@ -12847,7 +12842,7 @@ CREATE TABLE IF NOT EXISTS `irena_usulan_pln_log` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
--- Dumping data for table irena3.irena_usulan_pln_log: ~0 rows (approximately)
+-- Dumping data for table irena3.irena_usulan_pln_log: ~3 rows (approximately)
 DELETE FROM `irena_usulan_pln_log`;
 /*!40000 ALTER TABLE `irena_usulan_pln_log` DISABLE KEYS */;
 INSERT INTO `irena_usulan_pln_log` (`id`, `id_proyek`, `id_log_kategori`, `id_arsip`, `nama`, `deskripsi`, `update_by`, `update_date`) VALUES

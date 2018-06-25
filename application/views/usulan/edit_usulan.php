@@ -477,7 +477,7 @@
             form_data.append('status_usulan', status_usulan);
             form_data.append('id_usulan_hub', id_usulan_hub);
             form_data.append('id_provinsi', provinsi);
-            form_data.append('id_kabkota', id_kabkota);
+            form_data.append('id_kabkota', kabkota);
                         console.log(lokasi);
            
 

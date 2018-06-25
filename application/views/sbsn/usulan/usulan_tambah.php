@@ -103,37 +103,6 @@
                         </div>
                     </div>
 
-                     <div class="form-group timesheet_2-rows" >
-                        <fieldset id="timesheet-rows">
-                            
-
-                            <div class="timesheet-row">
-
-                              
-                                <label class="col-sm-3 control-label" >Poin :    </label>
-                                <div class="col-sm-8">
-                                    <select name="poin_kabkota[]"   class="poin_kabkota"  required>
-
-                                   <?php foreach($kabkota as $row ){ ?>
-                                    <option value="<?php echo $row['id']; ?>"><?php echo $row['nama']; ?>
-                                     </option>
-                                     <?php } ?>
-                                    </select>
-
-                                </div>
-                                 <div class="del disabled hidden"> <input type="button" name="clone" value="Hapus"></div>
-
-                              
-                             
-
-								                            
-
-                            </div>
-                             <!-- <input  type="button" id="add-row" name="add-row" value="Add row" />     -->
-                             <div class="clone"  title="Create new item"><input type="button" name="clone" value="Tambah"></div>
-                           
-                        </fieldset>
-                        </div>
 						
 						<div class="form-group">
 							<label for="single_multi" class="col-sm-3 control-label">Pelaksanaan Proyek</label>
@@ -185,18 +154,6 @@
 	</div>
 </div>
 
-<style type="text/css">
-	
-	.del {
-    position:relative;
-    float:right;
-    bottom:0px;    
-    right:0px;
-    background-image:url();
-	}
-
-</style>
-
 
 <script>
     $(document).ready(function(){
@@ -238,63 +195,8 @@
             multiple:true,
             width: "100%"
         });
-
-         
-          $(".poin_kabkota").select2({
-             placeholder: "Pilih Kabupaten / Kota",
-            
-             width: "100%"
-         });
-
-
-         jQuery(function($){
-             var $button = $('#add-row'),
-                 $row = $('.timesheet-row').clone();
-                // $tombol_hapus = "<div><a href="#" class="remove_field">Remove</a></div>";
-
-             $button.click(function(){
-             	
-                 $row.clone().insertBefore( $button ).append('<div><a href="#" class="remove_field">Remove</a></div>');
-               
-
-                 $(".poin_kabkota").select2({
-                 	                placeholder: "Pilih Kabupaten / Kota",
-                 	               
-                 	                width: "100%"
-                	});
-                	$(".poin_kabkota").last().next().next().remove();
-
-
-             });
-         });
-
-        $(".clone").click(function() {
-               var
-               $self = $(this),
-                   $element_to_clone = $self.prev(),
-                   $wrapper_parent_element = $self.parent(),
-                   $new_element = $element_to_clone.clone();
-
-               $new_element.find('.del').removeClass('hidden disabled').addClass('enabled');
-
-               $new_element.insertAfter($element_to_clone);
-
-               $(".poin_kabkota").select2({
-                	                placeholder: "Pilih Kabupaten / Kota",
-                	               
-                	                width: "100%"
-               	});
-
-               $(".poin_kabkota").last().next().next().remove();
-
-               return false;
-        });
-
-        $("body").on("click", ".del.enabled", function(event) {
-	        var $parent = $(this).parent();
-	        $parent.remove();
-	        return false;
-   		});
+        
+        
 		
 		
 		
@@ -335,11 +237,9 @@
 			var latar_belakang 				= $("#latar_belakang").val();
 			var tujuan 						= $("#tujuan").val();
 			var ruang_lingkup 				= $("#ruang_lingkup").val();
-			var lokasi 						= $("#lokasi").val();
+			var lokasi 				= $("#lokasi").val();
 			var id_provinsi                    = $("#provinsi").val();
             var id_kabkota                    = $("#kabkota").val();
-            var poin_kabkota                    =  $(".poin_kabkota").serializeArray();
-			console.log(poin_kabkota);
 			
             var form_data 	= new FormData();
  
@@ -357,7 +257,6 @@
 			form_data.append('id_instansi', id_instansi);
 			 form_data.append('id_provinsi', id_provinsi);
             form_data.append('id_kabkota', id_kabkota);
-            form_data.append('poin_kabkota', poin_kabkota);
 
 
             $.ajax({

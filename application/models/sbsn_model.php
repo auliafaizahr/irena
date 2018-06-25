@@ -44,14 +44,6 @@ class Sbsn_model extends CI_Model
 		
 	}
 
-		 function hapus_dari_poin($a)
-	{
-
-		$this->db->where('id_usulan', $a);
-		return $this->db->delete('irena_sbsn_usulan_jalan_kabkota');
-		
-	}
-
 		 function hapus_dari_usulan_prov($a)
 	{
 
