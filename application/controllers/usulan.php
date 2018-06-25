@@ -1595,18 +1595,77 @@ class Usulan extends CI_Controller {
 
 			$this->googlemaps->initialize($config);
 
-			$polyline = array();
-			$polyline['points'] = 
-							array(
-							'5.546182, 95.319054',
-						    '0.5070677, 101.4477793');
+			$sql1 	= "SELECT COUNT(DISTINCT id_usulan) FROM irena_sbsn_jalan_usulan_poin_kabkota_view ";
+			$sql2	= "SELECT id_usulan FROM irena_sbsn_jalan_usulan_poin_kabkota_view GROUP BY id_usulan";
+			$b 		= $this->db->query($sql1);
+			$c 		= $this->db->query($sql2);
+			$isi_array = array();
+			$isi_array1 = array();
+
+
+
+
+			
+
+			
+
+			foreach ($c as $key => $value) {
+				
+				$sql3	= "SELECT * FROM irena_sbsn_jalan_usulan_poin_kabkota_view 	WHERE id_usulan = '$value'   ORDER BY urut";
+				$sql4	= "SELECT COUNT(urut) FROM irena_sbsn_jalan_usulan_poin_kabkota_view 	WHERE id_usulan = '$value'   ORDER BY urut";
+
+				$d 		= $this->db->query($sql3);
+				$e 		= $this->db->query($sql4);
+
+				for ($i=0; $i < $e-1 ; $i++) { //looping sebanyak nomor urut
+					# code...
+
+					$isi_array1[$i] = 
+
+				}
+
+
+			}
+
+			/*for ($a=0; $a < b ; $a++) { //ini di akhir aja bisa, cuma untuk nampung kalo semuanya udah tergabung buat dipanggil buat pointing polyline
+				
+				
+
+
+
+			}
+*/
+				
+			$isi 		= array();
+			$isi[0]		= array('5.546182, 95.319054' , '0.5070677, 101.4477793' , '-0.853278, 100.3947116');
+			$isi[1]		= array('-7.1524786, 111.8869293', '-7.4704747, 112.4401329');
+			$isi[2]		= array('-7.1652437, 112.6519882', '-7.6043721, 111.8993478');
+
+			for ($i=0; $i < 3; $i++) { 
+				$polyline = array();
+				
+				/*$polyline['points'] = 
+								array(
+									'5.546182, 95.319054',
+							    	'0.5070677, 101.4477793',
+							    	'-0.853278, 100.3947116'
+							    	);*/
+
+				$polyline['points'] = $isi[$i];
+								
+
+				$polyline['infowindow_content'] =  'Hello World';
+				$this->googlemaps->add_polyline($polyline);
+			}
+
+
+			
 
 			/*$polyline['points'] = 
 							array(
 							'5.546182, 95.319054',
 						    '0.5070677, 101.4477793');*/
-			$polyline['infowindow_content'] =  'Hello World';
-			$this->googlemaps->add_polyline($polyline);
+			
 			$data['peta_3'] = $this->googlemaps->create_map();	
 
 

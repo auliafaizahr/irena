@@ -132,6 +132,9 @@
                        
                     </fieldset>
                     </div>
+<<<<<<< HEAD
+>>>>>>> parent of 5923296... poin done
+=======
 >>>>>>> parent of 5923296... poin done
 						
 						<div class="form-group">
@@ -295,6 +298,9 @@
 
 	 });*/
 
+<<<<<<< HEAD
+>>>>>>> parent of 5923296... poin done
+=======
 >>>>>>> parent of 5923296... poin done
         
         
