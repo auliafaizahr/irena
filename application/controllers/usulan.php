@@ -653,7 +653,7 @@ class Usulan extends CI_Controller {
 		$this->load->model('Usulan_model');
 		$this->load->model('Greenbook_model');
 		$this->load->model('Bluebook_model');
-		$a = $this->input->post('id');
+		$a = $this->input->post('q');
 		
 		
 		$data['kabkota']= $this->Greenbook_model->ambil_kabkota();
@@ -661,7 +661,7 @@ class Usulan extends CI_Controller {
 		
 		
 		
-		return $data;
+		return json_encode($data);
        
        // /$this->load->view('templates/footer1');
 
