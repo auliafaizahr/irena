@@ -1595,53 +1595,124 @@ class Usulan extends CI_Controller {
 
 			$this->googlemaps->initialize($config);
 
-			$sql1 	= "SELECT COUNT(DISTINCT id_usulan) FROM irena_sbsn_jalan_usulan_poin_kabkota_view ";
+			$sql1 	= "SELECT DISTINCT id_usulan FROM irena_sbsn_jalan_usulan_poin_kabkota_view ";
+			$sql6 	= "SELECT COUNT(DISTINCT id_usulan) FROM irena_sbsn_jalan_usulan_poin_kabkota_view ";
 			$sql2	= "SELECT id_usulan FROM irena_sbsn_jalan_usulan_poin_kabkota_view GROUP BY id_usulan";
-			$b 		= $this->db->query($sql1);
-			$c 		= $this->db->query($sql2);
+			$sql3	= "SELECT * FROM irena_sbsn_jalan_usulan_poin_kabkota_view 	ORDER BY id_usulan";
+			$sql7	= "SELECT * FROM irena_sbsn_jalan_usulan_poin_kabkota_view 	";
+
+			$sql5	= "SELECT id_usulan FROM irena_sbsn_jalan_usulan_poin_kabkota_view 	  ORDER BY urut";
+			$sql4	= "SELECT COUNT(urut) FROM irena_sbsn_jalan_usulan_poin_kabkota_view 	 ORDER BY urut";
+
+			$d 		= $this->db->query($sql3)->result_array(); //ambil semua field diurutkan berdasarkan id_usulan return nya array
+			//$e 		= $this->db->query($sql5)->row(); //ambil id_usulan nya aja yg diurutin berdasarkan urutan, return row
+			$b 		= $this->db->query($sql6)->num_rows(); //ngitung count distinct id_usulan, return jumlah baris aja, ini dobel karena di sql nya udah count distinct
+			$c 		= $this->db->query($sql2)->row();  //ambil id_usulan group by id_usulan, return nya row
+			$f		= $this->db->query($sql1)->num_rows(); //ambil data id_usulan , datanya bukan jumlahnya, return nya jumlah baris -> ini dobel, karena udah 
+			$g		= $this->db->query($sql1)->result_array(); //ambil data id_usulan , datanya bukan jumlahnya, return nya jumlah baris -> ini dobel, karena udah 
+			$h		= $this->db->query($sql7)->result_array(); //ambil data id_usulan , datanya bukan jumlahnya, return nya jumlah baris -> ini dobel, karena udah 
 			$isi_array = array();
 			$isi_array1 = array();
 
+			$banyak_usulan = $b;
+
+			$array_koordinat = array();
 
 
+			//for untuk jumlah id_usulan yang ada di tabel untuk dibuat array utama , for untuk array utama doang
+			for ($i=0; $i < $f  ; $i++) {
 
-			
 
-			
+				//sql untuk ngambil jumlah baris id_usulan tertentu yg diurutkan berdasarkan id_urut
+				$sql9 	= "SELECT DISTINCT id_usulan FROM irena_sbsn_jalan_usulan_poin_kabkota_view  ";
+				$sql10 	= "SELECT * FROM irena_sbsn_jalan_usulan_poin_kabkota_view WHERE id_usulan =  ORDER BY urut ";
 
-			foreach ($c as $key => $value) {
+				$e 		= $this->db->query($sql9)->result_array(); 
+				$q 		= $this->db->query($sql9)->num_rows(); 
+
+				$arr_id_usulan = array();
+				$arr_koor = array();
+				# code...
+
 				
-				$sql3	= "SELECT * FROM irena_sbsn_jalan_usulan_poin_kabkota_view 	WHERE id_usulan = '$value'   ORDER BY urut";
-				$sql4	= "SELECT COUNT(urut) FROM irena_sbsn_jalan_usulan_poin_kabkota_view 	WHERE id_usulan = '$value'   ORDER BY urut";
 
-				$d 		= $this->db->query($sql3);
-				$e 		= $this->db->query($sql4);
 
-				for ($i=0; $i < $e-1 ; $i++) { //looping sebanyak nomor urut
+				//pindahin id_usulan kesini, untuk dijadiin parameter di nextnya
+				for ($k=0; $k < $f ; $k++) { 
 					# code...
+					$arr_id_usulan[$k] = $g[$k]['id_usulan'];
+				}
 
-					$isi_array1[$i] = 
-
+				for ($k=0; $k < $f ; $k++) { 
+					# code...
+					//print_r($arr_id_usulan[$k]);
 				}
 
 
+			
+		}
+		
+			$array_koordinat = array();
+
+			$banyak_id = sizeof($arr_id_usulan);
+			//print_r('<pre>');
+			print_r($banyak_id);
+
+					$r = 0;
+			
+
+			$arr_koor4 = array();
+			$arr_koor3 = array();
+			
+					//print_r('<pre>');
+			for ($b2=0; $b2 < $banyak_id; $b2++) { 
+
+
+					$a1 	= "SELECT * FROM irena_sbsn_jalan_usulan_poin_kabkota_view WHERE id_usulan = '$arr_id_usulan[$b2]'";
+					$t 		= $this->db->query($a1)->result_array(); 
+					
+					$t1 	= $this->db->query($a1)->num_rows(); 
+
+					print_r($t1);
+					
+					
+				
+
+					for ($p=0; $p < $t1 ; $p++) { 
+						
+						//$arr_koor[$b2][$p] = "'"  . $t[$p]['lat'] . "," .  $t[$p]['longitude'] . "'" ;
+						//$arr_koor[$b2][$p] =  $t[$p]['lat'] . "," .  $t[$p]['longitude']  ;
+						//$arr_koor[$b2][$p] =  explode("," , ($t[$p]['lat']. " , " . $t[$p]['longitude']));
+						//$arr_koor[$b2][$p] =  implode("," , array($t[$p]['lat'] .", ". $t[$p]['longitude']));
+						$arr_koor[$b2][$p]	 	 =  implode("," , array($t[$p]['lat'] .", ". $t[$p]['longitude']));
+						//$arr_koor[$b2][$p] 		=  explode("," , $t[$p]['lat'] ."," .  $t[$p]['longitude']);
+
+						
+
+						//$arr_koor4[$b2][$p] 	= array_push($arr_koor4, $arr_koor[$b2][$p]);
+						//print_r($arr_koor[$b2][$p]);
+
+					}
+
+				
+
 			}
 
-			/*for ($a=0; $a < b ; $a++) { //ini di akhir aja bisa, cuma untuk nampung kalo semuanya udah tergabung buat dipanggil buat pointing polyline
-				
-				
 
 
-
-			}
-*/
 				
 			$isi 		= array();
 			$isi[0]		= array('5.546182, 95.319054' , '0.5070677, 101.4477793' , '-0.853278, 100.3947116');
 			$isi[1]		= array('-7.1524786, 111.8869293', '-7.4704747, 112.4401329');
 			$isi[2]		= array('-7.1652437, 112.6519882', '-7.6043721, 111.8993478');
+			print_r('<pre>');
+			print_r($arr_koor[1]);
+			// print_r($arr_koor);
+			print_r($isi);
+			// $tes_array 	= array();
 
-			for ($i=0; $i < 3; $i++) { 
+
+			for ($i=0; $i < $banyak_id; $i++) { 
 				$polyline = array();
 				
 				/*$polyline['points'] = 
@@ -1649,9 +1720,11 @@ class Usulan extends CI_Controller {
 									'5.546182, 95.319054',
 							    	'0.5070677, 101.4477793',
 							    	'-0.853278, 100.3947116'
-							    	);*/
+				);*/
 
-				$polyline['points'] = $isi[$i];
+				$polyline['points'] = $arr_koor[$i];
+				$polyline['onclick'] = 'bukaDetailgabung_1('.$baris->id_lokasi.')';
+
 								
 
 				$polyline['infowindow_content'] =  'Hello World';
@@ -1701,6 +1774,7 @@ class Usulan extends CI_Controller {
 		$this->load->view('Peta/map_gabung_1', $data);
 		$this->load->view('templates/footer'); 
 	}
+
 
 
 
@@ -2750,5 +2824,55 @@ class Usulan extends CI_Controller {
 
 	
 }
+
+
+/*
+			foreach ($c as  $value) {
+				
+				$sql3	= "SELECT * FROM irena_sbsn_jalan_usulan_poin_kabkota_view 	WHERE id_usulan = '$value'   ORDER BY urut";
+
+				$sql5	= "SELECT id_usulan FROM irena_sbsn_jalan_usulan_poin_kabkota_view 	WHERE id_usulan = '$value'   ORDER BY urut";
+				$sql4	= "SELECT COUNT(urut) FROM irena_sbsn_jalan_usulan_poin_kabkota_view 	WHERE id_usulan = '$value'   ORDER BY urut";
+
+				$d 		= $this->db->query($sql3)->result_array();
+				$e 		= $this->db->query($sql5)->row();
+				//print_r($d);
+				print_r($e);
+				//$e 		= $this->db->query($sql4);
+
+				$i 		= 0;
+
+				//coba pakai for bukan foreach
+
+
+
+				/*foreach ($d as  $value2) {
+
+					$sql5	= "SELECT * FROM irena_sbsn_jalan_usulan_poin_kabkota_view 	WHERE id_usulan = '$value2'   ORDER BY urut";
+					$f 		= $this->db->query($sql5)->result_array();
+
+					$isi_array[$i] = $value2['lat']; //ini error katanya try to get property non object
+				}*/
+/*/*
+				$i++;
+
+
+			}*/
+
+			//for ($i=0; $i < ; $i++) { 
+				# code...
+			//}
+
+			//print_r($banyak_usulan);
+			//print_r($isi_array1);
+//*/*/
+			/*for ($a=0; $a < b ; $a++) { //ini di akhir aja bisa, cuma untuk nampung kalo semuanya udah tergabung buat dipanggil buat pointing polyline
+				
+				
+
+
+
+			}
+*/
 
 
