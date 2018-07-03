@@ -166,16 +166,22 @@ class Sbsn extends CI_Controller {
 			 	  ];
 			 	}
 
-			 	$poin_kabkota			= $this->input->post('poin_kabkota');
+
+				$poin_kabkota = $this->input->post('poin_kabkota');
+			 	//$id_kategori = $this->input->post('id_kategori_proyek');
+	 			$array_poin = explode(",", $poin_kabkota);
+
 			 	$data6 = [];
-			 	foreach($poin_kabkota as $kabkota) {
-			 	  $data6[] = [
+			 	$i = 1;
+			 	foreach($array_poin as $kabkota) {
+
+			 	$data6[] = [
 			 	    'id_usulan' => $id_ ,
+			 	    'id_kategori' => $id_kategori ,
+			 	    'id_urut' => $i++,
 			 	    'id_kabkota' => $kabkota,
-			 	    
 			 	  ];
 			 	}
-
 
 
 
@@ -184,6 +190,7 @@ class Sbsn extends CI_Controller {
 			 	$this->db->insert_batch('irena_sbsn_usulan_jalan_kabkota', $data6);
 	 			$this->db->insert_batch('irena_sbsn_usulan_kabkota', $data5);
 	 			$this->db->insert_batch('irena_sbsn_usulan_lokasi', $data2);
+	 			
 	 			
 
 				

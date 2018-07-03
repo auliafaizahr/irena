@@ -25,7 +25,7 @@
 			<td><?php echo $row->dpp; ?></td>
 			<td><?php echo $row->kategori_proyek; ?></td>
 			<td><a href="#" onclick="detail_list('sbsn/usulan_detail/<?php echo $row->id_proyek; ?>');"><?php echo $row->judul; ?></a></td>
-			<td><?php echo number_format(($row->nilai/1000000),2); ?></td>
+			<td><?php echo number_format(($row->nilai),2); ?></td>
 			<td><?php 	if($row->single_multi == "0"){ 
 							echo "<span class='label '>SYC</span>"; 
 						}else{ 

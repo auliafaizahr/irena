@@ -148,14 +148,20 @@
                             </div>
                         </div>
 
-                       <!--  <div class="form-group">
-                            <label for="kabkota" class="col-sm-2 control-label">Poin </label>
-                            <div class="col-sm-9">
-                              <select name="kabkota" id="e10" class="form-control" >
-                              </select>
-                            </div>
-                        </div> -->
+                 
+                        <?php
 
+                        $sql1 = "SELECT DISTINCT id_kabkota FROM irena_sbsn_usulan_jalan_kabkota  WHERE id_usulan = '$usulan->id' ORDER BY id_urut";
+                        $d 		= $this->db->query($sql1)->num_rows();
+                        $a 		= $this->db->query($sql1)->result_array();
+
+
+
+                         if ($d ) {
+                        	# code...
+                        } ?>
+
+                        <div id="$d"> </div>
                          <div class="form-group timesheet_2-rows" >
                         <fieldset id="timesheet-rows">
                             
@@ -294,19 +300,19 @@
 		});
 
 
-          $("#provinsi").select2({
+        $("#provinsi").select2({
             placeholder: "Pilih Provinsi",
             multiple:true,
             width: "100%"
         });
         
-          $("#kabkota").select2({
+        $("#kabkota").select2({
             placeholder: "Pilih Kabupaten / Kota",
             multiple:true,
             width: "100%"
         });
 
-         $(".poin_kabkota").select2({
+        $(".poin_kabkota").select2({
             placeholder: "Pilih Kabupaten / Kota",
            
             width: "100%"
@@ -318,20 +324,13 @@
                 $row = $('.timesheet-row').clone(),
                 $row_2 = $('.timesheet-row');
 
-        	
-
              var $test = '<div><a href="#" class="remove_field">Remove</a></div>'; 
-               // $tombol_hapus = "<div><a href="#" class="remove_field">Remove</a></div>";
 
             $button.click(function(){
             	var $tambah =  $row.clone().append('<div><a href="#" class="remove_field">Remove</a></div>').insertAfter( $button );
-            	
-          	//var $tambah =  $row.append('<div><a href="#" class="remove_field">Remove</a></div>').insertAfter( $button ).clone();
+          
           		$tambah.clone();
-          	// $row.clone().insertAfter( $button ).append('<div><a href="#" class="remove_field">Remove</a></div>');
-                //$row_2.insertBefore( $button ).append('<div><a href="#" class="remove_field">Remove</a></div>');
-                //$row.append($test);
-              
+        
                 $(".poin_kabkota").select2({
                 	                placeholder: "Pilih Kabupaten / Kota",
                 	               
@@ -343,7 +342,9 @@
             });
         });
 
-         $("#id_kategori_proyek").change(function(){
+
+
+        $("#id_kategori_proyek").change(function(){
         	var $id_cek = document.getElementById("id_kategori_proyek").value;
 	       if($id_cek == "5" || $id_cek == "6" || $id_cek == "10" || $id_cek == "11" || $id_cek == "12" || $id_cek == "13" || $id_cek == "16" || $id_cek == "17" || $id_cek == "18" || $id_cek == "27"){
 	       	 $('.poin_kabkota').removeAttr('disabled');
@@ -383,21 +384,6 @@
    		 });
 
 
-       function tambah_poin_kabkota(argument) {
-       	// body...
-       }
-
- 
-		 function test() {
-		    if (document.getElementById('id_kategori_proyek').value == 6) {
-		        document.getElementById('second_child').style.display = 'block';
-		    } else {
-		        document.getElementById('second_child').style.display = 'none';
-		    }
-		}
-		
-		
-		
 		$('#id_instansi').change(function () {
             var selProv = $(this).val();
             console.log(selProv);

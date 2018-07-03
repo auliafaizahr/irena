@@ -1705,10 +1705,10 @@ class Usulan extends CI_Controller {
 			$isi[0]		= array('5.546182, 95.319054' , '0.5070677, 101.4477793' , '-0.853278, 100.3947116');
 			$isi[1]		= array('-7.1524786, 111.8869293', '-7.4704747, 112.4401329');
 			$isi[2]		= array('-7.1652437, 112.6519882', '-7.6043721, 111.8993478');
-			print_r('<pre>');
+		/*	print_r('<pre>');
 			print_r($arr_koor[1]);
 			// print_r($arr_koor);
-			print_r($isi);
+			print_r($isi);*/
 			// $tes_array 	= array();
 
 

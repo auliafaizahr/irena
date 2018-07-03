@@ -103,39 +103,38 @@
                         </div>
                     </div>
 
-<<<<<<< HEAD
-=======
+
                      <div class="form-group timesheet_2-rows" >
-                    <fieldset id="timesheet-rows">
-                        
+                        <fieldset id="timesheet-rows">
+                            
 
-                        <div class="timesheet-row">
+                            <div class="timesheet-row">
 
-                          
-                            <label class="col-sm-3 control-label" >Poin :    </label>
-                            <div class="col-sm-8">
-                                <select name="poin_kabkota[]"   class="poin_kabkota"  required>
+                              
+                                <label class="col-sm-3 control-label" >Poin :    </label>
+                                <div class="col-sm-8">
+                                    <select name="poin_kabkota[]"   class="poin_kabkota"  disabled="disabled">
 
-                               <?php foreach($kabkota as $row ){ ?>
-                                <option value="<?php echo $row['id']; ?>" ><?php echo $row['nama']; ?>
-                                 </option>
-                                 <?php } ?>
-                                </select>
+                                   <?php foreach($kabkota as $row ){ ?>
+                                    <option value="<?php echo $row['id']; ?>"><?php echo $row['nama']; ?>
+                                     </option>
+                                     <?php } ?>
+                                    </select>
+
+                                </div>
+                                 <div class="del disabled hidden"> <input type="button" name="clone" value="Hapus"></div>
+
+                              
+                             
+
+								                            
+
                             </div>
-                         
-
-                                
-
+                             <!-- <input  type="button" id="add-row" name="add-row" value="Add row" />     -->
+                             <div class="clone"   title="Create new item"><input class="clone_tombol " type="button" name="clone" disabled="disabled" value="Tambah"></div>
+                           
+                        </fieldset>
                         </div>
-                         <input  type="button" id="add-row" name="add-row" value="Add row" />    
-
-                       
-                    </fieldset>
-                    </div>
-<<<<<<< HEAD
->>>>>>> parent of 5923296... poin done
-=======
->>>>>>> parent of 5923296... poin done
 						
 						<div class="form-group">
 							<label for="single_multi" class="col-sm-3 control-label">Pelaksanaan Proyek</label>
@@ -228,8 +227,6 @@
             multiple:true,
             width: "100%"
         });
-<<<<<<< HEAD
-=======
 
          
           $(".poin_kabkota").select2({
@@ -239,73 +236,69 @@
          });
 
 
-         jQuery(function($){
-             var $button = $('#add-row'),
-                 $row = $('.timesheet-row').clone();
-                // $tombol_hapus = "<div><a href="#" class="remove_field">Remove</a></div>";
+          jQuery(function($){
+            var $button = $('#add-row'),
+                $row = $('.timesheet-row').clone(),
+                $row_2 = $('.timesheet-row');
 
-             $button.click(function(){
-             	
-                 $row.clone().insertBefore( $button ).append('<div><a href="#" class="remove_field">Remove</a></div>');
-               
+             var $test = '<div><a href="#" class="remove_field">Remove</a></div>'; 
 
-                 $(".poin_kabkota").select2({
-                 	                placeholder: "Pilih Kabupaten / Kota",
-                 	               
-                 	                width: "100%"
-                	});
-                	$(".poin_kabkota").last().next().next().remove();
-
-
-             });
-         });
-
-/*
-         $("#e10").select2({
-         	 
-	          ajax: {
-			    url: "<?php echo base_url(); ?>usulan/ambil_poin_kabkota/",
-			    dataType: 'json',
-			    delay: 250,
-			      data: function (params) {
-			        return {
-			          q: params.term, // search term
-			          page: params.page
-			        };
-			      },
-			     processResults: function (data, params) {
-			        // parse the results into the format expected by Select2
-			        // since we are using custom formatting functions we do not need to
-			        // alter the remote JSON data, except to indicate that infinite
-			        // scrolling can be used
-			        params.page = params.page || 1;
-
-			        return {
-			          results: data.items,
-			          pagination: {
-			            more: (params.page * 30) < data.total_count
-			          }
-			        };
-			      },
-			      cache: true
-			    },
-			    placeholder: 'Search for a repository',
-			    escapeMarkup: function (markup) { return markup; }, // let our custom formatter work
-			    minimumInputLength: 1,
-			    width: "100%"
-			    
-	     
-
-	 });*/
-
-<<<<<<< HEAD
->>>>>>> parent of 5923296... poin done
-=======
->>>>>>> parent of 5923296... poin done
+            $button.click(function(){
+            	var $tambah =  $row.clone().append('<div><a href="#" class="remove_field">Remove</a></div>').insertAfter( $button );
+          
+          		$tambah.clone();
         
-        
-		
-		
+                $(".poin_kabkota").select2({
+                	                placeholder: "Pilih Kabupaten / Kota",
+                	               
+                	                width: "100%"
+               	});
+               	$(".poin_kabkota").last().next().next().remove();
+
+
+            });
+        });
+
+         $("#id_kategori_proyek").change(function(){
+        	var $id_cek = document.getElementById("id_kategori_proyek").value;
+	       if($id_cek == "5" || $id_cek == "6" || $id_cek == "10" || $id_cek == "11" || $id_cek == "12" || $id_cek == "13" || $id_cek == "16" || $id_cek == "17" || $id_cek == "18" || $id_cek == "27"){
+	       	 $('.poin_kabkota').removeAttr('disabled');
+	       	 $('.clone_tombol').removeAttr('disabled');
+	       }else{
+	       	 $('.poin_kabkota').attr('disabled', 'disabled');
+	       	 $('.clone_tombol').attr('disabled', 'disabled');
+	       }
+	     });
+
+        $(".clone").click(function() {
+               var
+               $self = $(this),
+                   $element_to_clone = $self.prev(),
+                   $wrapper_parent_element = $self.parent(),
+                   $new_element = $element_to_clone.clone();
+
+               $new_element.find('.del').removeClass('hidden disabled').addClass('enabled');
+
+               $new_element.insertAfter($element_to_clone);
+
+               $(".poin_kabkota").select2({
+                	                placeholder: "Pilih Kabupaten / Kota",
+                	               
+                	                width: "100%"
+               	});
+
+               $(".poin_kabkota").last().next().next().remove();
+
+               return false;
+        });
+
+        $("body").on("click", ".del.enabled", function(event) {
+	        var $parent = $(this).parent();
+	        $parent.remove();
+	        return false;
+   		 });
+
+
 		
 		
 		
@@ -344,9 +337,27 @@
 			var latar_belakang 				= $("#latar_belakang").val();
 			var tujuan 						= $("#tujuan").val();
 			var ruang_lingkup 				= $("#ruang_lingkup").val();
-			var lokasi 				= $("#lokasi").val();
-			var id_provinsi                    = $("#provinsi").val();
+			var lokasi 						= $("#lokasi").val();
+			var id_provinsi                  = $("#provinsi").val();
             var id_kabkota                    = $("#kabkota").val();
+            var poin_kabkota                =  $(".poin_kabkota").serializeArray();
+            var panjang						= poin_kabkota.length;
+
+             var poin_urut = new Array();
+
+            for(var i = 0; i<panjang; i++){
+            	console.log(JSON.stringify(poin_kabkota[i].value));
+            	poin_urut[i] = poin_kabkota[i].value;
+
+            }
+
+            console.log(poin_urut);
+            var poin_pakai 		= poin_urut.toString();
+
+
+			console.log(poin_kabkota);
+			console.log(poin_pakai);
+			console.log(panjang);
 			
             var form_data 	= new FormData();
  
@@ -364,6 +375,7 @@
 			form_data.append('id_instansi', id_instansi);
 			 form_data.append('id_provinsi', id_provinsi);
             form_data.append('id_kabkota', id_kabkota);
+              form_data.append('poin_kabkota', poin_pakai);
 
 
             $.ajax({
