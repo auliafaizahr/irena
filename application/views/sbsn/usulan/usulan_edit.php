@@ -149,20 +149,9 @@
                         </div>
 
                  
-                        <?php
-
-                        $sql1 = "SELECT DISTINCT id_kabkota FROM irena_sbsn_usulan_jalan_kabkota  WHERE id_usulan = '$usulan->id' ORDER BY id_urut";
-                        $d 		= $this->db->query($sql1)->num_rows();
-                        $a 		= $this->db->query($sql1)->result_array();
-
-
-
-                         if ($d ) {
-                        	# code...
-                        } ?>
-
-                        <div id="$d"> </div>
-                         <div class="form-group timesheet_2-rows" >
+                       
+                        
+                        <div class="form-group timesheet_2-rows" >
                         <fieldset id="timesheet-rows">
                             
 
@@ -174,18 +163,12 @@
                                     <select name="poin_kabkota[]"   class="poin_kabkota"  disabled="disabled">
 
                                    <?php foreach($kabkota as $row ){ ?>
-                                    <option value="<?php echo $row['id']; ?>" <?php echo in_array($row['id'] , $a) ? 'selected' : '' ?>><?php echo $row['nama']; ?>
-                                     </option>
+                                    <option value="<?php echo $row['id']; ?>" <?php echo $row['id'] == $value['id_kabkota'] ? 'selected' : '' ?>><?php echo $row['nama']; ?>
                                      <?php } ?>
                                     </select>
 
                                 </div>
-                                 <div class="del disabled hidden"> <input type="button" name="clone" value="Hapus"></div>
-
-                              
-                             
-
-								                            
+                                 <div class="del disabled hidden"> <input type="button" name="clone" value="Hapus"></div>                            
 
                             </div>
                              <!-- <input  type="button" id="add-row" name="add-row" value="Add row" />     -->
@@ -194,6 +177,53 @@
                         </fieldset>
                         </div>
 
+                         <?php
+
+                        $sql1 = "SELECT DISTINCT id_kabkota FROM irena_sbsn_usulan_jalan_kabkota  WHERE id_usulan = '$usulan->id' ORDER BY id_urut";
+                        $d 		= $this->db->query($sql1)->num_rows();
+                        $a 		= $this->db->query($sql1)->result_array();
+
+
+
+                        foreach ($a as $key => $value) {
+                        	
+
+                        ?>
+
+
+                         <div class="form-group timesheet_2-rows" >
+                        <fieldset id="timesheet-rows2">
+                            
+
+                            <div class="timesheet-row2">
+
+                              
+                                <label class="col-sm-2 control-label" >Poin :    </label>
+                                <div class="col-sm-9">
+                                    <select name="poin_kabkota[]"   class="poin_kabkota"  disabled="disabled">
+
+                                   <?php foreach($kabkota as $row ){ ?>
+                                    <option value="<?php echo $row['id']; ?>" <?php echo $row['id'] == $value['id_kabkota'] ? 'selected' : '' ?>><?php echo $row['nama']; ?>
+                                     <?php } ?>
+                                    </select>
+
+                                </div>
+                                 <div class="del enabled"> <input type="button" name="clone" value="Hapus"></div>
+
+                              
+                             
+
+								                            
+
+                            </div>
+                             <!-- <input  type="button" id="add-row" name="add-row" value="Add row" />     -->
+                            
+                        </fieldset>
+                        </div>
+
+
+
+                        <?php } ?>
                         
 						
 						<div class="form-group">
@@ -318,7 +348,7 @@
             width: "100%"
         });
 
-
+/*
         jQuery(function($){
             var $button = $('#add-row'),
                 $row = $('.timesheet-row').clone(),
@@ -341,7 +371,7 @@
 
             });
         });
-
+*/
 
 
         $("#id_kategori_proyek").change(function(){
