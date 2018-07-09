@@ -387,7 +387,7 @@
             
 
             $.ajax({
-            url: '<?php echo base_url(); ?>usulan/tambah',
+            url: '<?php echo base_url(); ?>usulan/usulan_simpan/tambah',
                 dataType: 'json',
                 cache: false,
                 contentType: false,

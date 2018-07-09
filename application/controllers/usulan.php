@@ -1673,7 +1673,7 @@ class Usulan extends CI_Controller {
 					
 					$t1 	= $this->db->query($a1)->num_rows(); 
 
-					print_r($t1);
+					//print_r($t1);
 					
 					
 				
@@ -1723,7 +1723,7 @@ class Usulan extends CI_Controller {
 				);*/
 
 				$polyline['points'] = $arr_koor[$i];
-				$polyline['onclick'] = 'bukaDetailgabung_1('.$baris->id_lokasi.')';
+				//$polyline['onclick'] = 'bukaDetailgabung_1('.$baris->id_lokasi.')';
 
 								
 
@@ -2046,20 +2046,87 @@ class Usulan extends CI_Controller {
 			$data['update_date']	= date('Y-m-d H:i:s');*/
 			
 			if($this->uri->segment(3) == 'tambah'){
-				$data['nilai_admin']		= 0;
-				$data['nilai_admin_ket']	= "-";
-				$data['nilai_admin_id']		= $this->session->userdata('id');
-				$data['nilai_admin_date']	= date('Y-m-d H:i:s');
-				$data['nilai_layak']		= 0;
-				$data['nilai_layak_ket']	= "-";
-				$data['nilai_layak_id']		= $this->session->userdata('id');
-				$data['nilai_layak_date']	= date('Y-m-d H:i:s');
-				$data['masuk_drkh']			= 0;
-				$data['masuk_drkh_ket']		= "-";
-				$data['masuk_drkh_id']		= $this->session->userdata('id');
-				$data['masuk_drkh_date']	= date('Y-m-d H:i:s');
 				
-				$result 				= $this->hibah_model->usulan_simpan_data($data);
+
+				    	$this->db->insert('irena_usulan_pln', $data);
+
+					 	$isi = array(
+				    			'id_usulan' 		=> $this->Usulan_model->last()->id
+				    			
+				    			//'is_gb_update_by'			=> $this->session->userdata('id')
+				    			
+				    		);
+
+					 	$this->db->insert('irena_usulan_layak', $isi);
+				    	$this->db->insert('irena_usulan_adm', $isi);
+				    	$this->db->insert('irena_usulkan_bb', $isi);
+
+					 	$select2data = $this->input->post('lokasi');
+					 	$array_lokasi = explode(",", $select2data);
+					 	$id_instansi			= $this->input->post('id_instansi');
+
+					 	
+
+					 	$data2 = [];
+					 	foreach($array_lokasi as $lokasi) {
+					 	  $data2[] = [
+					 	    'id_usulan' => $isi['id_usulan'],
+					 	    'id_lokasi' => $lokasi,
+					 	    'id_instansi' => $id_instansi,
+					 	  ];
+					 	}
+
+					 	$data_histori = $this->input->post('id_usulan_hub');
+					 	$array_usulan = explode(",", $data_histori);
+
+					 	$data3 = [];
+					 	foreach($array_usulan as $usulan) {
+					 	  $data3[] = [
+					 	    'id_usulan' => $isi['id_usulan'],
+					 	    'id_usulan_terkait' => $usulan,
+					 	  ];
+					 	}
+
+					 	$data_prov = $this->input->post('id_provinsi');
+					 	$array_prov = explode(",", $data_prov);
+					 
+
+					 	
+
+					 	$data4 = [];
+					 	foreach($array_prov as $provinsi) {
+					 	  $data4[] = [
+					 	    'id_usulan' => $isi['id_usulan'],
+					 	    'id_prov' => $provinsi,
+					 	    'id_instansi' => $id_instansi,
+					 	  ];
+					 	}
+
+					 	$data_kabkota = $this->input->post('id_kabkota');
+					 	$array_kabkota = explode(",", $data_kabkota);
+
+						$data5 = [];
+							 foreach($array_kabkota as $kabkota) {
+							 	  $data5[] = [
+							 	    'id_usulan' => $id_ ,
+							 	    'id_kabkota' => $kabkota,
+							 	    'id_instansi' => $id_instansi,
+							 	  ];
+							 }
+					 	
+					 	
+
+					 	
+				    	$this->db->insert_batch('irena_usulan_kabkota', $data5);
+				    	$this->db->insert_batch('irena_usulan_prov', $data4);
+
+				    	$this->db->insert_batch('irena_usulan_lokasi', $data2);
+				    	$this->db->insert_batch('irena_usulan_historis', $data3);
+				    	
+
+				    	$status['success'] 			= true;
+				
+				
 			}elseif($this->uri->segment(3) == 'edit'){
 				$id_			= $this->input->post('id');
 				$this->Usulan_model->hapus_dari_lokasi($id_);

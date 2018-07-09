@@ -113,9 +113,9 @@
                             <div class="col-sm-9">
                                 <select name="provinsi" id="provinsi" class="form-control" multiple>
                            
-                                <?php $key = array($detail->id_provinsi);
+                                <?php $key = array($usulan->id_provinsi);
                                 $a = array();
-                                $a = explode(",", $detail->id_provinsi);
+                                $a = explode(",", $usulan->id_provinsi);
                                 $key2 = array("1", "2", "4", "3");
                                  
 
@@ -133,15 +133,15 @@
                             <div class="col-sm-9">
                                 <select name="kabkota" id="kabkota" class="form-control" multiple>
                            
-                                <?php $key = array($detail->kabkota);
-                                $a = array();
-                                $a = explode(",", $detail->kabkota);
+                                <?php $key = array($usulan->id_kabkota);
+                                $c = array();
+                                $c = explode(",", $usulan->id_kabkota);
                                 $key2 = array("1", "2", "4", "3");
                                  
 
 
                                 foreach($kabkota as $row ){ ?>
-                                <option value="<?php echo $row['id']; ?>" <?php echo in_array($row['id'] , $a) ? 'selected' : '' ?>><?php echo $row['nama']; ?>
+                                <option value="<?php echo $row['id']; ?>" <?php echo in_array($row['id'] , $c) ? 'selected' : '' ?>><?php echo $row['nama']; ?>
                                  </option>
                                  <?php } ?>
                                  </select>
@@ -149,7 +149,7 @@
                         </div>
 
                  
-                       
+                       <!-- 
                         
                         <div class="form-group timesheet_2-rows" >
                         <fieldset id="timesheet-rows">
@@ -172,11 +172,10 @@
 
                             </div>
                              <!-- <input  type="button" id="add-row" name="add-row" value="Add row" />     -->
-                             <div class="clone"   title="Create new item"><input class="clone_tombol " type="button" name="clone" disabled="disabled" value="Tambah"></div>
+                            <!--  <div class="clone"   title="Create new item"><input class="clone_tombol " type="button" name="clone" disabled="disabled" value="Tambah"></div>
                            
                         </fieldset>
-                        </div>
-
+                        </div>  -->
                          <?php
 
                         $sql1 = "SELECT DISTINCT id_kabkota FROM irena_sbsn_usulan_jalan_kabkota  WHERE id_usulan = '$usulan->id' ORDER BY id_urut";
@@ -191,8 +190,8 @@
                         ?>
 
 
-                         <div class="form-group timesheet_2-rows" >
-                        <fieldset id="timesheet-rows2">
+                        <div class="form-group timesheet_2-rows" >
+                        <fieldset id="timesheet-rows">
                             
 
                             <div class="timesheet-row2">
@@ -208,7 +207,9 @@
                                     </select>
 
                                 </div>
-                                 <div class="del enabled"> <input type="button" name="clone" value="Hapus"></div>
+                                 <div class="del enabled"> <input type="button" name="clone" value="Hapus" class="del-field" disabled="disabled"></div>
+                                
+                           
 
                               
                              
@@ -224,6 +225,13 @@
 
 
                         <?php } ?>
+
+                        <div class="form-group tambah_disini">
+							<label for="ruang_lingkup" class="col-sm-2 control-label"></label>
+							<div class="col-sm-10">
+								 <div class="clone"   title="Create new item"><input class="clone_tombol " type="button" name="clone" disabled="disabled" value="Tambah"></div>
+							</div>
+						</div>
                         
 						
 						<div class="form-group">
@@ -379,22 +387,26 @@
 	       if($id_cek == "5" || $id_cek == "6" || $id_cek == "10" || $id_cek == "11" || $id_cek == "12" || $id_cek == "13" || $id_cek == "16" || $id_cek == "17" || $id_cek == "18" || $id_cek == "27"){
 	       	 $('.poin_kabkota').removeAttr('disabled');
 	       	 $('.clone_tombol').removeAttr('disabled');
+	       	 $('.del-field').removeAttr('disabled');
 	       }else{
 	       	 $('.poin_kabkota').attr('disabled', 'disabled');
 	       	 $('.clone_tombol').attr('disabled', 'disabled');
+	       	 $('.del-field').attr('disabled', 'disabled');
 	       }
 	     });
 
         $(".clone").click(function() {
                var
-               $self = $(this),
-                   $element_to_clone = $self.prev(),
-                   $wrapper_parent_element = $self.parent(),
-                   $new_element = $element_to_clone.clone();
+
+               $self = $(".timesheet_2-rows"),
+                  $element_to_clone = $self.prev(),
+                  // $wrapper_parent_element = $self.parent(),
+                   $new_element = $self.clone(false);
+                   $tambah_baru = $(".tambah_disini")
 
                $new_element.find('.del').removeClass('hidden disabled').addClass('enabled');
 
-               $new_element.insertAfter($element_to_clone);
+               $new_element.insertBefore($tambah_baru);
 
                $(".poin_kabkota").select2({
                 	                placeholder: "Pilih Kabupaten / Kota",
@@ -404,8 +416,14 @@
 
                $(".poin_kabkota").last().next().next().remove();
 
+              // $(".poin_kabkota").last().next().next().next().next().remove().remove();
+               //$(".poin_kabkota:last").remove();
+
                return false;
         });
+
+
+        
 
         $("body").on("click", ".del.enabled", function(event) {
 	        var $parent = $(this).parent();

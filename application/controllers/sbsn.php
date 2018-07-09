@@ -126,7 +126,7 @@ class Sbsn extends CI_Controller {
 			
 
 				$this->sbsn_model->hapus_dari_lokasi($id_);
-				$this->sbsn_model->hapus_dari_poin($id_);
+				//$this->sbsn_model->hapus_dari_poin($id_);
 
 				$select2data = $this->input->post('lokasi');
 				$array_lokasi = explode(",", $select2data);
@@ -146,9 +146,10 @@ class Sbsn extends CI_Controller {
 	 			$array_prov = explode(",", $data_prov);
 
 				$data4 = [];
+				$j = 1;
 			 	foreach($array_prov as $provinsi) {
 			 	  $data4[] = [
-			 	    'id_usulan' => $id_ ,
+			 	    'id_usulan' => $id_2 ,
 			 	    'id_prov' => $provinsi,
 			 	    'id_instansi' => $id_instansi,
 			 	  ];
@@ -160,7 +161,7 @@ class Sbsn extends CI_Controller {
 				$data5 = [];
 			 	foreach($array_kabkota as $kabkota) {
 			 	  $data5[] = [
-			 	    'id_usulan' => $id_ ,
+			 	    'id_usulan' => $id_2 ,
 			 	    'id_kabkota' => $kabkota,
 			 	    'id_instansi' => $id_instansi,
 			 	  ];
@@ -168,20 +169,22 @@ class Sbsn extends CI_Controller {
 
 
 				$poin_kabkota = $this->input->post('poin_kabkota');
-			 	//$id_kategori = $this->input->post('id_kategori_proyek');
+			 	$id_kategori = $this->input->post('id_kategori_proyek');
 	 			$array_poin = explode(",", $poin_kabkota);
 
 			 	$data6 = [];
 			 	$i = 1;
-			 	foreach($array_poin as $kabkota) {
+			 	foreach($array_poin as $poin) {
 
 			 	$data6[] = [
-			 	    'id_usulan' => $id_ ,
+			 	    'id_usulan' => $id_2 ,
 			 	    'id_kategori' => $id_kategori ,
 			 	    'id_urut' => $i++,
-			 	    'id_kabkota' => $kabkota,
+			 	    'id_kabkota' => $poin,
 			 	  ];
 			 	}
+
+			 	//sssprint_r($id_usulan_pakai);
 
 
 
@@ -263,10 +266,10 @@ class Sbsn extends CI_Controller {
 
 
 
-/*
+
 			 	$this->db->insert_batch('irena_sbsn_usulan_prov', $data4);
 	 			$this->db->insert_batch('irena_sbsn_usulan_kabkota', $data5);
-	 			$this->db->insert_batch('irena_sbsn_usulan_lokasi', $data2);*/
+	 			$this->db->insert_batch('irena_sbsn_usulan_lokasi', $data2);
 	 			$this->db->insert_batch('irena_sbsn_usulan_jalan_kabkota', $data6);
 
 				$result 		= $this->sbsn_model->usulan_simpan_data($data);

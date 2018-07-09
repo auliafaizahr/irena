@@ -124,10 +124,7 @@
                                 </div>
                                  <div class="del disabled hidden"> <input type="button" name="clone" value="Hapus"></div>
 
-                              
-                             
-
-								                            
+                         
 
                             </div>
                              <!-- <input  type="button" id="add-row" name="add-row" value="Add row" />     -->
