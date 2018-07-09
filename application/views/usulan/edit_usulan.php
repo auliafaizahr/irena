@@ -206,9 +206,9 @@
                             <div class="col-sm-9">
                                 <select name="kabkota" id="kabkota" class="form-control" multiple>
                            
-                                <?php $key = array($detail->kabkota);
+                                <?php $key = array($detail->id_kabkota);
                                 $a = array();
-                                $a = explode(",", $detail->kabkota);
+                                $a = explode(",", $detail->id_kabkota);
                                 $key2 = array("1", "2", "4", "3");
                                  
 
@@ -476,8 +476,8 @@
             form_data.append('lokasi', lokasi);
             form_data.append('status_usulan', status_usulan);
             form_data.append('id_usulan_hub', id_usulan_hub);
-            form_data.append('id_provinsi', provinsi);
-            form_data.append('id_kabkota', kabkota);
+            form_data.append('id_provinsi', id_provinsi);
+            form_data.append('id_kabkota', id_kabkota);
                         console.log(lokasi);
            
 

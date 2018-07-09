@@ -2047,7 +2047,7 @@ class Usulan extends CI_Controller {
 			
 			if($this->uri->segment(3) == 'tambah'){
 				
-
+						$data 					= $_POST;
 				    	$this->db->insert('irena_usulan_pln', $data);
 
 					 	$isi = array(
@@ -2134,6 +2134,8 @@ class Usulan extends CI_Controller {
 				$this->Usulan_model->hapus_dari_prov($id_);
 				$this->Usulan_model->hapus_dari_kabkota($id_);
 				$id_instansi			= $this->input->post('id_instansi');
+				$data 					= $_POST;
+				$result 				= $this->Usulan_model->usulan_simpan_data_edit($data);
 
 
 				$select2data = $this->input->post('lokasi');
@@ -2195,7 +2197,7 @@ class Usulan extends CI_Controller {
 
 
 
-				$result 		= $this->Usulan_model->usulan_simpan_data_edit($data);
+				
 			}
 			
 		}
