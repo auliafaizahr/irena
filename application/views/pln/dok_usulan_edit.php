@@ -88,7 +88,6 @@
 			console.log("diatas ini id yg itu tea");
 
             $.ajax({
-            url: '<?php echo base_url(); ?>usulan/dok_usulan_simpan/edit',
                 dataType: 'json',
                 cache: false,
                 contentType: false,

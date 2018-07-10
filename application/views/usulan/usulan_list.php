@@ -402,10 +402,15 @@
 
 
 */
-  console.log(d.judul_usulan);
+  //console.log(d.judul_usulan);
   var results = JSON.parse(d);
-  console.log(results.isi[0].judul_usulan);
+  //console.log(results.isi[1].judul_usulan);
+  console.log(results.isi.length);
 
+
+  //var banyak_gb = sizeof(results.isi.gb_pinjaman);
+  //var banyak_gb = sizeof(isi.gb_pinjaman);
+//  console.log(banyak_gb);
 
     return '<table >'+
         '<tr>'+
@@ -424,6 +429,46 @@
             '<td style="width:20px;">  :  </td>'+
             '<td style="width:220px;">   ' + numeral(results.isi[0].gb_pinjaman).format('0,0') + ' </td>'+
         '</tr>'+
+
+       ((typeof results.isi[1] !== 'undefined')? 
+
+          '<tr>'+
+            '<td  style="width:200px;" >Greenbook  </td>' +
+            '<td style="width:20px;">  :  </td>'+
+            '<td style="width:220px;">   ' + results.isi[1].nama_gb + ' </td>'+
+            '<td> Nilai Pinjaman   </td>'+
+            '<td style="width:20px;">  :  </td>'+
+            '<td style="width:220px;">   ' + numeral(results.isi[1].gb_pinjaman).format('0,0') + ' </td>'+
+          '</tr>' : ""   )+
+
+       ((typeof results.isi[2] !== 'undefined')? 
+
+          '<tr>'+
+            '<td  style="width:200px;" >Greenbook  </td>' +
+            '<td style="width:20px;">  :  </td>'+
+            '<td style="width:220px;">   ' + results.isi[2].nama_gb + ' </td>'+
+            '<td> Nilai Pinjaman   </td>'+
+            '<td style="width:20px;">  :  </td>'+
+            '<td style="width:220px;">   ' + numeral(results.isi[2].gb_pinjaman).format('0,0') + ' </td>'+
+          '</tr>' : ""   )+
+
+         ((typeof results.isi[3] !== 'undefined')? 
+
+          '<tr>'+
+            '<td  style="width:200px;" >Greenbook  </td>' +
+            '<td style="width:20px;">  :  </td>'+
+            '<td style="width:220px;">   ' + results.isi[3].nama_gb + ' </td>'+
+            '<td> Nilai Pinjaman   </td>'+
+            '<td style="width:20px;">  :  </td>'+
+            '<td style="width:220px;">   ' + numeral(results.isi[3].gb_pinjaman).format('0,0') + ' </td>'+
+          '</tr>' : ""   )+
+
+
+
+
+        
+
+        
         '<tr>'+
             '<td  style="width:200px;" >Tanggal DK  </td>' +
             '<td style="width:20px;">  :  </td>'+
@@ -772,9 +817,10 @@ $('#example_id tbody').on('click', 'td:first-child', function () {
   } else {
     // Open row.
      $.get("<?php echo base_url(); ?>usulan/detail_expand_usulan/"+id, function(data) {
-          console.log(data[10]);
-          var results = JSON.parse(data);
-          console.log(results.isi[0].judul_usulan);
+          //console.log(data[10]);
+          //console.log(data);
+          //var results = JSON.parse(data);
+          //console.log(results.isi[0].judul_usulan);
           row.child(format(data)).show();
           tr.addClass('shown');
         
