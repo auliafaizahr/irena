@@ -143,6 +143,7 @@
 
 
 	</div>
+	</div>
 
 <script src="<?php echo base_url(); ?>assets/inspinia/js/jquery-2.1.1.js"></script>
 <script src="https://code.highcharts.com/highcharts.js"></script>

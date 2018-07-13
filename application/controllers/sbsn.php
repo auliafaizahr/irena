@@ -291,6 +291,31 @@ class Sbsn extends CI_Controller {
 		$this->load->model('dk_model');
 		$this->load->model('sbsn_model');
 		$data['instansi'] = array();
+		$data['id_lokasi'] = $this->uri->segment(3);
+		$id_lokasi = $this->uri->segment(3);
+		//$id_lokasi = '339';
+		$data['data']= $this->sbsn_model->ambil_proyek_berdasarkan_lokasi($id_lokasi);
+
+		
+		//$data['data']= $this->Bluebook_model->ambil_proyek_berdasarkan_lokasi();
+		$data['lembaga']= $this->Greenbook_model->ambil_instansi();
+		$data['program']= $this->Greenbook_model->ambil_program();
+		$data['arsip'] = $this->Greenbook_model->ambil_arsip();
+			
+
+		$data['dpp'] = $this->hibah_model->ambil_proyek_drkh();
+		$this->load->view('report/modal_map/dashboard_sbsn_modal_map', $data);
+	}
+
+	public function tampilkan_proyek_lokasi_1()
+	{
+		$this->load->model('Bluebook_model');
+		$this->load->model('hibah_model');
+		$this->load->model('Usulan_model');
+		$this->load->model('Greenbook_model');
+		$this->load->model('dk_model');
+		$this->load->model('sbsn_model');
+		$data['instansi'] = array();
 		$id_lokasi = $this->uri->segment(3);
 		//$id_lokasi = '339';
 		$data['data']= $this->sbsn_model->ambil_proyek_berdasarkan_lokasi($id_lokasi);
@@ -805,9 +830,12 @@ class Sbsn extends CI_Controller {
 	function tampilkan_dpp_edit()
 	{
 		$this->load->model('Usulan_model');
+		$this->load->model('Greenbook_model');
 		$id 					= $this->uri->segment(3); //id table of irena_sbsn_usulan_syarat
 		$query					= $this->sbsn_model->ambil_tabel_proyek_dpp_by_id($id);
 		$data['dpp']			= $query->row();
+		$data['provinsi']= $this->Greenbook_model->ambil_provinsi();
+		$data['kabkota']= $this->Greenbook_model->ambil_kabkota();
 		
 		$data['lokasi'] 		= $this->Usulan_model->ambil_lokasi();
 		$data['jenis']			= $this->sbsn_model->pilih_id_dpp();

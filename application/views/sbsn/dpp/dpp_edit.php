@@ -41,7 +41,7 @@
 							</div>
 						</div>
 
-						<div class="form-group">
+					<!-- 	<div class="form-group">
 							<label for="nilai" class="col-sm-2 control-label">Lokasi</label>
 							<div class="col-sm-10">
 							<select name="lokasi" id="lokasi" class="form-control" multiple>
@@ -54,6 +54,50 @@
 
 
                                 foreach($lokasi as $row ){ ?>
+                                <option value="<?php echo $row['id']; ?>" <?php echo in_array($row['id'] , $a) ? 'selected' : '' ?>><?php echo $row['nama']; ?>
+                                 </option>
+                                 <?php } ?>
+                            </select>
+								
+							</div>
+						</div>
+ -->
+
+						<div class="form-group">
+							<label for="nilai" class="col-sm-2 control-label">Provinsi</label>
+							<div class="col-sm-10">
+							<select name="id_prov" id="id_prov" class="form-control" multiple>
+                           
+                                <?php $key = array($dpp->provinsi);
+                                $a = array();
+                                $a = explode(",", $detail->lokasi);
+                              
+                                 
+
+
+                                foreach($provinsi as $row ){ ?>
+                                <option value="<?php echo $row['id']; ?>" <?php echo in_array($row['id'] , $a) ? 'selected' : '' ?>><?php echo $row['nama']; ?>
+                                 </option>
+                                 <?php } ?>
+                            </select>
+								
+							</div>
+						</div>
+
+
+						<div class="form-group">
+							<label for="nilai" class="col-sm-2 control-label">Kabupaten / Kota </label>
+							<div class="col-sm-10">
+							<select name="id_kabkota" id="id_kabkota" class="form-control" multiple>
+                           
+                                <?php $key = array($dpp->kabkota);
+                                $a = array();
+                                $a = explode(",", $detail->kabkota);
+                              
+                                 
+
+
+                                foreach($kabkota as $row ){ ?>
                                 <option value="<?php echo $row['id']; ?>" <?php echo in_array($row['id'] , $a) ? 'selected' : '' ?>><?php echo $row['nama']; ?>
                                  </option>
                                  <?php } ?>
@@ -90,6 +134,22 @@
 			multiple:true,
             tags: true
 		});
+
+		$("#id_prov").select2({
+			placeholder: "Pilih Lokasi Proyek Provinsi",
+			width: "100%",
+			multiple:true,
+            tags: true
+		});
+
+		$("#id_kabkota").select2({
+			placeholder: "Pilih Lokasi Proyek Kabupaten / Kota",
+			width: "100%",
+			multiple:true,
+            tags: true
+		});
+		
+		
 		
 		
 		$('#htmlForm').submit(function(e) {
@@ -103,6 +163,8 @@
 			var judul 		= $("#judul").val();
 			var nilai 		= $("#nilai").val();
 			var lokasi 		= $("#lokasi").val();
+			var id_prov 		= $("#id_prov").val();
+			var id_kabkota 		= $("#id_kabkota").val();
 			
             var form_data 	= new FormData();
 			
@@ -112,6 +174,8 @@
 			form_data.append('judul', judul);
 			form_data.append('nilai', nilai);
 			form_data.append('lokasi', lokasi);
+			form_data.append('id_prov', id_prov);
+			form_data.append('id_kabkota', id_kabkota);
 
 			console.log(id);
 			console.log(id_proyek);

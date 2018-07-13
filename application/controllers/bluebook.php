@@ -106,7 +106,7 @@ class Bluebook extends CI_Controller {
 	
 
 
-		$this->load->view('Peta/modal_phln_sbsn', $data);
+		$this->load->view('Peta/modal_phln_sbsn_1', $data);
 	}
 
 

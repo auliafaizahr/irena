@@ -3,9 +3,9 @@
     <div class="modal-content">
       <div class="ibox">
         <div class="ibox-title">
-          <h5>Proyek  pada Lokasi 
+          <center><h5>Proyek  pada Lokasi 
           <?php $a = $id_lokasi; 
-          echo $lokasi_nama; ?> </h5>
+          echo $lokasi_nama; ?> </h5> </center>
         </div>
 
         	<div id="loader1" class="loader1" style='visibility: hidden;'></div>
