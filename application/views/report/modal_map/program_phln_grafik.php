@@ -20,6 +20,8 @@
     </tr>
     <?php endforeach;   ?>
      <input type="hidden" name="fetch_id" id="fetch_id" value="<?php echo $id; ?>">
+     <input type="hidden" name="id_lokasi2" id="id_lokasi2" class="form-control" value="<?php echo $id_lokasi; ?>"> 
+
 
     
 </tbody>
@@ -104,7 +106,7 @@ $table.find('.js-view-parents').on('click', function(e) {
 
 	
 	$.ajax({
-				url: "<?php echo base_url(); ?>usulan/filter_program_isi_bluebook/"+id,
+				url: "<?php echo base_url(); ?>usulan/filter_program_isi_prov/"+id,
 				type: "GET",
 				dataType: "html",
 				

@@ -268,6 +268,15 @@ function usulan_simpan_data($data)
 		return $a->result_array();
 	}
 
+	public function ambil_grafik_program_untuk_prov($x)
+	{
+		$query = "SELECT irena_program_pln.nama_program AS program, SUM(IF(irena_bluebook_proyek.id_bluebook = '$x', nilai_pinjaman, 0)) AS total, irena_bluebook_proyek.id_program AS id_program FROM irena_bluebook_proyek LEFT JOIN irena_program_pln ON irena_bluebook_proyek.id_program = irena_program_pln.id GROUP BY id_program HAVING total > 0";
+
+		 $a= $this->db->query($query);
+
+		return $a->result_array();
+	}
+
 	public function ambil_grafik_sektor_per_bb($x)
 	{
 		$query = "SELECT irena_sektor.nama AS sektor, SUM(IF(irena_bluebook_proyek.id_bluebook = '$x', nilai_pinjaman, 0)) AS total FROM irena_bluebook_proyek LEFT JOIN irena_sektor ON irena_bluebook_proyek.id_sektor = irena_sektor.id GROUP BY id_sektor HAVING total > 0";

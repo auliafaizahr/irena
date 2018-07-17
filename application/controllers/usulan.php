@@ -99,8 +99,32 @@ class Usulan extends CI_Controller {
 
 	public function tampilkan_dashboard_modal_map()
 	{
-		$this->load->view('report/modal_map/dashboard_map');
+		$data['id_lokasi'] = $this->uri->segment(3);
+		$this->load->view('report/modal_map/dashboard_map', $data);
 	}
+
+	public function hitung_total_proyek_prov()
+	{
+		$this->load->model('Bluebook_model');
+		$this->load->model('sbsn_model');
+		$this->load->model('Usulan_model');
+
+		//$id = $this->input->post('id');
+		$id= $this->uri->segment(3);
+
+
+		
+
+		$data['total_kegiatan']= $this->Usulan_model->hitung_total_proyek_prov($id);
+		$data['total_nilai']= $this->Usulan_model->hitung_total_nilai_proyek_prov($id);
+
+
+		
+		
+    
+		$this->load->view('report/modal_map/total_kegiatan_phln', $data);
+	}
+	
 
 	
 	
@@ -418,6 +442,26 @@ class Usulan extends CI_Controller {
     	 echo json_encode($data);
 	}
 
+	public function filter_program_isi_prov()
+	{
+
+		$this->load->model('Usulan_model');
+		$this->load->model('Bluebook_model');
+			
+		$id = $this->input->post('id');
+		$a = $this->uri->segment(3);
+		//$data['detail'] = $this->Bluebook_model->ambil_proyek_per_bb($a);
+
+		
+		foreach ($this->Bluebook_model->ambil_grafik_program_untuk_prov($a) as $row) {
+			$data[] = array(
+				'name' => $row['nama'],
+				'y' => $row['total']
+				);
+		}
+    	 echo json_encode($data);
+	}
+
 
 
 	public function filter_sektor_bluebook()
@@ -472,6 +516,24 @@ class Usulan extends CI_Controller {
 
 		
 		$this->load->view('report/bluebook/report_bb_infra', $data);
+		
+	}
+
+	public function filter_phln_prov()
+	{
+
+		$this->load->model('Usulan_model');
+		$this->load->model('Bluebook_model');
+			
+		$id = $this->input->post('id');
+		$a = $this->uri->segment(3);
+		//$data['detail'] = $this->Bluebook_model->ambil_proyek_per_bb($a);
+		$data['id'] = $this->uri->segment(3);
+
+		$data['detail'] = $this->Bluebook_model->ambil_grafik_infra_per_bb($data['id']);
+
+		
+		$this->load->view('report/modal_map/program_phln_grafik', $data);
 		
 	}
 
@@ -1343,6 +1405,30 @@ class Usulan extends CI_Controller {
 		$this->load->view('Peta/usulan_proyek_list', $data);
 	}
 
+	public function tampilkan_proyek_prov_tes()
+	{
+		$this->load->model('Bluebook_model');
+		$this->load->model('hibah_model');
+		$this->load->model('Usulan_model');
+		$this->load->model('Greenbook_model');
+		$this->load->model('dk_model');
+		$data['instansi'] = array();
+		$data['id_lokasi'] = $this->uri->segment(3);
+		$id_lokasi = $this->uri->segment(3);
+		//$id_lokasi = '339';
+		$data['data']= $this->Usulan_model->ambil_proyek_berdasarkan_prov($id_lokasi);
+
+		
+		//$data['data']= $this->Bluebook_model->ambil_proyek_berdasarkan_lokasi();
+		$data['lembaga']= $this->Greenbook_model->ambil_instansi();
+		$data['program']= $this->Greenbook_model->ambil_program();
+		$data['arsip'] = $this->Greenbook_model->ambil_arsip();
+			
+
+		
+		$this->load->view('Peta/la_proyek_list_provinsi', $data);
+	}
+
 	public function tampilkan_proyek_lokasi_tes_1()
 	{
 		$this->load->model('Bluebook_model');
@@ -1354,7 +1440,8 @@ class Usulan extends CI_Controller {
 		$data['id_lokasi'] = $this->uri->segment(3);
 		$id_lokasi = $this->uri->segment(3);
 		//$id_lokasi = '339';
-		$data['data']= $this->Usulan_model->ambil_proyek_berdasarkan_lokasi($id_lokasi);
+		//$data['data']= $this->Usulan_model->ambil_proyek_berdasarkan_lokasi($id_lokasi);
+		$data['data']= $this->Usulan_model->ambil_proyek_berdasarkan_prov($id_lokasi);
 
 		
 		//$data['data']= $this->Bluebook_model->ambil_proyek_berdasarkan_lokasi();
@@ -1363,7 +1450,7 @@ class Usulan extends CI_Controller {
 		$data['arsip'] = $this->Greenbook_model->ambil_arsip();
 			
 
-		$data['dpp'] = $this->hibah_model->ambil_proyek_drkh();
+		
 		$this->load->view('report/modal_map/dashboard_phln_modal_map', $data);
 	}
 
@@ -1606,7 +1693,8 @@ class Usulan extends CI_Controller {
 			//$marker['fullscreenControl'] = 'TRUE';
 			$this->googlemaps->initialize($config);
 
-			$query = "SELECT * FROM irena_view_lokasi_gabung_semua GROUP BY id_lokasi";
+			//$query = "SELECT * FROM irena_view_lokasi_gabung_semua GROUP BY id_lokasi";
+			$query = "SELECT * FROM irena_view_prov_sbsn_phln GROUP BY id_prov";
 			//$query2 = "SELECT * FROM irena_view_bb_lokasi GROUP BY id_lokasi";
 			$a = $this->db->query($query);
 			//$b = $this->db->query($query2)->result();
@@ -1618,8 +1706,8 @@ class Usulan extends CI_Controller {
 				$marker['icon'] = base_url().'assets/images/map_pink.png';
 				//$marker['icon'] = base_url().'assets/images/'.$baris->gambar;
 				$marker['position'] = $baris->latitude.','.$baris->longitude;
-				$id_lokasi = $baris->id_lokasi;
-				$marker['onclick'] = 'bukaDetailgabung_1('.$baris->id_lokasi.')';
+				$id_lokasi = $baris->id_prov;
+				$marker['onclick'] = 'bukaDetailgabung_1('.$baris->id_prov.')';
 				//$marker['onclick'] = '$("#myModal2'.$baris->id_kabkota.'").modal("show")';
 				//$marker['onclick'] = 'alert("tes")';
 				$this->googlemaps->add_marker($marker);
@@ -1713,10 +1801,6 @@ class Usulan extends CI_Controller {
 
 					for ($p=0; $p < $t1 ; $p++) { 
 						
-						//$arr_koor[$b2][$p] = "'"  . $t[$p]['lat'] . "," .  $t[$p]['longitude'] . "'" ;
-						//$arr_koor[$b2][$p] =  $t[$p]['lat'] . "," .  $t[$p]['longitude']  ;
-						//$arr_koor[$b2][$p] =  explode("," , ($t[$p]['lat']. " , " . $t[$p]['longitude']));
-						//$arr_koor[$b2][$p] =  implode("," , array($t[$p]['lat'] .", ". $t[$p]['longitude']));
 						$arr_koor[$b2][$p]	 	 =  implode("," , array($t[$p]['lat'] .", ". $t[$p]['longitude']));
 						//$arr_koor[$b2][$p] 		=  explode("," , $t[$p]['lat'] ."," .  $t[$p]['longitude']);
 

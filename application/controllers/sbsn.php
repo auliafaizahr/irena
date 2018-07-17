@@ -330,6 +330,54 @@ class Sbsn extends CI_Controller {
 		$data['dpp'] = $this->hibah_model->ambil_proyek_drkh();
 		$this->load->view('Peta/sbsn_proyek_list', $data);
 	}
+
+	public function tampilkan_proyek_prov()
+	{
+		$this->load->model('Bluebook_model');
+		$this->load->model('hibah_model');
+		$this->load->model('Usulan_model');
+		$this->load->model('Greenbook_model');
+		$this->load->model('dk_model');
+		$this->load->model('sbsn_model');
+		$data['instansi'] = array();
+		$id_lokasi = $this->uri->segment(3);
+		//$id_lokasi = '339';
+		$data['data']= $this->sbsn_model->ambil_proyek_berdasarkan_prov($id_lokasi);
+
+		
+		//$data['data']= $this->Bluebook_model->ambil_proyek_berdasarkan_lokasi();
+		$data['lembaga']= $this->Greenbook_model->ambil_instansi();
+		$data['program']= $this->Greenbook_model->ambil_program();
+		$data['arsip'] = $this->Greenbook_model->ambil_arsip();
+			
+
+		$data['dpp'] = $this->hibah_model->ambil_proyek_drkh();
+		$this->load->view('Peta/sbsn_proyek_list', $data);
+	}
+
+
+	public function hitung_total_proyek_prov()
+	{
+		$this->load->model('Bluebook_model');
+		$this->load->model('sbsn_model');
+
+		//$id = $this->input->post('id');
+		$id= $this->uri->segment(3);
+
+
+		
+
+		$data['total_kegiatan']= $this->sbsn_model->hitung_total_proyek_prov($id);
+		$data['total_nilai']= $this->sbsn_model->hitung_total_nilai_proyek_prov($id);
+
+
+		
+		
+    
+		$this->load->view('report/modal_map/total_kegiatan_sbsn', $data);
+	}
+	
+	
 	
 	function usulan_tampil_form_edit()
 	{	
@@ -873,7 +921,7 @@ class Sbsn extends CI_Controller {
 			$id_					= $this->input->post('id_proyek');
 			$id_dpp					= $this->input->post('id_dpp');
 			$this->sbsn_model->hapus_dari_lokasi_dpp($id_);
-
+/*
 			$select2data = $this->input->post('lokasi');
 			$array_lokasi = explode(",", $select2data);
 				
@@ -886,9 +934,37 @@ class Sbsn extends CI_Controller {
 				    'id_lokasi' => $lokasi,
 				  ];
 			}
-	 		$this->db->insert_batch('irena_dpp_lokasi', $data2);
+	 		$this->db->insert_batch('irena_dpp_lokasi', $data2);*/
+
+	 		$data_prov = $this->input->post('id_prov');
+			$array_prov = explode(",", $data_prov);
+				
+			$data3 = [];
+				foreach($array_prov as $prov) {
+				  $data3[] = [
+				    'id_usulan' =>  $id_,
+				    'id_dpp' => $id_dpp,
+				    'id_prov' => $prov,
+				  ];
+			}
+	 		$this->db->insert_batch('irena_sbsn_dpp_prov', $data3);
+
+
+	 		$data_kabkota = $this->input->post('id_kabkota');
+			$array_kabkota = explode(",", $data_kabkota);
+				
+			$data4 = [];
+				foreach($array_kabkota as $kabkota) {
+				  $data4[] = [
+				    'id_usulan' =>  $id_,
+				    'id_dpp' => $id_dpp,
+				    'id_kabkota' => $kabkota,
+				  ];
+			}
+	 		$this->db->insert_batch('irena_sbsn_dpp_kabkota', $data4);
 			
 			$result 		= $this->sbsn_model->dpp_simpan_data($data);
+			//$result 		= $this->sbsn_model->dpp_simpan_data($data);
 			
 			
 		}

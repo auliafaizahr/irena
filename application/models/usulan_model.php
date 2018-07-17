@@ -109,11 +109,27 @@ class Usulan_model extends CI_Model {
 		return $a->result();
 	}
 
+		public function ambil_grafik_program_per_prov($x)
+	{
+		$query = "SELECT irena_program_pln.nama_program AS nama, SUM(IF(irena_view_la_prov_proyek.id_prov = '$x', nilai, 0)) AS total FROM irena_view_la_prov_proyek LEFT JOIN irena_program_pln ON irena_program_pln.id = irena_view_la_prov_proyek.id_program  HAVING total > 0";
+
+		 $a= $this->db->query($query);
+
+		return $a->result_array();
+	}
+
 	public function ambil_proyek_berdasarkan_lokasi($x)
 	{
 		$sql = "SELECT * FROM usulan_lokasi WHERE id_lokasi = '$x' ";
 		return $this->db->query($sql)->result_array();
 	}
+
+	public function ambil_proyek_berdasarkan_prov($x)
+	{
+		$sql = "SELECT * FROM irena_view_la_prov_proyek WHERE id_prov = '$x' ";
+		return $this->db->query($sql)->result_array();
+	}
+
 
 
 
@@ -365,6 +381,30 @@ class Usulan_model extends CI_Model {
 	{
 		
 		$query = "SELECT * FROM irena_provinsi_kabkota WHERE id = '$x'";
+		 $a= $this->db->query($query);
+		return $a->row();
+	}
+
+	public function hitung_total_proyek_prov($x)
+	{
+		$sql = "SELECT  COUNT(IF(irena_view_la_prov_proyek.id_prov = '$x', irena_view_la_prov_proyek.id, NULL)) AS total_kegiatan FROM irena_view_la_prov_proyek";
+		 $a= $this->db->query($sql);
+
+		return $a->row()->total_kegiatan;
+	}
+
+		public function hitung_total_nilai_proyek_prov($x)
+	{
+		$sql = "SELECT  SUM(IF(irena_view_la_prov_proyek.id_prov = '$x', irena_view_la_prov_proyek.nilai, 0)) AS total_nilai FROM irena_view_la_prov_proyek";
+		 $a= $this->db->query($sql);
+
+		return $a->row()->total_nilai;
+	}
+
+			public function ambil_nama_prov_($x)
+	{
+		
+		$query = "SELECT * FROM irena_provinsi WHERE id = '$x'";
 		 $a= $this->db->query($query);
 		return $a->row();
 	}

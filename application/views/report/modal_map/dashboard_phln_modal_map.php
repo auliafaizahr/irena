@@ -27,7 +27,7 @@
 				<div id="loader1" class="loader1" style='visibility: hidden;'></div>
 				<div class="ibox-content" >
 
-				<div id="total_kegiatan"></div>
+				<div id="total_kegiatan_PHLN"></div>
 				
 				
 				 </div>
@@ -78,7 +78,7 @@
 				<div id="loader1" class="loader1" style='visibility: hidden;'></div>
 				<div class="ibox-content" >
 
-				<div id="total_kegiatan"></div>
+				<div id="chart_phln"></div>
 				
 				
 				 </div>
@@ -136,16 +136,34 @@
 	$(document).ready(function(){
 		
 		segarkan_data5();
+		segarkan_data_total_phln();
 		
 	});
 
 	function segarkan_data5(){
 		var id = $("#id_lokasi2").val(); 
 		console.log(id);
-		$.get("<?php echo base_url(); ?>usulan/tampilkan_proyek_lokasi_tes/"+id, function(data) {
+		$.get("<?php echo base_url(); ?>usulan/tampilkan_proyek_prov_tes/"+id, function(data) {
 			$("#daftar_proyek").html(data);
 		});
 	}
+
+	function segarkan_data_total_phln(){
+		var id = $("#id_lokasi2").val(); 
+		console.log(id);
+		$.get("<?php echo base_url(); ?>usulan/hitung_total_proyek_prov/"+id, function(data) {
+			$("#total_kegiatan_PHLN").html(data);
+		});
+	}
+
+	function chart_phln(){
+		var id = $("#id_lokasi2").val(); 
+		console.log(id);
+		$.get("<?php echo base_url(); ?>usulan/filter_phln_prov/"+id, function(data) {
+		$("#chart_phln").html(data);
+		});
+	}
+
 
 	
 </script> 

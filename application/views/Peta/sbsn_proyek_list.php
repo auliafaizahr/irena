@@ -21,7 +21,7 @@
       <tr class="gradeX">
        
         <td><?php echo $value['instansi']; ?></td>
-        <td><?php echo $value['judul']; ?></td>
+        <td><?php echo $value['judul_proyek']; ?></td>
         <td><?php echo $value['nilai']; ?></td>
         <td><?php echo $value['dpp']; ?></td>
        

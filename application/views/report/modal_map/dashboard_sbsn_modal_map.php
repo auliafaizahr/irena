@@ -27,7 +27,7 @@
 				<div id="loader1" class="loader1" style='visibility: hidden;'></div>
 				<div class="ibox-content" >
 
-				<div id="total_kegiatan"></div>
+				<h3><div id="total_kegiatan"></div></h3>
 				
 				
 				 </div>
@@ -161,14 +161,24 @@
 	$(document).ready(function(){
 		
 		segarkan_data5();
+		segarkan_data_total();
 		
 	});
 
 	function segarkan_data5(){
 		var id = $("#id_lokasi2").val(); 
 		console.log(id);
-		$.get("<?php echo base_url(); ?>sbsn/tampilkan_proyek_lokasi_1/"+id, function(data) {
+		$.get("<?php echo base_url(); ?>sbsn/tampilkan_proyek_prov/"+id, function(data) {
 			$("#daftar_proyek").html(data);
+		});
+	}
+
+
+	function segarkan_data_total(){
+		var id = $("#id_lokasi2").val(); 
+		console.log(id);
+		$.get("<?php echo base_url(); ?>sbsn/hitung_total_proyek_prov/"+id, function(data) {
+			$("#total_kegiatan").html(data);
 		});
 	}
 

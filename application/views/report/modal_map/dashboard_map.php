@@ -14,6 +14,9 @@
 
 <div class="wrapper wrapper-content animated fadeIn">
 	<div class="row">
+	<input type="hidden" name="id_lokasi2" id="id_lokasi2" class="form-control" value="<?php echo $id_lokasi; ?>"> 
+
+	
 		
 	
 			<div class="col-lg-3" >
@@ -27,11 +30,11 @@
 				<div id="loader1" class="loader1" style='visibility: hidden;'></div>
 				<div class="ibox-content" >
 
-				<div id="total_kegiatan"></div>
+				<div id="total_kegiatan_PHLN"></div>
 				
 				
 				 </div>
-				</div>
+			</div>
 
 			</div>
 
@@ -45,7 +48,7 @@
 							<div id="loader1" class="loader1" style='visibility: hidden;'></div>
 							<div class="ibox-content" >
 
-							<div id="total_kegiatan_LA"></div>
+							<div id="total_kegiatan_SBSN"></div>
 							
 							 </div>
 							</div>
@@ -89,6 +92,30 @@
 
 
 <script>
+
+	$(document).ready(function(){
+		
+		
+		segarkan_data_total_sbsn();
+		segarkan_data_total_phln();
+		
+	});
+
+	function segarkan_data_total_sbsn(){
+		var id = $("#id_lokasi2").val(); 
+		console.log(id);
+		$.get("<?php echo base_url(); ?>sbsn/hitung_total_proyek_prov/"+id, function(data) {
+			$("#total_kegiatan_SBSN").html(data);
+		});
+	}
+
+	function segarkan_data_total_phln(){
+		var id = $("#id_lokasi2").val(); 
+		console.log(id);
+		$.get("<?php echo base_url(); ?>usulan/hitung_total_proyek_prov/"+id, function(data) {
+			$("#total_kegiatan_PHLN").html(data);
+		});
+	}
 
 
 	

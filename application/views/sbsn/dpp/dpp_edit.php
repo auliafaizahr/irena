@@ -70,7 +70,7 @@
                            
                                 <?php $key = array($dpp->provinsi);
                                 $a = array();
-                                $a = explode(",", $detail->lokasi);
+                                $a = explode(",", $dpp->id_prov);
                               
                                  
 
@@ -92,7 +92,7 @@
                            
                                 <?php $key = array($dpp->kabkota);
                                 $a = array();
-                                $a = explode(",", $detail->kabkota);
+                                $a = explode(",", $dpp->id_kabkota);
                               
                                  
 

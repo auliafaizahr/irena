@@ -86,7 +86,7 @@ class Bluebook extends CI_Controller {
 		 $this->load->model('Usulan_model');
 		 $this->load->model('Bluebook_model');
 		$data['id_lokasi'] = $this->input->post('id');
-		$data['lokasi_nama'] = $this->Usulan_model->ambil_lokasi_proyek_id_nama($data['id_lokasi'])->nama;
+		$data['lokasi_nama'] = $this->Usulan_model->ambil_nama_prov_($data['id_lokasi'])->nama;
 		//$data['data']= $this->Bluebook_model->ambil_proyek_berdasarkan_lokasi();
 		
 		$data['lembaga']= $this->Usulan_model->ambil_instansi();

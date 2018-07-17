@@ -74,6 +74,28 @@ class Sbsn_model extends CI_Model
 		return $this->db->query($sql)->result_array();
 	}
 
+	public function hitung_total_proyek_prov($x)
+	{
+		$sql = "SELECT  COUNT(IF(irena_view_sbsn_dpp_prov.id_prov = '$x', irena_view_sbsn_dpp_prov.id_usulan, NULL)) AS total_kegiatan FROM irena_view_sbsn_dpp_prov";
+		 $a= $this->db->query($sql);
+
+		return $a->row()->total_kegiatan;
+	}
+
+		public function hitung_total_nilai_proyek_prov($x)
+	{
+		$sql = "SELECT  SUM(IF(irena_view_sbsn_dpp_prov.id_prov = '$x', irena_view_sbsn_dpp_prov.nilai, 0)) AS total_nilai FROM irena_view_sbsn_dpp_prov";
+		 $a= $this->db->query($sql);
+
+		return $a->row()->total_nilai;
+	}
+
+	public function ambil_proyek_berdasarkan_prov($x)
+	{
+		$sql = "SELECT * FROM irena_view_sbsn_dpp_prov WHERE id_prov = '$x' ";
+		return $this->db->query($sql)->result_array();
+	}
+
 	
 	function pilih_kategori_proyek()
 	{
