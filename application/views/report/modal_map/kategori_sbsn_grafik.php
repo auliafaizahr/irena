@@ -4,7 +4,7 @@
   <table class="table table-striped table-hover js-table" id="example0">
     <thead>
       <tr>
-        <th>Program</th>
+        <th>Kategori</th>
         <th>Total Nilai Pinjaman</th>
        <!--  <th>Actions</th> -->
       </tr>
@@ -13,7 +13,7 @@
     <?php foreach ($detail as $key => $value): ?>
    
     <tr data-toggle="collapse" data-target="#collapse4039" class="clickable">
-      <td><?php echo $value['program']; ?></td>
+      <td><?php echo $value['nama']; ?></td>
       <td><?php echo number_format($value['total']); ?></td>
    
      
@@ -56,7 +56,7 @@ $table.find('.js-view-parents').on('click', function(e) {
  // var parentsData = [];
 
     $.ajax({
-        url: "<?php echo base_url(); ?>usulan/filter_infra_bluebook",
+        url: "<?php echo base_url(); ?>sbsn/filter_program_isi_prov",
         dataType: "json",
         //data: parentsData,
         success: function (isi) {
@@ -69,7 +69,7 @@ $table.find('.js-view-parents').on('click', function(e) {
 			};
 
         	data: parentsData;
-
+/*
     var newRow = '<tr class="expand-child" id="collapse' + $btn.data('name') + '">' +
       '<td colspan="12">' +
       '<table class="table table-condensed table-bordered" width=100% >' +
@@ -81,7 +81,7 @@ $table.find('.js-view-parents').on('click', function(e) {
       '<th>School name</th>' +
       '</tr>' +
       '</thead>' +
-      '<tbody>';
+      '<tbody>';*/
 
     if (parentsData.parents) {
       $.each(parentsData.parents, function(i, parent) {
@@ -106,7 +106,7 @@ $table.find('.js-view-parents').on('click', function(e) {
 
 	
 	$.ajax({
-				url: "<?php echo base_url(); ?>usulan/filter_program_isi_prov/"+id,
+				url: "<?php echo base_url(); ?>sbsn/filter_program_isi_prov/"+id,
 				type: "GET",
 				dataType: "html",
 				
@@ -123,7 +123,7 @@ $table.find('.js-view-parents').on('click', function(e) {
 					console.log(a);
 
 					  
-					$.getJSON("<?php echo base_url(); ?>usulan/filter_program_isi_prov/"+id, function(json) {
+					$.getJSON("<?php echo base_url(); ?>sbsn/filter_program_isi_prov/"+id, function(json) {
 					console.log(json);
 					console.log(json.length);
 					console.log(json[0].name);

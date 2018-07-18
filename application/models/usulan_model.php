@@ -556,6 +556,15 @@ class Usulan_model extends CI_Model {
 		
 	}
 
+	public function semua_kecamatan()
+	{
+		
+		$query = "SELECT * FROM irena_kecamatan ORDER BY nama ASC";
+		 $a= $this->db->query($query);
+		return $a->result_array();
+		
+	}
+
 
 	public function status_lembaga($x)
 	{

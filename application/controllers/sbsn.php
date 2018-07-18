@@ -54,7 +54,93 @@ class Sbsn extends CI_Controller {
 		
 		$this->load->view('sbsn/usulan/usulan_tambah', $data);
 	}
+
+		public function filter_sbsn_prov()
+	{
+
+		$this->load->model('Usulan_model');
+		$this->load->model('Bluebook_model');
+		$this->load->model('sbsn_model');
+			
+		$id = $this->input->post('id');
+		$a = $this->uri->segment(3);
+		$id_lokasi = $this->uri->segment(3);
+		//$data['detail'] = $this->Bluebook_model->ambil_proyek_per_bb($a);
+		$data['id'] = $this->uri->segment(3);
+		$data['id_lokasi'] = $this->uri->segment(3);
+
+		$data['detail'] = $this->sbsn_model->ambil_grafik_program_untuk_prov($data['id']);
+
+		
+		$this->load->view('report/modal_map/kategori_sbsn_grafik', $data);
+		
+	}
+
+	public function sanding_dpp_prov()
+	{
+
+		$this->load->model('Usulan_model');
+		$this->load->model('Bluebook_model');
+		$this->load->model('sbsn_model');
+			
+		$id = $this->input->post('id');
+		$a = $this->uri->segment(3);
+		$id_lokasi = $this->uri->segment(3);
+		//$data['detail'] = $this->Bluebook_model->ambil_proyek_per_bb($a);
+		$data['id'] = $this->uri->segment(3);
+		$data['id_lokasi'] = $this->uri->segment(3);
+
+		$data['detail'] = $this->sbsn_model->ambil_grafik_program_untuk_prov($data['id']);
+
+		
+		$this->load->view('report/modal_map/sanding_dpp');
+		
+	}
+
+	public function filter_sanding_dpp_isi()
+	{
+
+		$this->load->model('Usulan_model');
+		$this->load->model('Bluebook_model');
+		$this->load->model('sbsn_model');
+			
+		$id = $this->input->post('id');
+		$a = $this->uri->segment(3);
+		//$data['detail'] = $this->Bluebook_model->ambil_proyek_per_bb($a);
+
+		
+		foreach ($this->sbsn_model->ambil_grafik_sanding_dpp_prov_isi($a) as $row) {
+			$data[] = array(
+				'name' => $row['nama'],
+				'y' => $row['total']
+				);
+		}
+    	 echo json_encode($data);
+	}
 	
+	
+
+	public function filter_program_isi_prov()
+	{
+
+		$this->load->model('Usulan_model');
+		$this->load->model('Bluebook_model');
+		$this->load->model('sbsn_model');
+			
+		$id = $this->input->post('id');
+		$a = $this->uri->segment(3);
+		//$data['detail'] = $this->Bluebook_model->ambil_proyek_per_bb($a);
+
+		
+		foreach ($this->sbsn_model->ambil_grafik_program_untuk_prov($a) as $row) {
+			$data[] = array(
+				'name' => $row['nama'],
+				'y' => $row['total']
+				);
+		}
+    	 echo json_encode($data);
+	}
+
 	function ambil_data_instansi_es_1_by_id_instansi()
 	{
 		$id_instansi 		= $this->uri->segment(3); 

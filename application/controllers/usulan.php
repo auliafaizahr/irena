@@ -455,7 +455,7 @@ class Usulan extends CI_Controller {
 		
 		foreach ($this->Bluebook_model->ambil_grafik_program_untuk_prov($a) as $row) {
 			$data[] = array(
-				'name' => $row['nama'],
+				'name' => $row['program'],
 				'y' => $row['total']
 				);
 		}
@@ -529,8 +529,9 @@ class Usulan extends CI_Controller {
 		$a = $this->uri->segment(3);
 		//$data['detail'] = $this->Bluebook_model->ambil_proyek_per_bb($a);
 		$data['id'] = $this->uri->segment(3);
+		$data['id_lokasi'] = $this->uri->segment(3);
 
-		$data['detail'] = $this->Bluebook_model->ambil_grafik_infra_per_bb($data['id']);
+		$data['detail'] = $this->Bluebook_model->ambil_grafik_program_untuk_prov($data['id']);
 
 		
 		$this->load->view('report/modal_map/program_phln_grafik', $data);

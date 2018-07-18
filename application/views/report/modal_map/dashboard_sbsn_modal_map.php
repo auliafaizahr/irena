@@ -78,7 +78,7 @@
 				<div id="loader1" class="loader1" style='visibility: hidden;'></div>
 				<div class="ibox-content" >
 
-				<div id="total_kegiatan"></div>
+				<div id="chart_sbsn"></div>
 				
 				
 				 </div>
@@ -104,7 +104,7 @@
 				<div id="loader1" class="loader1" style='visibility: hidden;'></div>
 				<div class="ibox-content" >
 
-				<div id="total_kegiatan"></div>
+				<div id="chart_dpp"></div>
 				
 				
 				 </div>
@@ -154,6 +154,9 @@
 </div>
 
 
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/data.js"></script>
+<script src="https://code.highcharts.com/modules/drilldown.js"></script>
 
 
 <script>
@@ -162,6 +165,8 @@
 		
 		segarkan_data5();
 		segarkan_data_total();
+		chart_sbsn();
+		chart_dpp();
 		
 	});
 
@@ -179,6 +184,22 @@
 		console.log(id);
 		$.get("<?php echo base_url(); ?>sbsn/hitung_total_proyek_prov/"+id, function(data) {
 			$("#total_kegiatan").html(data);
+		});
+	}
+
+	function chart_sbsn(){
+		var id = $("#id_lokasi2").val(); 
+		console.log(id);
+		$.get("<?php echo base_url(); ?>sbsn/filter_sbsn_prov/"+id, function(data) {
+		$("#chart_sbsn").html(data);
+		});
+	}
+
+	function chart_dpp(){
+		var id = $("#id_lokasi2").val(); 
+		console.log(id);
+		$.get("<?php echo base_url(); ?>sbsn/sanding_dpp_prov/"+id, function(data) {
+		$("#chart_dpp").html(data);
 		});
 	}
 

@@ -129,6 +129,44 @@ class Sbsn_model extends CI_Model
 		$sql="SELECT * FROM irena_view_sbsn_usulan_awal WHERE id_proyek = '$id'";
 		return $this->db->query($sql);
 	}
+
+	public function ambil_grafik_program_untuk_prov($x)
+	{
+		$query = "SELECT irena_sbsn_kategori_proyek.nama AS nama, SUM(IF(irena_view_sbsn_dpp_prov.id_prov = '$x', nilai, 0)) AS total, irena_view_sbsn_dpp_prov.id_kategori AS id_kategori FROM irena_view_sbsn_dpp_prov LEFT JOIN irena_sbsn_kategori_proyek ON irena_view_sbsn_dpp_prov.id_kategori = irena_sbsn_kategori_proyek.id GROUP BY id_kategori HAVING total > 0";
+
+		 $a= $this->db->query($query);
+
+		return $a->result_array();
+	}
+
+	public function ambil_jumlah_kegiatan_di_prov($x)
+	{
+		$query = "SELECT irena_sbsn_dpp.nama AS nama, COUNT(IF(irena_view_sbsn_dpp_prov.id_prov = '$x, irena_view_sbsn_dpp_prov.id_usulan, 0)) AS total, irena_sbsn_proyek.id_dpp AS id_dpp 
+FROM irena_view_sbsn_dpp_prov 
+LEFT JOIN irena_sbsn_proyek ON irena_view_sbsn_dpp_prov.id_usulan = irena_sbsn_proyek.id 
+LEFT JOIN irena_sbsn_proyek_dpp ON irena_view_sbsn_dpp_prov.id_usulan = irena_sbsn_proyek_dpp.id_proyek
+LEFT JOIN irena_sbsn_dpp ON irena_sbsn_proyek_dpp.id_dpp = irena_sbsn_dpp.id 
+GROUP BY id_dpp HAVING total > 0";
+
+		 $a= $this->db->query($query);
+
+		return $a->result_array();
+	}
+
+	public function ambil_grafik_sanding_dpp_prov_isi($x)
+	{
+		$query = "SELECT irena_sbsn_dpp.nama AS nama, SUM(IF(irena_view_sbsn_dpp_prov.id_prov = '$x', irena_view_sbsn_dpp_prov.nilai, 0)) AS total, irena_sbsn_proyek.id_dpp AS id_dpp 
+			FROM irena_view_sbsn_dpp_prov 
+			LEFT JOIN irena_sbsn_proyek ON irena_view_sbsn_dpp_prov.id_usulan = irena_sbsn_proyek.id 
+			LEFT JOIN irena_sbsn_proyek_dpp ON irena_view_sbsn_dpp_prov.id_usulan = irena_sbsn_proyek_dpp.id_proyek
+			LEFT JOIN irena_sbsn_dpp ON irena_sbsn_proyek_dpp.id_dpp = irena_sbsn_dpp.id 
+			GROUP BY id_dpp HAVING total > 0";
+
+		 $a= $this->db->query($query);
+
+		return $a->result_array();
+	}
+
 	
 	function usulan_hapus($id){
 		$this->db->where('id', $id);

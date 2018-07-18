@@ -129,7 +129,9 @@
 </div>
 
 
-
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/data.js"></script>
+<script src="https://code.highcharts.com/modules/drilldown.js"></script>
 
 <script>
 
@@ -137,6 +139,7 @@
 		
 		segarkan_data5();
 		segarkan_data_total_phln();
+		 chart_phln();
 		
 	});
 

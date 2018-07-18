@@ -270,7 +270,7 @@ function usulan_simpan_data($data)
 
 	public function ambil_grafik_program_untuk_prov($x)
 	{
-		$query = "SELECT irena_program_pln.nama_program AS program, SUM(IF(irena_bluebook_proyek.id_bluebook = '$x', nilai_pinjaman, 0)) AS total, irena_bluebook_proyek.id_program AS id_program FROM irena_bluebook_proyek LEFT JOIN irena_program_pln ON irena_bluebook_proyek.id_program = irena_program_pln.id GROUP BY id_program HAVING total > 0";
+		$query = "SELECT irena_program_pln.nama_program AS program, SUM(IF(irena_view_la_prov_proyek.id_prov = '$x', nilai, 0)) AS total, irena_view_la_prov_proyek.id_program AS id_program FROM irena_view_la_prov_proyek LEFT JOIN irena_program_pln ON irena_view_la_prov_proyek.id_program = irena_program_pln.id GROUP BY id_program HAVING total > 0";
 
 		 $a= $this->db->query($query);
 
