@@ -148,6 +148,26 @@
                             </div>
                         </div>
 
+                        <div class="form-group">
+                            <label for="kabkota" class="col-sm-2 control-label">Kecamatan</label>
+                            <div class="col-sm-9">
+                                <select name="kabkota" id="kecamatan" class="form-control" multiple>
+                           
+                                <?php $key = array($usulan->id_kecamatan);
+                                $c = array();
+                                $c = explode(",", $usulan->id_kecamatan);
+                                $key2 = array("1", "2", "4", "3");
+                                 
+
+
+                                foreach($kecamatan as $row ){ ?>
+                                <option value="<?php echo $row['id']; ?>" <?php echo in_array($row['id'] , $c) ? 'selected' : '' ?>><?php echo $row['nama']; ?>
+                                 </option>
+                                 <?php } ?>
+                                 </select>
+                            </div>
+                        </div>
+
                  
                        <!-- 
                         
@@ -350,6 +370,13 @@
             width: "100%"
         });
 
+        $("#kecamatan").select2({
+            placeholder: "Pilih Kabupaten / Kota",
+            multiple:true,
+            width: "100%"
+        });
+
+
         $(".poin_kabkota").select2({
             placeholder: "Pilih Kabupaten / Kota",
            
@@ -474,6 +501,7 @@
 			//var id_instansi 						= $("#id_instansi").val();
 			var id_provinsi                 = $("#provinsi").val();
             var id_kabkota                  = $("#kabkota").val();
+            var id_kecamatan                  = $("#kecamatan").val();
             var poin_kabkota                =  $(".poin_kabkota").serializeArray();
             var panjang						= poin_kabkota.length;
             //var arr_poin 					= JSON.stringify(poin_kabkota[0].value);
@@ -514,6 +542,7 @@
 			//form_data.append('id_instansi', id_instansi);
 			form_data.append('id_provinsi', id_provinsi);
             form_data.append('id_kabkota', id_kabkota);
+            form_data.append('id_kecamatan', id_kecamatan);
             form_data.append('poin_kabkota', poin_pakai);
 
             console.log(isi_data);

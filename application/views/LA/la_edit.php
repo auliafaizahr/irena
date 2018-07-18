@@ -551,23 +551,38 @@
 
             $.ajax({
                 url: '<?php echo base_url(); ?>loan_aggr/la_simpan/edit',
-                dataTheidi
-                    }
-                    else {
-                        $.each(response.messages, function(key, value) {
-                            var element = $('#' + key);
-                            
-                            element.closest('div.form-group')
-                            .removeClass('has-error')
-                            .addClass(value.length > 0 ? 'has-error' : 'has-success')
-                            .find('.text-danger')
-                            .remove();
+                
+                    dataType: 'json',
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    data: form_data,
+                    type: 'post',
+                    success: function(response){
+                        if (response.success == true) {
+                            $('#ModalEdit').modal('hide');
+                            segarkan_data();
+                            notif("Informasi", "Data berhasil disimpan.");
+                        }
+                        else {
+                            $.each(response.messages, function(key, value) {
+                                var element = $('#' + key);
+                                
+                                element.closest('div.form-group')
+                                .removeClass('has-error')
+                                .addClass(value.length > 0 ? 'has-error' : 'has-success')
+                                .find('.text-danger')
+                                .remove();
 
-                            element.after(value);
-                        });
+                                element.after(value);
+                            });
+                        }
                     }
-                }
+
+
+                });
             });
         });
-    });
+   
 </script>
+

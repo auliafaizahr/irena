@@ -105,6 +105,27 @@
 								
 							</div>
 						</div>
+
+						<div class="form-group">
+							<label for="nilai" class="col-sm-2 control-label">Kecamatan</label>
+							<div class="col-sm-10">
+							<select name="id_kabkota" id="kecamatan" class="form-control" multiple>
+                           
+                                <?php $key = array($dpp->id_kecamatan);
+                                $a = array();
+                                $a = explode(",", $dpp->id_kecamatan);
+                              
+                                 
+
+
+                                foreach($kecamatan as $row ){ ?>
+                                <option value="<?php echo $row['id']; ?>" <?php echo in_array($row['id'] , $a) ? 'selected' : '' ?>><?php echo $row['nama']; ?>
+                                 </option>
+                                 <?php } ?>
+                            </select>
+								
+							</div>
+						</div>
 						
 						
 						<input type="hidden" name="id" class="form-control" id="id" value="<?php  echo $dpp->id; ?>">
@@ -142,6 +163,14 @@
             tags: true
 		});
 
+		$("#kecamatan").select2({
+			placeholder: "Pilih Lokasi Proyek Provinsi",
+			width: "100%",
+			multiple:true,
+            tags: true
+		});
+
+
 		$("#id_kabkota").select2({
 			placeholder: "Pilih Lokasi Proyek Kabupaten / Kota",
 			width: "100%",
@@ -165,6 +194,7 @@
 			var lokasi 		= $("#lokasi").val();
 			var id_prov 		= $("#id_prov").val();
 			var id_kabkota 		= $("#id_kabkota").val();
+			var id_kecamatan 		= $("#kecamatan").val();
 			
             var form_data 	= new FormData();
 			
@@ -176,6 +206,8 @@
 			form_data.append('lokasi', lokasi);
 			form_data.append('id_prov', id_prov);
 			form_data.append('id_kabkota', id_kabkota);
+			form_data.append('id_kecamatan', id_kecamatan);
+
 
 			console.log(id);
 			console.log(id_proyek);

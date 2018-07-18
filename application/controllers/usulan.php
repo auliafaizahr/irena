@@ -2251,6 +2251,8 @@ class Usulan extends CI_Controller {
 				$this->Usulan_model->hapus_dari_histori($id_);
 				$this->Usulan_model->hapus_dari_prov($id_);
 				$this->Usulan_model->hapus_dari_kabkota($id_);
+				$this->Usulan_model->hapus_dari_adm($id_);
+				$this->Usulan_model->hapus_dari_layak($id_);
 				$id_instansi			= $this->input->post('id_instansi');
 				$data 					= $_POST;
 				$result 				= $this->Usulan_model->usulan_simpan_data_edit($data);
@@ -2258,6 +2260,13 @@ class Usulan extends CI_Controller {
 
 				$select2data = $this->input->post('lokasi');
 				$array_lokasi = explode(",", $select2data);
+
+				$isi = array(
+				    			'id_usulan' 		=> $id_
+				    			
+				    			//'is_gb_update_by'			=> $this->session->userdata('id')
+				    			
+				    		);
 				
 				$data2 = [];
 				foreach($array_lokasi as $lokasi) {
@@ -2302,6 +2311,9 @@ class Usulan extends CI_Controller {
 			 	    'id_instansi' => $id_instansi,
 			 	  ];
 			 	}
+
+			 	$this->db->insert('irena_usulan_layak', $isi);
+				$this->db->insert('irena_usulan_adm', $isi);
 	 	
 	 	
 

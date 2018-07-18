@@ -463,11 +463,6 @@
             '<td style="width:220px;">   ' + numeral(results.isi[3].gb_pinjaman).format('0,0') + ' </td>'+
           '</tr>' : ""   )+
 
-
-
-
-        
-
         
         '<tr>'+
             '<td  style="width:200px;" >Tanggal DK  </td>' +

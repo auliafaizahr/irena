@@ -180,6 +180,11 @@ class Usulan_model extends CI_Model {
 		
 	}
 
+
+
+
+
+
 	public function hapus_dari_prov($a)
 	{
 

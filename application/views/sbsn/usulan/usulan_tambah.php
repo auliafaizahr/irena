@@ -104,6 +104,23 @@
                     </div>
 
 
+                    <div class="form-group">
+                        <label for="lokasi" class="col-sm-3 control-label">Kecamatan</label>
+                        <div class="col-sm-9">
+
+                            <select name="kabkota" id="kecamatan" class="form-control"  >
+                                 
+                                <?php foreach($kecamatan as $row){ ?>
+                                    <option value="<?php echo $row['id']; ?>"><?php echo $row['nama']; ?>
+                                  </option>
+                                <?php } ?>
+                            </select>
+                           <!-- <textarea name="lokasi" id="lokasi" class="col-sm-12" rows="5" placeholder="Lokasi"></textarea> -->
+                        </div>
+                    </div>
+
+
+
                      <div class="form-group timesheet_2-rows" >
                         <fieldset id="timesheet-rows">
                             
@@ -225,6 +242,13 @@
             width: "100%"
         });
 
+          $("#kecamatan").select2({
+            placeholder: "Pilih Kabupaten / Kota",
+            multiple:true,
+            width: "100%"
+        });
+
+
          
           $(".poin_kabkota").select2({
              placeholder: "Pilih Kabupaten / Kota",
@@ -337,6 +361,7 @@
 			var lokasi 						= $("#lokasi").val();
 			var id_provinsi                  = $("#provinsi").val();
             var id_kabkota                    = $("#kabkota").val();
+            var id_kecamatan                    = $("#id_kecamatan").val();
             var poin_kabkota                =  $(".poin_kabkota").serializeArray();
             var panjang						= poin_kabkota.length;
 
@@ -371,6 +396,7 @@
 			form_data.append('lokasi', lokasi);
 			form_data.append('id_instansi', id_instansi);
 			 form_data.append('id_provinsi', id_provinsi);
+			 form_data.append('id_kecamatan', id_kecamatan);
             form_data.append('id_kabkota', id_kabkota);
               form_data.append('poin_kabkota', poin_pakai);
 
