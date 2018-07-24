@@ -340,46 +340,48 @@
                         </div>
 
                         <div class="form-group">
+                            <label for="judul_id" class="col-sm-3 control-label">Activities </label>
+                           <!--  <div class="col-sm-9">
+                                <textarea name="activities[]" id="activities[]" class="col-sm-12" rows="5" placeholder="Activites"><?php echo $detail->outcome; ?></textarea>
+                            </div> -->
+                        </div>
+
+                        <div id="input_utama" class="input_utama">
+                        <div class="form-group">
                             <label for="judul_id" class="col-sm-3 control-label"></label>
                             <div class="col-sm-9">
-                                <textarea name="activities[]" id="activities[]" class="col-sm-12" rows="5" placeholder="Activites"><?php echo $detail->outcome; ?></textarea>
+                                
+
+                                                            <div id="clonedInput" class="clonedInput">
+                                                            <div>
+                                                                <label for="txtCategory" class="">Implementation :  <span class="requiredField">*</span></label>
+                                                                 <input type="text" name="durasi" id="durasi" class="form-control" placeholder="Durasi Pelaksanaan (dalam bulan)" value="<?php echo $detail->durasi; ?>">
+                                                            </div>
+                                                            <div>
+                                                                <label for="txtSubCategory" class="">Project Implementation Unit : <span class="requiredField">*</span></label>
+                                                                 <input type="text" name="durasi" id="durasi" class="form-control" placeholder="Durasi Pelaksanaan (dalam bulan)" value="<?php echo $detail->durasi; ?>">
+                                                            </div>
+                                                            <div>
+                                                           
+                                                            <div class="button">
+                                                                <button class="clone_button" type="button">Clone</button> 
+                                                                <button class="remove_button" type="button" >Remove</button>
+                                                            </div>
+                                                            </div>
+                                                        </div>
                             </div>
                         </div>
 
-                        <div id="clonedInput1" class="clonedInput">
-                            <div>
-                                <label for="txtCategory" class="">Learning category <span class="requiredField">*</span></label>
-                                <select class="" name="txtCategory[]" id="category1">
-                                    <option value="">Please select</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label for="txtSubCategory" class="">Sub-category <span class="requiredField">*</span></label>
-                                <select class="" name="txtSubCategory[]" id="subcategory1">
-                                    <option value="">Please select category</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label for="txtSubSubCategory">Sub-sub-category <span class="requiredField">*</span></label>
-                                <select name="txtSubSubCategory[]" id="subsubcategory1">
-                                    <option value="">Please select sub-category</option>
-                                </select>
-                            </div>
-                            <div class="actions">
-                                <button class="clone_button">Clone</button> 
-                                <button class="remove_button">Remove</button>
-                            </div>
-                        </div>
 
-                        <div id="clonedInput"> </div>
 
                         <input type="hidden" name="id" class="form-control" id="id" value="<?php echo $detail->id; ?>">
                     </div>
                     <div class="modal-footer">                  
-                        <button type="submit"class="btn btn-primary">Simpan</button>
+                        <button type="submit" class="btn btn-primary">Simpan</button>
                         <button type="button" id="tblTutup" class="btn btn-white" data-dismiss="modal">Tutup</button>
                     </div>
                 </form>
+             
             </div>
         </div>
     </div>
@@ -492,12 +494,13 @@
         var regex = /^(.+?)(\d+)$/i;
         var cloneIndex = $(".clonedInput").length;
         var a = 2;
+        var baru = $(".clonedInput")
          
 
         function clone(){
-            $(this).parents(".clonedInput").clone()
+            $(this).parents(".input_utama").clone()
 
-                .append(".clonedInput"+a).after(".clonedInput1")
+                .appendTo(".input_utama")
                 .attr("id", "clonedInput" +  cloneIndex)
                 .find("*")
                 .each(function() {
@@ -509,6 +512,7 @@
                 })
                 .on('click', 'button.clone_button', clone)
                 .on('click', 'button.remove_button', remove);
+               // $("#ModalEdit").modal('show');
             cloneIndex++;
             a++;
         }
