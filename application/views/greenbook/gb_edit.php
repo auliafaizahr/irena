@@ -332,6 +332,47 @@
                             <label for="durasi" class="col-sm-3">Bulan</label>
                         </div>
 
+                        <div class="form-group">
+                            <label for="judul_id" class="col-sm-3 control-label">Activities</label>
+                            <div class="col-sm-9">
+                                <textarea name="activities[]" id="activities[]" class="col-sm-12" rows="5" placeholder="Activites"><?php echo $detail->outcome; ?></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="judul_id" class="col-sm-3 control-label"></label>
+                            <div class="col-sm-9">
+                                <textarea name="activities[]" id="activities[]" class="col-sm-12" rows="5" placeholder="Activites"><?php echo $detail->outcome; ?></textarea>
+                            </div>
+                        </div>
+
+                        <div id="clonedInput1" class="clonedInput">
+                            <div>
+                                <label for="txtCategory" class="">Learning category <span class="requiredField">*</span></label>
+                                <select class="" name="txtCategory[]" id="category1">
+                                    <option value="">Please select</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="txtSubCategory" class="">Sub-category <span class="requiredField">*</span></label>
+                                <select class="" name="txtSubCategory[]" id="subcategory1">
+                                    <option value="">Please select category</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="txtSubSubCategory">Sub-sub-category <span class="requiredField">*</span></label>
+                                <select name="txtSubSubCategory[]" id="subsubcategory1">
+                                    <option value="">Please select sub-category</option>
+                                </select>
+                            </div>
+                            <div class="actions">
+                                <button class="clone_button">Clone</button> 
+                                <button class="remove_button">Remove</button>
+                            </div>
+                        </div>
+
+                        <div id="clonedInput"> </div>
+
                         <input type="hidden" name="id" class="form-control" id="id" value="<?php echo $detail->id; ?>">
                     </div>
                     <div class="modal-footer">                  
@@ -346,6 +387,12 @@
 
 <style>
     .modal { overflow: auto !important; }
+
+    body { padding: 10px;}
+
+    .clonedInput { padding: 10px; border-radius: 5px; background-color: #def; margin-bottom: 10px; }
+
+    .clonedInput div { margin: 5px; }
 </style>
 
 
@@ -441,6 +488,38 @@
             tags: true
         });
         
+
+        var regex = /^(.+?)(\d+)$/i;
+        var cloneIndex = $(".clonedInput").length;
+        var a = 2;
+         
+
+        function clone(){
+            $(this).parents(".clonedInput").clone()
+
+                .append(".clonedInput"+a).after(".clonedInput1")
+                .attr("id", "clonedInput" +  cloneIndex)
+                .find("*")
+                .each(function() {
+                    var id = this.id || "";
+                    var match = id.match(regex) || [];
+                    if (match.length == 3) {
+                        this.id = match[1] + (cloneIndex);
+                    }
+                })
+                .on('click', 'button.clone_button', clone)
+                .on('click', 'button.remove_button', remove);
+            cloneIndex++;
+            a++;
+        }
+
+        function remove(){
+            $(this).parents(".clonedInput").remove();
+        }
+        $(".clone_button").on("click", clone);
+
+        $(".remove_button").on("click", remove);
+
         
         
         

@@ -21,7 +21,7 @@
 		?>
 		<tr class="gradeX">
 			<td style="display:none;"><?php echo $row->update_date; ?></td>
-			<td><?php echo $row->instansi_singkatan; ?></td>
+			<td><?php echo $row->instansi; ?></td>
 			<td><?php echo $row->dpp; ?></td>
 			<td><?php echo $row->kategori_proyek; ?></td>
 			<td><a href="#" onclick="detail_list('sbsn/usulan_detail/<?php echo $row->id_proyek; ?>');"><?php echo $row->judul; ?></a></td>

@@ -1011,7 +1011,7 @@ class Greenbook extends CI_Controller {
 		$data['detail'] = $this->Greenbook_model->detail_proyek($a);
 
 	
-		$this->load->view('greenbook/detail_gb', $data);
+		$this->load->view('greenbook/detail_gb_2', $data);
 		//$this->load->view('templates/footer1');
 		
 		

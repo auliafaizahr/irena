@@ -25,10 +25,10 @@
               <td class="mail-ontact text-right">Judul EN</td>
               <td class="mail-subject"><?php echo $detail->judul_proyek_eng; ?></td>
             </tr>
-            <tr class="read">
+            <!-- <tr class="read">
               <td class="mail-ontact text-right">Judul ID</td>
               <td class="mail-subject"><?php echo $detail->judul_proyek_id; ?></td>
-            </tr>
+            </tr> -->
 
              <tr class="read">
               <td class="mail-ontact text-right">Program</td>
@@ -40,20 +40,14 @@
                 <td class="mail-subject"><?php echo $this->Usulan_model->ambil_instansi_untuk_usulan($detail->id_instansi)->nama_instansi; ?></td>
               </tr>
 
-
-            
               <tr class="read">
                 <td class="mail-ontact text-right">Instansi Pelaksana</td>
                 <td class="mail-subject"><?php echo $detail->instansi_pelaksana; ?>
               </tr>
 
               <tr class="read">
-                <td class="mail-ontact text-right">Ruang Lingkup ENG</td>
-                <td class="mail-subject"><?php echo  nl2br($detail->ruang_lingkup_eng); ?></td>
-              </tr>
-              <tr class="read">
-                <td class="mail-ontact text-right">Ruang Lingkup ID</td>
-                <td class="mail-subject"><?php echo  nl2br($detail->ruang_lingkup_id); ?></td>
+                <td class="mail-ontact text-right">Durasi</td>
+                <td class="mail-subject"><?php echo $detail->durasi. " bulan"; ?></td>
               </tr>
 
               <tr class="read">
@@ -76,7 +70,139 @@
                
               </tr>
 
+
+
+
+            
+              
+
               <tr class="read">
+                <td class="mail-ontact text-right">Ruang Lingkup ENG</td>
+                <td class="mail-subject"><?php echo  nl2br($detail->ruang_lingkup_eng); ?></td>
+              </tr>
+
+              <tr class="read">
+                <td class="mail-ontact text-right">Activities</td>
+                <td class="mail-subject"><?php echo  nl2br($detail->ruang_lingkup_eng); ?></td>
+              </tr>
+
+
+              <!-- Row Funding Source -->
+              <tr class="read">
+                <td class="mail-ontact text-right">Funding Source</td>
+                
+              </tr>
+
+              <tr class="read">
+                <td class="mail-ontact text-right"></td>
+                <td class="mail-subject">
+                  
+                  <table>
+                    <tr>
+                      <th rowspan="2" style="text-align:center"> Implementing Agency </th>
+                      <th colspan="4" width="400px" style="text-align:center"> Funding (US $ 000) </th>
+                      <th rowspan="2" style="text-align:center"> Source </th>
+                    </tr>
+
+                    <tr>
+                      <th width="100" style="text-align:center">Loan</th>
+                      <th width="100" style="text-align:center">Grant</th>
+                      <th width="100" style="text-align:center">Local</th>
+                      <th width="100" style="text-align:center">Total</th>
+                    </tr>
+
+                    <tr>
+                      <td  style="text-align:center">Loan</td>
+                      <td  style="text-align:center">Loan</td>
+                      <td  style="text-align:center">Loan</td>
+                      <td  style="text-align:center">Loan</td>
+                      <td  style="text-align:center">Loan</td>
+                      <td  style="text-align:center">Loan</td>
+                      
+                    </tr>
+                    <tr>
+
+                  </table>
+
+
+                </td>
+                
+              </tr>
+
+              <!-- Row Disbursement -->
+              <tr class="read">
+                <td class="mail-ontact text-right">Disbursement Plan</td>
+                
+              </tr>
+
+              <tr class="read">
+                <td class="mail-ontact text-right"></td>
+                <td class="mail-subject">
+                  
+                  <table>
+                    <tr>
+                      <th  rowspan="2"  style="text-align:center"> Source </th>
+                      <th colspan="5"  style="text-align:center"> Disbursement Plan (US $ 000) </th>
+                      <th  rowspan="2"  style="text-align:center"> Total </th>
+                    </tr>
+                    
+                    <tr>
+                      
+                      <th width="100" style="text-align:center">1st</th>
+                      <th width="100" style="text-align:center">2nd</th>
+                      <th width="100" style="text-align:center">3rd</th>
+                      <th width="100" style="text-align:center">4th</th>
+                    </tr>
+                    <tr>
+
+                  </table>
+
+
+                </td>
+                
+              </tr>
+
+               <!-- Row Funding Alloc -->
+              <tr class="read">
+                <td class="mail-ontact text-right">Funding Allocation</td>
+                
+              </tr>
+
+              <tr class="read">
+                <td class="mail-ontact text-right"></td>
+                <td class="mail-subject">
+                  
+                  <table>
+                    <tr>
+                      <th  rowspan="2"  style="text-align:center"> Activities </th>
+                      <th colspan="5"  style="text-align:center"> Category (US $ 000) </th>
+                      
+                    </tr>
+                    
+                    <tr>
+                      
+                      <th width="100" style="text-align:center">Services</th>
+                      <th width="100" style="text-align:center">Construction</th>
+                      <th width="100" style="text-align:center">Goods</th>
+                      <th width="100" style="text-align:center">Training</th>
+                      <th width="100" style="text-align:center">Other</th>
+                    </tr>
+                    <tr>
+
+                  </table>
+
+
+                </td>
+                
+              </tr>
+              <!-- <tr class="read">
+                <td class="mail-ontact text-right">Ruang Lingkup ID</td>
+                <td class="mail-subject"><?php echo  nl2br($detail->ruang_lingkup_id); ?></td>
+              </tr> -->
+
+             
+
+              <!-- <tr class="read">
                 <td class="mail-ontact text-right">Output</td>
                 <td class="mail-subject"><?php echo nl2br($detail->output); ?></td>
               </tr>
@@ -85,16 +211,13 @@
                 <td class="mail-subject"><?php echo nl2br($detail->outcome); ?></td>
               </tr>
 
-              <tr class="read">
-                <td class="mail-ontact text-right">Durasi</td>
-                <td class="mail-subject"><?php echo $detail->durasi. " bulan"; ?></td>
-              </tr>
+              
                <tr class="read">
                 <td class="mail-ontact text-right">Perkiraan Tahun Pertama Pelaksanaan</td>
                 <td class="mail-subject"><?php echo $detail->proyeksi_tahun_pertama_penarikan; ?></td>
               </tr>
-
-               <tr class="read">
+ -->
+              <!--  <tr class="read">
                 <td class="mail-ontact text-right">Nilai Pinjaman</td>
                 <td class="mail-subject"><?php echo "USD " .  number_format(($detail->nilai_pinjaman!="")?$detail->nilai_pinjaman:'');?></td>
               </tr>
@@ -116,7 +239,7 @@
                <tr class="read">
                 <td class="mail-ontact text-right">Referensi Bluebook</td>
                 <td class="mail-subject"><?php echo ($detail->id_bluebook!="")?$this->Bluebook_model->kode_bluebook($detail->id_bluebook)->nama:'';?></td>
-              </tr>
+              </tr> -->
 <!-- 
               <tr class="read">
                 <td class="mail-ontact text-right">Referensi Program Bluebook</td>
@@ -127,7 +250,7 @@
               
 
            
-
+<!-- 
               <tr class="read">
                 <td class="mail-ontact text-right">Kategori</td>
                 <td class="mail-subject"><?php 
@@ -164,7 +287,7 @@
                 <td class="mail-subject"><?php echo ($detail->id_status_lembaga!="")?$this->Bluebook_model->status_lembaga($detail->id_status_lembaga)->status:'';?>
                   </td>
                 
-              </tr>
+              </tr> -->
              
               
              
@@ -310,7 +433,7 @@
               </tr> -->
 
            
-                <?php if($this->Usulan_model->ambil_untuk_modal($detail->id_usulan)->id_proyek_bb != '' || $this->Usulan_model->ambil_untuk_modal($detail->id_usulan)->id_proyek_bb != NULL){ ?>
+             <!--  <?php if($this->Usulan_model->ambil_untuk_modal($detail->id_usulan)->id_proyek_bb != '' || $this->Usulan_model->ambil_untuk_modal($detail->id_usulan)->id_proyek_bb != NULL){ ?>
                <tr class="read">
                  <td class="mail-ontact text-right">Detail Bluebook</td>
                  <td class="mail-subject">
@@ -586,7 +709,7 @@
                </tr>
 
                <?php }; ?>
-
+ -->
 
 
 

@@ -383,25 +383,7 @@
   
 
   function format(d){
-    // `d` is the original data object for the row
-/*
-       $.ajax({
-               
-                url : "<?php echo base_url(); ?>Usulan/detail_expand_usulan",
-              
-                 type : 'get',
-                 dataType:'json',
-                success : function(response){
-                alert(response);
-                console.log("isi");
-           
-             
-                },
-                
-          });
 
-
-*/
   //console.log(d.judul_usulan);
   var results = JSON.parse(d);
   //console.log(results.isi[1].judul_usulan);
