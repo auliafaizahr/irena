@@ -295,6 +295,17 @@
       });
    /* row.child(format()).show();
     tr.addClass('shown');*/
+
+   /*   $.ajax({
+                type : 'post',
+                url : "<?php echo base_url(); ?>Loan_aggr/detil",
+                data :  'id='+ id,
+                success : function(response){
+               row.child.html(response);
+                $('#modalDetail').modal('show');
+                },
+                dataType: "html"
+            });*/
   }
 });
 
@@ -313,23 +324,60 @@
 
     return '<table >'+
         '<tr>'+
-            '<td  style="width:200px;" >Bluebook  </td>' +
-            '<td style="width:20px;">  :  </td>'+
-            '<td style="width:220px;">    </td>'+
-            '<td> Nilai Pinjaman   </td>'+
-            '<td style="width:20px;">  :  </td>'+
-            '<td style="width:220px;">    </td>'+
-        '</tr>'+
-        '<tr>'+
-            '<td  style="width:200px;" >Greenbook  </td>' +
-            '<td style="width:20px;">  :  </td>'+
-            '<td style="width:220px;">   </td>'+
-            '<td> Nilai Pinjaman   </td>'+
-            '<td style="width:20px;">  :  </td>'+
-            '<td style="width:220px;">    </td>'+
+            '<td  style="width:200px;" rowspan="2" >Kategori  </td>' +
+            '<td style="width:100px; align:text-center;">  1  </td>'+
+            '<td style="width:100px;"> 2   </td>'+
+            '<td style="width:100px;"> 3   </td>'+
+            '<td style="width:100px;"> 4  </td>'+
+            
         '</tr>'+
 
-    '</table>';
+        '<tr>'+
+           
+            '<td style="width:100px;">  2015  </td>'+
+            '<td style="width:100px;"> 2016   </td>'+
+            '<td style="width:100px;"> 2017   </td>'+
+            '<td style="width:100px;"> 2018  </td>'+
+            
+        '</tr>'+
+
+        '<tr>'+
+           
+            '<td style="width:100px;"> Disbursement GB  </td>'+
+            '<td style="width:100px;">  0  </td>'+
+            '<td style="width:100px;"> 0   </td>'+
+            '<td style="width:100px;"> 0   </td>'+
+            '<td style="width:100px;"> 0  </td>'+
+            
+        '</tr>'+
+
+         '<tr>'+
+           
+            '<td style="width:100px;"> Penyerapan </td>'+
+            '<td style="width:100px;">  0  </td>'+
+            '<td style="width:100px;"> 0   </td>'+
+            '<td style="width:100px;"> 0   </td>'+
+            '<td style="width:100px;"> 0  </td>'+
+            
+        '</tr>'+
+
+        '<tr>'+
+           
+            '<td style="width:100px;"> Selisih </td>'+
+            '<td style="width:100px;">  0  </td>'+
+            '<td style="width:100px;"> 0   </td>'+
+            '<td style="width:100px;"> 0   </td>'+
+            '<td style="width:100px;"> 0  </td>'+
+            
+        '</tr>'+
+        
+        
+
+    '</table>' +
+    
+    '<div class="progress progress-mini" style="width:200px;">'+
+          '<div style="width:50%;" class="progress-bar"></div>'+ 
+        '</div>' ;
 }
 </script>
 
