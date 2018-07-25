@@ -2,6 +2,7 @@
 	<thead>
 		<tr>
 			<!-- <th style="display:none;">Update date</th> -->
+      <th></th>
 			<th style="width:300px;">Instansi Pengusul</th>
 			<th class="text-center" style="width:300px;">Judul Proyek</th>
 			<th class="text-center">Program</th>
@@ -21,6 +22,7 @@
 		?>
 		<tr class="gradeX">
 			<!-- td style="display:none;"><?php echo $row->update_date; ?></td> -->
+      <td class="child"  data-id="<?php echo $value['id'];  ?>"></td>
 			<td><?php $c = $value['id'];
 			 $b = $this->Usulan_model->ambil_instansi_untuk_usulan($value['id_instansi'])->nama_instansi;
 			 echo $b; ?>
@@ -266,4 +268,85 @@
 			"order": [[ 0, "desc" ]]
 		});
 	});
+
+  var table = $('#example').DataTable();
+
+  $('#example tbody').on('click', 'td:first-child', function () {
+  var tr = $(this).closest('tr');
+  var row = table.row( tr );
+  var id = $(this).attr('data-id');
+
+  if (row.child.isShown()) {
+    // This row is already open - close it.
+    row.child.hide();
+    tr.removeClass('shown');
+  } else {
+    // Open row.
+     $.get("<?php echo base_url(); ?>usulan/detail_expand_usulan/"+id, function(data) {
+          //console.log(data[10]);
+          //console.log(data);
+          //var results = JSON.parse(data);
+          //console.log(results.isi[0].judul_usulan);
+          row.child(format()).show();
+          //dibuat load dari halaman lain terpisah, jadi ga di js buat tabel html nya
+        
+          tr.addClass('shown');
+        
+      });
+   /* row.child(format()).show();
+    tr.addClass('shown');*/
+  }
+});
+
+
+    function format(){
+
+  //console.log(d.judul_usulan);
+ // var results = JSON.parse(d);
+  //console.log(results.isi[1].judul_usulan);
+ // console.log(results.isi.length);
+
+
+  //var banyak_gb = sizeof(results.isi.gb_pinjaman);
+  //var banyak_gb = sizeof(isi.gb_pinjaman);
+//  console.log(banyak_gb);
+
+    return '<table >'+
+        '<tr>'+
+            '<td  style="width:200px;" >Bluebook  </td>' +
+            '<td style="width:20px;">  :  </td>'+
+            '<td style="width:220px;">    </td>'+
+            '<td> Nilai Pinjaman   </td>'+
+            '<td style="width:20px;">  :  </td>'+
+            '<td style="width:220px;">    </td>'+
+        '</tr>'+
+        '<tr>'+
+            '<td  style="width:200px;" >Greenbook  </td>' +
+            '<td style="width:20px;">  :  </td>'+
+            '<td style="width:220px;">   </td>'+
+            '<td> Nilai Pinjaman   </td>'+
+            '<td style="width:20px;">  :  </td>'+
+            '<td style="width:220px;">    </td>'+
+        '</tr>'+
+
+    '</table>';
+}
 </script>
+
+<style type="text/css">
+  th,
+
+div.dataTables_wrapper {
+  
+  margin: 0 auto;
+}
+
+td.child {
+  background: url('https://datatables.net/examples/resources/details_open.png') no-repeat center center;
+  cursor: pointer;
+}
+
+tr.shown td.child {
+  background: url('https://datatables.net/examples/resources/details_close.png') no-repeat center center;
+}
+</style>

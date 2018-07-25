@@ -346,13 +346,15 @@
                             </div> -->
                         </div>
 
+                        <div id="wadah_input">
+
                         <div id="input_utama" class="input_utama">
                         <div class="form-group">
                             <label for="judul_id" class="col-sm-3 control-label"></label>
                             <div class="col-sm-9">
                                 
 
-                                                            <div id="clonedInput" class="clonedInput">
+                                                            <div id="clonedInput1" class="clonedInput">
                                                             <div>
                                                                 <label for="txtCategory" class="">Implementation :  <span class="requiredField">*</span></label>
                                                                  <input type="text" name="durasi" id="durasi" class="form-control" placeholder="Durasi Pelaksanaan (dalam bulan)" value="<?php echo $detail->durasi; ?>">
@@ -364,7 +366,7 @@
                                                             <div>
                                                            
                                                             <div class="button">
-                                                                <button class="clone_button" type="button">Clone</button> 
+                                                                <button class="clone_button" type="button"  >Clone</button> 
                                                                 <button class="remove_button" type="button" >Remove</button>
                                                             </div>
                                                             </div>
@@ -375,6 +377,8 @@
 
 
                         <input type="hidden" name="id" class="form-control" id="id" value="<?php echo $detail->id; ?>">
+                    </div>
+
                     </div>
                     <div class="modal-footer">                  
                         <button type="submit" class="btn btn-primary">Simpan</button>
@@ -493,15 +497,18 @@
 
         var regex = /^(.+?)(\d+)$/i;
         var cloneIndex = $(".clonedInput").length;
-        var a = 2;
-        var baru = $(".clonedInput")
-         
+       // var a = 2;
+        var baru = $(".clonedInput");
+        var button_clone = $(".clone_button");
+        var b = document.querySelector(".clone_button"); 
+        var c = document.querySelector(".clone_button" + cloneIndex); 
 
         function clone(){
-            $(this).parents(".input_utama").clone()
+            $(this).parents("#input_utama").clone()
 
-                .appendTo(".input_utama")
-                .attr("id", "clonedInput" +  cloneIndex)
+                .appendTo("#wadah_input")
+                .attr("class", "input_utama" + cloneIndex)
+                b.setAttribute("class", "clone_button" + cloneIndex)
                 .find("*")
                 .each(function() {
                     var id = this.id || "";
@@ -510,16 +517,21 @@
                         this.id = match[1] + (cloneIndex);
                     }
                 })
+
                 .on('click', 'button.clone_button', clone)
                 .on('click', 'button.remove_button', remove);
+           // b.setAttribute("hidden", "hidden");
                // $("#ModalEdit").modal('show');
             cloneIndex++;
-            a++;
+            console.log(cloneIndex);
         }
+       
+
 
         function remove(){
-            $(this).parents(".clonedInput").remove();
+            $(this).parents("#input_utama").remove();
         }
+
         $(".clone_button").on("click", clone);
 
         $(".remove_button").on("click", remove);

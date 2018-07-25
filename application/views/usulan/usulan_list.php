@@ -780,7 +780,7 @@
 		});
 	});
 
-  var table = $('#example_id').DataTable();
+  var table = $('#example').DataTable();
 
 $('#example_id tbody').on('click', 'td:first-child', function () {
   var tr = $(this).closest('tr');
