@@ -22,7 +22,7 @@
 		?>
 		<tr class="gradeX">
 			<!-- td style="display:none;"><?php echo $row->update_date; ?></td> -->
-      <td class="child"  data-id="<?php echo $value['id'];  ?>"></td>
+      <td class="child"  data-id="<?php echo $value['id_usulan'];  ?>"></td>
 			<td><?php $c = $value['id'];
 			 $b = $this->Usulan_model->ambil_instansi_untuk_usulan($value['id_instansi'])->nama_instansi;
 			 echo $b; ?>
@@ -282,12 +282,12 @@
     tr.removeClass('shown');
   } else {
     // Open row.
-     $.get("<?php echo base_url(); ?>usulan/detail_expand_usulan/"+id, function(data) {
+     $.get("<?php echo base_url(); ?>loan_aggr/detail_expand_la/"+id, function(data) {
           //console.log(data[10]);
           //console.log(data);
           //var results = JSON.parse(data);
           //console.log(results.isi[0].judul_usulan);
-          row.child(format()).show();
+          row.child(format(data)).show();
           //dibuat load dari halaman lain terpisah, jadi ga di js buat tabel html nya
         
           tr.addClass('shown');
@@ -310,12 +310,16 @@
 });
 
 
-    function format(){
+    function format(d){
 
-  //console.log(d.judul_usulan);
- // var results = JSON.parse(d);
+  console.log(d);
+ var results = JSON.parse(d);
+
   //console.log(results.isi[1].judul_usulan);
- // console.log(results.isi.length);
+ console.log(results.isi.length);
+ console.log(results.isi2.length);
+ console.log(results.isi[0]);
+// console.log(results.isi[2].id_urut_disb);
 
 
   //var banyak_gb = sizeof(results.isi.gb_pinjaman);
@@ -325,46 +329,89 @@
     return '<table >'+
         '<tr>'+
             '<td  style="width:200px;" rowspan="2" >Kategori  </td>' +
-            '<td style="width:100px; align:text-center;">  1  </td>'+
-            '<td style="width:100px;"> 2   </td>'+
-            '<td style="width:100px;"> 3   </td>'+
-            '<td style="width:100px;"> 4  </td>'+
+            /*'<td style="width:100px; align:text-center;">  1  </td>'+
+            '<td style="width:100px;"> 2   </td>'+*/
+             //((typeof results.isi[2].id_urut_disb == 3)? '<td style="width:100px;"> 3   </td>')+
+            ((typeof results.isi[0] !== 'undefined')?  '<td style="width:100px;"> 3   </td>' : "" )+
+            ((typeof results.isi[1] !== 'undefined')?  '<td style="width:100px;"> 3   </td>' : "" )+
+            ((typeof results.isi[2] !== 'undefined')?  '<td style="width:100px;"> 3   </td>' : "" )+
+            ((typeof results.isi[3] !== 'undefined')?  '<td style="width:100px;"> 4   </td>' : "" )+
+             ((typeof results.isi[4] !== 'undefined' )? '<td style="width:100px;"> 5   </td>' : "" )+
+             ((typeof results.isi[5] !== 'undefined')? '<td style="width:100px;"> 6   </td>' : "" )+
+             ((typeof results.isi[6] !== 'undefined')? '<td style="width:100px;"> 7   </td>' : "" )+
+             ((typeof results.isi[7] !== 'undefined')? '<td style="width:100px;"> 8   </td>' : "" )+
+             ((typeof results.isi[8] !== 'undefined')? '<td style="width:100px;"> 9   </td>' : "" )+
+           /* '<td style="width:100px;"> 4  </td>'+
+            '<td style="width:100px;"> Total  </td>'+*/
             
         '</tr>'+
 
         '<tr>'+
+
            
-            '<td style="width:100px;">  2015  </td>'+
-            '<td style="width:100px;"> 2016   </td>'+
-            '<td style="width:100px;"> 2017   </td>'+
-            '<td style="width:100px;"> 2018  </td>'+
+           /* '<td style="width:100px; align:text-center;">  2015  </td>'+
+            '<td style="width:100px;"> 201   </td>'+*/
+             //((typeof results.isi[2].id_urut_disb == 3)? '<td style="width:100px;"> 3   </td>')+
+            ((typeof results.isi2[0] !== 'undefined')?  '<td style="width:100px;"> '+ results.isi2[0].tahun +'   </td>' : "" )+
+            ((typeof results.isi2[1] !== 'undefined')?  '<td style="width:100px;"> '+ results.isi2[1].tahun +'   </td>' : "" )+
+            ((typeof results.isi2[2] !== 'undefined')?  '<td style="width:100px;"> '+ results.isi2[2].tahun +'   </td>' : "" )+
+            ((typeof results.isi2[3] !== 'undefined')?  '<td style="width:100px;"> '+ results.isi2[3].tahun +'   </td>' : "" )+
+            ((typeof results.isi2[4] !== 'undefined')?  '<td style="width:100px;"> '+ results.isi2[4].tahun +'   </td>' : "" )+
+            ((typeof results.isi2[5] !== 'undefined')?  '<td style="width:100px;"> '+ results.isi2[5].tahun +'   </td>' : "" )+
+            ((typeof results.isi2[6] !== 'undefined')?  '<td style="width:100px;"> '+ results.isi2[6].tahun +'   </td>' : "" )+
+            ((typeof results.isi2[7] !== 'undefined')?  '<td style="width:100px;"> '+ results.isi2[7].tahun +'   </td>' : "" )+
+            ((typeof results.isi2[8] !== 'undefined')?  '<td style="width:100px;"> '+ results.isi2[8].tahun +'   </td>' : "" )+
+           /* ((typeof results.isi[3].tahun !== 'undefined')?  '<td style="width:100px;"> '+ results.isi[3].tahun +'   </td>' : "" )+
+            ((typeof results.isi[4].tahun !== 'undefined')?  '<td style="width:100px;"> '+ results.isi[4].tahun +'   </td>' : "" )+
+            ((typeof results.isi[5].tahun !== 'undefined')?  '<td style="width:100px;"> '+ results.isi[5].tahun +'   </td>' : "" )+
+            ((typeof results.isi[6].tahun !== 'undefined')?  '<td style="width:100px;"> '+ results.isi[6].tahun +'   </td>' : "" )+
+            ((typeof results.isi[7].tahun !== 'undefined')?  '<td style="width:100px;"> '+ results.isi[7].tahun +'   </td>' : "" )+
+           */
+          
             
         '</tr>'+
 
         '<tr>'+
            
             '<td style="width:100px;"> Disbursement GB  </td>'+
-            '<td style="width:100px;">  0  </td>'+
-            '<td style="width:100px;"> 0   </td>'+
-            '<td style="width:100px;"> 0   </td>'+
-            '<td style="width:100px;"> 0  </td>'+
+            ((typeof results.isi[0] !== 'undefined')?  '<td style="width:100px;"> '+ numeral(results.isi[0].nilai_disb).format('0,0') +'   </td>' : "" )+
+            ((typeof results.isi[1] !== 'undefined')?  '<td style="width:100px;">  '+ numeral(results.isi[1].nilai_disb).format('0,0') +'   </td>' : "" )+
+             ((typeof results.isi[2] !== 'undefined' )? '<td style="width:100px;"> '+ numeral(results.isi[2].nilai_disb).format('0,0') +'   </td>' : "" )+
+             ((typeof results.isi[3] !== 'undefined')? '<td style="width:100px;"> '+ numeral(results.isi[3].nilai_disb).format('0,0') +'   </td>' : "" )+
+             ((typeof results.isi[4] !== 'undefined')? '<td style="width:100px;"> '+ numeral(results.isi[4].nilai_disb).format('0,0')   +'   </td>' : "" )+
+             ((typeof results.isi[5] !== 'undefined')? '<td style="width:100px;"> '+ numeral(results.isi[5].nilai_disb).format('0,0')  +'   </td>' : "" )+
+             ((typeof results.isi[6] !== 'undefined')? '<td style="width:100px;"> '+ numeral(results.isi[6].nilai_disb).format('0,0') +'   </td>' : "" )+
+             ((typeof results.isi[7] !== 'undefined')? '<td style="width:100px;"> '+ numeral(results.isi[7].nilai_disb).format('0,0')  +'   </td>' : "" )+
+             ((typeof results.isi[8] !== 'undefined')? '<td style="width:100px;"> '+ numeral(results.isi[8].nilai_disb).format('0,0')  +'   </td>' : "" )+
+             ((typeof results.isi[9] !== 'undefined')? '<td style="width:100px;"> '+ numeral(results.isi[9].nilai_disb).format('0,0')  +'   </td>' : "" )+
+             ((typeof results.isi[10] !== 'undefined')? '<td style="width:100px;"> '+ numeral(results.isi[10].nilai_disb).format('0,0')  +'   </td>' : "" )+
             
         '</tr>'+
 
-         '<tr>'+
+         /*'<tr>'+
            
             '<td style="width:100px;"> Penyerapan </td>'+
-            '<td style="width:100px;">  0  </td>'+
-            '<td style="width:100px;"> 0   </td>'+
-            '<td style="width:100px;"> 0   </td>'+
-            '<td style="width:100px;"> 0  </td>'+
+
+            ((typeof results.isi2[0] !== 'undefined')?  '<td style="width:100px;"> '+ numeral(results.isi2[0].pagu_nilai).format('0,0') +'    </td>' : "" )+
+            ((typeof results.isi2[1] !== 'undefined')?  '<td style="width:100px;"> '+ numeral(results.isi2[1].pagu_nilai).format('0,0') +'    </td>' : "" )+
+            ((typeof results.isi2[2] !== 'undefined')?  '<td style="width:100px;"> '+ numeral(results.isi2[2].pagu_nilai).format('0,0') +'    </td>' : "" )+
+            ((typeof results.isi2[3] !== 'undefined')?  '<td style="width:100px;"> '+ numeral(results.isi2[3].pagu_nilai).format('0,0') +'    </td>' : "" )+
+            ((typeof results.isi2[4] !== 'undefined')?  '<td style="width:100px;"> '+ numeral(results.isi2[4].pagu_nilai).format('0,0') +'    </td>' : "" )+
+            ((typeof results.isi2[5] !== 'undefined')?  '<td style="width:100px;"> '+ numeral(results.isi2[5].pagu_nilai).format('0,0') +'    </td>' : "" )+
+            ((typeof results.isi2[6] !== 'undefined')?  '<td style="width:100px;"> '+ numeral(results.isi2[6].pagu_nilai).format('0,0') +'    </td>' : "" )+
+            ((typeof results.isi2[7] !== 'undefined')?  '<td style="width:100px;"> '+ numeral(results.isi2[7].pagu_nilai).format('0,0') +'    </td>' : "" )+
+            ((typeof results.isi2[8] !== 'undefined')?  '<td style="width:100px;"> '+ numeral(results.isi2[8].pagu_nilai).format('0,0') +'    </td>' : "" )+
+            ((typeof results.isi2[9] !== 'undefined')?  '<td style="width:100px;"> '+ numeral(results.isi2[9].pagu_nilai).format('0,0') +'    </td>' : "" )+
+            ((typeof results.isi2[10] !== 'undefined')?  '<td style="width:100px;"> '+ numeral(results.isi2[10].pagu_nilai).format('0,0') +'    </td>' : "" )+
             
-        '</tr>'+
+            
+            
+        '</tr>'+*/
 
         '<tr>'+
            
             '<td style="width:100px;"> Selisih </td>'+
-            '<td style="width:100px;">  0  </td>'+
+            ((typeof results.isi2[0] !== 'undefined')?  '<td style="width:100px;"> '+ numeral(results.isi2[0].pagu_nilai).format('0,0') +'    </td>' : "" )+
             '<td style="width:100px;"> 0   </td>'+
             '<td style="width:100px;"> 0   </td>'+
             '<td style="width:100px;"> 0  </td>'+

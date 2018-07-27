@@ -45,6 +45,25 @@ class La_model extends CI_Model {
         return $this->db->query($query)->result();
 	}
 
+	public function all_banding($x)
+	{
+		
+		$query = "SELECT irena_gb_disb.id_usulan AS id_usulan, irena_gb_disb.id_gb_proyek AS id_gb_proyek, irena_gb_disb.id_urut AS id_urut_disb, irena_gb_disb.nilai AS nilai_disb, irena_la_pagu.id_usulan AS id_usulan_di_la, irena_la_pagu.id_gb_proyek AS id_gb_di_LA, irena_la_pagu.id_urut AS id_urut_pagu, irena_la_pagu.tahun AS tahun, irena_la_pagu.nilai AS pagu_nilai FROM irena_gb_disb LEFT JOIN irena_la_pagu ON irena_la_pagu.id_usulan =  irena_gb_disb.id_usulan AND irena_gb_disb.id_gb_proyek = irena_la_pagu.id_gb_proyek WHERE irena_gb_disb.id_usulan = '$x' GROUP BY id_urut_disb";
+		 $a= $this->db->query($query);
+		return $a->result_array();
+		
+	}
+
+	public function all_banding_tahun($x)
+	{
+		
+		$query = "SELECT irena_gb_disb.id_usulan AS id_usulan, irena_gb_disb.id_gb_proyek AS id_gb_proyek, irena_gb_disb.id_urut AS id_urut_disb, irena_gb_disb.nilai AS nilai_disb, irena_la_pagu.id_usulan AS id_usulan_di_la, irena_la_pagu.id_gb_proyek AS id_gb_di_LA, irena_la_pagu.id_urut AS id_urut_pagu, irena_la_pagu.tahun AS tahun, irena_la_pagu.nilai AS pagu_nilai FROM irena_gb_disb LEFT JOIN irena_la_pagu ON irena_la_pagu.id_usulan =  irena_gb_disb.id_usulan AND irena_gb_disb.id_gb_proyek = irena_la_pagu.id_gb_proyek WHERE irena_gb_disb.id_usulan = '$x'  GROUP BY tahun";
+		 $a= $this->db->query($query);
+		return $a->result_array();
+		
+	}
+
+
 	public function ambil_bb($x)
 	{
 		$query = "SELECT nama FROM irena_bluebook_kode WHERE id = '$x'";

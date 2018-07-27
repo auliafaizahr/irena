@@ -71,6 +71,21 @@ class Loan_aggr extends CI_Controller {
     	$this->load->view('LA/catatan_la', $data);
     }
 
+    function detail_expand_la()
+	{
+		$this->load->model('Usulan_model');
+		$this->load->model('Bluebook_model');
+		$this->load->model('la_model');
+		
+		$id = $this->uri->segment(3);
+		$data['isi'] = $this->la_model->all_banding($id);
+		$data['isi2'] = $this->la_model->all_banding_tahun($id);
+
+		echo json_encode($data);
+		//var_dump($data);
+	}
+
+
     function tambah_catatan()
 	{
 		$this->load->model('la_model');

@@ -762,7 +762,7 @@
                 data :  'id='+ id,
                 success : function(response){
                 
-                  $("#tmpModal").html(response);
+                $("#tmpModal").html(response);
                 $('#modalDetail').modal('show');
           
                 //  $('#modalKecil').modal('show');
@@ -780,7 +780,7 @@
 		});
 	});
 
-  var table = $('#example').DataTable();
+  var table = $('#example_id').DataTable();
 
 $('#example_id tbody').on('click', 'td:first-child', function () {
   var tr = $(this).closest('tr');
