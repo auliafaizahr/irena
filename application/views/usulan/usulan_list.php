@@ -415,7 +415,7 @@
        ((typeof results.isi[1] !== 'undefined')? 
 
           '<tr>'+
-            '<td  style="width:200px;" >Greenbook  </td>' +
+            '<td  style="width:200px;" > </td>' +
             '<td style="width:20px;">  :  </td>'+
             '<td style="width:220px;">   ' + results.isi[1].nama_gb + ' </td>'+
             '<td> Nilai Pinjaman   </td>'+
@@ -426,7 +426,7 @@
        ((typeof results.isi[2] !== 'undefined')? 
 
           '<tr>'+
-            '<td  style="width:200px;" >Greenbook  </td>' +
+            '<td  style="width:200px;" >  </td>' +
             '<td style="width:20px;">  :  </td>'+
             '<td style="width:220px;">   ' + results.isi[2].nama_gb + ' </td>'+
             '<td> Nilai Pinjaman   </td>'+
@@ -437,12 +437,23 @@
          ((typeof results.isi[3] !== 'undefined')? 
 
           '<tr>'+
-            '<td  style="width:200px;" >Greenbook  </td>' +
+            '<td  style="width:200px;" >  </td>' +
             '<td style="width:20px;">  :  </td>'+
             '<td style="width:220px;">   ' + results.isi[3].nama_gb + ' </td>'+
             '<td> Nilai Pinjaman   </td>'+
             '<td style="width:20px;">  :  </td>'+
             '<td style="width:220px;">   ' + numeral(results.isi[3].gb_pinjaman).format('0,0') + ' </td>'+
+          '</tr>' : ""   )+
+
+          ((typeof results.isi[4] !== 'undefined')? 
+
+          '<tr>'+
+            '<td  style="width:200px;" >  </td>' +
+            '<td style="width:20px;">  :  </td>'+
+            '<td style="width:220px;">   ' + results.isi[4].nama_gb + ' </td>'+
+            '<td> Nilai Pinjaman   </td>'+
+            '<td style="width:20px;">  :  </td>'+
+            '<td style="width:220px;">   ' + numeral(results.isi[4].gb_pinjaman).format('0,0') + ' </td>'+
           '</tr>' : ""   )+
 
         
@@ -454,6 +465,42 @@
             '<td style="width:20px;">  :  </td>'+
             '<td style="width:220px;">   ' + numeral(results.isi[0].dk_pinjaman).format('0,0') + ' </td>'+
         '</tr>'+
+
+        ((typeof results.isi[1] !== 'undefined')? 
+
+          '<tr>'+
+            '<td  style="width:200px;" >  </td>' +
+            '<td style="width:20px;">  :  </td>'+
+            '<td style="width:220px;">   ' + dateFormat(results.isi[1].tgl_DK, "fullDate") + ' </td>'+
+            '<td> Nilai Pinjaman   </td>'+
+            '<td style="width:20px;">  :  </td>'+
+            '<td style="width:220px;">   ' + numeral(results.isi[1].dk_pinjaman).format('0,0') + ' </td>'+
+          '</tr>' : ""   )+
+
+
+        ((typeof results.isi[2] !== 'undefined')? 
+
+          '<tr>'+
+            '<td  style="width:200px;" >  </td>' +
+            '<td style="width:20px;">  :  </td>'+
+            '<td style="width:220px;">   ' + dateFormat(results.isi[2].tgl_DK, "fullDate") + ' </td>'+
+            '<td> Nilai Pinjaman   </td>'+
+            '<td style="width:20px;">  :  </td>'+
+            '<td style="width:220px;">   ' + numeral(results.isi[2].dk_pinjaman).format('0,0') + ' </td>'+
+          '</tr>' : ""   )+
+
+         ((typeof results.isi[3] !== 'undefined')? 
+
+          '<tr>'+
+            '<td  style="width:200px;" >  </td>' +
+            '<td style="width:20px;">  :  </td>'+
+            '<td style="width:220px;">   ' + dateFormat(results.isi[3].tgl_DK, "fullDate") + ' </td>'+
+            '<td> Nilai Pinjaman   </td>'+
+            '<td style="width:20px;">  :  </td>'+
+            '<td style="width:220px;">   ' + numeral(results.isi[3].dk_pinjaman).format('0,0') + ' </td>'+
+          '</tr>' : ""   )+
+
+
         '<tr>'+
             '<td  style="width:200px;" >Tanggal LA  </td>' +
             '<td style="width:20px;">  :  </td>'+
@@ -462,6 +509,39 @@
             '<td style="width:20px;">  :  </td>'+
             '<td style="width:220px;">   ' + numeral(results.isi[0].la_pinjaman).format('0,0') + ' </td>'+
         '</tr>'+
+
+        ((typeof results.isi[1] !== 'undefined')? 
+
+         '<tr>'+
+            '<td  style="width:200px;" > </td>' +
+            '<td style="width:20px;">  :  </td>'+
+            '<td style="width:220px;">   ' + dateFormat(results.isi[1].tgl_LA, "fullDate") + ' </td>'+
+            '<td> Nilai Pinjaman   </td>'+
+            '<td style="width:20px;">  :  </td>'+
+            '<td style="width:220px;">   ' + numeral(results.isi[1].la_pinjaman).format('0,0') + ' </td>'+
+        '</tr>' : ""   )+
+
+        ((typeof results.isi[2] !== 'undefined')? 
+
+         '<tr>'+
+            '<td  style="width:200px;" > </td>' +
+            '<td style="width:20px;">  :  </td>'+
+            '<td style="width:220px;">   ' + dateFormat(results.isi[2].tgl_LA, "fullDate") + ' </td>'+
+            '<td> Nilai Pinjaman   </td>'+
+            '<td style="width:20px;">  :  </td>'+
+            '<td style="width:220px;">   ' + numeral(results.isi[2].la_pinjaman).format('0,0') + ' </td>'+
+        '</tr>' : ""   )+
+
+        ((typeof results.isi[3] !== 'undefined')? 
+
+         '<tr>'+
+            '<td  style="width:200px;" >  </td>' +
+            '<td style="width:20px;">  :  </td>'+
+            '<td style="width:220px;">   ' + dateFormat(results.isi[3].tgl_LA, "fullDate") + ' </td>'+
+            '<td> Nilai Pinjaman   </td>'+
+            '<td style="width:20px;">  :  </td>'+
+            '<td style="width:220px;">   ' + numeral(results.isi[3].la_pinjaman).format('0,0') + ' </td>'+
+        '</tr>' : ""   )+
       
     '</table>';
 }
