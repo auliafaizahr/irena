@@ -389,6 +389,10 @@
   //console.log(results.isi[1].judul_usulan);
   console.log(results.isi.length);
 
+  var a = results.isi[0].tgl_DK;
+  //console.log(a.toLocaleDateString(['ban', 'id']));
+ // console.log(a.toISOString());
+
 
   //var banyak_gb = sizeof(results.isi.gb_pinjaman);
   //var banyak_gb = sizeof(isi.gb_pinjaman);
@@ -412,7 +416,8 @@
             '<td style="width:220px;">   ' + numeral(results.isi[0].gb_pinjaman).format('0,0') + ' </td>'+
         '</tr>'+
 
-       ((typeof results.isi[1] !== 'undefined')? 
+       ((typeof results.isi[1] !== 'undefined' )? 
+
 
           '<tr>'+
             '<td  style="width:200px;" > </td>' +
@@ -460,7 +465,7 @@
         '<tr>'+
             '<td  style="width:200px;" >Tanggal DK  </td>' +
             '<td style="width:20px;">  :  </td>'+
-            '<td style="width:220px;">   ' + dateFormat(results.isi[0].tgl_DK, "fullDate") + ' </td>'+
+            '<td style="width:220px;">   ' + dateFormat(results.isi[0].tgl_DK, "longDate") + ' </td>'+
             '<td> Nilai Pinjaman   </td>'+
             '<td style="width:20px;">  :  </td>'+
             '<td style="width:220px;">   ' + numeral(results.isi[0].dk_pinjaman).format('0,0') + ' </td>'+
@@ -471,7 +476,7 @@
           '<tr>'+
             '<td  style="width:200px;" >  </td>' +
             '<td style="width:20px;">  :  </td>'+
-            '<td style="width:220px;">   ' + dateFormat(results.isi[1].tgl_DK, "fullDate") + ' </td>'+
+            '<td style="width:220px;">   ' + dateFormat(results.isi[1].tgl_DK, "longDate") + ' </td>'+
             '<td> Nilai Pinjaman   </td>'+
             '<td style="width:20px;">  :  </td>'+
             '<td style="width:220px;">   ' + numeral(results.isi[1].dk_pinjaman).format('0,0') + ' </td>'+
@@ -483,7 +488,7 @@
           '<tr>'+
             '<td  style="width:200px;" >  </td>' +
             '<td style="width:20px;">  :  </td>'+
-            '<td style="width:220px;">   ' + dateFormat(results.isi[2].tgl_DK, "fullDate") + ' </td>'+
+            '<td style="width:220px;">   ' + dateFormat(results.isi[2].tgl_DK, "longDate") + ' </td>'+
             '<td> Nilai Pinjaman   </td>'+
             '<td style="width:20px;">  :  </td>'+
             '<td style="width:220px;">   ' + numeral(results.isi[2].dk_pinjaman).format('0,0') + ' </td>'+
@@ -494,7 +499,7 @@
           '<tr>'+
             '<td  style="width:200px;" >  </td>' +
             '<td style="width:20px;">  :  </td>'+
-            '<td style="width:220px;">   ' + dateFormat(results.isi[3].tgl_DK, "fullDate") + ' </td>'+
+            '<td style="width:220px;">   ' + dateFormat(results.isi[3].tgl_DK, "longDate") + ' </td>'+
             '<td> Nilai Pinjaman   </td>'+
             '<td style="width:20px;">  :  </td>'+
             '<td style="width:220px;">   ' + numeral(results.isi[3].dk_pinjaman).format('0,0') + ' </td>'+
@@ -504,7 +509,7 @@
         '<tr>'+
             '<td  style="width:200px;" >Tanggal LA  </td>' +
             '<td style="width:20px;">  :  </td>'+
-            '<td style="width:220px;">   ' + dateFormat(results.isi[0].tgl_LA, "fullDate") + ' </td>'+
+            '<td style="width:220px;">   ' + dateFormat(results.isi[0].tgl_LA, "longDate") + ' </td>'+
             '<td> Nilai Pinjaman   </td>'+
             '<td style="width:20px;">  :  </td>'+
             '<td style="width:220px;">   ' + numeral(results.isi[0].la_pinjaman).format('0,0') + ' </td>'+
@@ -515,7 +520,7 @@
          '<tr>'+
             '<td  style="width:200px;" > </td>' +
             '<td style="width:20px;">  :  </td>'+
-            '<td style="width:220px;">   ' + dateFormat(results.isi[1].tgl_LA, "fullDate") + ' </td>'+
+            '<td style="width:220px;">   ' + dateFormat(results.isi[1].tgl_LA, "longDate") + ' </td>'+
             '<td> Nilai Pinjaman   </td>'+
             '<td style="width:20px;">  :  </td>'+
             '<td style="width:220px;">   ' + numeral(results.isi[1].la_pinjaman).format('0,0') + ' </td>'+
@@ -526,7 +531,7 @@
          '<tr>'+
             '<td  style="width:200px;" > </td>' +
             '<td style="width:20px;">  :  </td>'+
-            '<td style="width:220px;">   ' + dateFormat(results.isi[2].tgl_LA, "fullDate") + ' </td>'+
+            '<td style="width:220px;">   ' + dateFormat(results.isi[2].tgl_LA, "longDate") + ' </td>'+
             '<td> Nilai Pinjaman   </td>'+
             '<td style="width:20px;">  :  </td>'+
             '<td style="width:220px;">   ' + numeral(results.isi[2].la_pinjaman).format('0,0') + ' </td>'+
@@ -537,7 +542,7 @@
          '<tr>'+
             '<td  style="width:200px;" >  </td>' +
             '<td style="width:20px;">  :  </td>'+
-            '<td style="width:220px;">   ' + dateFormat(results.isi[3].tgl_LA, "fullDate") + ' </td>'+
+            '<td style="width:220px;">   ' + dateFormat(results.isi[3].tgl_LA, "longDate") + ' </td>'+
             '<td> Nilai Pinjaman   </td>'+
             '<td style="width:20px;">  :  </td>'+
             '<td style="width:220px;">   ' + numeral(results.isi[3].la_pinjaman).format('0,0') + ' </td>'+
