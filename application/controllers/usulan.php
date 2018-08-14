@@ -2978,7 +2978,7 @@ class Usulan extends CI_Controller {
 		$data5 = [];
 			 foreach($array_kabkota as $kabkota) {
 			 	  $data5[] = [
-			 	    'id_usulan' => $id_ ,
+			 	    'id_usulan' => $isi['id_usulan'],
 			 	    'id_kabkota' => $kabkota,
 			 	    'id_instansi' => $id_instansi,
 			 	  ];
