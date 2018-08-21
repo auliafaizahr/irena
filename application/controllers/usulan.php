@@ -2251,8 +2251,8 @@ class Usulan extends CI_Controller {
 				$this->Usulan_model->hapus_dari_histori($id_);
 				$this->Usulan_model->hapus_dari_prov($id_);
 				$this->Usulan_model->hapus_dari_kabkota($id_);
-				$this->Usulan_model->hapus_dari_adm($id_);
-				$this->Usulan_model->hapus_dari_layak($id_);
+				/*$this->Usulan_model->hapus_dari_adm($id_);
+				$this->Usulan_model->hapus_dari_layak($id_);*/
 				$id_instansi			= $this->input->post('id_instansi');
 				$data 					= $_POST;
 				$result 				= $this->Usulan_model->usulan_simpan_data_edit($data);
@@ -2312,8 +2312,8 @@ class Usulan extends CI_Controller {
 			 	  ];
 			 	}
 
-			 	$this->db->insert('irena_usulan_layak', $isi);
-				$this->db->insert('irena_usulan_adm', $isi);
+			 	/*$this->db->insert('irena_usulan_layak', $isi);
+				$this->db->insert('irena_usulan_adm', $isi);*/
 	 	
 	 	
 
@@ -2500,7 +2500,45 @@ class Usulan extends CI_Controller {
 		    			
 		    		);
 
+		    		$id_bb_pakai = $this->Usulan_model->last_bb()->id;
+
 					$result3 					= $this->Usulan_model->tambah_ke_BB_layak($isi);
+
+					$isi_prov 				= $this->input->post('provinsi');
+					$isi_kabkota 			= $this->input->post('kabkota');
+					$array_prov				= explode(",", $isi_prov);
+					$array_kabkota			= explode(",", $isi_kabkota);
+
+					$data_prov = [];
+					foreach($array_prov as $prov) {
+					  $data_prov[] = [
+					    'id_bb_proyek' 		=>  $id_bb_pakai,
+					    'id_instansi' 		=> $this->input->post('id_instansi'),
+					    'id_status' 		=>   $this->input->post('id_status'),
+					    'id_bb' 			=>  $this->input->post('id_bluebook'),
+					    
+					    
+					    'id_prov' 		=> $prov,
+					  ];
+					}
+
+					$data_kabkota = [];
+					foreach($array_kabkota as $kabkota) {
+					  $data_kabkota[] = [
+					    'id_bb_proyek' 		=>  $id_bb_pakai,
+					    'id_instansi' 		=>  $this->input->post('id_instansi'),
+					    'id_status' 		=>  $this->input->post('id_status'),
+					    'id_bb' 			=>  $this->input->post('id_bluebook'),
+					    
+					    
+					    'id_kabkota' 		=> $kabkota,
+					  ];
+					}
+
+					$this->db->insert_batch('irena_bb_prov', $data_prov);
+					$this->db->insert_batch('irena_bb_kabkota', $data_kabkota);
+
+
 
 		    		
 				

@@ -118,7 +118,7 @@
               </tr>
               -->
 
-              <tr class="read">
+             <!--  <tr class="read">
                 <td class="mail-ontact text-right">Lokasi</td>
               
                 <td class="mail-subject"><?php $a =  explode(",", $detail->lokasi); 
@@ -136,7 +136,7 @@
 
                 ?></td>
                
-              </tr>
+              </tr> -->
 
               <tr class="read">
                 <td class="mail-ontact text-right">Output</td>
@@ -238,7 +238,7 @@
                 <td class="mail-subject"><?php echo $value->durasi. " bulan"; ?></td>
               </tr>
 
-              <tr class="read">
+            <!--   <tr class="read">
                 <td class="mail-ontact text-right">Lokasi</td>
               
                 <td class="mail-subject"><?php $a =  explode(",", $value->lokasi); 
@@ -256,7 +256,7 @@
 
                 ?></td>
                
-              </tr>
+              </tr> -->
               <tr class="read">
                 <td class="mail-ontact text-right">Ruang Lingkup ENG</td>
                 <td class="mail-subject"><?php echo  nl2br($value->ruang_lingkup_eng); ?></pre></td>
@@ -347,7 +347,7 @@
                 <td class="mail-subject"><?php echo $value->durasi. " bulan"; ?></td>
               </tr>
 
-              <tr class="read">
+            <!--   <tr class="read">
                 <td class="mail-ontact text-right">Lokasi</td>
               
                 <td class="mail-subject"><?php $a =  explode(",", $value->lokasi); 
@@ -365,7 +365,7 @@
 
                 ?></td>
                
-              </tr>
+              </tr> -->
               <tr class="read">
                 <td class="mail-ontact text-right">Ruang Lingkup ENG</td>
                 <td class="mail-subject"><?php echo  nl2br($value->ruang_lingkup_eng); ?></pre></td>
@@ -458,7 +458,7 @@
                 <td class="mail-subject"><?php echo $value->durasi. " bulan"; ?></td>
               </tr>
 
-              <tr class="read">
+             <!--  <tr class="read">
                 <td class="mail-ontact text-right">Lokasi</td>
               
                 <td class="mail-subject"><?php $a =  explode(",", $value->lokasi); 
@@ -476,7 +476,7 @@
 
                 ?></td>
                
-              </tr>
+              </tr> -->
               <tr class="read">
                 <td class="mail-ontact text-right">Ruang Lingkup ENG</td>
                 <td class="mail-subject"><?php echo  nl2br($value->ruang_lingkup_eng); ?></pre></td>
@@ -569,7 +569,7 @@
                 <td class="mail-subject"><?php echo $value->durasi. " bulan"; ?></td>
               </tr>
 
-              <tr class="read">
+             <!--  <tr class="read">
                 <td class="mail-ontact text-right">Lokasi</td>
               
                 <td class="mail-subject"><?php $a =  explode(",", $value->lokasi); 
@@ -587,7 +587,7 @@
 
                 ?></td>
                
-              </tr>
+              </tr> -->
               <tr class="read">
                 <td class="mail-ontact text-right">Ruang Lingkup ENG</td>
                 <td class="mail-subject"><?php echo  nl2br($value->ruang_lingkup_eng); ?></pre></td>

@@ -437,6 +437,24 @@
 
         });
 
+        $("#provinsi").select2({
+            placeholder: "Pilih Lokasi",
+            width: "100%",
+            multiple:true,
+            tags: true
+
+
+        });
+
+        $("#kabkota").select2({
+            placeholder: "Pilih Lokasi",
+            width: "100%",
+            multiple:true,
+            tags: true
+
+
+        });
+
         $("#id_bluebook").select2({
             placeholder: "Pilih Bluebook",
             width: "100%"
@@ -477,7 +495,9 @@
 			var infra		 	= $("#infra").val();
 			var lokasi		 	= $("#lokasi").val();
 			var id_status		 	= $("#id_status").val();
-			var id_bluebook		 	= $("#id_bluebook").val();
+            var id_bluebook         = $("#id_bluebook").val();
+            var provinsi            = $("#provinsi").val();
+			var kabkota		 	= $("#kabkota").val();
 			
 			console.log(nilai_layak);
             var form_data 	= new FormData();
@@ -503,7 +523,9 @@
 			form_data.append('dana_pendamping', dana_pendamping);
 			form_data.append('tahun_usulan', tahun_usulan);
 			form_data.append('id_sektor', id_sektor);
-			form_data.append('lokasi', lokasi);
+            form_data.append('lokasi', lokasi);
+            form_data.append('provinsi', provinsi);
+			form_data.append('kabkota', kabkota);
 			form_data.append('id_status', id_status);
 			form_data.append('durasi', durasi);
 			form_data.append('infra', infra);

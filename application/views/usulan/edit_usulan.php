@@ -448,6 +448,7 @@
             var lokasi                   = $("#lokasi").val();
             var id_provinsi                    = $("#provinsi").val();
             var id_kabkota                    = $("#kabkota").val();
+            var infra                    = $("#infra").val();
 
             if (status_usulan == 0 ) {
                 var id_usulan_hub                    = 0;
@@ -478,6 +479,7 @@
             form_data.append('id_usulan_hub', id_usulan_hub);
             form_data.append('id_provinsi', id_provinsi);
             form_data.append('id_kabkota', id_kabkota);
+            form_data.append('infra', infra);
                         console.log(lokasi);
            
 

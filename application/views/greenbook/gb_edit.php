@@ -60,7 +60,14 @@
                             <label for="id_sektor" class="col-sm-3 control-label">Sektor </label>
                             <div class="col-sm-9">
                                 <select name="id_sektor" id="id_sektor" class="form-control"  >
-                                     
+
+                                 <?php 
+                                        $query  = $this->Usulan_model->ambil_nama_sektor_($detail->id_sektor); 
+                                        foreach ($query as $key) 
+                                        {
+                                    ?>
+                                        <option value="<?php echo $key->id; ?>"><?php echo $key->nama; ?></option>
+                                    <?php } ?>
                                     <?php foreach($sektor as $row){ ?>
                                         <option value="<?php echo $row['id']; ?>"><?php echo $row['nama']; ?>
                                       </option>
@@ -580,6 +587,7 @@
             var output                   = $("#output").val();
             var outcome                   = $("#outcome").val();
             var id_bluebook                   = $("#id_bluebook").val();
+            var id_sektor                   = $("#id_sektor").val();
             var id_lender                   = $("#id_lender").val();
             var id_status_lender                   = $("#id_status_lender").val();
             var id_status_lembaga                   = $("#id_status_lembaga").val();
@@ -615,6 +623,7 @@
             form_data.append('lokasi', lokasi);
              form_data.append('kabkota', kabkota);
             form_data.append('provinsi', provinsi);
+            form_data.append('id_sektor', id_sektor);
 
 
             $.ajax({
