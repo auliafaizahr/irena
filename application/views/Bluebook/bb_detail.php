@@ -51,7 +51,7 @@
                 <td class="mail-subject"><?php echo $detail->durasi. " bulan"; ?></td>
               </tr>
 
-              <td class="mail-ontact text-right">Lokasi</td>
+              <!-- <td class="mail-ontact text-right">Lokasi</td>
               
                 <td class="mail-subject"><?php $a =  explode(",", $detail->lokasi); 
                    $banyak_lokasi = (count($a));
@@ -67,7 +67,7 @@
                    echo $lokasi_fix;
 
                 ?></td>
-               
+                -->
               </tr>
 
               <tr class="read">
