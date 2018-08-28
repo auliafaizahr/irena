@@ -182,6 +182,9 @@ class Bluebook extends CI_Controller {
 		$data['status_umum']= $this->Usulan_model->semua_status_umum();
 		$data['lokasi'] = $this->Usulan_model->ambil_lokasi();
 		$data['greenbook']= $this->Greenbook_model->ambil_greenbook();
+		$data['provinsi']= $this->Greenbook_model->ambil_provinsi();
+		$data['kabkota']= $this->Greenbook_model->ambil_kabkota();
+
 
 		
 		$data['lender']= $this->Bluebook_model->semua_lender();
@@ -567,6 +570,8 @@ class Bluebook extends CI_Controller {
 			        'infra'			=>  $this->input->post('infra'),
 			        'id_status'			=>  $this->input->post('id_status'),
 			        'lokasi'			=>  $this->input->post('lokasi'),
+			        'provinsi'			=>  $this->input->post('provinsi'),
+			        'kabkota'			=>  $this->input->post('kabkota'),
 			   		 );
 
 					$result2 					= $this->Bluebook_model->tambah_ke_GB($data2);
@@ -576,17 +581,55 @@ class Bluebook extends CI_Controller {
 		    			
 		    		);
 
+		    		$last 				= $this->Bluebook_model->last_gb()->id;
+
 					$result3 					= $this->Bluebook_model->tambah_ke_GB_layak($isi);
 
+					$isi_prov 				= $this->input->post('provinsi');
+					$isi_kabkota 			= $this->input->post('kabkota');
+					//$array_lokasi			= explode(",", $select2data);
+					$array_prov				= explode(",", $isi_prov);
+					$array_kabkota			= explode(",", $isi_kabkota);
+
+					$data_prov = [];
+					foreach($array_prov as $prov) {
+					  $data_prov[] = [
+					   'id_gb_proyek' =>  $last,
+					    'id_bb' =>  $this->input->post('id_bluebook'),
+					    'id_instansi' 		=>  $this->input->post('id_instansi'),
+					    'id_lender' 		=> $this->input->post('id_lender'),
+					    'id_gb' =>  $this->input->post('id_greenbook'),
+					  
+					    'id_prov' 		=> $prov,
+
+					  ];
+					}
+
+					$data_kabkota = [];
+					foreach($array_kabkota as $kabkota) {
+					  $data_kabkota[] = [
+					    'id_gb_proyek' =>  $last,
+					    'id_instansi' 		=> $this->input->post('id_instansi'),
+					    'id_lender' 		=>  $this->input->post('id_lender'),
+					    'id_gb' => $this->input->post('id_greenbook'),
+					    
+					    'id_kabkota' 		=> $kabkota,
+
+					  ];
+					}
+
 		    	
-		    		
+		    			
 
 						//$data 						= $_POST;
 						$data2 						= $_POST;
 						$data 						= $_POST;
 						$data_isGB 						= $_POST;
 						$isi 						= $_POST;
-				
+
+			 			$this->db->insert_batch('irena_gb_prov', $data_prov);
+			 			$this->db->insert_batch('irena_gb_kabkota', $data_kabkota);
+						
 						$status['success'] 			= true;
 
 					}elseif( $gb_kasubdit	== '1' ){

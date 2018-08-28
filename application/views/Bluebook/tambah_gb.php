@@ -189,6 +189,49 @@
                             </div>
                         </div>
 
+                        <div class="form-group">
+                            <label for="provinsi" class="col-sm-3 control-label">Provinsi </label>
+                            <div class="col-sm-9">
+                                <select name="lokasi" id="provinsi" class="form-control" multiple>
+                           
+                                <?php $key = array($detail->provinsi);
+                                $a = array();
+                                $a = explode(",", $detail->provinsi);
+                                $key2 = array("1", "2", "4", "3");
+                                 
+
+
+                                foreach($provinsi as $row ){ ?>
+                                <option value="<?php echo $row['id']; ?>" <?php echo in_array($row['id'] , $a) ? 'selected' : '' ?>><?php echo $row['nama']; ?>
+                                 </option>
+                                 <?php } ?>
+                                 </select>
+                            </div>
+                        </div>
+
+                         <div class="form-group">
+                            <label for="kabkota" class="col-sm-3 control-label">Kabkota </label>
+                            <div class="col-sm-9">
+                                <select name="lokasi" id="kabkota" class="form-control" multiple>
+                           
+                                <?php $key = array($detail->kabkota);
+                                $a = array();
+                                $a = explode(",", $detail->kabkota);
+                                $key2 = array("1", "2", "4", "3");
+                                 
+
+
+                                foreach($kabkota as $row ){ ?>
+                                <option value="<?php echo $row['id']; ?>" <?php echo in_array($row['id'] , $a) ? 'selected' : '' ?>><?php echo $row['nama']; ?>
+                                 </option>
+                                 <?php } ?>
+                                 </select>
+                            </div>
+                        </div>
+
+                        
+
+
                          <div class="form-group">
                             <label for="ruang_lingkup_eng" class="col-sm-3 control-label">Ruang Lingkup EN</label>
                             <div class="col-sm-9">
@@ -472,6 +515,20 @@
             multiple:true,
             tags: true
         });
+
+         $("#provinsi").select2({
+            placeholder: "Pilih Lokasi",
+            width: "100%",
+            multiple:true,
+            tags: true
+        });
+
+          $("#kabkota").select2({
+            placeholder: "Pilih Lokasi",
+            width: "100%",
+            multiple:true,
+            tags: true
+        });
         
         
 
@@ -517,7 +574,9 @@
 			var id_status		 			= $("#id_status").val();
 			var infra		 				= $("#infra").val();
 			var id_bluebook		 				= $("#id_bluebook").val();
-			var id_greenbook		 				= $("#id_greenbook").val();
+            var id_greenbook                        = $("#id_greenbook").val();
+            var provinsi                        = $("#provinsi").val();
+			var kabkota		 				= $("#kabkota").val();
 
 
 
@@ -557,7 +616,9 @@
 			form_data.append('id_status', id_status);
 			form_data.append('infra', infra);
 			form_data.append('id_bluebook', id_bluebook);
-			form_data.append('id_greenbook', id_greenbook);
+            form_data.append('id_greenbook', id_greenbook);
+            form_data.append('kabkota', kabkota);
+			form_data.append('provinsi', provinsi);
 
 
 
