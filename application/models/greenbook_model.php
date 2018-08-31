@@ -223,7 +223,7 @@ class Greenbook_model extends CI_Model {
 
 	public function kode_greenbook($x)
 	{
-		$query = "SELECT nama FROM irena_greenbook_kode WHERE id = '$x'";
+		$query = "SELECT nama FROM irena_greenbook_kode WHERE id = '$x' ORDER BY urut";
 		 $a= $this->db->query($query);
 
 		return $a->row();

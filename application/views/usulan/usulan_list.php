@@ -378,6 +378,16 @@
 
   }
 
+  function format_1(){
+
+      var a = 26;
+
+       $.get("<?php echo base_url(); ?>usulan/detil_1/"+a, function(data){
+          return data;
+       });
+
+       return false;
+  }
  
 
   
@@ -878,12 +888,15 @@ $('#example_id tbody').on('click', 'td:first-child', function () {
     tr.removeClass('shown');
   } else {
     // Open row.
-     $.get("<?php echo base_url(); ?>usulan/detail_expand_usulan/"+id, function(data) {
+     $.get("<?php echo base_url(); ?>usulan/detil_1/"+id, function(data) {
           //console.log(data[10]);
           //console.log(data);
           //var results = JSON.parse(data);
           //console.log(results.isi[0].judul_usulan);
-          row.child(format(data)).show();
+
+          //$("td.child").html(data);
+          row.child(data).show();
+         
           tr.addClass('shown');
         
       });

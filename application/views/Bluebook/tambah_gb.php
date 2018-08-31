@@ -23,6 +23,7 @@
 										<input type="hidden" name="nilai_layak" id="nilai_layak" class="form-control" value="">
 										<input type="hidden" name="id" id="id" class="form-control" value="<?php echo $detail->id; ?>">
 										<input type="hidden" name="id_usulan" id="id_usulan" class="form-control" value="<?php echo $detail->id_usulan; ?>">
+
 										<!-- <input type="hidden" name="id_bluebook" id="id_bluebook" class="form-control" value="<?php echo $detail->id_bluebook; ?>">
 										<input type="hidden" name="id_instansi" id="id_instansi" class="form-control" value="<?php echo $detail->id_instansi; ?>">
 										<input type="hidden" name="id_status_lender" id="id_status_lender" class="form-control" value="<?php echo $detail->id_status_lender; ?>">
@@ -60,6 +61,13 @@
 								<textarea name="nilai_layak_ket" id="nilai_layak_ket" class="col-sm-12" rows="5">-</textarea>
 							</div>
 						</div>
+
+                    <div class="form-group">
+                        <label for="tahun_usulan" class="col-sm-3 control-label">Tahun Usulan </label>
+                        <div class="col-sm-9">
+                           <input type="text" name="tahun_usulan" id="tahun_usulan" class="form-control" value="<?php echo $detail->tahun_usulan; ?>">
+                        </div>
+                    </div>
 
 					<div class="form-group">
 					    <label for="id_greenbook" class="col-sm-3 control-label">Kode Greenbook </label>
@@ -556,7 +564,7 @@
 			var ruang_lingkup_eng 	= $("#ruang_lingkup_eng").val();
 			var id_instansi 		= $("#id_instansi").val();
 			var id_program		 	= $("#id_program").val();
-			var instansi_pelaksana		 	= $("instansi_pelaksana").val();
+			var instansi_pelaksana		 	= $("#instansi_pelaksana").val();
 			var proyeksi_tahun_pertama_penarikan		 	= $("#proyeksi_tahun_pertama_penarikan").val();
 			var id_lender		 	= $("#id_lender").val();
 			var id_eselon_1		 	= $("#id_eselon_1").val();

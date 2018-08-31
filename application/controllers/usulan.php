@@ -651,6 +651,24 @@ class Usulan extends CI_Controller {
 		
 	}
 
+	public function detil_1()
+	{
+
+		$this->load->model('Usulan_model');
+		$this->load->model('dk_model');
+		$this->load->model('Greenbook_model');
+		$this->load->model('Bluebook_model');
+		$a = $this->uri->segment(3);
+		$data['a'] = $this->input->post('id');
+		$data['detail'] = $this->Usulan_model->detail_proyek($a);
+
+		
+		
+		$this->load->view('Usulan/expand_usulan', $data);
+		//$this->load->view('templates/footer1');
+		
+	}
+
 		public function detil_isi()
 	{
 
