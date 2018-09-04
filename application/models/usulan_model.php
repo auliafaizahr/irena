@@ -476,6 +476,25 @@ class Usulan_model extends CI_Model {
 		
 	}
 
+	public function group_bb($x)
+	{
+		
+		$query = "SELECT * FROM irena_view_untuk_detail_modal WHERE id = '$x' GROUP BY id_bb";
+		 $a= $this->db->query($query);
+		return $a->result_array();
+		
+	}
+
+		public function group_gb_by_bb($x, $y)
+	{
+		
+		$query = "SELECT * FROM irena_view_untuk_detail_modal WHERE id = '$x' AND id_bb = '$y' ";
+		 $a= $this->db->query($query);
+		return $a->result_array();
+		
+	}
+
+
 	public function ambil_gb_detail($x)
 	{
 		$query = "SELECT * FROM irena_greenbook_proyek WHERE id_usulan = '$x' ORDER BY id_greenbook";

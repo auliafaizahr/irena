@@ -148,9 +148,14 @@
                              echo "<a   id='".$c."'  onclick='tambah_BB($usul_BB, $c, $kasubdit_usul, $user_level, $layak )'><i class='btn fa fa-check-square btn-warning'></i></a>";
                              //echo '<a ><i class="btn fa fa-check-square btn-warning"></i></a>';
                           }elseif ($kasubdit_usul == '2') {
-                             echo "<a   id='".$c."'  onclick='tambah_BB($usul_BB, $c, $kasubdit_usul, $user_level, $layak  )'><i class=' btn fa fa-check-square btn-primary'></i></a>";
+                             echo "<a   id='".$c."'  onclick='tambah_BB($usul_BB, $c, $kasubdit_usul, $user_level, $layak  )'><i class=' btn fa fa-check-square btn-primary'></i></a>"."<a id='".$c."'  onclick='tambah_BB($usul_BB, $c, $kasubdit_usul, $user_level, $layak)' ><i class='btn fa fa-plus  btn-danger'></i></a>";
+
+                           /* echo '<a ><i class="btn fa fa-check-square btn-primary"></i></a>'."<i class='btn fa fa-plus  btn-danger'></i></a>"; 
+*/
                           }else{
                             echo '<a ><i class="btn fa fa-check-square btn-primary"></i></a>';
+
+
                           }
                            
                         }else{
@@ -754,7 +759,7 @@
                         console.log('Belum dinilai oleh kasubdit');                     
                      }
                       //cek kalo hasil penilaian staff dan kasubdit berbeda
-                  }else if( (kasubdit_usul  == '2' && usul_BB == '1') || (kasubdit_usul == '1' && usul_BB == '2') ){
+                  }else if( (kasubdit_usul  == '2' && usul_BB == '1') || (kasubdit_usul == '1' && usul_BB == '2' ) || (kasubdit_usul == '2' && usul_BB == '2' ) ){
                       $.ajax({
                                     type : 'post',
                                               url : "<?php echo base_url(); ?>Usulan/tambahBB",
