@@ -479,7 +479,7 @@ class Usulan_model extends CI_Model {
 	public function group_bb($x)
 	{
 		
-		$query = "SELECT * FROM irena_view_untuk_detail_modal WHERE id = '$x' GROUP BY id_bb";
+		$query = "SELECT * FROM irena_view_untuk_detail_modal WHERE id = '$x' GROUP BY id_bb ORDER BY bb_urut";
 		 $a= $this->db->query($query);
 		return $a->result_array();
 		
@@ -488,7 +488,7 @@ class Usulan_model extends CI_Model {
 		public function group_gb_by_bb($x, $y)
 	{
 		
-		$query = "SELECT * FROM irena_view_untuk_detail_modal WHERE id = '$x' AND id_bb = '$y' ";
+		$query = "SELECT * FROM irena_view_untuk_detail_modal WHERE id = '$x' AND id_bb = '$y' ORDER BY gb_urut ";
 		 $a= $this->db->query($query);
 		return $a->result_array();
 		

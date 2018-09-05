@@ -789,9 +789,9 @@
               if (layak == '2') {
 
 
-                  if (kasubdit_usul == '0') {
+                  if (kasubdit_usul == '0' || kasubdit_usul == '2') {
 
-                      if (usul_BB != '0') {
+                      if (usul_BB != '0' || usul_BB != '2') {
 
                            $.ajax({
                             type : 'post',
