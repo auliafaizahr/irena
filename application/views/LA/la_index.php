@@ -1,4 +1,4 @@
-<div class="row wrapper border-bottom white-bg page-heading">
+ <div class="row wrapper border-bottom white-bg page-heading">
 	<div class="col-lg-12">
 		<h2>Daftar Proyek Loan Agreement</h2>
 		<ol class="breadcrumb">
@@ -28,12 +28,13 @@
 				</div>
 				-->
 				<div id="loader1" class="loader1" style='visibility: hidden;'></div>
-				     <ul class="nav nav-tabs tabs-up" id="friends">
+				     <ul class="nav nav-tabs tabs-up active" id="friends">
                       <!--  <li><a href="#" id="contacts_tab" data-toggle="tab" rel="tooltip"> Contacts </a></li>
                        <li><a href="#" class="media_node span" id="friends_list_tab" data-toggle="tab" data-url="#" rel="tooltip"> Friends list</a></li> -->
-                       <li><a href="#awaiting_request" class="media_node span" id="awaiting_request_tab" data-url="<?php echo base_url(); ?>loan_aggr/tampilkan_la_list" data-toggle="tab" rel="tooltip">Daftar Proyek</a></li>
+                      <li><a href="#awaiting_request" class="media_node span" id="awaiting_request_tab" data-url="<?php echo base_url(); ?>loan_aggr/tampilkan_la_list" data-toggle="tab" rel="tooltip">Daftar Proyek</a></li>
+                       
                        <li><a href="#awaiting_request" class="media_node span" id="friends_list_tab" data-url="<?php echo base_url(); ?>loan_aggr/tampilkan_la_monev_list" data-toggle="tab" rel="tooltip">Penyerapan</a></li>
-                 </ul>
+                 	</ul>
 
                  <div class="tab-content">
                       <div class="tab-panel panel-default  active" id="contacts">

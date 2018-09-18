@@ -14,6 +14,53 @@
 
 <div class="wrapper wrapper-content animated fadeIn">
 	<div class="row">
+		<div class="col-lg-12">
+			<div class="ibox float-e-margins">
+				<!-- <div class="ibox-title">
+                    <h5>Data</h5>
+				</div> -->
+				<!-- 
+				<div class="ibox-content">	
+					<a href="<?php  //echo base_url(); ?>arsip/send">Kirim Email</a> <br>
+					<br>
+					<select name="id_jenis" class="form-control m-b" required>
+						<option value=""></option>
+						<option value="">ok</option>
+						<option value="">tk ok</option>
+					</select>
+				</div>
+				-->
+				<div id="loader1" class="loader1" style='visibility: hidden;'></div>
+				     <ul class="nav nav-tabs tabs-up active" id="friends">
+                      <!--  <li><a href="#" id="contacts_tab" data-toggle="tab" rel="tooltip"> Contacts </a></li>
+                       <li><a href="#" class="media_node span" id="friends_list_tab" data-toggle="tab" data-url="#" rel="tooltip"> Friends list</a></li> -->
+                      <li><a href="#awaiting_request" class="media_node span center" id="awaiting_request_tab" data-url="<?php echo base_url(); ?>loan_aggr/tampilkan_la_list" data-toggle="tab" style='width: 300px; text-align: center'  rel="tooltip">Proyek</a></li>
+                       
+                       <li><a href="#awaiting_request" class="media_node span" id="friends_list_tab" data-url="<?php echo base_url(); ?>loan_aggr/tampilkan_la_monev_list"  style='width: 300px; text-align: center' data-toggle="tab" rel="tooltip">Grafik</a></li>
+
+                       <li><a href="#awaiting_request" class="media_node span" id="friends_list_tab" data-url="<?php echo base_url(); ?>loan_aggr/tampilkan_la_monev_list"  style='width: 300px; text-align: center' data-toggle="tab" rel="tooltip">Banding</a></li>
+                 	</ul>
+
+                 <div class="tab-content">
+                      <div class="tab-panel panel-default  active" id="contacts">
+                      		
+                       </div>
+                       <div class="tab-panel " id="friends_list">
+
+                       </div>
+                       <div class="tab-panel panel-default  urlbox span8" id="awaiting_request">
+                     
+                       </div>
+                </div>
+				
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<!-- <div class="wrapper wrapper-content animated fadeIn">
+	<div class="row">
 		<div class="col-lg-3">
 			<div class="ibox float-e-margins">
 				<div class="ibox-title">
@@ -48,8 +95,8 @@
 			</div>
 
 			<div class="col-lg-9">
-		<!-- 	untuk tabel dan grafik per kementerian -->
-				<div class="ibox float-e-margins">
+			untuk tabel dan grafik per kementerian -->
+				<!-- <div class="ibox float-e-margins">
 					<div class="ibox-title">
 						<h5>Tabel dan Grafik Laporan Persebaran per Kementerian / Lembaga</h5>
 						<div class="ibox-tools">
@@ -166,7 +213,7 @@
 			</div>
 
 
-				</div>
+				</div> -->
 		
 
 <script src="<?php echo base_url(); ?>assets/inspinia/js/jquery-2.1.1.js"></script>
@@ -176,7 +223,7 @@
 <!-- 
 <script src="<?php echo base_url(); ?>assets/highcharts/highcharts.js"></script>
 <script src="<?php echo base_url(); ?>assets/highcharts/modules/data.js"></script>
-<script src="<?php echo base_url(); ?>assets/highcharts/modules/drilldown.js"></script> --> -->
+<script src="<?php echo base_url(); ?>assets/highcharts/modules/drilldown.js"></script> --> 
 
 
 <script>
