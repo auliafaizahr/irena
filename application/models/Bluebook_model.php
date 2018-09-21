@@ -277,6 +277,43 @@ function usulan_simpan_data($data)
 		return $a->result_array();
 	}
 
+	public function proyek_anak_program($x, $y)
+	{
+		$query = "SELECT irena_instansi_2.nama_instansi AS instansi, irena_bluebook_proyek.judul_proyek_eng AS judul,  irena_bluebook_proyek.nilai_pinjaman AS pinjaman FROM irena_bluebook_proyek JOIN irena_instansi_2 ON irena_instansi_2.id = irena_bluebook_proyek.id_instansi   WHERE id_bluebook = '$x' AND id_program = '$y' ";
+
+		 $a= $this->db->query($query);
+
+		return $a->result_array();
+	}
+
+	public function proyek_anak_kl($x, $y)
+	{
+		$query = "SELECT irena_instansi_2.nama_instansi AS instansi, irena_bluebook_proyek.judul_proyek_eng AS judul,  irena_bluebook_proyek.nilai_pinjaman AS pinjaman FROM irena_bluebook_proyek JOIN irena_instansi_2 ON irena_instansi_2.id = irena_bluebook_proyek.id_instansi   WHERE id_bluebook = '$x' AND id_program = '$y' ";
+
+		 $a= $this->db->query($query);
+
+		return $a->result_array();
+	}
+
+	public function proyek_anak_sektor($x, $y)
+	{
+		$query = "SELECT irena_instansi_2.nama_instansi AS instansi, irena_bluebook_proyek.judul_proyek_eng AS judul,  irena_bluebook_proyek.nilai_pinjaman AS pinjaman FROM irena_bluebook_proyek JOIN irena_instansi_2 ON irena_instansi_2.id = irena_bluebook_proyek.id_instansi   WHERE id_bluebook = '$x' AND id_sektor = '$y' ";
+
+		 $a= $this->db->query($query);
+
+		return $a->result_array();
+	}
+
+	public function proyek_anak_status($x, $y)
+	{
+		$query = "SELECT irena_instansi_2.nama_instansi AS instansi, irena_bluebook_proyek.judul_proyek_eng AS judul,  irena_bluebook_proyek.nilai_pinjaman AS pinjaman FROM irena_bluebook_proyek JOIN irena_instansi_2 ON irena_instansi_2.id = irena_bluebook_proyek.id_instansi   WHERE id_bluebook = '$x' AND id_status = '$y' ";
+
+		 $a= $this->db->query($query);
+
+		return $a->result_array();
+	}
+
+
 	public function ambil_grafik_sektor_per_bb($x)
 	{
 		$query = "SELECT irena_sektor.nama AS sektor, SUM(IF(irena_bluebook_proyek.id_bluebook = '$x', nilai_pinjaman, 0)) AS total FROM irena_bluebook_proyek LEFT JOIN irena_sektor ON irena_bluebook_proyek.id_sektor = irena_sektor.id GROUP BY id_sektor HAVING total > 0";

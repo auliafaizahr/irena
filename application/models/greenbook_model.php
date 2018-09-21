@@ -41,6 +41,15 @@ class Greenbook_model extends CI_Model {
 		
 	}
 
+		public function total_kegiatan_dan_nilai_gb()
+	{
+		$query = "SELECT irena_greenbook_proyek.id_greenbook AS id_gb, irena_greenbook_kode.nama AS nama_gb, SUM(irena_greenbook_proyek.nilai_pinjaman) AS total_nilai,COUNT(irena_greenbook_proyek.id) AS total_keg, COUNT(DISTINCT irena_greenbook_proyek.id_program) AS total_program,  irena_greenbook_kode.urut AS urut FROM irena_greenbook_proyek  JOIN irena_greenbook_kode ON irena_greenbook_kode.id = irena_greenbook_proyek.id_greenbook GROUP BY irena_greenbook_proyek.id_greenbook ORDER BY urut";
+		 $a= $this->db->query($query);
+
+		return $a->result_array();
+	}
+
+
 
 	public function ambil_catatan($a)
 	{
@@ -269,6 +278,8 @@ class Greenbook_model extends CI_Model {
 		return $a->result_array();
 	}
 
+
+	//ambil untuk tabel yg group by ini juga
 	public function ambil_grafik_kl_per_gb($x)
 	{
 		$query = "SELECT irena_instansi_2.nama_instansi AS nama, SUM(IF(id_greenbook = '$x' , nilai_pinjaman, 0)) AS total, irena_greenbook_proyek.id_instansi as id_instansi FROM irena_greenbook_proyek LEFT JOIN irena_instansi_2 ON irena_greenbook_proyek.id_instansi = irena_instansi_2.id GROUP BY id_instansi HAVING total > 0 ";
@@ -304,6 +315,55 @@ class Greenbook_model extends CI_Model {
 
 		return $a->result_array();
 	}
+
+	public function proyek_anak_lender($x, $y)
+	{
+		$query = "SELECT irena_instansi_2.nama_instansi AS instansi, irena_greenbook_proyek.judul_proyek_eng AS judul, irena_program_pln.nama_program AS program, irena_greenbook_proyek.nilai_pinjaman AS pinjaman FROM irena_greenbook_proyek JOIN irena_instansi_2 ON irena_instansi_2.id = irena_greenbook_proyek.id_instansi JOIN irena_program_pln ON irena_program_pln.id = irena_greenbook_proyek.id_program   WHERE id_greenbook = '$x' AND id_lender = '$y'";
+
+		 $a= $this->db->query($query);
+
+		return $a->result_array();
+	}
+
+	public function proyek_anak_bluebook($x, $y)
+	{
+		$query = "SELECT irena_instansi_2.nama_instansi AS instansi, irena_greenbook_proyek.judul_proyek_eng AS judul, irena_program_pln.nama_program AS program, irena_lender.lender AS lender,  irena_greenbook_proyek.nilai_pinjaman AS pinjaman FROM irena_greenbook_proyek JOIN irena_instansi_2 ON irena_instansi_2.id = irena_greenbook_proyek.id_instansi JOIN irena_program_pln ON irena_program_pln.id = irena_greenbook_proyek.id_program JOIN irena_lender  ON irena_lender.id = irena_greenbook_proyek.id_lender  WHERE id_greenbook = '$x' AND irena_greenbook_proyek.id_bluebook = '$y' ";
+
+		 $a= $this->db->query($query);
+
+		return $a->result_array();
+	}
+
+	public function proyek_anak_program($x, $y)
+	{
+		$query = "SELECT irena_instansi_2.nama_instansi AS instansi, irena_greenbook_proyek.judul_proyek_eng AS judul,  irena_greenbook_proyek.nilai_pinjaman AS pinjaman FROM irena_greenbook_proyek JOIN irena_instansi_2 ON irena_instansi_2.id = irena_greenbook_proyek.id_instansi   WHERE id_greenbook = '$x' AND id_program = '$y'";
+
+		 $a= $this->db->query($query);
+
+		return $a->result_array();
+	}
+
+	public function proyek_anak_kl($x, $y)
+	{
+		$query = "SELECT irena_instansi_2.nama_instansi AS instansi, irena_greenbook_proyek.judul_proyek_eng AS judul, irena_program_pln.nama_program AS program, irena_greenbook_proyek.nilai_pinjaman AS pinjaman FROM irena_greenbook_proyek JOIN irena_instansi_2 ON irena_instansi_2.id = irena_greenbook_proyek.id_instansi JOIN irena_program_pln ON irena_program_pln.id = irena_greenbook_proyek.id_program   WHERE id_greenbook = '$x' AND irena_greenbook_proyek.id_instansi = '$y' ";
+
+		 $a= $this->db->query($query);
+
+		return $a->result_array();
+	}
+
+	public function proyek_anak_sektor($x, $y)
+	{
+		$query = "SELECT irena_instansi_2.nama_instansi AS instansi, irena_greenbook_proyek.judul_proyek_eng AS judul, irena_program_pln.nama_program AS program, irena_greenbook_proyek.nilai_pinjaman AS pinjaman FROM irena_greenbook_proyek JOIN irena_instansi_2 ON irena_instansi_2.id = irena_greenbook_proyek.id_instansi JOIN irena_program_pln ON irena_program_pln.id = irena_greenbook_proyek.id_program   WHERE id_greenbook = '$x' AND id_lender = '$y'";
+
+		 $a= $this->db->query($query);
+
+		return $a->result_array();
+	}
+
+
+
+
 
 	public function ambil_grafik_infra_per_gb($x)
 	{

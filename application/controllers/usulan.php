@@ -1928,6 +1928,19 @@ class Usulan extends CI_Controller {
 		$this->load->view('report/greenbook/report_gb_index', $data);
 		$this->load->view('templates/footer'); 
 	}
+
+		public function report_gb_tab_proyek()
+	{
+		$this->load->model('Bluebook_model');
+		$this->load->model('Greenbook_model');
+
+		$data['greenbook']= $this->Greenbook_model->ambil_greenbook();
+		
+    	//$this->load->view('templates/header'); 
+		$this->load->view('report/greenbook/report_gb_tab_grafik', $data);
+		//$this->load->view('templates/footer'); 
+	}
+    
     
 
     public function update() {
