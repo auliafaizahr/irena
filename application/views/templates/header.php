@@ -68,7 +68,7 @@
 			}
 			
 		.loader1 {
-				position: absolute;
+				position: absolute;\
 				left: 0;
 				top: 0;
 				right: 0;

@@ -178,8 +178,7 @@
 
 
 	
-	$(document).ready(function(){
-		
+
 		//untuk hapus
 		$('#submit_btn').click(function(){
 			
@@ -233,8 +232,8 @@
 			console.log("diatas ini kode bb");
 			
 
-			
+			return false;
 		});
 
-	});
+	
 </script> 
