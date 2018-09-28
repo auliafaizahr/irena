@@ -3,7 +3,7 @@
   <table class="table table-striped table-hover js-table" id="example_x2">
     <thead>
       <tr>
-        <th></th>
+         <th></th>
         <th>Program</th>
         <th>Total Nilai Pinjaman</th>
         <!-- <th>Actions</th> -->
@@ -14,8 +14,8 @@
         <?php foreach ($detail_isi as $key => $value): ?>
        
         <tr data-toggle="collapse" data-target="#collapse4039" class="clickable">
-          <td class="child" data-id="<?php echo $id;  ?>" data-program="<?php echo $value['id_program'];  ?>" ></td>
-          <td><?php echo $value['program']; ?></td>
+          <td class="child" data-id="<?php echo $id;  ?>" data-inst="<?php echo $value['id_instansi'];  ?>" ></td>
+          <td><?php echo $value['nama']; ?></td>
           <td><?php echo number_format($value['total']); ?></td>
 
         </tr>
@@ -46,13 +46,13 @@ $(document).ready(function(){
 		});
 	});
 
+ var table = $('#example_x2').DataTable();
 
-  var table = $('#example_x2').DataTable();
 $('#example_x2 tbody').on('click', 'td:first-child', function () {
   var tr = $(this).closest('tr');
   var row = table.row( tr );
   var id = $(this).attr('data-id');
-  var b = $(this).attr('data-program');
+  var b = $(this).attr('data-inst');
 
   if (row.child.isShown()) {
     // This row is already open - close it.
@@ -60,13 +60,8 @@ $('#example_x2 tbody').on('click', 'td:first-child', function () {
     tr.removeClass('shown');
   } else {
     // Open row.
-     $.get("<?php echo base_url(); ?>greenbook/expand_anak_program/"+id+"/"+b, function(data) {
-          //console.log(data[10]);
-          //console.log(data);
-          //var results = JSON.parse(data);
-          //console.log(results.isi[0].judul_usulan);
-
-          //$("td.child").html(data);
+     $.get("<?php echo base_url(); ?>greenbook/expand_anak_kl/"+id+"/"+b, function(data) {
+        
           row.child(data).show();
          
           tr.addClass('shown');

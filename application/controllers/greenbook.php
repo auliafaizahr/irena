@@ -40,6 +40,69 @@ class Greenbook extends CI_Controller {
 		$this->load->view('report/Greenbook/gb_report_list', $data);
 	}
 
+	public function expand_anak_lender()
+	{
+
+		$this->load->model('Usulan_model');
+		$this->load->model('dk_model');
+		$this->load->model('Greenbook_model');
+		$this->load->model('Bluebook_model');
+		$a = $this->uri->segment(3);
+		$b = $this->uri->segment(4);
+		$data['a'] = $this->input->post('id');
+		$data['id'] = $a;
+		$data['detail'] = $this->Greenbook_model->proyek_anak_lender($a, $b);
+		$data['group_bb'] = $this->Usulan_model->group_bb($a);
+
+		
+		
+		$this->load->view('report/greenbook/gb_expand_lender', $data);
+		//$this->load->view('templates/footer1');
+		
+	}
+
+	public function expand_anak_program()
+	{
+
+		$this->load->model('Usulan_model');
+		$this->load->model('dk_model');
+		$this->load->model('Greenbook_model');
+		$this->load->model('Bluebook_model');
+		$a = $this->uri->segment(3);
+		$b = $this->uri->segment(4);
+		$data['a'] = $this->input->post('id');
+		$data['id'] = $a;
+		$data['detail'] = $this->Greenbook_model->proyek_anak_program($a,  $b);
+		$data['group_bb'] = $this->Usulan_model->group_bb($a);
+
+		
+		
+		$this->load->view('report/greenbook/gb_expand_program', $data);
+		//$this->load->view('templates/footer1');
+		
+	}
+
+	public function expand_anak_kl()
+	{
+
+		$this->load->model('Usulan_model');
+		$this->load->model('dk_model');
+		$this->load->model('Greenbook_model');
+		$this->load->model('Bluebook_model');
+		$a = $this->uri->segment(3);
+		$b = $this->uri->segment(4);
+		$data['a'] = $this->input->post('id');
+		$data['id'] = $a;
+		$data['detail'] = $this->Greenbook_model->proyek_anak_kl($a,  $b);
+		$data['group_bb'] = $this->Usulan_model->group_bb($a);
+
+		
+		
+		$this->load->view('report/greenbook/gb_expand_kl', $data);
+		//$this->load->view('templates/footer1');
+		
+	}
+
 			public function tampil_gb_banding()
 	{
 		$this->load->model('Bluebook_model');
@@ -416,6 +479,31 @@ class Greenbook extends CI_Controller {
     	 $this->load->view('report/greenbook/report_gb_tabel_by_lender', $data);
 	}
 
+		public function tampilkan_tabel_group_lender_2()
+	{
+
+		$this->load->model('Usulan_model');
+		$this->load->model('Bluebook_model');
+		$this->load->model('Greenbook_model');
+
+			
+		/*$id = $this->input->post('id');
+		$data['id'] = $this->uri->segment(3);*/
+
+		$data['id'] = $this->uri->segment(3);
+		$data['pilih'] = $this->uri->segment(4);
+		
+
+
+	
+		$data['detail'] = $this->Greenbook_model->ambil_grafik_lender_per_gb($data['id']);
+
+		//$data['detail'] = $this->Greenbook_model->ambil_grafik_lender_per_gb($data['id']);
+		
+    	 //echo json_encode($data);
+    	 $this->load->view('report/greenbook/report_gb_tabel_by_lender_2', $data);
+	}
+
 		public function tampilkan_tabel_group_program()
 	{
 
@@ -439,6 +527,131 @@ class Greenbook extends CI_Controller {
 		
     	 //echo json_encode($data);
     	 $this->load->view('report/greenbook/report_gb_tabel_by_program', $data);
+	}
+
+		public function tampilkan_tabel_group_program_2()
+	{
+
+		$this->load->model('Usulan_model');
+		$this->load->model('Bluebook_model');
+		$this->load->model('Greenbook_model');
+
+			
+		/*$id = $this->input->post('id');
+		$data['id'] = $this->uri->segment(3);*/
+
+		$data['id'] = $this->uri->segment(3);
+		$data['pilih'] = $this->uri->segment(4);
+		
+
+
+	
+		$data['detail_isi'] = $this->Greenbook_model->ambil_grafik_program_per_gb($data['id']);
+
+		//$data['detail'] = $this->Greenbook_model->ambil_grafik_lender_per_gb($data['id']);
+		
+    	 //echo json_encode($data);
+    	 $this->load->view('report/greenbook/report_gb_tabel_by_program_2', $data);
+	}
+
+	public function tampilkan_tabel_group_kl()
+	{
+
+		$this->load->model('Usulan_model');
+		$this->load->model('Bluebook_model');
+		$this->load->model('Greenbook_model');
+
+			
+		/*$id = $this->input->post('id');
+		$data['id'] = $this->uri->segment(3);*/
+
+		$data['id'] = $this->uri->segment(3);
+		$data['pilih'] = $this->uri->segment(4);
+		
+
+
+	
+		$data['detail_isi'] = $this->Greenbook_model->ambil_grafik_kl_per_gb($data['id']);
+
+		//$data['detail'] = $this->Greenbook_model->ambil_grafik_lender_per_gb($data['id']);
+		
+    	 //echo json_encode($data);
+    	 $this->load->view('report/greenbook/report_gb_tabel_by_kl', $data);
+	}
+
+	public function tampilkan_tabel_group_kl_2()
+	{
+
+		$this->load->model('Usulan_model');
+		$this->load->model('Bluebook_model');
+		$this->load->model('Greenbook_model');
+
+			
+		/*$id = $this->input->post('id');
+		$data['id'] = $this->uri->segment(3);*/
+
+		$data['id'] = $this->uri->segment(3);
+		$data['pilih'] = $this->uri->segment(4);
+		
+
+
+	
+		$data['detail_isi'] = $this->Greenbook_model->ambil_grafik_kl_per_gb($data['id']);
+
+		//$data['detail'] = $this->Greenbook_model->ambil_grafik_lender_per_gb($data['id']);
+		
+    	 //echo json_encode($data);
+    	 $this->load->view('report/greenbook/report_gb_tabel_by_kl_2', $data);
+	}
+
+	public function tampilkan_tabel_group_sektor()
+	{
+
+		$this->load->model('Usulan_model');
+		$this->load->model('Bluebook_model');
+		$this->load->model('Greenbook_model');
+
+			
+		/*$id = $this->input->post('id');
+		$data['id'] = $this->uri->segment(3);*/
+
+		$data['id'] = $this->uri->segment(3);
+		$data['pilih'] = $this->uri->segment(4);
+		
+
+
+	
+		$data['detail_isi'] = $this->Greenbook_model->ambil_grafik_sektor_per_gb($data['id']);
+
+		//$data['detail'] = $this->Greenbook_model->ambil_grafik_lender_per_gb($data['id']);
+		
+    	 //echo json_encode($data);
+    	 $this->load->view('report/greenbook/report_gb_tabel_by_sektor', $data);
+	}
+
+	public function tampilkan_tabel_group_sektor_2()
+	{
+
+		$this->load->model('Usulan_model');
+		$this->load->model('Bluebook_model');
+		$this->load->model('Greenbook_model');
+
+			
+		/*$id = $this->input->post('id');
+		$data['id'] = $this->uri->segment(3);*/
+
+		$data['id'] = $this->uri->segment(3);
+		$data['pilih'] = $this->uri->segment(4);
+		
+
+
+	
+		$data['detail_isi'] = $this->Greenbook_model->ambil_grafik_sektor_per_gb($data['id']);
+
+		//$data['detail'] = $this->Greenbook_model->ambil_grafik_lender_per_gb($data['id']);
+		
+    	 //echo json_encode($data);
+    	 $this->load->view('report/greenbook/report_gb_tabel_by_sektor_2', $data);
 	}
 
 

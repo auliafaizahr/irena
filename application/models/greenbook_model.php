@@ -345,7 +345,7 @@ class Greenbook_model extends CI_Model {
 
 	public function proyek_anak_kl($x, $y)
 	{
-		$query = "SELECT irena_instansi_2.nama_instansi AS instansi, irena_greenbook_proyek.judul_proyek_eng AS judul, irena_program_pln.nama_program AS program, irena_greenbook_proyek.nilai_pinjaman AS pinjaman FROM irena_greenbook_proyek JOIN irena_instansi_2 ON irena_instansi_2.id = irena_greenbook_proyek.id_instansi JOIN irena_program_pln ON irena_program_pln.id = irena_greenbook_proyek.id_program   WHERE id_greenbook = '$x' AND irena_greenbook_proyek.id_instansi = '$y' ";
+		$query = "SELECT irena_greenbook_proyek.id_instansi AS id_instansi, irena_instansi_2.nama_instansi AS instansi, irena_greenbook_proyek.judul_proyek_eng AS judul, irena_program_pln.nama_program AS program, irena_greenbook_proyek.nilai_pinjaman AS pinjaman FROM irena_greenbook_proyek JOIN irena_instansi_2 ON irena_instansi_2.id = irena_greenbook_proyek.id_instansi JOIN irena_program_pln ON irena_program_pln.id = irena_greenbook_proyek.id_program   WHERE id_greenbook = '$x' AND irena_greenbook_proyek.id_instansi = '$y' ";
 
 		 $a= $this->db->query($query);
 
@@ -354,7 +354,7 @@ class Greenbook_model extends CI_Model {
 
 	public function proyek_anak_sektor($x, $y)
 	{
-		$query = "SELECT irena_instansi_2.nama_instansi AS instansi, irena_greenbook_proyek.judul_proyek_eng AS judul, irena_program_pln.nama_program AS program, irena_greenbook_proyek.nilai_pinjaman AS pinjaman FROM irena_greenbook_proyek JOIN irena_instansi_2 ON irena_instansi_2.id = irena_greenbook_proyek.id_instansi JOIN irena_program_pln ON irena_program_pln.id = irena_greenbook_proyek.id_program   WHERE id_greenbook = '$x' AND id_lender = '$y'";
+		$query = "SELECT irena_greenbook_proyek.id_sektor,  irena_instansi_2.nama_instansi AS instansi, irena_greenbook_proyek.judul_proyek_eng AS judul, irena_program_pln.nama_program AS program, irena_greenbook_proyek.nilai_pinjaman AS pinjaman FROM irena_greenbook_proyek JOIN irena_instansi_2 ON irena_instansi_2.id = irena_greenbook_proyek.id_instansi JOIN irena_program_pln ON irena_program_pln.id = irena_greenbook_proyek.id_program JOIN irena_sektor ON irena_sektor.id = irena_greenbook_proyek.id_sektor   WHERE id_greenbook = '$x' AND irena_greenbook_proyek.id_sektor = '$y'";
 
 		 $a= $this->db->query($query);
 
@@ -376,7 +376,7 @@ class Greenbook_model extends CI_Model {
 
 	public function ambil_grafik_sektor_per_gb($x)
 	{
-		$query = "SELECT irena_sektor.nama AS sektor, SUM(IF(irena_greenbook_proyek.id_greenbook =  '$x', nilai_pinjaman, 0)) AS total FROM irena_greenbook_proyek LEFT JOIN irena_sektor ON irena_greenbook_proyek.id_sektor = irena_sektor.id GROUP BY id_sektor HAVING total > 0";
+		$query = "SELECT irena_sektor.nama AS sektor, irena_greenbook_proyek.id_sektor AS id_sektor,  SUM(IF(irena_greenbook_proyek.id_greenbook =  '$x', nilai_pinjaman, 0)) AS total FROM irena_greenbook_proyek LEFT JOIN irena_sektor ON irena_greenbook_proyek.id_sektor = irena_sektor.id GROUP BY id_sektor HAVING total > 0";
 
 		 $a= $this->db->query($query);
 

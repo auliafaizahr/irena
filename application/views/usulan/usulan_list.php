@@ -905,8 +905,7 @@ $('#example_id tbody').on('click', 'td:first-child', function () {
           tr.addClass('shown');
         
       });
-   /* row.child(format()).show();
-    tr.addClass('shown');*/
+   
   }
 });
 

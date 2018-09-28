@@ -147,43 +147,61 @@ $('#submit_btn_1').click(function(){
       var id = $("#kode_gb_1").val();
       var group = $("#group_by_1").val();
 
-
-      //kumpulkan berdasarkan lender
       if (group === '1') {
-         var id = $("#kode_gb_1").val();
-        var group = $("#group_by_1").val();
 
-            function fresh_(){
+       
+          function fresh_(){
               $.get("<?php echo base_url(); ?>greenbook/tampilkan_tabel_group_lender/"+id/+group, function(data) {
                 $("#tabel_1").html(data);
                 console.log(data);
               });
             }
-      }
 
-      //kumpulkan berdasarkan bluebook
-      else if (group === '2') {
+      
+      } else if (group === '2') {
 
-        function fresh_(){
-          $.get("<?php echo base_url(); ?>greenbook/tampilkan_tabel_group_lender/"+id/+group, function(data) {
-            $("#tabel_1").html(data);
-          });
+        if (id === '1') {
+
+          function fresh_(){
+            $.get("<?php echo base_url(); ?>greenbook/tampilkan_tabel_group_lender/"+id, function(data) {
+              $("#tabel_1").html(data);
+            });
+          }
+
         }
 
+      }  else if (group === '3') {
 
-      }
+     
+
+          function fresh_(){
+          $.get("<?php echo base_url(); ?>greenbook/tampilkan_tabel_group_program/"+id, function(isi) {
+            $("#tabel_1").html(isi);
+            console.log(isi);
+          });
 
 
-      //kumpulkan berdasarkan program
-       else if (group === '3') {
+        }
 
-         
+      } else if (group === '4') {
 
-        console.log(id);
-        console.log(group);
+     
 
-        function fresh_(){
-          $.get("<?php echo base_url(); ?>greenbook/tampilkan_tabel_group_program/"+id/+group, function(isi) {
+          function fresh_(){
+          $.get("<?php echo base_url(); ?>greenbook/tampilkan_tabel_group_kl/"+id, function(isi) {
+            $("#tabel_1").html(isi);
+            console.log(isi);
+          });
+
+
+        }
+
+      } else if (group === '5') {
+
+     
+
+          function fresh_(){
+          $.get("<?php echo base_url(); ?>greenbook/tampilkan_tabel_group_sektor/"+id, function(isi) {
             $("#tabel_1").html(isi);
             console.log(isi);
           });
@@ -203,6 +221,90 @@ $('#submit_btn_1').click(function(){
 
       return false;
     });
+
+
+
+
+$('#submit_btn_2').click(function(){
+      
+      var id_2 = $("#kode_gb_2").val();
+      var group_2 = $("#group_by_2").val();
+
+      if (group_2 === '1') {
+
+       
+          function fresh_2(){
+              $.get("<?php echo base_url(); ?>greenbook/tampilkan_tabel_group_lender_2/"+id_2, function(data) {
+                $("#tabel_2").html(data);
+                console.log(data);
+              });
+            }
+
+      
+      } else if (group_2 === '2') {
+
+        if (id === '1') {
+
+          function fresh_2(){
+            $.get("<?php echo base_url(); ?>greenbook/tampilkan_tabel_group_lender_2/"+id_2, function(data) {
+              $("#tabel_2").html(data);
+            });
+          }
+
+        }
+
+      }  else if (group_2 === '3') {
+
+     
+
+          function fresh_2(){
+          $.get("<?php echo base_url(); ?>greenbook/tampilkan_tabel_group_program_2/"+id_2, function(isi) {
+            $("#tabel_2").html(isi);
+            console.log(isi);
+          });
+
+
+        }
+
+      } else if (group_2 === '4') {
+
+     
+
+          function fresh_2(){
+          $.get("<?php echo base_url(); ?>greenbook/tampilkan_tabel_group_kl_2/"+id_2, function(isi) {
+            $("#tabel_2").html(isi);
+            console.log(isi);
+          });
+
+
+        }
+
+      } else if (group_2 === '5') {
+
+     
+
+          function fresh_2(){
+          $.get("<?php echo base_url(); ?>greenbook/tampilkan_tabel_group_sektor_2/"+id_2, function(isi) {
+            $("#tabel_2").html(isi);
+            console.log(isi);
+          });
+
+
+        }
+
+      }
+
+      fresh_2();
+
+     
+      console.log(id);
+      console.log("diatas ini kode bb");
+      
+     
+
+      return false;
+    });
+
 
 
 

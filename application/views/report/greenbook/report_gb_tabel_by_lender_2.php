@@ -1,9 +1,8 @@
 	
   <div class="ibox-content">
-  <table class="table table-striped table-hover js-table" id="example_x">
+  <table class="table table-striped table-hover js-table" id="example_x3">
     <thead>
       <tr>
-        <th></th>
         <th>Lender</th>
         <th>Total Nilai Pinjaman</th>
         <!-- <th>Actions</th> -->
@@ -14,11 +13,8 @@
         <?php foreach ($detail as $key => $value): ?>
        
         <tr data-toggle="collapse" data-target="#collapse4039" class="clickable">
-           <td class="child" data-id="<?php echo $id;  ?>" data-lender="<?php echo $value['id_lender'];  ?>" ></td>
           <td><?php echo $value['lender']; ?></td>
-          <td><?php echo number_format($value['total']); ?>
-            
-          </td>
+          <td><?php echo number_format($value['total']); ?></td>
        
          
          <!--  <td>
@@ -53,62 +49,14 @@
 console.log('apaaannnn');
 
 $(document).ready(function(){
-		$('#example_x').DataTable({
+		$('#example_x3').DataTable({
 			responsive: true,
 			"dom": 'T<"clear">lfrtip',
 			"order": [[ 0, "desc" ]]
 		});
 	});
 
-  var table = $('#example_x').DataTable();
-
-$('#example_x tbody').on('click', 'td:first-child', function () {
-  var tr = $(this).closest('tr');
-  var row = table.row( tr );
-  var id = $(this).attr('data-id');
-  var b = $(this).attr('data-lender');
-
-  if (row.child.isShown()) {
-    // This row is already open - close it.
-    row.child.hide();
-    tr.removeClass('shown');
-  } else {
-    // Open row.
-     $.get("<?php echo base_url(); ?>greenbook/expand_anak_lender/"+id+"/"+b, function(data) {
-          //console.log(data[10]);
-          //console.log(data);
-          //var results = JSON.parse(data);
-          //console.log(results.isi[0].judul_usulan);
-
-          //$("td.child").html(data);
-          row.child(data).show();
-         
-          tr.addClass('shown');
-        
-      });
-   
-  }
-});
-
 
 
 	
 </script>
-
-<style type="text/css">
-  th,
-
-div.dataTables_wrapper {
-  
-  margin: 0 auto;
-}
-
-td.child {
-  background: url('https://datatables.net/examples/resources/details_open.png') no-repeat center center;
-  cursor: pointer;
-}
-
-tr.shown td.child {
-  background: url('https://datatables.net/examples/resources/details_close.png') no-repeat center center;
-}
-</style>

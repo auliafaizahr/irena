@@ -659,6 +659,7 @@ class Usulan extends CI_Controller {
 		$this->load->model('Greenbook_model');
 		$this->load->model('Bluebook_model');
 		$a = $this->uri->segment(3);
+		$b = $this->uri->segment(4);
 		$data['a'] = $this->input->post('id');
 		$data['id'] = $a;
 		$data['detail'] = $this->Usulan_model->detail_proyek($a);
